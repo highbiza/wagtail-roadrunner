@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.utils.version import get_version
-from .registering import *
-
 
 VERSION = (0, 0, 1, "alpha", 0)
 

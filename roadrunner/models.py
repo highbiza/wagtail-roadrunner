@@ -10,9 +10,8 @@ from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel
-from wagtail.contrib.forms.models import AbstractFormField
 from wagtail.contrib.table_block.blocks import TableBlock
-from wagtail.core import blocks 
+from wagtail.core import blocks
 from wagtail.core.models import Orderable
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.documents.blocks import DocumentChooserBlock
@@ -25,48 +24,30 @@ from roadrunner.fields import RoadRunnerField
 
 @register_snippet
 class PreFooterSnippet(models.Model):
-    name = models.CharField(
-        verbose_name="Naam",
-        max_length=50,
-    )
+    name = models.CharField(verbose_name="Naam", max_length=50)
     content = RoadRunnerField()
 
-    panels = [
-        FieldPanel("name"),
-        RoadRunnerPanel('content'),
-    ]
+    panels = [FieldPanel("name"), RoadRunnerPanel("content")]
 
     def __str__(self):
         return self.name
-
 
 
 @register_snippet
 class Template(models.Model):
-    name = models.CharField(
-        verbose_name="Naam",
-        max_length=50,
-    )
+    name = models.CharField(verbose_name="Naam", max_length=50)
     content = RoadRunnerField()
 
-    panels = [
-        FieldPanel("name"),
-        RoadRunnerPanel('content'),
-    ]
+    panels = [FieldPanel("name"), RoadRunnerPanel("content")]
 
     def __str__(self):
         return self.name
-    
+
 
 @register_snippet
 class Block(ClusterableModel):
-    name = models.CharField(
-        verbose_name="Naam",
-        max_length=50,
-    )
-    html = models.TextField(
-        default="<div></div>",
-    )
+    name = models.CharField(verbose_name="Naam", max_length=50)
+    html = models.TextField(default="<div></div>")
 
     panels = [
         FieldPanel("name"),
@@ -93,93 +74,97 @@ class Block(ClusterableModel):
     @classmethod
     def get_streamfields(cls):
         all_blocks = cls.objects.all()
-        blocks = {block.get_name(): block.get_block() for block in all_blocks}
-        return OrderedDict(blocks)
+        streamfields = {block.get_name(): block.get_block() for block in all_blocks}
+        return OrderedDict(streamfields)
 
 
 BLOCK_FIELD_CHOICES = [
-    ('char', 'Tekst'),
-    ('richtext', 'Richtext'),
-    ('text', 'Meerdere regels tekst'),
-    ('image', 'Afbeelding'),
-    ('page', 'Pagina'),
-    ('document', 'Document'),
-    ('choice', 'Dropdown'),
-    ('multiple_choice', 'Meerdere keuze dropdown'),
-    ('integer', 'Nummer'),
-    ('date', 'Datum'),
-    ('boolean', 'Checkbox'),
+    ("char", "Tekst"),
+    ("richtext", "Richtext"),
+    ("text", "Meerdere regels tekst"),
+    ("image", "Afbeelding"),
+    ("page", "Pagina"),
+    ("document", "Document"),
+    ("choice", "Dropdown"),
+    ("multiple_choice", "Meerdere keuze dropdown"),
+    ("integer", "Nummer"),
+    ("date", "Datum"),
+    ("boolean", "Checkbox"),
     # ('table', 'Tabel'),
-    ('color', 'Kleur'),
-    ('email', 'Email'),
-    ('url', 'URL'),
+    ("color", "Kleur"),
+    ("email", "Email"),
+    ("url", "URL"),
 ]
 
+
 class BlockField(Orderable):
-    block = ParentalKey(Block, on_delete=models.CASCADE, related_name='fields')
+    block = ParentalKey(Block, on_delete=models.CASCADE, related_name="fields")
     label = models.CharField(
-        verbose_name=_('label'),
+        verbose_name=_("label"),
         max_length=255,
-        help_text=_('The label of the form field')
+        help_text=_("The label of the form field"),
     )
-    block_type = models.CharField(verbose_name=_('field type'), max_length=16,
-        choices=BLOCK_FIELD_CHOICES)
-    required = models.BooleanField(verbose_name=_('required'), default=True)
+    block_type = models.CharField(
+        verbose_name=_("field type"), max_length=16, choices=BLOCK_FIELD_CHOICES
+    )
+    required = models.BooleanField(verbose_name=_("required"), default=True)
     choices = models.TextField(
-        verbose_name=_('choices'),
-        blank=True,
-        help_text='Bij dropdowns/multi-dropdowns'
+        verbose_name=_("choices"), blank=True, help_text="Bij dropdowns/multi-dropdowns"
     )
-    help_text = models.CharField(verbose_name=_('help text'), max_length=255, blank=True)
+    help_text = models.CharField(
+        verbose_name=_("help text"), max_length=255, blank=True
+    )
 
     panels = [
-        FieldPanel('label'),
-        FieldPanel('help_text'),
-        FieldPanel('required'),
-        FieldPanel('block_type', classname="formbuilder-type"),
-        FieldPanel('choices', classname="formbuilder-choices"),
+        FieldPanel("label"),
+        FieldPanel("help_text"),
+        FieldPanel("required"),
+        FieldPanel("block_type", classname="formbuilder-type"),
+        FieldPanel("choices", classname="formbuilder-choices"),
     ]
 
     def get_choices(self):
         choices = self.choices.split(",")
         return (
-            (str(slugify(str(unidecode(choice.strip())))), choice.strip(), ) for choice in choices if choice
+            (str(slugify(str(unidecode(choice.strip())))), choice.strip())
+            for choice in choices
+            if choice
         )
 
     def get_block(self):
         block_type = self.block_type
         attrs = dict(label=self.label, required=self.required, help_text=self.help_text)
-        if block_type == 'char':
+        if block_type == "char":
             block = blocks.CharBlock
-        if block_type == 'richtext':
+        if block_type == "richtext":
             block = blocks.RichTextBlock
-        if block_type == 'text':
+        if block_type == "text":
             block = blocks.TextBlock
-        if block_type == 'page':
+        if block_type == "page":
             block = blocks.PageChooserBlock
-        if block_type == 'image':
+        if block_type == "image":
             block = ImageChooserBlock
-        if block_type == 'document':
+        if block_type == "document":
             block = DocumentChooserBlock
-        if block_type == 'choice':
+        if block_type == "choice":
             block = blocks.ChoiceBlock
             attrs.update(dict(choices=self.get_choices()))
-        if block_type == 'multiple_choice':
+        if block_type == "multiple_choice":
             block = MultipleChoiceBlock
             attrs.update(dict(choices=self.get_choices()))
-        if block_type == 'integer':
+        if block_type == "integer":
             block = blocks.IntegerBlock
-        if block_type == 'date':
+        if block_type == "date":
             block = blocks.DateBlock
-        if block_type == 'boolean':
+        if block_type == "boolean":
             block = blocks.BooleanBlock
-        if block_type == 'table':
+        if block_type == "table":
             block = TableBlock
-        if block_type == 'color':
+        if block_type == "color":
             block = ColorPickerBlock
-        if block_type == 'email':
+        if block_type == "email":
             block = blocks.EmailBlock
-        if block_type == 'url':
+        if block_type == "url":
             block = blocks.URLBlock
 
         return block(**attrs)
@@ -190,7 +175,6 @@ class BlockField(Orderable):
 
 
 class SnippetBlock(blocks.StructBlock):
-
     def __init__(self, template, name, fields, *args, **kwargs):
         self.template = template
         self.name = name
@@ -204,6 +188,7 @@ class SnippetBlock(blocks.StructBlock):
     def render(self, value, context=None):
         template = DjangoTemplate(self.template)
         new_context = {
-            key.replace("-", "_"): value for key, value in self.get_context(value).get('self', {}).items()
+            key.replace("-", "_"): value
+            for key, value in self.get_context(value).get("self", {}).items()
         }
         return template.render(Context(new_context))

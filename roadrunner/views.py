@@ -16,7 +16,8 @@ def image(request):
         if image_obj:
             # Use thumnails for images instead of the actual original full sized images.
             return JsonResponse(
-                get_rendition_or_not_found(image_obj, Filter("max-130x130")).url, safe=False
+                get_rendition_or_not_found(image_obj, Filter("max-130x130")).url,
+                safe=False,
             )
 
     return JsonResponse(False, safe=False)

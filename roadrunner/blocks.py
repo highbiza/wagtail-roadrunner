@@ -16,18 +16,15 @@ class MultipleChoiceField(ChoiceField):
 class MultipleChoiceBlock(blocks.ChoiceBlock):
     many = True
 
-    def __init__(self, *args ,**kwargs):
-        super().__init__(*args ,**kwargs)
-        choices = self._constructor_kwargs.get('choices')
-        help_text = self._constructor_kwargs.get('help_text')
-        required = self._constructor_kwargs.get('required')
-        label = self._constructor_kwargs.get('label')
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        choices = self._constructor_kwargs.get("choices")
+        help_text = self._constructor_kwargs.get("help_text")
+        required = self._constructor_kwargs.get("required")
+        label = self._constructor_kwargs.get("label")
 
         self.field = MultipleChoiceField(
-            choices=choices,
-            help_text=help_text,
-            required=required,
-            label=label,
+            choices=choices, help_text=help_text, required=required, label=label
         )
 
     def to_python(self, value):
@@ -38,14 +35,14 @@ class MultipleChoiceBlock(blocks.ChoiceBlock):
 
 class BootstrapColorChoiceBlock(blocks.ChoiceBlock):
     choices = [
-        ('primary', 'Primary'),
-        ('secondary', 'Secondary'),
-        ('light', 'Light'),
-        ('dark', 'Dark'),
-        ('info', 'Info'),
-        ('success', 'Success'),
-        ('warning', 'Warning'),
-        ('danger', 'Danger'),
+        ("primary", "Primary"),
+        ("secondary", "Secondary"),
+        ("light", "Light"),
+        ("dark", "Dark"),
+        ("info", "Info"),
+        ("success", "Success"),
+        ("warning", "Warning"),
+        ("danger", "Danger"),
     ]
 
 
@@ -54,109 +51,95 @@ class ColorPickerBlock(blocks.CharBlock):
 
 
 BACKGROUND_CHOICES = [
-    ('bg-primary', 'Primary achtergrond'),
-    ('bg-secondary', 'Secondary achtergrond'),
-    ('bg-light', 'Light achtergrond'),
-    ('bg-dark', 'Dark achtergrond'),
-    ('bg-info', 'Info achtergrond'),
-    ('bg-success', 'Success achtergrond'),
-    ('bg-warning', 'Warning achtergrond'),
-    ('bg-danger', 'Danger achtergrond'),
+    ("bg-primary", "Primary achtergrond"),
+    ("bg-secondary", "Secondary achtergrond"),
+    ("bg-light", "Light achtergrond"),
+    ("bg-dark", "Dark achtergrond"),
+    ("bg-info", "Info achtergrond"),
+    ("bg-success", "Success achtergrond"),
+    ("bg-warning", "Warning achtergrond"),
+    ("bg-danger", "Danger achtergrond"),
 ]
 
 DEFAULT_CHOICES = [
-    ('%s-1', 'Overal 1x %s'),
-    ('%s-2', 'Overal 2x %s'),
-    ('%s-3', 'Overal 3x %s'),
-    ('%s-4', 'Overal 4x %s'),
-    ('%s-5', 'Overal 5x %s'),
-
-    ('%sx-1', 'Links/rechts 1x %s'),
-    ('%sx-2', 'Links/rechts 2x %s'),
-    ('%sx-3', 'Links/rechts 3x %s'),
-    ('%sx-4', 'Links/rechts 4x %s'),
-    ('%sx-5', 'Links/rechts 5x %s'),
-
-    ('%sl-1', 'Links 1x %s'),
-    ('%sl-2', 'Links 2x %s'),
-    ('%sl-3', 'Links 3x %s'),
-    ('%sl-4', 'Links 4x %s'),
-    ('%sl-5', 'Links 5x %s'),
-
-    ('%sr-1', 'Rechts 1x %s'),
-    ('%sr-2', 'Rechts 2x %s'),
-    ('%sr-3', 'Rechts 3x %s'),
-    ('%sr-4', 'Rechts 4x %s'),
-    ('%sr-5', 'Rechts 5x %s'),
-
-    ('%sy-1', 'Boven/onder 1x %s'),
-    ('%sy-2', 'Boven/onder 2x %s'),
-    ('%sy-3', 'Boven/onder 3x %s'),
-    ('%sy-4', 'Boven/onder 4x %s'),
-    ('%sy-5', 'Boven/onder 5x %s'),
-
-    ('%st-1', 'Boven 1x %s'),
-    ('%st-2', 'Boven 2x %s'),
-    ('%st-3', 'Boven 3x %s'),
-    ('%st-4', 'Boven 4x %s'),
-    ('%st-5', 'Boven 5x %s'),
-
-    ('%sb-1', 'Onder 1x %s'),
-    ('%sb-2', 'Onder 2x %s'),
-    ('%sb-3', 'Onder 3x %s'),
-    ('%sb-4', 'Onder 4x %s'),
-    ('%sb-5', 'Onder 5x %s'),
+    ("%s-1", "Overal 1x %s"),
+    ("%s-2", "Overal 2x %s"),
+    ("%s-3", "Overal 3x %s"),
+    ("%s-4", "Overal 4x %s"),
+    ("%s-5", "Overal 5x %s"),
+    ("%sx-1", "Links/rechts 1x %s"),
+    ("%sx-2", "Links/rechts 2x %s"),
+    ("%sx-3", "Links/rechts 3x %s"),
+    ("%sx-4", "Links/rechts 4x %s"),
+    ("%sx-5", "Links/rechts 5x %s"),
+    ("%sl-1", "Links 1x %s"),
+    ("%sl-2", "Links 2x %s"),
+    ("%sl-3", "Links 3x %s"),
+    ("%sl-4", "Links 4x %s"),
+    ("%sl-5", "Links 5x %s"),
+    ("%sr-1", "Rechts 1x %s"),
+    ("%sr-2", "Rechts 2x %s"),
+    ("%sr-3", "Rechts 3x %s"),
+    ("%sr-4", "Rechts 4x %s"),
+    ("%sr-5", "Rechts 5x %s"),
+    ("%sy-1", "Boven/onder 1x %s"),
+    ("%sy-2", "Boven/onder 2x %s"),
+    ("%sy-3", "Boven/onder 3x %s"),
+    ("%sy-4", "Boven/onder 4x %s"),
+    ("%sy-5", "Boven/onder 5x %s"),
+    ("%st-1", "Boven 1x %s"),
+    ("%st-2", "Boven 2x %s"),
+    ("%st-3", "Boven 3x %s"),
+    ("%st-4", "Boven 4x %s"),
+    ("%st-5", "Boven 5x %s"),
+    ("%sb-1", "Onder 1x %s"),
+    ("%sb-2", "Onder 2x %s"),
+    ("%sb-3", "Onder 3x %s"),
+    ("%sb-4", "Onder 4x %s"),
+    ("%sb-5", "Onder 5x %s"),
 ]
 
 
-def get_choices(type):
-    return [
-        (key % type[0], value % type) for key, value in DEFAULT_CHOICES
-    ]
+def get_choices(t):
+    return [(key % t[0], value % t) for key, value in DEFAULT_CHOICES]
 
 
 class BaseStylingBlock(blocks.StructBlock):
     margin = blocks.ChoiceBlock(
-        label="Margin",
-        required=False,
-        choices=get_choices("margin"),
+        label="Margin", required=False, choices=get_choices("margin")
     )
     padding = blocks.ChoiceBlock(
-        label="Padding",
-        required=False,
-        choices=get_choices("padding"),
+        label="Padding", required=False, choices=get_choices("padding")
     )
     border = blocks.ChoiceBlock(
         label="Border",
         required=False,
         choices=[
-            ('border border-primary', 'Primary rand'),
-            ('border border-secondary', 'Secondary rand'),
-            ('border border-light', 'Light rand'),
-            ('border border-dark', 'Dark rand'),
-            ('border border-info', 'Info rand'),
-            ('border border-success', 'Success rand'),
-            ('border border-warning', 'Warning rand'),
-            ('border border-danger', 'Danger rand'),
+            ("border border-primary", "Primary rand"),
+            ("border border-secondary", "Secondary rand"),
+            ("border border-light", "Light rand"),
+            ("border border-dark", "Dark rand"),
+            ("border border-info", "Info rand"),
+            ("border border-success", "Success rand"),
+            ("border border-warning", "Warning rand"),
+            ("border border-danger", "Danger rand"),
         ],
     )
     border_radius = blocks.ChoiceBlock(
         label="Border radius",
         required=False,
         choices=[
-            ('rounded', 'Rond'),
-            ('rounded-top', 'Boven rond'),
-            ('rounded-bottom', 'Onder rond'),
-            ('rounded-left', 'Links rond'),
-            ('rounded-right', 'Rechts rond'),
-            ('rounded-circle', 'Cirkel'),
-            ('rounded-pill', 'Pill'),
-        ]
+            ("rounded", "Rond"),
+            ("rounded-top", "Boven rond"),
+            ("rounded-bottom", "Onder rond"),
+            ("rounded-left", "Links rond"),
+            ("rounded-right", "Rechts rond"),
+            ("rounded-circle", "Cirkel"),
+            ("rounded-pill", "Pill"),
+        ],
     )
     background_color = ColorPickerBlock(
-        label="Achtergrond kleur",
-        max_length=255,
-        required=False
+        label="Achtergrond kleur", max_length=255, required=False
     )
     color = ColorPickerBlock(label="Font kleur", max_length=255, required=False)
     font_size = blocks.IntegerBlock(label="Font grootte", required=False)
@@ -166,9 +149,7 @@ class BaseStylingBlock(blocks.StructBlock):
         required=False,
     )
     block_classes = blocks.CharBlock(
-        label='CSS classes',
-        max_length=255,
-        required=False,
+        label="CSS classes", max_length=255, required=False
     )
 
     class Meta:
@@ -176,6 +157,7 @@ class BaseStylingBlock(blocks.StructBlock):
 
 
 # HTML
+
 
 class HeaderBlock(blocks.StructBlock):
     HEADER_CHOICES = (
@@ -243,6 +225,7 @@ class VideoBlock(blocks.StructBlock):
 
 # Bootstrap
 
+
 class ButtonBlock(blocks.StructBlock):
     btn_class = BootstrapColorChoiceBlock(label="Kleur van de knop")
     page = blocks.PageChooserBlock(label="Pagina")
@@ -304,7 +287,9 @@ class ThumbnailBlock(blocks.StructBlock):
 
 
 class CardBlock(blocks.StructBlock):
-    color = BootstrapColorChoiceBlock(label="Kleur", help_text="Kleur van card.", required=False)
+    color = BootstrapColorChoiceBlock(
+        label="Kleur", help_text="Kleur van card.", required=False
+    )
     header = blocks.CharBlock(
         max_length=255, label="Header", help_text="Header van card", required=False
     )
@@ -392,10 +377,7 @@ preset_blocks = [
         HeaderBlock(
             template="streamfields/html/header.html",
             icon="title",
-            roadrunner_options={
-                "group": "HTML",
-                "title": "text",
-            }
+            roadrunner_options={"group": "HTML", "title": "text"},
         ),
     ),
     (
@@ -403,9 +385,7 @@ preset_blocks = [
         DividerBlock(
             template="streamfields/html/divider.html",
             icon="horizontalrule",
-            roadrunner_options={
-                "group": "HTML",
-            }
+            roadrunner_options={"group": "HTML"},
         ),
     ),
     (
@@ -413,10 +393,7 @@ preset_blocks = [
         ImageBlock(
             template="streamfields/html/image.html",
             icon="fa-camera-retro",
-            roadrunner_options={
-                "group": "HTML",
-                "title": "alt",
-            }
+            roadrunner_options={"group": "HTML", "title": "alt"},
         ),
     ),
     (
@@ -424,10 +401,7 @@ preset_blocks = [
         VideoBlock(
             template="streamfields/html/video.html",
             icon="fa-video-camera",
-            roadrunner_options={
-                "group": "HTML",
-                "title": "url",
-            }
+            roadrunner_options={"group": "HTML", "title": "url"},
         ),
     ),
     (
@@ -435,10 +409,7 @@ preset_blocks = [
         TextBlock(
             template="streamfields/html/text.html",
             icon="fa-align-left",
-            roadrunner_options={
-                "group": "HTML",
-                "title": "text",
-            }
+            roadrunner_options={"group": "HTML", "title": "text"},
         ),
     ),
     (
@@ -446,10 +417,7 @@ preset_blocks = [
         RichText(
             template="streamfields/html/richtext.html",
             icon="fa-align-left",
-            roadrunner_options={
-                "group": "HTML",
-                "title": "block_text",
-            }
+            roadrunner_options={"group": "HTML", "title": "block_text"},
         ),
     ),
     (
@@ -457,10 +425,7 @@ preset_blocks = [
         TextBlock(
             template="streamfields/html/html.html",
             icon="fa-html5",
-            roadrunner_options={
-                "group": "HTML",
-                "title": "text",
-            }
+            roadrunner_options={"group": "HTML", "title": "text"},
         ),
     ),
     (
@@ -468,10 +433,7 @@ preset_blocks = [
         ScriptBlock(
             template="streamfields/html/script.html",
             icon="fa-code",
-            roadrunner_options={
-                "group": "HTML",
-                "title": "script",
-            }
+            roadrunner_options={"group": "HTML", "title": "script"},
         ),
     ),
     # bootstrap
@@ -480,19 +442,15 @@ preset_blocks = [
         ButtonBlock(
             template="streamfields/bootstrap/button.html",
             icon="fa-hand-pointer-o",
-            roadrunner_options={
-                "group": "Bootstrap",
-            }
-        )
+            roadrunner_options={"group": "Bootstrap"},
+        ),
     ),
     (
         "breadcrumb",
         BreadcrumbBlock(
             template="streamfields/bootstrap/breadcrumb.html",
             icon="fa-chevron-right",
-            roadrunner_options={
-                "group": "Bootstrap",
-            }
+            roadrunner_options={"group": "Bootstrap"},
         ),
     ),
     (
@@ -500,10 +458,7 @@ preset_blocks = [
         JumbotronBlock(
             template="streamfields/bootstrap/jumbotron.html",
             icon="fa-file",
-            roadrunner_options={
-                "group": "Bootstrap",
-                "title": "header",
-            }
+            roadrunner_options={"group": "Bootstrap", "title": "header"},
         ),
     ),
     (
@@ -511,10 +466,7 @@ preset_blocks = [
         ThumbnailBlock(
             template="streamfields/bootstrap/thumbnail.html",
             icon="fa-camera",
-            roadrunner_options={
-                "group": "Bootstrap",
-                "title": "text",
-            }
+            roadrunner_options={"group": "Bootstrap", "title": "text"},
         ),
     ),
     (
@@ -522,10 +474,7 @@ preset_blocks = [
         CardBlock(
             template="streamfields/bootstrap/card.html",
             icon="fa-columns",
-            roadrunner_options={
-                "group": "Bootstrap",
-                "title": "header",
-            }
+            roadrunner_options={"group": "Bootstrap", "title": "header"},
         ),
     ),
     (
@@ -533,10 +482,7 @@ preset_blocks = [
         EmbedBlock(
             template="streamfields/bootstrap/embed.html",
             icon="fa-terminal",
-            roadrunner_options={
-                "group": "Bootstrap",
-                "title": "url",
-            }
+            roadrunner_options={"group": "Bootstrap", "title": "url"},
         ),
     ),
     (
@@ -544,10 +490,7 @@ preset_blocks = [
         ModalBlock(
             template="streamfields/bootstrap/modal.html",
             icon="fa-window-restore",
-            roadrunner_options={
-                "group": "Bootstrap",
-                "title": "text",
-            }
+            roadrunner_options={"group": "Bootstrap", "title": "text"},
         ),
     ),
     (
@@ -555,10 +498,7 @@ preset_blocks = [
         AccordionBlock(
             template="streamfields/bootstrap/accordion.html",
             icon="fa-bars",
-            roadrunner_options={
-                "group": "Bootstrap",
-                "title": "header",
-            }
+            roadrunner_options={"group": "Bootstrap", "title": "header"},
         ),
     ),
     # ListBlocks,
@@ -568,10 +508,7 @@ preset_blocks = [
             TabBlock(),
             template="streamfields/bootstrap/nav_pills.html",
             icon="fa-bars",
-            roadrunner_options={
-                "group": "Bootstrap",
-                "title": "tab_header",
-            }
+            roadrunner_options={"group": "Bootstrap", "title": "tab_header"},
         ),
     ),
     (
@@ -580,10 +517,7 @@ preset_blocks = [
             TabBlock(),
             template="streamfields/bootstrap/nav_tabs.html",
             icon="fa-list",
-            roadrunner_options={
-                "group": "Bootstrap",
-                "title": "tab_header",
-            }
+            roadrunner_options={"group": "Bootstrap", "title": "tab_header"},
         ),
     ),
     (
@@ -592,19 +526,15 @@ preset_blocks = [
             CarouselBlock(),
             template="streamfields/bootstrap/carousel.html",
             icon="fa-picture-o",
-            roadrunner_options={
-                "group": "Bootstrap",
-                "title": "caption",
-            }
+            roadrunner_options={"group": "Bootstrap", "title": "caption"},
         ),
     ),
 ]
 
 
 class StreamBlock(blocks.StreamBlock):
-
     def additional_child_blocks(self):
-        from roadrunner import registered_blocks
+        from roadrunner.registering import registered_blocks
         from roadrunner.models import Block
 
         streamfields = Block.get_streamfields()
@@ -615,14 +545,14 @@ class StreamBlock(blocks.StreamBlock):
 
         return streamfields
 
-
     def to_python(self, value):
         child_blocks = self.child_blocks
         child_blocks.update(self.additional_child_blocks())
-        return blocks.StreamValue(self, [
-            child_data for child_data in value
-            if child_data['type'] in child_blocks
-        ], is_lazy=True)
+        return blocks.StreamValue(
+            self,
+            [child_data for child_data in value if child_data["type"] in child_blocks],
+            is_lazy=True,
+        )
 
 
 class RoadRunnerBaseBlock(blocks.StructBlock):
@@ -631,8 +561,7 @@ class RoadRunnerBaseBlock(blocks.StructBlock):
         label="Breedte kolom", help_text="De breedte kolommen (*/12)."
     )
     content = StreamBlock(
-        getattr(settings, 'ROADRUNNER_CONTENT_BLOCKS', preset_blocks),
-        label="Inhoud",
+        getattr(settings, "ROADRUNNER_CONTENT_BLOCKS", preset_blocks), label="Inhoud"
     )
     styling = BaseStylingBlock()
 
@@ -646,7 +575,6 @@ class RoadRunnerBaseBlock(blocks.StructBlock):
 
 
 class ModelChoiceBlock(blocks.FieldBlock):
-
     def __init__(self, model, required=True, help_text=None, **kwargs):
         self._required = required
         self._help_text = help_text
@@ -656,11 +584,8 @@ class ModelChoiceBlock(blocks.FieldBlock):
     def get_queryset(self):
         model = self._model
         if isinstance(model, str):
-            app_label, model_name = model.split('.')
-            model_type = ContentType.objects.get(
-                app_label=app_label,
-                model=model_name
-            )
+            app_label, model_name = model.split(".")
+            model_type = ContentType.objects.get(app_label=app_label, model=model_name)
             model = model_type.model_class()
         return model.objects.all()
 
@@ -678,12 +603,11 @@ class ModelChoiceBlock(blocks.FieldBlock):
         queryset = self.get_queryset()
         try:
             value = queryset.get(id=value)
-        except:
+        except queryset.model.DoesNotExist:
             return
         else:
             return value
 
 
 class TemplateBlock(blocks.StructBlock):
-    template = ModelChoiceBlock(model='roadrunner.template')
-
+    template = ModelChoiceBlock(model="roadrunner.template")

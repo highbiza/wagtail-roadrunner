@@ -7,12 +7,12 @@ from .blocks import RoadRunnerBaseBlock, TemplateBlock
 
 
 class RoadRunnerFormField(forms.Field):
-    def __init__(self, block=None, **kwargs): # pylint: disable=W0613
+    def __init__(self, block=None, **kwargs):  # pylint: disable=W0613
         super().__init__(**kwargs)
 
 
 class RoadRunnerField(StreamField):
-    def __init__(self, block_types=[], grid=True, **kwargs):
+    def __init__(self, block_types=None, grid=True, **kwargs):
         if grid:
             base_block = RoadRunnerBaseBlock(block_types)
             block_types = [
@@ -40,7 +40,7 @@ class RoadRunnerField(StreamField):
                         template="streamfields/template.html",
                         icon="snippet",
                         label="Template",
-                    )
+                    ),
                 ),
             ]
         super().__init__(block_types, **kwargs)

@@ -27,14 +27,14 @@ collectstatic:
 	manage.py collectstatic --no-input
 
 lint: fail-if-no-virtualenv
-	@black --check --exclude "migrations/*" ocyan
-	@pylint setup.py ocyan/
+	@black --check --exclude "migrations/*" roadrunner
+	@pylint setup.py roadrunner/
 
 black:
-	@black --exclude "migrations/*" ocyan
+	@black --exclude "migrations/*" roadrunner
 
 test: fail-if-no-virtualenv
-	@coverage run --source='ocyan.plugin.roadrunner.bs4' `which manage.py` test
+	@coverage run --source='roadrunner' `which manage.py` test
 	@coverage report
 	@coverage xml
 	@coverage html

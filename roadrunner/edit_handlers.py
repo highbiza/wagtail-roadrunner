@@ -18,7 +18,7 @@ class RoadRunnerPanel(StreamFieldPanel):
     choice_table = {}
 
     def classes(self):
-        return ['object', 'road-runner']
+        return ["object", "road-runner"]
 
     def html_declarations(self):
         """
@@ -123,7 +123,7 @@ class RoadRunnerPanel(StreamFieldPanel):
 
             if hasattr(block, "additional_child_blocks"):
                 child_blocks.update(
-                    block.additional_child_blocks() # self.get_content_type()
+                    block.additional_child_blocks()  # self.get_content_type()
                 )
 
         # Add field information if this is, or extends a "primitive" field
@@ -151,19 +151,18 @@ class RoadRunnerPanel(StreamFieldPanel):
                 ]:
                     tree["field"][field] = getattr(block.field, field)
 
-
             # Check if we're dealing with a choice field, in that case we have to
             # update the choices table. We're using this table because we want
             # to avoid duplicating data we send to the browser.
             choices = None
 
             if hasattr(block.field, "_choices"):
-                choices = block.field._choices
+                choices = block.field._choices  # pylint: disable=W0212
             if hasattr(block.field, "choices"):
                 choices = block.field.choices
             if choices:
                 tmp = []
-                for key, val in choices:  # pylint: disable=W0212
+                for key, val in choices:
                     tmp.append([str(key), str(val)])
 
                 choices_hash = hashlib.md5(str(tmp).encode("utf-8")).hexdigest()
