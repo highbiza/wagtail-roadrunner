@@ -1,0 +1,10 @@
+[MASTER]
+jobs=4
+load-plugins=pylint_django
+score=n
+
+[MESSAGES CONTROL]
+disable=R,C,W5103
+
+[TYPECHECK]
+ignored-classes=responses
