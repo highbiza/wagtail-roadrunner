@@ -6,6 +6,11 @@ pipeline {
 
     stages {
         stage('Build') {
+            steps {
+                withPythonEnv('System-CPython-3.6') {
+                    echo 'building...'
+                }
+            }
         }
         stage('Lint') {
             steps {
