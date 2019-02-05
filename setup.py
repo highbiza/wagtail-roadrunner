@@ -18,6 +18,7 @@ extras_require: dict = {
         "black",
         "vdt.versionplugin.wheel",
         "coverage",
+        "ocyan.plugin.wagtail",
     ]
 }
 
