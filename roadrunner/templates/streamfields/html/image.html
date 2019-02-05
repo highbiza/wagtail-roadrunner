@@ -1,0 +1,2 @@
+{% load styling_tags %}
+<img class="img-fluid {% get_styling_classes self.styling %}" src="{{ self.image.file.url }}" alt="{% if self.image %}{{ self.alt|default:self.image.title }}{% else %}missing image{% endif %}" {% get_styling self.styling %}/>

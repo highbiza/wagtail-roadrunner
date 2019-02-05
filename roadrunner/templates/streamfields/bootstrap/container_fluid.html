@@ -1,0 +1,19 @@
+{% load wagtailimages_tags %}
+{% load wagtailcore_tags %}
+{% load styling_tags %}
+{% load bootstrap4_tags %}
+{% load static %}
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            {% for block in self %}
+                <div class="{{ block.grid|to_bootstrap4 }} {% get_styling_classes block.styling %}" {% get_styling block.styling %}>
+                    {% for content in block.content %}
+                        {% include_block content with request=request page=page blockid=forloop.counter %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

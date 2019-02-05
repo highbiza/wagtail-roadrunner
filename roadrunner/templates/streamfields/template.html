@@ -1,0 +1,8 @@
+{% load wagtailcore_tags %}
+{% load roadrunner_tags %}
+
+{% block content %}
+    {% for block in self.template.content %}
+        {% include_block block with request=request page=page self=self %}
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% load styling_tags %}
+{% load wagtailcore_tags %}
+
+<div class="card {% get_styling_classes self.styling %}" {% get_styling self.styling %}>
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            {% for tab in self %}
+                <li role="presentation" class="nav-item">
+                    <a data-toggle="tab" class="nav-link {% if forloop.first %} active{% endif %}" href="#{{ tab.tab_header|slugify }}_{{ blockid }}_{{ forloop.counter }}">
+                        {{ tab.tab_header }}
+                        {% if tab.badge %}
+                        <span class="badge badge-secondary">
+                            {{ tab.badge }}
+                        </span>
+                        {% endif %}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="tab-content">
+            {% for tab in self %}
+                <div id="{{ tab.tab_header|slugify }}_{{ blockid }}_{{ forloop.counter }}" class="tab-pane fade{% if forloop.first %} in active show{% endif %} {% get_styling_classes tab.styling %}" {% get_styling tab.styling %}>
+                    {{ tab.tab_content|convert_to_html }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

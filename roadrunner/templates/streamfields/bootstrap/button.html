@@ -1,0 +1,4 @@
+{% load styling_tags %}
+<a href="{{ self.page.url }}" class="btn btn-{{ self.btn_class }} {% get_styling_classes self.styling %}" {% get_styling self.styling %}>
+    {{ self.page.title }}
+</a>

@@ -1,0 +1,13 @@
+{% load styling_tags %}
+
+<div class="card {% get_styling_classes self.styling %}" {% get_styling self.styling %}>
+    <img src="{{ self.image.file.url }}" alt="{{ self.image.title }}" class="card-img-top" >
+    <div class="card-body">
+        {% if self.caption %}
+            {{ self.caption|convert_to_html }}
+            {% if self.text %}
+                <a class="btn btn-{{ self.button_class }}" {{ self.attributes|safe }}>{{ self.text }}</a>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>

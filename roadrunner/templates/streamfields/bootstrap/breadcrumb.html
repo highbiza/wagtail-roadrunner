@@ -1,0 +1,17 @@
+{% load styling_tags %}
+
+{% if self.pair_icon %}
+<style>
+.breadcrumb-item+.breadcrumb-item::before {
+    content: "{{ self.pair_icon|safe }}";
+}
+</style>
+{% endif %}
+<ol class="breadcrumb {% get_styling_classes self.styling %}" {% get_styling self.styling %}>
+    {% for ancestor in page.get_ancestors %}
+        {% if not ancestor.is_root %}
+        <li class="breadcrumb-item"><a href="{{ ancestor.url }}">{{ ancestor }}</a></li>
+        {% endif %}
+    {% endfor %}
+    <li class="breadcrumb-item active">{{ page }}</li>
+</ol>

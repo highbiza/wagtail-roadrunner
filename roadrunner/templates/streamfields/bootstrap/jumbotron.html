@@ -1,0 +1,9 @@
+{% load styling_tags %}
+{% load wagtailcore_tags %}
+
+<div class="jumbotron {% get_styling_classes self.styling %}" {% get_styling self.styling %}>
+    <div class="container">
+        <h1>{{ self.header }}</h1>
+        {{ self.html|convert_to_html }}
+    </div>
+</div>

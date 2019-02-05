@@ -1,0 +1,32 @@
+{% load styling_tags %}
+{% load wagtailcore_tags %}
+
+<div id="carousel_{{ blockid }}" class="carousel slide {% get_styling_classes self.styling %}" data-ride="carousel">
+    <ol class="carousel-indicators">
+        {% for slide in self %}
+            <li data-target="#carousel_{{ blockid }}" data-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active"{% endif %}></li>
+        {% endfor %}
+    </ol>
+
+    <div class="carousel-inner" role="listbox">
+        {% for slide in self %}
+            <div class="carousel-item{% if forloop.first %} active{% endif %}">
+                <img src="{{ slide.image.file.url }}" alt="{{ slide.image.alt }}" class="d-block w-100" />
+                {% if slide.caption %}
+                    <div class="carousel-caption">
+                        {{ slide.caption|convert_to_html }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <a class="left carousel-control-prev" href="#carousel_{{ blockid }}" role="button" data-slide="prev">
+        <span class="fa fa-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control-next" href="#carousel_{{ blockid }}" role="button" data-slide="next">
+        <span class="fa fa-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>

@@ -1,0 +1,2 @@
+{% load styling_tags %}
+<div class="{% get_styling_classes self.styling %}" {% get_styling self.styling %}>{{ self.text|safe }}</div>

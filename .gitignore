@@ -1,0 +1,42 @@
+# Basics
+*.py[cod]
+__pycache__
+
+# Pycharm
+.idea/*
+
+# Vim
+*~
+*.swp
+*.swo
+
+# Logs
+*.log
+pip-log.txt
+
+# Translations
+*.mo
+*.pot
+
+# Sqlite dbs
+*.sqlite
+*.sqlite3
+
+# OSX
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# OSX thumbnails
+._*
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+.hypothesis/
