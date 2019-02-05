@@ -6,11 +6,6 @@ pipeline {
 
     stages {
         stage('Build') {
-            steps {
-                withPythonEnv('System-CPython-3.6') {
-                    pysh "make"
-                }
-            }
         }
         stage('Lint') {
             steps {

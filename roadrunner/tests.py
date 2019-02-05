@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
-from django.test import TestCase
-from django.urls import reverse
+from django.test import TestCase, override_settings
+# from django.urls import reverse
 
 from .templatetags.styling_tags import get_styling
 from .blocks import AccordionBlock
@@ -11,18 +12,13 @@ from .fields import RoadRunnerField
 from .wagtail_hooks import css, js, wagtail
 
 
+@override_settings(INSTALLED_APPS=settings.INSTALLED_APPS + ["roadrunner"])
 class RoadRunnerTest(TestCase):
-    fixtures = ["roadrunner.json"]
+    fixtures = ["roadrunner"]
 
     def login(self):
         # Create a user
-        user = get_user_model().objects._create_user(  # pylint: disable=W0212
-            username="test2",
-            email="test2@email.com",
-            password="password",
-            is_staff=True,
-            is_superuser=True,
-        )  # pylint: disable=W0212
+        user = get_user_model().objects.get(pk=1)
         user.groups.add(Group.objects.get(pk=2))
         # Login
         self.client.login(username="test2", password="password")
@@ -52,23 +48,3 @@ class RoadRunnerTest(TestCase):
         panel = field.get_panel()
         self.assertEqual(panel, RoadRunnerPanel)
 
-    def test_image_view(self):
-        url = reverse("roadrunner:image")
-        response = self.client.get(url)
-        self.assertFalse(response.json())
-        response = self.client.get(url, {"id": 1})
-        self.assertNotEqual(response.json(), False)
-
-    def test_page_view(self):
-        url = reverse("roadrunner:page")
-        response = self.client.get(url)
-        self.assertFalse(response.json())
-        response = self.client.get(url, {"id": 1})
-        self.assertNotEqual(response.json(), False)
-
-    def test_document_view(self):
-        url = reverse("roadrunner:document")
-        response = self.client.get(url)
-        self.assertFalse(response.json())
-        response = self.client.get(url, {"id": 1})
-        self.assertNotEqual(response.json(), False)
