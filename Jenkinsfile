@@ -8,7 +8,7 @@ pipeline {
         stage('Build') {
             steps {
                 withPythonEnv('System-CPython-3.6') {
-                    echo 'building...'
+                    pysh "make"
                 }
             }
         }

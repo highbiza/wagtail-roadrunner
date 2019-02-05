@@ -1,6 +1,6 @@
-.PHONY: fail-if-no-virtualenv all install migrate loaddata collectstatic lint black test debug undebug
+.PHONY: fail-if-no-virtualenv all install lint black test debug undebug
 
-all: install migrate loaddata collectstatic
+all: install
 
 fail-if-no-virtualenv:
 ifndef VIRTUAL_ENV # check for a virtualenv in development environment
@@ -13,18 +13,8 @@ ifndef PIP_INDEX_URL
 PIP_INDEX_URL=https://pypi.uwkm.nl/ocyan/testing/+simple/
 endif
 
-
 install: fail-if-no-virtualenv
 	PIP_INDEX_URL=${PIP_INDEX_URL} pip install --editable .[test] --upgrade --upgrade-strategy=eager --pre
-
-migrate:
-	manage.py migrate --no-input
-
-loaddata:
-	# manage.py loaddata
-
-collectstatic:
-	manage.py collectstatic --no-input
 
 lint: fail-if-no-virtualenv
 	@black --check --exclude "migrations/*" roadrunner
