@@ -526,7 +526,7 @@ preset_blocks = [
             CarouselBlock(),
             template="streamfields/bootstrap/carousel.html",
             icon="fa-picture-o",
-            roadrunner_options={"group": "Bootstrap", "title": "caption"},
+            roadrunner_options={"group": "Bootstrap"},
         ),
     ),
 ]

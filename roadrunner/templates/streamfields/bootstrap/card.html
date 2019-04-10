@@ -8,7 +8,7 @@
         </div>
     {% endif %}
     <div class="card-body">
-        {{ self.panel_content|convert_to_html }}
+        {{ self.card_content|convert_to_html }}
     </div>
     {% if self.footer %}
         <div class="card-footer">{{ self.footer }}</div>
