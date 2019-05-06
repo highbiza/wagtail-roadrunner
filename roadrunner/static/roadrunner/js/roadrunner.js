@@ -21,7 +21,6 @@ $.fn.roadrunner = function(data){
         var addChild = function(treePath, source){
             var block = rr.Routing.getData(treePath, rr.Globals.tree);
             var dataPath = source.closest('[data-path]').attr('data-path');
-
             if (typeof dataPath == 'undefined') {
                 dataPath = '';
             }
@@ -405,10 +404,27 @@ $.fn.roadrunner = function(data){
             });
         };
 
+        // id = dom data-id attribute of DOM element
+        // value = id of product
+        var initProduct = function(name, productId){
+            $.get(rr.Globals.urls.product + '?id=' + productId, function(data){
+                if(!data){
+                    // no product returned
+                    return;
+                }
+
+                var target = $('input[name="' + name + '"]').prev();
+                $('div.chosen', target).show(0);
+                $('span.title').html(data);
+                $('div.unchosen', target).hide(0);
+            });
+        };
+
         return {
             'initImage': initImage,
             'initDocument': initDocument,
             'initPage': initPage,
+            'initProduct': initProduct,
         };
     })();
     var TEMPLATE_VARS = {
@@ -432,6 +448,7 @@ $.fn.roadrunner = function(data){
         'TextBlock',
         'ModelChoiceField',
         'GridChoiceBlock',
+        'ProductChooserBlock',
     ];
 
     /*
@@ -745,6 +762,8 @@ $.fn.roadrunner = function(data){
                 rr.Ajax.initPage(block.name, value);
             } else if (blockType == 'DocumentChooserBlock' && hasValue && value != '') {
                 rr.Ajax.initDocument(block.name, value);
+            } else if (blockType == 'ProductChooserBlock' && hasValue && value != '') { 
+                rr.Ajax.initProduct(block.name, value);
             } else if (blockType == 'GridChoiceBlock') {
                 var choice = rr.Globals.choices[block.field.choices][1];
                 var prefix = choice[0].substr(0, choice[0].length - choice[1].length);
@@ -1371,7 +1390,6 @@ $.fn.roadrunner = function(data){
         'TextBlock': '<div class="rr_textfield rr_block"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><textarea data-required="{{required}}" name="{{path}}" placeholder="{{placeholder}}">{{value}}</textarea><span class="help">{{help_text}}</span></div></div></div>',
         'ListWrapper': '<div class="rr_block rr_listwrapper rr_parentblock"><div class="rr_header"> <div class="button-group button-group-square"><button type="button" title="Verwijderen" data-action="delete" data-path="{{path}}" class="rr_action button icon text-replace hover-no icon-bin">Verwijderen</button> </div><br class="clearfix" /> </div><div class="rr_block_content"><div class="rr_children"></div></div></div>',
         'TableBlock': '<div class="rr_tablefield rr_block"><div class="rr_block_content"><div class="input"><div class="field boolean_field widget-checkbox_input"><label for="{{path}}-handsontable-header">Rij-header</label><div class="field-content" style="width: 80%;"><div class="input"><input id="{{path}}-handsontable-header" name="{{path}}-handsontable-header" type="checkbox" /></div><p class="help">Geef de eerste rij weer als een header.</p></div></div><br/><div class="field boolean_field widget-checkbox_input"><label for="{{path}}-handsontable-col-header">Kolomheader</label><div class="field-content" style="width: 80%;"><div class="input"><input id="{{path}}-handsontable-col-header" name="{{path}}-handsontable-col-header" type="checkbox" /></div><p class="help">Geef de eerste kolom als een header weer.</p></div></div><br/><div id="{{path}}-handsontable-container" style="height: 135px; overflow: hidden; width: 100%;" class="handsontable"></div><!-- old table value:{&quot;data&quot;:[[null,&quot;&quot;,null,null],[null,null,null,null],[null,null,null,null],[null,null,null,null]],&quot;first_row_is_table_header&quot;:false,&quot;first_col_is_header&quot;:false}--><input id="{{path}}" name="{{path}}" placeholder="Tabel" value="{{value}}" type="hidden" /><script>initTable("{{path}}", {"minSpareRows": 0, "startRows": 4, "height": 108, "autoColumnSize": false, "renderer": "text", "startCols": 4, "stretchH": "all", "language": "nl", "rowHeaders": false, "contextMenu": true, "editor": "text", "colHeaders": false});</script><span></span><p class="help">HTML is mogelijk in de tabel</p></div></div></div>',
-        'ProductChooserBlock': 'ProductChooserBlock',
         '_BlockWrapper': '<div class="rr_blockwrapper {{width}}" data-path="{{data_path}}" data-treepath="{{tree_path}}"> {{header}}<div class="rr_children"></div></div>',
         'StreamBlock': '<div class="rr_items"></div><div class="rr_new_block full_width"><button type="button" data-action="addChild" data-params="{{tree_path}}" class="rr_action addChild button"></button></div>',
         '_ModalContent': '<section id="{{id}}" class="{{classes}}">{{content}}</section>',
@@ -1390,6 +1408,7 @@ $.fn.roadrunner = function(data){
         '_FieldWrapper': '<div class="rr_fields">{{fields}}<button type="button" class="button button-longrunning rr_action" data-action="{{action}}" data-path="{{data_path}}" data-params="{{tree_path}}"><span class="icon icon-spinner"></span><em>Pas toe</em></button></div>',
         'StructBlock': '<div class="rr_structblock" data-path="{{data_path}}">{{header}}<div class="rr_block_preview_content">{{preview}}</div></div>',
         'URLBlock': '<div class="rr_urlfield rr_block url_field"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><input data-required="{{required}}" name="{{path}}" placeholder="{{placeholder}}" value="{{value}}" type="url" /><span class="help">{{help_text}}</span></div></div></div>',
+        'ProductChooserBlock': '<div class="rr_productfield rr_block"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><div id="{{path}}-chooser" class="chooser product-chooser blank"><div class="chosen"><span class="title"></span><ul class="actions"><!-- <li><button type="button" class="button action-clear button-small button-secondary">Leeg keuze</button></li> --><li><button type="button" class="button action-choose button-small button-secondary">Kies een ander product</button></li><!-- <li><a href="" class="edit-link button button-small button-secondary" target="_blank">Wijzig dit product</a></li> --></ul></div><div class="unchosen"><button type="button" class="button action-choose button-small button-secondary">Kies een product</button></div></div><input id="{{path}}" name="{{path}}" placeholder="Product" value="{{value}}" type="hidden"><script>createProductChooser("{{path}}");</script><span></span><span class="help">{{help_text}}</p></div></div></div>',       
     };
     rr.HtmlEntity = function() {
         this.html = null;

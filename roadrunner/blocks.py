@@ -8,6 +8,7 @@ from django.forms import ChoiceField
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
+from ocyan.plugin.wagtail_oscar_integration.blocks import ProductChooserBlock
 
 class MultipleChoiceField(ChoiceField):
     pass
@@ -216,6 +217,10 @@ class ImageBlock(blocks.StructBlock):
     styling = BaseStylingBlock()
 
 
+class ProductBlock(blocks.StructBlock):
+    product = ProductChooserBlock()
+
+
 class VideoBlock(blocks.StructBlock):
     url = blocks.CharBlock(
         label="URL", help_text="Het adres van een site, de domeinnaam.", max_length=255
@@ -394,6 +399,14 @@ preset_blocks = [
             template="streamfields/html/image.html",
             icon="fa-camera-retro",
             roadrunner_options={"group": "HTML", "title": "alt"},
+        ),
+    ),
+    (
+        "product",
+        ProductBlock(
+            template="streamfields/webshop/product.html",
+            icon="fa-product-hunt",
+            roadrunner_options={"group": "Webshop", "title": "product"},
         ),
     ),
     (

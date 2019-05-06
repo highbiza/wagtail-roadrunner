@@ -8,6 +8,9 @@ from wagtail.documents.models import Document
 from wagtail.images.models import Image, Filter
 from wagtail.images.shortcuts import get_rendition_or_not_found
 
+from oscar.core.loading import get_model
+
+Product = get_model("catalogue", "Product")
 
 def image(request):
     image_id = request.GET.get("id")
@@ -40,5 +43,16 @@ def document(request):
         document_obj = Document.objects.filter(pk=document_id).first()
         if document_obj:
             return JsonResponse(document_obj.title, safe=False)
+
+    return JsonResponse(False, safe=False)
+
+
+def product(request):
+    product_id = request.GET.get("id")
+
+    if product_id:
+        product_obj = Product.objects.filter(pk=product_id).first()
+        if product_obj:
+            return JsonResponse(product_obj.get_title(), safe=False)
 
     return JsonResponse(False, safe=False)
