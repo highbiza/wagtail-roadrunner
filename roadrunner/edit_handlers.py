@@ -72,6 +72,7 @@ class RoadRunnerPanel(StreamFieldPanel):
             "page": reverse("roadrunner:page"),
             "image": reverse("roadrunner:image"),
             "document": reverse("roadrunner:document"),
+            "product": reverse("roadrunner:product"),
         }
 
     def get_content_type(self):
