@@ -8,6 +8,7 @@ from wagtail.documents.models import Document
 from wagtail.images.models import Image, Filter
 from wagtail.images.shortcuts import get_rendition_or_not_found
 
+
 def image(request):
     image_id = request.GET.get("id")
     if image_id:
@@ -47,7 +48,7 @@ def product(request):
     from oscar.core.loading import get_model
 
     Product = get_model("catalogue", "Product")
-    
+
     product_id = request.GET.get("id")
 
     if product_id:
