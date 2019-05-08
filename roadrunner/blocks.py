@@ -216,9 +216,6 @@ class ImageBlock(blocks.StructBlock):
     styling = BaseStylingBlock()
 
 
-
-
-
 class VideoBlock(blocks.StructBlock):
     url = blocks.CharBlock(
         label="URL", help_text="Het adres van een site, de domeinnaam.", max_length=255
