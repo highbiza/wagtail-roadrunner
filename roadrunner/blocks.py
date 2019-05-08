@@ -8,7 +8,10 @@ from django.forms import ChoiceField
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
-from ocyan.plugin.wagtail_oscar_integration.blocks import ProductChooserBlock
+from ocyan.plugin.wagtail_oscar_integration.blocks import (
+    ProductChooserBlock
+)  # pylint: disable=E0611,E0401
+
 
 class MultipleChoiceField(ChoiceField):
     pass

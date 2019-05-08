@@ -49,15 +49,17 @@ def roadrunner_colorpicker_js():
         src=static("roadrunner/plugins/colorpicker/js/colorpicker.js"), v=version
     )
 
+
 def roadrunner_product_chooser_js():
     return '<script type="text/javascript" src="{src}?v={v}"></script>'.format(
         src=static("wagtailadmin/js/product-chooser.js"), v=version
     )
 
+
 def roadrunner_product_chooser_modal_js():
     return '<script type="text/javascript" src="{src}?v={v}"></script>'.format(
         src=static("wagtailadmin/js/product-chooser-modal.js"), v=version
-    ) 
+    )
 
 
 @hooks.register("insert_editor_css")
