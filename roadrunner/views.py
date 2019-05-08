@@ -12,6 +12,7 @@ from oscar.core.loading import get_model
 
 Product = get_model("catalogue", "Product")
 
+
 def image(request):
     image_id = request.GET.get("id")
     if image_id:
