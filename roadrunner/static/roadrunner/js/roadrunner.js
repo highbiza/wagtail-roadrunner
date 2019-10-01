@@ -704,6 +704,9 @@ $.fn.roadrunner = function(data){
                 if (value == "") {
                     value = "null";
                 }
+                // Fix single quotes HTML parsing errors
+                // (and subsequent JSON parsing errors)
+                value = value.replace(/'/g, "&apos;");
             }
 
             if(block.field){
