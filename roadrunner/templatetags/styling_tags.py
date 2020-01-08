@@ -1,14 +1,11 @@
 from django import template
+from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 from wagtail.admin.rich_text.converters.contentstate import ContentstateConverter
 from wagtail.core.rich_text import features as feature_registry
 from wagtail.core.templatetags.wagtailcore_tags import richtext
 
-features = feature_registry.get_default_features()
-converter = ContentstateConverter(features)
 register = template.Library()
-
-
 style_classes = ["block_classes", "padding", "margin", "border_radius", "border"]
 
 
@@ -45,7 +42,22 @@ def get_styling_classes(styling):
     return " ".join(klasses)
 
 
+class ContentstateConverterBuilder:
+    # This defers calling get_default_features until Django is started up.
+    # prevents _frozen_importlib._DeadlockError: deadlock detected by _ModuleLock
+
+    @cached_property
+    def converter(self):
+        features = feature_registry.get_default_features()
+        converter = ContentstateConverter(features)
+        return converter
+
+
+converter_builder = ContentstateConverterBuilder()
+
+
 @register.filter
 def convert_to_html(text):
-    html = converter.to_database_format(text.source)
+    # Shouldn't this be something like https://docs.wagtail.io/en/v2.7/advanced_topics/customisation/rich_text_internals.html#FeatureRegistry.register_converter_rule
+    html = converter_builder.converter.to_database_format(text.source)
     return richtext(html)
