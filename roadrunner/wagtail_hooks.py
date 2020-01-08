@@ -112,6 +112,12 @@ def wagtail_page_chooser_modal_js():
     )
 
 
+def wagtail_document_chooser_modal_js():
+    return '<script type="text/javascript" src="{src}"></script>'.format(
+        src=static("wagtaildocs/js/document-chooser-modal.js")
+    )
+
+
 def wagtail_draftail_js():
     return '<script type="text/javascript" src="{src}"></script>'.format(
         src=static("wagtailadmin/js/draftail.js")
@@ -127,6 +133,7 @@ def wagtail():
         + wagtail_page_chooser_js()
         + wagtail_page_chooser_modal_js()
         + wagtail_draftail_js()
+        + wagtail_document_chooser_modal_js()
     )
 
 
