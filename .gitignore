@@ -19,7 +19,6 @@ pyvenv.cfg
 pip-log.txt
 
 # Translations
-*.mo
 *.pot
 
 # Sqlite dbs
