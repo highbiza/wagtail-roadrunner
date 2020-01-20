@@ -105,6 +105,52 @@ span.go-fullscreen:before {
 
 .stream-menu button {
     color: #808080;
+    background-color: transparent;
+    border: 0;
+    height: auto;
+    display: block;
+    width: 100%;
+    padding: 0 0 .5em;
+    overflow: visible;
+}
+
+.stream-menu button:before {
+    display: block;
+    font-family: wagtail;
+    font-size: 2em;
+    width: 100%;
+    height: 2em;
+    line-height: 2em;
+    text-align: center;
+}
+
+body.ready .stream-menu button {
+    transition: all .2s ease;
+}
+
+.stream-menu .stream-menu-inner {
+    transform: translateZ(0);
+    max-width: 50em;
+    margin: auto;
+    overflow: hidden;
+}
+
+.stream-menu ul {
+    transform: translateZ(0) scale(1);
+    visibility: visible;
+    opacity: 1;
+    padding: 1em 1em 0;
+    overflow: hidden;
+}
+
+.stream-menu li {
+    box-sizing: border-box;
+    display: inline;
+    float: left;
+    width: 16.66667%;
+    padding-right: 1.5%;
+    padding-left: 1.5%;
+    padding-bottom: 3%;
 }
 
 .rr_modal .modal-body {
