@@ -2,10 +2,10 @@
 {% load wagtailimages_tags %}
 
 {% image self.image format-webp width-1000 as desktop_webp %}
-{% image self.image format-png width-1000 as desktop %}
+{% image self.image width-1000 as desktop %}
 {% image self.image format-webp width-800 as tablet_webp %}
-{% image self.image format-png width-800 as tablet %}
+{% image self.image width-800 as tablet %}
 {% image self.image format-webp width-400 as mobile_webp %}
-{% image self.image format-png width-400 as mobile %}
+{% image self.image width-400 as mobile %}
 
 <img class="img-fluid {% get_styling_classes self.styling %}" src="{{ desktop.url }}" srcset="{{ desktop.url }} 1000w, {{ desktop_webp.url }} 1000w, {{ tablet.url }} 800w, {{ tablet_webp.url }} 800w, {{ mobile.url }} 400w, {{ mobile_webp.url }} 400w" , alt="{% if self.image %}{{ self.alt|default:self.image.title }}{% else %}missing image{% endif %}" {% get_styling self.styling %} />
