@@ -1,15 +1,10 @@
-{% load styling_tags %}
-{% load wagtailimages_tags %}
+{% load styling_tags wagtailimages_tags %}
 
-{% image self.image format-webp width-1000 as desktop_webp %}
-{% image self.image width-1000 as desktop %}
-{% image self.image format-webp width-800 as tablet_webp %}
-{% image self.image width-800 as tablet %}
-{% image self.image format-webp width-400 as mobile_webp %}
-{% image self.image width-400 as mobile %}
+{% image self.image original format-webp as image_webp %}
+{% image self.image original as image %}
 
 <picture>
-    <source type="image/webp" srcset="{{mobile_webp.url}} 400w, {{tablet_webp.url}}, 800w, {{desktop_webp.url}} 1000w">
-    <source srcset="{{mobile.url}} 400w, {{tablet.url}} 800w, {{desktop.url}} 1000w">
-    <img class="img-fluid" src="{{mobile.url}}" alt="{% if self.image %}{{ self.alt|default:self.image.title }}{% else %}missing image{% endif %}">
+    <source type="image/webp" srcset="{{image_webp.url}}">
+    <source srcset="{{image.url}}">
+    <img class="img-fluid" src="{{image.url}}" alt="{% if self.image %}{{ self.alt|default:self.image.title }}{% else %}missing image{% endif %}" width="{{image.width}}" height="{{image.height}}">
 </picture>
