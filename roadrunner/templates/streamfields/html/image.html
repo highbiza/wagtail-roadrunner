@@ -1,15 +1,9 @@
-{% load styling_tags %}
-{% load wagtailimages_tags %}
+{% load styling_tags wagtailimages_tags ocyan_thumbnail %}
 
-{% image self.image format-webp width-1000 as desktop_webp %}
-{% image self.image width-1000 as desktop %}
-{% image self.image format-webp width-800 as tablet_webp %}
-{% image self.image width-800 as tablet %}
-{% image self.image format-webp width-400 as mobile_webp %}
-{% image self.image width-400 as mobile %}
-
-<picture>
-    <source type="image/webp" srcset="{{mobile_webp.url}} 400w, {{tablet_webp.url}}, 800w, {{desktop_webp.url}} 1000w">
-    <source srcset="{{mobile.url}} 400w, {{tablet.url}} 800w, {{desktop.url}} 1000w">
-    <img class="img-fluid" src="{{mobile.url}}" alt="{% if self.image %}{{ self.alt|default:self.image.title }}{% else %}missing image{% endif %}">
-</picture>
+{% with self.image.width|stringformat:"s" as width %}
+    {% with self.image.height|stringformat:"s" as height %}
+        {% get_styling_classes self.styling as classes %}
+        {% get_styling self.styling as inline_styling %}
+        {% picture self.image.file width|add:"x"|add:height upscale=True alt=self.alt|default:self.image.title classes=classes inline_styling=inline_styling %} 
+    {% endwith %}
+{% endwith %}

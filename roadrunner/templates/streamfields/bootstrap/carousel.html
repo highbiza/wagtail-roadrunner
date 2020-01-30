@@ -1,5 +1,5 @@
 {% load styling_tags %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags ocyan_thumbnail %}
 
 <div id="carousel_{{ blockid }}" class="carousel slide {% get_styling_classes self.styling %}" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -11,7 +11,11 @@
     <div class="carousel-inner" role="listbox">
         {% for slide in self %}
             <div class="carousel-item{% if forloop.first %} active{% endif %}">
-                <img src="{{ slide.image.file.url }}" alt="{{ slide.image.alt }}" class="d-block w-100" />
+                {% with slide.image.width|stringformat:"s" as width %}
+                    {% with slide.image.height|stringformat:"s" as height %}
+                        {% picture slide.image.file width|add:"x"|add:height upscale=True alt=slide.image.alt classes="w-100 d-block" %} 
+                    {% endwith %}
+                {% endwith %}
                 {% if slide.caption %}
                     <div class="carousel-caption">
                         {{ slide.caption|convert_to_html }}
