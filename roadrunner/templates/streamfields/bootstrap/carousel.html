@@ -16,7 +16,7 @@
                 <picture>
                     <source type="image/webp" srcset="{{image_webp.url}}">
                     <source srcset="{{image.url}}">
-                    <img class="w-100 d-block" src="{{image.url}}" alt="{% if slide.image %}{{ self.alt|default:slide.image.title }}{% else %}missing image{% endif %}">
+                    <img class="w-100 d-block" src="{{image.url}}" alt="{{ slide.image.alt }}">
                 </picture>
                 {% if slide.caption %}
                     <div class="carousel-caption">
