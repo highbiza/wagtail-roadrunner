@@ -1,9 +1,10 @@
-{% load styling_tags wagtailimages_tags ocyan_thumbnail %}
+{% load styling_tags wagtailimages_tags %}
 
-{% with self.image.width|stringformat:"s" as width %}
-    {% with self.image.height|stringformat:"s" as height %}
-        {% get_styling_classes self.styling as classes %}
-        {% get_styling self.styling as inline_styling %}
-        {% picture self.image.file width|add:"x"|add:height upscale=True alt=self.alt|default:self.image.title classes=classes inline_styling=inline_styling %} 
-    {% endwith %}
-{% endwith %}
+{% image self.image original format-webp as image_webp %}
+{% image self.image original as image %}
+
+<picture>
+    <source type="image/webp" srcset="{{image_webp.url}}">
+    <source srcset="{{image.url}}">
+    <img class="img-fluid" src="{{image.url}}" alt="{% if self.image %}{{ self.alt|default:self.image.title }}{% else %}missing image{% endif %}">
+</picture>
