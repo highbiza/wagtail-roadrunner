@@ -328,6 +328,7 @@ class ModalBlock(blocks.StructBlock):
 
 class CarouselBlock(blocks.StructBlock):
     image = ImageChooserBlock()
+    url = blocks.URLBlock(required=False, help_text="Where the user goes on click.")
     caption = blocks.RichTextBlock(
         label="Caption", help_text="Caption van de slide.", required=False
     )

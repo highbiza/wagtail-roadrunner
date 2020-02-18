@@ -11,6 +11,7 @@
     <div class="carousel-inner" role="listbox">
         {% for slide in self %}
             <div class="carousel-item{% if forloop.first %} active{% endif %}">
+                {% if slide.url %}<a href="{{slide.url}}">{% endif %}
                 {% image slide.image original format-webp as image_webp %}
                 {% image slide.image original as image %}
                 <picture>
@@ -23,6 +24,7 @@
                         {{ slide.caption|convert_to_html }}
                     </div>
                 {% endif %}
+                {% if slide.url %}</a>{% endif %}
             </div>
         {% endfor %}
     </div>
