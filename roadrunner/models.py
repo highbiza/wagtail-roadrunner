@@ -187,15 +187,15 @@ class SnippetBlock(blocks.StructBlock):
 
     def render(self, value, context=None):
         template = DjangoTemplate(self.template)
-        base_context = self.get_context(value, parent_context=context)
+        context = self.get_context(value, parent_context=context)
         new_context = {
             key.replace("-", "_"): value
-            for key, value in base_context.get("self", {}).items()
+            for key, value in context.get("self", {}).items()
         }
 
-        if "request" in base_context:
-            return template.render(
-                RequestContext(base_context.get("request"), new_context)
-            )
+        context.update(new_context)
+
+        if "request" in context:
+            return template.render(RequestContext(context.get("request"), context))
         else:
-            return template.render(Context(new_context))
+            return template.render(Context(context))
