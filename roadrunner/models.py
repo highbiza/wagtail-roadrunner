@@ -193,7 +193,7 @@ class SnippetBlock(blocks.StructBlock):
             for key, value in base_context.get("self", {}).items()
         }
 
-        if context is not None:
+        if "request" in base_context:
             return template.render(
                 RequestContext(base_context.get("request"), new_context)
             )
