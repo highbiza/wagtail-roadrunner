@@ -187,8 +187,11 @@ class SnippetBlock(blocks.StructBlock):
 
     def render(self, value, context=None):
         template = DjangoTemplate(self.template)
+        base_context = self.get_context(value, parent_context=dict(context))
         new_context = {
             key.replace("-", "_"): value
             for key, value in self.get_context(value).get("self", {}).items()
         }
+        new_context["csrf_token"] = base_context.get("csrf_token")
+        new_context["request"] = base_context.get("request")
         return template.render(Context(new_context))
