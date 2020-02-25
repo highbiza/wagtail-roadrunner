@@ -192,8 +192,10 @@ class SnippetBlock(blocks.StructBlock):
             key.replace("-", "_"): value
             for key, value in base_context.get("self", {}).items()
         }
-        
+
         if context is not None:
-            return template.render(RequestContext(base_context.get("request"), new_context))
-        else:            
+            return template.render(
+                RequestContext(base_context.get("request"), new_context)
+            )
+        else:
             return template.render(Context(new_context))
