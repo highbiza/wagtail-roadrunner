@@ -2,7 +2,7 @@ from collections import OrderedDict
 from unidecode import unidecode
 
 from django.db import models
-from django.template import Template as DjangoTemplate, Context
+from django.template import Template as DjangoTemplate, Context, RequestContext
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
@@ -187,11 +187,23 @@ class SnippetBlock(blocks.StructBlock):
 
     def render(self, value, context=None):
         template = DjangoTemplate(self.template)
-        base_context = self.get_context(value, parent_context=dict(context))
-        new_context = {
-            key.replace("-", "_"): value
-            for key, value in self.get_context(value).get("self", {}).items()
-        }
-        new_context["csrf_token"] = base_context.get("csrf_token")
-        new_context["request"] = base_context.get("request")
-        return template.render(Context(new_context))
+        if context is not None:
+            base_context = self.get_context(value, parent_context=context)
+
+            new_context = {
+                key.replace("-", "_"): value
+                for key, value in base_context.get("self", {}).items()
+            }
+
+            return template.render(
+                RequestContext(base_context.get("request"), new_context)
+            )
+        else:
+            base_context = self.get_context(value)
+
+            new_context = {
+                key.replace("-", "_"): value
+                for key, value in base_context.get("self", {}).items()
+            }
+
+            return template.render(Context(new_context))
