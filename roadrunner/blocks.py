@@ -335,6 +335,16 @@ class CarouselBlock(blocks.StructBlock):
     styling = BaseStylingBlock()
 
 
+class UniqueListBlock(blocks.ListBlock):
+    def get_uuid(self):
+        return uuid.uuid4()
+
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context)
+        context["block_uuid"] = self.get_uuid()
+        return context
+
+
 class AccordionBlock(blocks.StructBlock):
     panel_color = BootstrapColorChoiceBlock(
         label="Kleur", help_text="Kleur van accordion.", required=False
@@ -523,7 +533,7 @@ preset_blocks = [
     ),
     (
         "carousel",
-        blocks.ListBlock(
+        UniqueListBlock(
             CarouselBlock(),
             template="streamfields/bootstrap/carousel.html",
             icon="fa-picture-o",
