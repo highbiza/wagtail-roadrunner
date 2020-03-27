@@ -4,8 +4,6 @@
 <div id="carousel_{{ block_uuid }}" class="carousel slide {% get_styling_classes self.styling %}" data-ride="carousel">
     <ol class="carousel-indicators">
         {% for slide in self %}
-            {{slide.get_uuid}}
-
             <li data-target="#carousel_{{ block_uuid }}" data-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active"{% endif %}></li>
         {% endfor %}
     </ol>
