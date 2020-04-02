@@ -1,10 +1,12 @@
 {% load styling_tags %}
-{% load wagtailcore_tags wagtailimages_tags ocyan_thumbnail %}
+{% load wagtailcore_tags wagtailimages_tags ocyan_thumbnail roadrunner_tags %}
 
-<div id="carousel_{{ block_uuid }}" class="carousel slide {% get_styling_classes self.styling %}" data-ride="carousel">
+{% get_unique_id as unique_id %}
+
+<div id="carousel_{{unique_id}}" class="carousel slide {% get_styling_classes self.styling %}" data-ride="carousel">
     <ol class="carousel-indicators">
         {% for slide in self %}
-            <li data-target="#carousel_{{ block_uuid }}" data-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active"{% endif %}></li>
+            <li data-target="#carousel_{{unique_id}}" data-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active"{% endif %}></li>
         {% endfor %}
     </ol>
 
@@ -29,11 +31,11 @@
         {% endfor %}
     </div>
 
-    <a class="left carousel-control-prev" href="#carousel_{{ block_uuid }}" role="button" data-slide="prev">
+    <a class="left carousel-control-prev" href="#carousel_{{unique_id}}" role="button" data-slide="prev">
         <span class="fa fa-chevron-left" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
     </a>
-    <a class="right carousel-control-next" href="#carousel_{{ block_uuid }}" role="button" data-slide="next">
+    <a class="right carousel-control-next" href="#carousel_{{unique_id}}" role="button" data-slide="next">
         <span class="fa fa-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
