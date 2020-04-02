@@ -1,5 +1,6 @@
 from django import template
 from roadrunner.models import PreFooterSnippet
+import uuid
 
 register = template.Library()
 
@@ -12,3 +13,8 @@ def pre_footer(context):
         "page": context.get("page"),
         "self": context.get("self"),
     }
+
+
+@register.simple_tag(takes_context=False)
+def get_unique_id():
+    return uuid.uuid4()
