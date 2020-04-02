@@ -1,7 +1,7 @@
 {% load styling_tags %}
 {% load wagtailcore_tags wagtailimages_tags ocyan_thumbnail roadrunner_tags %}
 
-{% get_unique_id self as unique_id %}
+{% get_unique_id as unique_id %}
 
 <div id="carousel_{{unique_id}}" class="carousel slide {% get_styling_classes self.styling %}" data-ride="carousel">
     <ol class="carousel-indicators">
