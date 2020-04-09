@@ -1,1 +1,3 @@
-{% include "catalogue/partials/product.html" with product=self.product %}
+{% if self.product is not None %}
+    {% include "catalogue/partials/product.html" with product=self.product %}
+{% endif %}
