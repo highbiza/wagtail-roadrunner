@@ -124,6 +124,13 @@ def wagtail_draftail_js():
     )
 
 
+def wagtail_embed_chooser_modal_js():
+    return '<script type="text/javascript" src="{src}"></script>'.format(
+        src=static("wagtailembeds/js/embed-chooser-modal.js")
+
+    )
+
+
 @hooks.register("insert_editor_js")
 def wagtail():
     return (
@@ -134,6 +141,7 @@ def wagtail():
         + wagtail_page_chooser_modal_js()
         + wagtail_draftail_js()
         + wagtail_document_chooser_modal_js()
+        + wagtail_embed_chooser_modal_js()
     )
 
 
