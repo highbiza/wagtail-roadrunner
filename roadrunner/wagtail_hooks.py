@@ -127,7 +127,6 @@ def wagtail_draftail_js():
 def wagtail_embed_chooser_modal_js():
     return '<script type="text/javascript" src="{src}"></script>'.format(
         src=static("wagtailembeds/js/embed-chooser-modal.js")
-
     )
 
 
