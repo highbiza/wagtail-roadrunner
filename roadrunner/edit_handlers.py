@@ -93,6 +93,7 @@ class RoadRunnerPanel(StreamFieldPanel):
             "type": block.__class__.__name__,
             "field": {},
             "children": [],
+            "default": "",
         }
 
         child_blocks = []
@@ -107,6 +108,8 @@ class RoadRunnerPanel(StreamFieldPanel):
                     tree["label"] = args["label"]
                 else:
                     tree["label"] = block.label
+                if "default" in args:
+                    tree["default"] = args["default"]
 
         # If a block has only one child, try to soak up the data
         # and then move on to processing the children of that child
