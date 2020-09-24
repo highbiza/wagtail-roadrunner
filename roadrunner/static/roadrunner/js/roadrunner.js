@@ -688,7 +688,8 @@ $.fn.roadrunner = function(data){
 
         var getField = function(block, value) {
             var blockType = block.type;
-            var hasValue = value !== null && typeof value !== 'undefined';
+            var hasValue = value !== null && typeof value !== 'undefined' && value !== '';
+            var hasDefaultValue = block.default !== null && typeof value !== 'undefined';
 
             // Drill down on the actual type of this block, going to a primitive field
             if(PRIMITIVE_FIELDS.indexOf(blockType) === -1 && block.field && PRIMITIVE_FIELDS.indexOf(block.field.type) !== -1) {
@@ -775,6 +776,8 @@ $.fn.roadrunner = function(data){
 
             if (hasValue) {
                 html.set('value', value);
+            } else if(hasDefaultValue) {
+                html.set('value', block.default);
             } else {
                 html.set('value', '');
             }
