@@ -689,7 +689,7 @@ $.fn.roadrunner = function(data){
         var getField = function(block, value) {
             var blockType = block.type;
             var hasValue = value !== null && typeof value !== 'undefined' && value !== '';
-            var hasDefaultValue = block.default !== null && typeof value !== 'undefined';
+            var hasDefaultValue = block.default !== null && typeof block.default !== 'undefined';
 
             // Drill down on the actual type of this block, going to a primitive field
             if(PRIMITIVE_FIELDS.indexOf(blockType) === -1 && block.field && PRIMITIVE_FIELDS.indexOf(block.field.type) !== -1) {
@@ -701,6 +701,7 @@ $.fn.roadrunner = function(data){
             var html = rr.Html.getHtml(blockType);
 
             if (blockType == 'RichTextBlock') {
+                hasValue = true
                 html.set('opts', rr.Globals.rich_text_opts);
                 if (value == "") {
                     value = "null";
