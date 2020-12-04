@@ -160,21 +160,26 @@ class RoadRunnerPanel(StreamFieldPanel):
             # to avoid duplicating data we send to the browser.
             choices = None
 
-            if hasattr(block.field, "_choices"):
-                choices = block.field._choices  # pylint: disable=W0212
-            if hasattr(block.field, "choices"):
-                choices = block.field.choices
-            if choices:
-                tmp = []
-                for key, val in choices:
-                    tmp.append([str(key), str(val)])
+            if (
+                not hasattr(block, "add_choices_to_source")
+                or hasattr(block, "add_choices_to_source")
+                and block.add_choices_to_source
+            ):
+                if hasattr(block.field, "_choices"):
+                    choices = block.field._choices  # pylint: disable=W0212
+                if hasattr(block.field, "choices"):
+                    choices = block.field.choices
+                if choices:
+                    tmp = []
+                    for key, val in choices:
+                        tmp.append([str(key), str(val)])
 
-                choices_hash = hashlib.md5(str(tmp).encode("utf-8")).hexdigest()
+                    choices_hash = hashlib.md5(str(tmp).encode("utf-8")).hexdigest()
 
-                if choices_hash not in self.choice_table:
-                    self.choice_table[choices_hash] = tmp
+                    if choices_hash not in self.choice_table:
+                        self.choice_table[choices_hash] = tmp
 
-                tree["field"]["choices"] = choices_hash
+                    tree["field"]["choices"] = choices_hash
 
         # Delete some empty fields to tighten our json in the end
         delete_if_empty = ["label", "icon"]
