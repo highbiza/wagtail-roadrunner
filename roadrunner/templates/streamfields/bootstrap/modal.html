@@ -1,9 +1,11 @@
 {% load styling_tags %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags roadrunner_tags %}
 
-<a class="btn btn-{{ self.button_class }} {% get_styling_classes self.styling %}" href="#" data-toggle="modal" data-target="#modal_{{ blockid }}" {% get_styling self.styling %}>{{ self.text }}</a>
+{% get_unique_id as unique_id %}
 
-<div class="modal fade" tabindex="-1" role="dialog" id="modal_{{ blockid }}">
+<a class="btn btn-{{ self.button_class }} {% get_styling_classes self.styling %}" href="#" data-toggle="modal" data-target="#modal_{{ unique_id }}" {% get_styling self.styling %}>{{ self.text }}</a>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_{{ unique_id }}">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             {% if self.modal_header %}
