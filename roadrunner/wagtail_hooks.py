@@ -111,10 +111,12 @@ def wagtail_page_chooser_modal_js():
         src=static("wagtailadmin/js/page-chooser-modal.js")
     )
 
+
 def wagtail_document_chooser_js():
     return '<script type="text/javascript" src="{src}"></script>'.format(
         src=static("wagtaildocs/js/document-chooser.js")
     )
+
 
 def wagtail_document_chooser_modal_js():
     return '<script type="text/javascript" src="{src}"></script>'.format(
