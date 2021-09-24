@@ -6,6 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.utils.html import mark_safe
 from django.urls import reverse
 from django.template.loader import render_to_string
+from django.core.serializers.json import DjangoJSONEncoder
 
 from wagtail.admin.edit_handlers import StreamFieldPanel
 from wagtail.core.rich_text import features as feature_registry
@@ -53,7 +54,7 @@ class RoadRunnerPanel(StreamFieldPanel):
             "art": art,
         }
         context.update(self.get_additional_context())
-        return json.dumps(context)
+        return json.dumps(context, cls=DjangoJSONEncoder)
 
     def get_additional_context(self):
         return {}
@@ -65,7 +66,7 @@ class RoadRunnerPanel(StreamFieldPanel):
             plugin = feature_registry.get_editor_plugin("draftail", feature)
             if plugin:
                 plugin.construct_options(options)
-        return json.dumps(options)
+        return json.dumps(options, cls=DjangoJSONEncoder)
 
     def get_urls(self):
         return {
