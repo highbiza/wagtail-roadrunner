@@ -1,7 +1,8 @@
 {% load styling_tags %}
+{% load wagtailimages_tags %}
 
 <div class="card {% get_styling_classes self.styling %}" {% get_styling self.styling %}>
-    <img src="{{ self.image.file.url }}" alt="{{ self.image.title }}" class="card-img-top" >
+    {% image self.image original class="img-fluid w-100" %}
     <div class="card-body">
         {% if self.caption %}
             {{ self.caption|convert_to_html }}
