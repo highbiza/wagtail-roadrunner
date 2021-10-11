@@ -2,7 +2,7 @@
 {% load wagtailimages_tags %}
 
 <div class="card {% get_styling_classes self.styling %}" {% get_styling self.styling %}>
-    {% image self.image original class="img-fluid w-100" %}
+    {% image self.image original class="img-fluid card-img-top" %}
     <div class="card-body">
         {% if self.caption %}
             {{ self.caption|convert_to_html }}
