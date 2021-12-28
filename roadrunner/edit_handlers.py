@@ -23,7 +23,7 @@ class RoadRunnerPanel(StreamFieldPanel):
 
     def html_declarations(self):
         """
-        RoadRunner does not use html declarations -- this lightens the 
+        RoadRunner does not use html declarations -- this lightens the
         load heavily.
         """
         return ""

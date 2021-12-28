@@ -50,18 +50,6 @@ def roadrunner_colorpicker_js():
     )
 
 
-def roadrunner_product_chooser_js():
-    return '<script type="text/javascript" src="{src}?v={v}"></script>'.format(
-        src=static("wagtailadmin/js/product-chooser.js"), v=version
-    )
-
-
-def roadrunner_product_chooser_modal_js():
-    return '<script type="text/javascript" src="{src}?v={v}"></script>'.format(
-        src=static("wagtailadmin/js/product-chooser-modal.js"), v=version
-    )
-
-
 @hooks.register("insert_editor_css")
 def css():
     return (
@@ -69,8 +57,6 @@ def css():
         + roadrunner_grid_css()
         + roadrunner_widgets_css()
         + roadrunner_colorpicker_css()
-        + roadrunner_product_chooser_js()
-        + roadrunner_product_chooser_modal_js()
     )
 
 
