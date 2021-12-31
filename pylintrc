@@ -2,6 +2,7 @@
 jobs=1
 load-plugins=pylint_django
 score=n
+django-settings-module = empty_testproject.settings.base
 
 [MESSAGES CONTROL]
 disable=R,C,W5103
