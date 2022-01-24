@@ -42,12 +42,12 @@ class RoadRunnerPanel(StreamFieldPanel):
         return self.render()
 
     def run_road(self):
-        stream_data = getattr(self.instance, self.field_name).stream_data
+        stream_data = getattr(self.instance, self.field_name).raw_data
         tree = self.get_stream_tree()
         context = {
             "tree": tree,
             "choices": self.choice_table,
-            "stream_data": stream_data,
+            "stream_data": list(stream_data),
             "tree_name": self.field_name,
             "urls": self.get_urls(),
             "rich_text_opts": self.rich_text_opts(),

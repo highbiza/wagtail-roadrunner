@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from django.conf.urls import include, url
-from django.contrib.staticfiles.templatetags.staticfiles import static
+
+try:
+    from django.contrib.staticfiles.templatetags.staticfiles import static
+except ImportError:
+    from django.templatetags.static import static
 
 from wagtail.core import hooks
 
