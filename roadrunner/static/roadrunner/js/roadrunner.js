@@ -1,3 +1,4 @@
+// var do_log = console.log
 function do_log() {};
 
 $.fn.roadrunner = function(data){
@@ -21,7 +22,7 @@ $.fn.roadrunner = function(data){
 
     rr.Actions = (function(){
         var addChild = function(treePath, source){
-          do_log("Actioin.addChild")
+          do_log("Actioin.addChild", treePath, source)
             var block = rr.Routing.getData(treePath, rr.Globals.tree);
             var dataPath = source.closest('[data-path]').attr('data-path');
             if (typeof dataPath == 'undefined') {
@@ -284,7 +285,7 @@ $.fn.roadrunner = function(data){
 
 
         var pickBlock = function(params, source){
-          do_log("Actioin.pickBlock")
+          do_log("Actioin.pickBlock", params, source)
           
             var block = rr.Routing.getData(params);
             var dataPath = source.attr('data-path');
@@ -436,7 +437,7 @@ $.fn.roadrunner = function(data){
         // id = dom data-id attribute of DOM element
         // value = id of product
         var initProduct = function(name, productId){
-          do_log("Ajax.initProduct")
+          do_log("Ajax.initProduct", name, productId)
             $.get(rr.Globals.urls.product + '?id=' + productId, function(data){
                 if(!data){
                     // no product returned
@@ -727,7 +728,7 @@ $.fn.roadrunner = function(data){
     rr.Fields = (function(){
 
         var getField = function(block, value) {
-          do_log("Fields.getField")
+          do_log("Fields.getField", block, value)
           
             var blockType = block.type;
             var hasValue = value !== null && typeof value !== 'undefined' && value !== '';
@@ -780,7 +781,8 @@ $.fn.roadrunner = function(data){
                 var choicesHtml = '';
                 for(var i in choices){
                     var choice = choices[i];
-                    if(hasValue && (choice[0] == value || value.indexOf(choice[0]) > -1 )) {
+                    do_log("IK BEN value", value, choices);
+                    if(hasValue && (choice[0].toString() == value.toString() || value.toString().indexOf(choice[0]) > -1 )) {
                         choicesHtml += '<option value="' + choice[0] + '" selected="selected">' + choice[1] + '</option>';
                     } else {
                         choicesHtml += '<option value="' + choice[0] + '">' + choice[1] + '</option>';
@@ -818,8 +820,11 @@ $.fn.roadrunner = function(data){
               if (hasValue && value != '') {
                 rr.Ajax.initDocument(block.name, value);
               }
-            } else if (blockType == 'ProductChooserBlock' && hasValue && value != '') { 
+            } else if (blockType == 'ProductChooserBlock') {
+              html.set('chooserUrl', window.chooserUrls.productChooser);
+              if (hasValue && value != '') {
                 rr.Ajax.initProduct(block.name, value);
+              }
             } else if (blockType == 'GridChoiceBlock') {
                 var choice = rr.Globals.choices[block.field.choices][1];
                 var prefix = choice[0].substr(0, choice[0].length - choice[1].length);
@@ -909,7 +914,7 @@ $.fn.roadrunner = function(data){
         };
 
         var openForm = function(children, treePath, dataPath, action){
-          do_log("GUI.openForm")
+          do_log("GUI.openForm", children, treePath, dataPath, action)
             var fields = '';
             var styling_fields = '';
 
@@ -1468,7 +1473,7 @@ $.fn.roadrunner = function(data){
         'DateBlock': '<div class="rr_datefield rr_block date_field"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><input id="{{path}}" name="{{path}}" data-required="{{required}}" placeholder="Datum" type="text" value="{{value}}" /><script>initDateChooser("{{path}}", {"dayOfWeekStart": 1, "format": "Y-m-d"});</script><span class="help">{{help_text}}</span></div></div></div>',
         '_BlockPicker': '<div class="rr_addChild stream-menu-inner" data-path="{{data_path}}"><ul>{{items}}</ul></div>',
         'ModelChoiceField': '<div class="rr_choicefield rr_block"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="field char_field widget-text_input fieldname-title grid-title"><div class="field-content"><div class="input"><select name="{{path}}" data-required="{{required}}" placeholder="{{placeholder}}">{{choices}}</select><span class="help">{{help_text}}</span></div></div></div></div></div>',
-        'PageChooserBlock': '<div class="rr_pagefield rr_block"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><div id="{{path}}-chooser" data-chooser-url="{{chooserUrl}}" class="chooser page-chooser blank"><div class="chosen"><span class="title"></span><ul class="actions"><!-- <li><button type="button" class="button action-clear button-small button-secondary">Leeg keuze</button></li> --><li><button type="button" class="button action-choose button-small button-secondary">Kies een andere pagina</button></li><!-- <li><a href="" class="edit-link button button-small button-secondary" target="_blank">Wijzig deze pagina</a></li> --></ul></div><div class="unchosen"><button type="button" class="button action-choose button-small button-secondary">Kies een pagina</button></div></div><input id="{{path}}" name="{{path}}" placeholder="Pagina" value="{{value}}" type="hidden"><script>createPageChooser("{{path}}", null, {model_names:["wagtailcore.page"], can_choose_root: false, user_perms: null}).openChooserModal();</script><span></span><span class="help">{{help_text}}</p></div></div></div>',
+        'PageChooserBlock': '<div class="rr_pagefield rr_block"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><div id="{{path}}-chooser" data-chooser-url="{{chooserUrl}}" class="chooser page-chooser blank"><div class="chosen"><span class="title"></span><ul class="actions"><!-- <li><button type="button" class="button action-clear button-small button-secondary">Leeg keuze</button></li> --><li><button type="button" class="button action-choose button-small button-secondary">Kies een andere pagina</button></li><!-- <li><a href="" class="edit-link button button-small button-secondary" target="_blank">Wijzig deze pagina</a></li> --></ul></div><div class="unchosen"><button type="button" class="button action-choose button-small button-secondary">Kies een pagina</button></div></div><input id="{{path}}" name="{{path}}" placeholder="Pagina" value="{{value}}" type="hidden"><script>createPageChooser("{{path}}", null, {model_names:["wagtailcore.page"], can_choose_root: false, user_perms: null});</script><span></span><span class="help">{{help_text}}</p></div></div></div>',
         'BooleanBlock': '<div class="rr_booleanfield rr_block"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><input name="{{path}}" placeholder="{{placeholder}}" type="checkbox" {{value}} /><br/><span class="help">{{help_text}}</span></div></div></div>',
         'block_header': '<div class="rr_block_header"><div class="button-group button-group-square">{{edit_button}}<button type="button" title="Kopiëren" data-action="copy" data-path="{{data_path}}" class="rr_action button icon text-replace icon-fa-clone">Kopiëren</button>{{add_button}}<span class="rr_header_label">{{label}}</span><button type="button" title="Verwijderen" data-action="delete" data-path="{{data_path}}" class="rr_action button icon text-replace hover-no icon-bin">Verwijderen</button></div><br class="clearfix" /></div>',
         'TextBlock': '<div class="rr_textfield rr_block"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><textarea data-required="{{required}}" name="{{path}}" placeholder="{{placeholder}}">{{value}}</textarea><span class="help">{{help_text}}</span></div></div></div>',
