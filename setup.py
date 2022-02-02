@@ -44,6 +44,6 @@ setup(
         "Framework :: Wagtail :: 2",
     ],
     keywords="RoadRunner",
-    install_requires=["wagtail", "wagtailfontawesome"],
+    install_requires=["wagtail", "wagtailfontawesome", "unidecode"],
     extras_require=extras_require,
 )
