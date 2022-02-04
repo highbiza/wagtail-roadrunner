@@ -1,6 +1,10 @@
+// var do_log = console.log
+function do_log() {};
+
 $.fn.roadrunner = function(data){
     var rr = this;
     this.init = function(rr_data){
+      do_log("init");
         rr.Globals = $.extend(rr.Globals, rr_data);
         rr.Globals.input = $('[name="' + rr.Globals.tree_name + '"]#' + rr.attr('id'));
         rr.Globals.form = rr.closest('form');
@@ -13,12 +17,12 @@ $.fn.roadrunner = function(data){
         });
         rr.Events.setupEvents();
         rr.Events.setupSaveEvents();
-        console.log(rr.Globals.art);
+        do_log(rr.Globals.art);
     };
 
     rr.Actions = (function(){
-
         var addChild = function(treePath, source){
+          do_log("Actioin.addChild", treePath, source)
             var block = rr.Routing.getData(treePath, rr.Globals.tree);
             var dataPath = source.closest('[data-path]').attr('data-path');
             if (typeof dataPath == 'undefined') {
@@ -32,6 +36,7 @@ $.fn.roadrunner = function(data){
         };
 
         var editBlock = function(value, source){
+          do_log("Actioin.editBlock")
             var dataPath = source.closest('.stream-menu-inner').attr('data-path');
             var current_data = rr.Routing.getData(dataPath, rr.Globals.stream_data);
             current_data['type'] = value;
@@ -76,9 +81,15 @@ $.fn.roadrunner = function(data){
         ];
 
         var groupByName = function(obj) {
+          do_log("Actioin.groupByName", obj)
+          
             var newObj = [];
             for (var i in obj) {
                 var o = obj[i];
+                do_log(o);
+                if (rr.Routing.isNumeric(o.value)) {
+                  o.value = parseFloat(o.value)
+                }
                 var index = rr.Content.findNodeIndex(o.name, newObj);
                 if (!index) {
                     newObj.push(o);
@@ -96,6 +107,8 @@ $.fn.roadrunner = function(data){
         };
 
         var validateForm = function(treePath, source) {
+          do_log("Actioin.validateForm", treePath, source)
+          
             var block = rr.Routing.getData(treePath, rr.Globals.tree);
             var fields = rr.Globals.modal.find('[name]');
             var validated = rr.Validation.validate(fields);
@@ -104,6 +117,7 @@ $.fn.roadrunner = function(data){
             source.attr('disabled', 'disabled');
 
             if (validated) {
+              do_log(fields, fields.serializeArray());
                 var serialized_data = groupByName(fields.serializeArray());
                 var dataPath = source.attr('data-path');
                 var tmp_obj = {};
@@ -188,6 +202,7 @@ $.fn.roadrunner = function(data){
         };
 
         var validateEditForm = function(treePath, source) {
+          do_log("Actioin.validateEditForm")
             var block = rr.Routing.getData(treePath);
             var fields = rr.Globals.modal.find('[name]');
             var validated = rr.Validation.validate(fields);
@@ -196,9 +211,11 @@ $.fn.roadrunner = function(data){
             source.attr('disabled', 'disabled');
 
             if (validated) {
+              do_log("validateEditForm", fields, fields.serializeArray());
                 var serialized_data = groupByName(fields.serializeArray());
                 var dataPath = source.attr('data-path');
                 var data = rr.Routing.getData(dataPath, rr.Globals.stream_data);
+                do_log("IK BEN DE MASTER NEUKER", dataPath, data)
                 var children = block.children;
 
                 for (i in block.children) {
@@ -268,6 +285,8 @@ $.fn.roadrunner = function(data){
 
 
         var pickBlock = function(params, source){
+          do_log("Actioin.pickBlock", params, source)
+          
             var block = rr.Routing.getData(params);
             var dataPath = source.attr('data-path');
             rr.Gui.hideModal();
@@ -284,6 +303,8 @@ $.fn.roadrunner = function(data){
         };
 
         var deleteItem = function(params, source){
+          do_log("Actioin.deleteItem")
+          
             var dataPath = source.attr('data-path');
             var element = rr.find('[data-path="' + dataPath + '"]:first');
             var siblings = element.siblings('[data-path]');
@@ -294,6 +315,8 @@ $.fn.roadrunner = function(data){
         };
 
         var edit = function(treePath, source) {
+          do_log("Actioin.edit")
+          
             var dataPath = source.attr('data-path');
             var block = rr.Routing.getData(treePath, rr.Globals.tree);
 
@@ -305,6 +328,9 @@ $.fn.roadrunner = function(data){
         };
 
         var copy = function(params, source) {
+          do_log("Actioin.copy")
+          
+          do_log("NEUKENNNN< NUKKEENEN", params, source);
             var dataPath = source.attr('data-path');
             var element = rr.find('[data-path="' + dataPath + '"]:first');
             var clone = element.clone();
@@ -359,6 +385,8 @@ $.fn.roadrunner = function(data){
         // id = dom data-id attribute of DOM element
         // value = id of image
         var initImage = function(name, imageId){
+          do_log("Ajax.initImage")
+          
             $.get(rr.Globals.urls.image + '?id=' + imageId, function(data){
                 if(!data){
                     // no image returned
@@ -375,6 +403,7 @@ $.fn.roadrunner = function(data){
         // id = dom data-id attribute of DOM element
         // value = id of document
         var initDocument = function(name, documentId){
+          do_log("Ajax.initDocument")
             $.get(rr.Globals.urls.document + '?id=' + documentId, function(data){
                 if(!data){
                     // no image returned
@@ -391,6 +420,7 @@ $.fn.roadrunner = function(data){
         // id = dom data-id attribute of DOM element
         // value = id of page
         var initPage = function(name, pageId){
+          do_log("Ajax.initPage")
             $.get(rr.Globals.urls.page + '?id=' + pageId, function(data){
                 if(!data){
                     // no image returned
@@ -407,6 +437,7 @@ $.fn.roadrunner = function(data){
         // id = dom data-id attribute of DOM element
         // value = id of product
         var initProduct = function(name, productId){
+          do_log("Ajax.initProduct", name, productId)
             $.get(rr.Globals.urls.product + '?id=' + productId, function(data){
                 if(!data){
                     // no product returned
@@ -483,6 +514,7 @@ $.fn.roadrunner = function(data){
         // table in Wagtail) and a tree describing the streamfields that might show
         // up
         var addContent = function(dataPath, treePath){
+          do_log("Content.addContent", dataPath, treePath)
             var state = rr.Routing.getData(dataPath, rr.Globals.stream_data);
             var tree = rr.Routing.getData(treePath, rr.Globals.tree);
             if (!tree) return;
@@ -542,6 +574,7 @@ $.fn.roadrunner = function(data){
 
         // Take a tree and find the index of a node by name
         var findNodeIndex = function(name, tree){
+          do_log("Content.findNodeIndex", name, tree)
             for(var i in tree){
                 var node = tree[i];
                 if(node.name == name){
@@ -559,6 +592,7 @@ $.fn.roadrunner = function(data){
     })();
     rr.Dragging = (function(){
         var sortable = function(element, options, callback) {
+      do_log("Dragging.sortable")
             var options = $.extend({}, {
                 // containment: 'parent',
                 handle: '> .rr_block_header',
@@ -581,6 +615,7 @@ $.fn.roadrunner = function(data){
         };
 
         var update = function(event, ui) {
+          do_log("Dragging.update")
             var item = ui.item;
             var index = item.index();
             var dataPath = rr.Routing.stringToPath(item.attr('data-path'));
@@ -589,6 +624,7 @@ $.fn.roadrunner = function(data){
             }
             var parentPath = dataPath.slice(0, dataPath.length - 1); // path minus last item, aka parent
             var data = rr.Routing.getData(dataPath, rr.Globals.stream_data);
+            do_log("IK NEUK DIE PRINCESSEN HAHAH", data)
             var parent = rr.Routing.getData(parentPath, rr.Globals.stream_data);
             var inArray = $.inArray(data, parent); // hopefully, will never fail, else problems
             
@@ -610,6 +646,7 @@ $.fn.roadrunner = function(data){
 
         // Sets up the DOM events we want to act on, passes it straight to rr.Actions
         var setupEvents = function(){
+          do_log("Events.setupEvents")
             rr.on('click', '.rr_action', function(event){
                 event.preventDefault();
                 event.stopPropagation();
@@ -626,15 +663,19 @@ $.fn.roadrunner = function(data){
                     rr.Actions[action](params, $(this));
                     rr.Globals.lastAction = action;
                 } else {
-                    console.log("Action not found: " + action);
+                    do_log("Action not found: " + action);
                 }
             });
         };
 
         var setupSaveEvents = function(){
+          do_log("Events.setupSaveEvents")
+          
             rr.Globals.form.submit(function(e) {
+              do_log("NEUKEN NEUKEN HAHAH", rr.Globals.stream_data);
                 var stream_data = JSON.stringify(rr.Globals.stream_data);
                 rr.Globals.input.val(stream_data);
+                return true;
             });
         };
 
@@ -687,6 +728,8 @@ $.fn.roadrunner = function(data){
     rr.Fields = (function(){
 
         var getField = function(block, value) {
+          do_log("Fields.getField", block, value)
+          
             var blockType = block.type;
             var hasValue = value !== null && typeof value !== 'undefined' && value !== '';
             var hasDefaultValue = block.default !== null && typeof block.default !== 'undefined';
@@ -738,7 +781,8 @@ $.fn.roadrunner = function(data){
                 var choicesHtml = '';
                 for(var i in choices){
                     var choice = choices[i];
-                    if(hasValue && (choice[0] == value || value.indexOf(choice[0]) > -1 )) {
+                    do_log("IK BEN value", value, choices);
+                    if(hasValue && (choice[0].toString() == value.toString() || value.toString().indexOf(choice[0]) > -1 )) {
                         choicesHtml += '<option value="' + choice[0] + '" selected="selected">' + choice[1] + '</option>';
                     } else {
                         choicesHtml += '<option value="' + choice[0] + '">' + choice[1] + '</option>';
@@ -761,14 +805,26 @@ $.fn.roadrunner = function(data){
                 if (value == 'true' || value == true) {
                     value = 'checked="checked"';
                 }
-            } else if (blockType == 'ImageChooserBlock' && hasValue && value != '') {
-                rr.Ajax.initImage(block.name, value);
-            } else if (blockType == 'PageChooserBlock' && hasValue && value != '') {
-                rr.Ajax.initPage(block.name, value);
-            } else if (blockType == 'DocumentChooserBlock' && hasValue && value != '') {
+            } else if (blockType == 'ImageChooserBlock') {
+                html.set('chooserUrl', window.chooserUrls.imageChooser);
+                if (hasValue && value != '') {
+                  rr.Ajax.initImage(block.name, value);
+                }
+            } else if (blockType == 'PageChooserBlock') {
+                html.set('chooserUrl', window.chooserUrls.pageChooser);
+                if (hasValue && value != '') {
+                  rr.Ajax.initPage(block.name, value);
+                }
+            } else if (blockType == 'DocumentChooserBlock') {
+              html.set('chooserUrl', window.chooserUrls.documentChooser);
+              if (hasValue && value != '') {
                 rr.Ajax.initDocument(block.name, value);
-            } else if (blockType == 'ProductChooserBlock' && hasValue && value != '') { 
+              }
+            } else if (blockType == 'ProductChooserBlock') {
+              html.set('chooserUrl', window.chooserUrls.productChooser);
+              if (hasValue && value != '') {
                 rr.Ajax.initProduct(block.name, value);
+              }
             } else if (blockType == 'GridChoiceBlock') {
                 var choice = rr.Globals.choices[block.field.choices][1];
                 var prefix = choice[0].substr(0, choice[0].length - choice[1].length);
@@ -797,6 +853,7 @@ $.fn.roadrunner = function(data){
 
         // The root block wraps around all our streamfields
         var createRootBlock = function(tree, treePath){
+          do_log("GUI.createRootBlock")
             var node = rr.Routing.getData(treePath, tree);
             var html = rr.Html.getHtml(node.type);
             html.set('tree_path', treePath);
@@ -806,10 +863,12 @@ $.fn.roadrunner = function(data){
         // Sets up the editor given a tree that defines all the streamfields and a
         // state which is the content_json that's saved into the page revision
         var setupEditor = function() {
+          do_log("GUI.setupEditor")
             createRootBlock(rr.Globals.tree, '/');
         };
 
         var deviceViewSelect = function() {
+          do_log("GUI.deviceViewSelector")
             var deviceViewSelector = $('<div class="device-size-chooser"></div>');
             var sizes = [
                 $('<div class="size xs" data-size="xs"></div>'),
@@ -828,6 +887,7 @@ $.fn.roadrunner = function(data){
         };
 
         var openModal = function(tabs, content, label) {
+          do_log("GUI.openModal")
             var modal = rr.Html.getHtml('_Modal');
             modal.set('tabs', tabs);
             modal.set('content', content);
@@ -840,6 +900,7 @@ $.fn.roadrunner = function(data){
         };
 
         var hideModal = function(modal) {
+          do_log("GUI.hideModal")
             if (modal) {
                 modal.modal('hide');
             } else {
@@ -848,10 +909,12 @@ $.fn.roadrunner = function(data){
         };
 
         var replaceModalContent = function(modal, id, content) {
+          do_log("GUI.replaceModalContent")
             modal.find('#' + id).attr('class', 'active').html(content);
         };
 
         var openForm = function(children, treePath, dataPath, action){
+          do_log("GUI.openForm", children, treePath, dataPath, action)
             var fields = '';
             var styling_fields = '';
 
@@ -931,6 +994,7 @@ $.fn.roadrunner = function(data){
         };
 
         var editBlockPicker = function(block, dataPath) {
+          do_log("GUI.editBlockPicker")
             var data = rr.Routing.getData(dataPath, rr.Globals.stream_data);
             var html = rr.Html.getHtml('_BlockPicker');
             var items = '';
@@ -973,6 +1037,7 @@ $.fn.roadrunner = function(data){
         };
 
         var addBlockPicker = function(children, treePath, dataPath){
+          do_log("GUI.addBlockPicker")
             var groups = {};
 
             for (var i in children){
@@ -1029,6 +1094,7 @@ $.fn.roadrunner = function(data){
         };
 
         var addBlock = function(block, treePath, parentPath, dataPath, kwargs){
+          do_log("GUI.addBlock")
             var blockType = block.type;
 
             if (kwargs.hasOwnProperty('type')) {
@@ -1092,6 +1158,7 @@ $.fn.roadrunner = function(data){
         };
 
         var addBlockWrapper = function(value, treePath, dataPath, notNewData) {
+          do_log("GUI.addBlockWrapper")
             var block = rr.Routing.getData(treePath);
             // var label = '<button data-action="preview" title="Preview ' + block.label + '" class="button rr_action text-replace icon icon-view"></button> ' + block.label; // ' + block.icon + '
             var label = block.label;
@@ -1164,6 +1231,7 @@ $.fn.roadrunner = function(data){
         };
 
         var help = function(msg, duration, html) {
+          do_log("GUI.help")
             var wrapper = $('<div class="help-wrapper"></div>');
             var message = $('<span class="help"></span>');
 
@@ -1187,6 +1255,9 @@ $.fn.roadrunner = function(data){
         // Flag all the inputs/textareas/selects that are required but have no
         // value
         var flagMissingFields = function(){
+          
+          do_log("GUI.flagMissingFields")
+          
             var fields = 'input[data-required=required], '
                 + 'select[data-required=required], ' 
                 + 'textarea[data-required=required]';
@@ -1219,6 +1290,7 @@ $.fn.roadrunner = function(data){
         };
 
         var unFlagMissingFields = function(){
+          do_log("GUI.unFlagMissingFields")
             $('.missing').removeClass('missing');
         };
 
@@ -1241,6 +1313,7 @@ $.fn.roadrunner = function(data){
     rr.Helpers = (function(){
 
         var justFunc = function(func) {
+          do_log("Helpers.justFunc", func)
             if(typeof func === 'undefined') {
                 return function(){};
             } else {
@@ -1249,14 +1322,17 @@ $.fn.roadrunner = function(data){
         };
 
         var capitalize = function(string) {
+          do_log("Helpers.capitalize", string)
             return string.charAt(0).toUpperCase() + string.slice(1);
         };
 
         var isArray = function(obj) {
+          do_log("Helpers.isArray", obj)
             return Object.prototype.toString.call(obj) === '[object Array]';
         };
 
         var clone = function(obj) {
+          do_log("Helpers.clone", obj)
             if(isArray(obj)) {
                 return obj.slice(0);
             } else {
@@ -1265,10 +1341,12 @@ $.fn.roadrunner = function(data){
         };
 
         var has = function(object, key) {
+          do_log("Helpers.has", object, key)
             return object ? hasOwnProperty.call(object, key) : false;
         };
 
         var cleanPath = function(path){
+          do_log("Helpers.cleanPath", path)
             var splitted = path.split('-');
             var newPath = [];
             var lastNumber = false;
@@ -1292,6 +1370,7 @@ $.fn.roadrunner = function(data){
         // (or return an empty name when that doesn't work it)
         // FIXME: this function should actually not really be necessary
         var resolveName = function(block){
+          do_log("Helpers.resolveName", block)
             if(block.type == 'ProductChooserBlock'){
                 return 'Product id';
             }
@@ -1304,6 +1383,7 @@ $.fn.roadrunner = function(data){
 
 
         var getKwargs = function(data, block) {
+          do_log("Helpers.getKwargs", data, block)
             var kwargs = {};
 
             if (typeof data['grid'] == 'string'){
@@ -1354,6 +1434,7 @@ $.fn.roadrunner = function(data){
     })();
     rr.Html = (function(){
         var getHtml = function(file){
+          do_log("Html.getHtml")
             var htmlEntity = new rr.HtmlEntity();
             if(rr.HtmlCache[file]) {
                 htmlEntity.init(rr.HtmlCache[file]);
@@ -1364,6 +1445,7 @@ $.fn.roadrunner = function(data){
         };
 
         var getMultipleHtml = function(files) {
+          do_log("Html.getMultipleHtml")
             var result = {};
 
             if(files.length == 0) return {};
@@ -1391,7 +1473,7 @@ $.fn.roadrunner = function(data){
         'DateBlock': '<div class="rr_datefield rr_block date_field"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><input id="{{path}}" name="{{path}}" data-required="{{required}}" placeholder="Datum" type="text" value="{{value}}" /><script>initDateChooser("{{path}}", {"dayOfWeekStart": 1, "format": "Y-m-d"});</script><span class="help">{{help_text}}</span></div></div></div>',
         '_BlockPicker': '<div class="rr_addChild stream-menu-inner" data-path="{{data_path}}"><ul>{{items}}</ul></div>',
         'ModelChoiceField': '<div class="rr_choicefield rr_block"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="field char_field widget-text_input fieldname-title grid-title"><div class="field-content"><div class="input"><select name="{{path}}" data-required="{{required}}" placeholder="{{placeholder}}">{{choices}}</select><span class="help">{{help_text}}</span></div></div></div></div></div>',
-        'PageChooserBlock': '<div class="rr_pagefield rr_block"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><div id="{{path}}-chooser" class="chooser page-chooser blank"><div class="chosen"><span class="title"></span><ul class="actions"><!-- <li><button type="button" class="button action-clear button-small button-secondary">Leeg keuze</button></li> --><li><button type="button" class="button action-choose button-small button-secondary">Kies een andere pagina</button></li><!-- <li><a href="" class="edit-link button button-small button-secondary" target="_blank">Wijzig deze pagina</a></li> --></ul></div><div class="unchosen"><button type="button" class="button action-choose button-small button-secondary">Kies een pagina</button></div></div><input id="{{path}}" name="{{path}}" placeholder="Pagina" value="{{value}}" type="hidden"><script>createPageChooser("{{path}}",["wagtailcore.page"], null, true);</script><span></span><span class="help">{{help_text}}</p></div></div></div>',
+        'PageChooserBlock': '<div class="rr_pagefield rr_block"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><div id="{{path}}-chooser" data-chooser-url="{{chooserUrl}}" class="chooser page-chooser blank"><div class="chosen"><span class="title"></span><ul class="actions"><!-- <li><button type="button" class="button action-clear button-small button-secondary">Leeg keuze</button></li> --><li><button type="button" class="button action-choose button-small button-secondary">Kies een andere pagina</button></li><!-- <li><a href="" class="edit-link button button-small button-secondary" target="_blank">Wijzig deze pagina</a></li> --></ul></div><div class="unchosen"><button type="button" class="button action-choose button-small button-secondary">Kies een pagina</button></div></div><input id="{{path}}" name="{{path}}" placeholder="Pagina" value="{{value}}" type="hidden"><script>createPageChooser("{{path}}", null, {model_names:["wagtailcore.page"], can_choose_root: false, user_perms: null});</script><span></span><span class="help">{{help_text}}</p></div></div></div>',
         'BooleanBlock': '<div class="rr_booleanfield rr_block"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><input name="{{path}}" placeholder="{{placeholder}}" type="checkbox" {{value}} /><br/><span class="help">{{help_text}}</span></div></div></div>',
         'block_header': '<div class="rr_block_header"><div class="button-group button-group-square">{{edit_button}}<button type="button" title="Kopiëren" data-action="copy" data-path="{{data_path}}" class="rr_action button icon text-replace icon-fa-clone">Kopiëren</button>{{add_button}}<span class="rr_header_label">{{label}}</span><button type="button" title="Verwijderen" data-action="delete" data-path="{{data_path}}" class="rr_action button icon text-replace hover-no icon-bin">Verwijderen</button></div><br class="clearfix" /></div>',
         'TextBlock': '<div class="rr_textfield rr_block"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><textarea data-required="{{required}}" name="{{path}}" placeholder="{{placeholder}}">{{value}}</textarea><span class="help">{{help_text}}</span></div></div></div>',
@@ -1404,13 +1486,13 @@ $.fn.roadrunner = function(data){
         'ListBlock': '<div class="rr_listblock rr_gridblock {{width}}" data-path="{{data_path}}">{{header}}<div class="rr_children"></div></div>',
         '_BlockPickerItem': '<li><button type="button" data-action="{{action}}" data-path="{{data_path}}" data-params="{{params}}" class="rr_action button icon icon-{{icon}} {{classes}}"><span>{{label}}</span></button></li>',
         '_ButtonAdd': '<button type="button" data-action="addChild" title="Voeg inhoud toe" data-params="{{tree_path}}" class="rr_action button icon text-replace icon-plus">Toevoegen</button>',
-        'ImageChooserBlock': '<div class="rr_imagefield rr_block"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><div id="field_{{path}}-chooser" class="chooser image-chooser blank"><div class="chosen"><div class="preview-image"><img></div><ul class="actions"><!-- <li><button type="button" class="button action-clear button-small button-secondary">Leeg keuze</button></li> --><li><button type="button" class="button action-choose button-small button-secondary">Kies een andere afbeelding</button></li><!-- <li><a href="" class="edit-link button button-small button-secondary" target="_blank">Wijzig deze afbeelding</a></li> --></ul></div><div class="unchosen"><button type="button" class="button action-choose button-small button-secondary">Kies een afbeelding</button></div></div><input value="{{value}}" name="{{path}}" id="field_{{path}}" placeholder="Afbeelding" type="hidden" data-required="{{required}}"><script>createImageChooser("field_{{path}}");</script><span></span><span class="help">{{help_text}}</p></div></div></div>',
+        'ImageChooserBlock': '<div class="rr_imagefield rr_block"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><div id="field_{{path}}-chooser" data-chooser-url="{{chooserUrl}}" class="chooser image-chooser blank"><div class="chosen"><div class="preview-image"><img></div><ul class="actions"><!-- <li><button type="button" class="button action-clear button-small button-secondary">Leeg keuze</button></li> --><li><button type="button" class="button action-choose button-small button-secondary">Kies een andere afbeelding</button></li><!-- <li><a href="" class="edit-link button button-small button-secondary" target="_blank">Wijzig deze afbeelding</a></li> --></ul></div><div class="unchosen"><button type="button" class="button action-choose button-small button-secondary">Kies een afbeelding</button></div></div><input value="{{value}}" name="{{path}}" id="field_{{path}}" placeholder="Afbeelding" type="hidden" data-required="{{required}}"><script>createImageChooser("field_{{path}}");</script><span></span><span class="help">{{help_text}}</p></div></div></div>',
         'ColorPickerBlock': '<div class="rr_colorpicker rr_block"><div class="rr_block_content"><label class="{{required}}" for="field_{{path}}">{{label}}</label><div class="input"><input data-required="{{required}}" maxlength="10" id="field_{{path}}" name="{{path}}" placeholder="{{placeholder}}" value="{{value}}" type="text" /><span class="help">{{help_text}}</span></div></div></div><script type="text/javascript">var field = $(\'input#field_{{path}}\');field.ColorPicker();var value = \'{{value}}\';if (value == \'\') {value = \'#FFFFFF\';}field.ColorPickerSetColor(value);</script>',
         'RawHTMLBlock': '<div class="rr_htmlblock rr_block"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><textarea data-required="{{required}}" name="{{path}}" cols="40" rows="10" placeholder="{{placeholder}}">{{value}}</textarea><span class="help">{{help_text}}</span></div></div></div>',
         'EmailBlock': '<div class="rr_emailfield rr_block"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><input data-required="{{required}}" name="{{path}}" placeholder="{{placeholder}}" type="email" value="{{value}}"/><span class="help">{{help_text}}</span></div></div></div>',
         'IntegerBlock': '<div class="rr_integerfield rr_block"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><input data-required="{{required}}" max="{{max}}" min="{{min}}" name="{{path}}" placeholder="{{placeholder}}" value="{{value}}" type="number" /><span class="help">{{help_text}}</span></div></div></div>',
-        'DocumentChooserBlock': '<div class="rr_documentfield rr_block"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><div id="{{path}}-chooser" class="chooser document-chooser blank"><div class="chosen"><span class="title"></span><ul class="actions"><!-- <li><button type="button" class="button action-clear button-small button-secondary">Leeg keuze</button></li> --><li><button type="button" class="button action-choose button-small button-secondary">Kies een ander document</button></li><!-- <li><a href="" class="edit-link button button-small button-secondary" target="_blank">Wijzig dit document</a></li> --></ul></div><div class="unchosen"><button type="button" class="button action-choose button-small button-secondary">Kies een document</button></div></div><input id="{{path}}" name="{{path}}" placeholder="Document" value="{{value}}" type="hidden"><script>createDocumentChooser("{{path}}");</script><span></span><span class="help">{{help_text}}</p></div></div></div>',
-        '_ModalTab': '<li class="{{classes}}"><a href="#{{id}}">{{label}}</a></li>',
+        'DocumentChooserBlock': '<div class="rr_documentfield rr_block"><div class="rr_block_content"><label class="{{required}}" for="{{path}}">{{label}}</label><div class="input"><div id="{{path}}-chooser" data-chooser-url="{{chooserUrl}}" class="chooser document-chooser blank"><div class="chosen"><span class="title"></span><ul class="actions"><!-- <li><button type="button" class="button action-clear button-small button-secondary">Leeg keuze</button></li> --><li><button type="button" class="button action-choose button-small button-secondary">Kies een ander document</button></li><!-- <li><a href="" class="edit-link button button-small button-secondary" target="_blank">Wijzig dit document</a></li> --></ul></div><div class="unchosen"><button type="button" class="button action-choose button-small button-secondary">Kies een document</button></div></div><input id="{{path}}" name="{{path}}" placeholder="Document" value="{{value}}" type="hidden"><script>createDocumentChooser("{{path}}");</script><span></span><span class="help">{{help_text}}</p></div></div></div>',
+        '_ModalTab': '<li class="{{classes}}"><a href="#{{id}}" data-toggle="tab">{{label}}</a></li>',
         '_Modal': '<div class="rr_modal modal fade" role="dialog"><div class="modal-dialog"><div class="modal-content"><button type="button" class="button close icon text-replace icon-cross" data-dismiss="modal" aria-hidden="true">×</button><div class="modal-body"><header class="merged tab-merged "><div class="row nice-padding"><div class="left"><div class="col header-title"><h1 class="icon icon-docs">{{label}}</h1></div></div></div></header><ul class="tab-nav merged">{{tabs}}</ul><div class="tab-content">{{content}}<section id="searched-blocks" class="stream-menu"></section></div></div></div></div></div>',
         '_FieldWrapper': '<div class="rr_fields">{{fields}}<button type="button" class="button button-longrunning rr_action" data-action="{{action}}" data-path="{{data_path}}" data-params="{{tree_path}}"><span class="icon icon-spinner"></span><em>Pas toe</em></button></div>',
         'StructBlock': '<div class="rr_structblock" data-path="{{data_path}}">{{header}}<div class="rr_block_preview_content">{{preview}}</div></div>',
@@ -1422,6 +1504,7 @@ $.fn.roadrunner = function(data){
     };
 
     rr.HtmlEntity.prototype.init = function(html) {
+      do_log("HtmlEntity.init")
         this.html = html;
         for (var key in TEMPLATE_VARS) {
             if (!TEMPLATE_VARS.hasOwnProperty(key)) continue;
@@ -1430,6 +1513,7 @@ $.fn.roadrunner = function(data){
     };
 
     rr.HtmlEntity.prototype.set = function(key, value) {
+      do_log("HtmlEntity.set", key, value)
         this.html = this.html.replace(new RegExp('{{' + key + '}}', 'g'), value);
         return this;
     };
@@ -1451,6 +1535,8 @@ $.fn.roadrunner = function(data){
     */
 
     var collectTypes = function(tree){
+      do_log("HtmlEntity.collectTypes")
+      do_log("IK collectTypes", "neuk", tree);
         var result = [];
 
         var blockType = tree.type;
@@ -1471,10 +1557,12 @@ $.fn.roadrunner = function(data){
     rr.Routing = (function(){
 
         var pathToString = function(path){
+          do_log("Routing.pathToString", path)
             return path.join('/');
         };
 
         var stringToPath = function(str){
+          do_log("Routing.stringToPath", str)
             var splitted = str.split('/');
             if(splitted[splitted.length - 1] == '') {
                 splitted.pop();
@@ -1486,6 +1574,7 @@ $.fn.roadrunner = function(data){
         };
 
         var getData = function(path, data) {
+          do_log("Routing.getData", path, data)
             if(typeof path === 'string') {
                 path = stringToPath(path);
             }
@@ -1496,6 +1585,7 @@ $.fn.roadrunner = function(data){
         };
 
         var _getData = function(path, data){
+          do_log("Routing._getData", path, data)
             if(path.length == 0) {
                 return data;
             }
@@ -1508,6 +1598,7 @@ $.fn.roadrunner = function(data){
         };
 
         var deleteData = function(path, data) {
+          do_log("Routing.deleteData", path, data)
             if(typeof path === 'string') {
                 path = stringToPath(path);
             }
@@ -1518,6 +1609,7 @@ $.fn.roadrunner = function(data){
         };
 
         var _deleteData = function(path, data){
+          do_log("Routing._deleteData", path, data)
             if(path.length == 0) {
                 delete data;
             } else if (path.length == 1) {
@@ -1531,10 +1623,12 @@ $.fn.roadrunner = function(data){
         };
 
         var getParentData = function(path, data) {
+          do_log("Routing.getParentData", path, data)
             return _getParentData(rr.Helpers.clone(path), data); 
         };
 
         var _getParentData = function(path, data) {
+          do_log("Routing._getParentData", path, data)
             if(path.length <= 2) {
                 return data;
             } else {
@@ -1544,6 +1638,8 @@ $.fn.roadrunner = function(data){
         };
 
         var updatePaths = function(elements) {
+          do_log("Routing.updatePaths", elements)
+          do_log("EY updatePaths", elements);
             elements.each(function(i, element){
                 var item = $(element);
                 var currentPath = item.attr('data-path');
@@ -1567,6 +1663,8 @@ $.fn.roadrunner = function(data){
         };
 
         var isNumeric = function(obj) {
+          do_log("Routing.isNumeric", obj)
+          do_log("EY NIGGA DIE IS NUMERIC BOI", obj);
             return !isNaN(obj - parseFloat(obj));
         };
 
@@ -1577,19 +1675,22 @@ $.fn.roadrunner = function(data){
             'deleteData': deleteData,
             'getParentData': getParentData,
             'updatePaths': updatePaths,
+          'isNumeric': isNumeric
         };
     })();
     rr.Validation = (function(){
         // Error messages
         var addErrorMessage = function(field, error) {
+          do_log("Validation.addErrorMessage", field, error)
             $(field).find('.field').addClass('error');
             $(field).parent().append('' +
                 '<p class="error-message"><span>' + error + '</span></p>');
-            console.log('Error found!', error);
+            do_log('Error found!', error);
         };
 
 
         var validate = function(fields) {
+          do_log("Validation.validate", fields)
             var flagged = 0;
             $('.error').removeClass('error');
             $('.error-message').remove();
@@ -1635,21 +1736,25 @@ $.fn.roadrunner = function(data){
         /* Value Validations */
 
         var validateEmail = function(email) {
+          do_log("Validation.validateEmail", email)
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(email);
         };
 
         var validateMinInteger = function(value, min) {
+          do_log("Validation.validateMinInteger", value, min)
             return parseInt(value) >= parseInt(min);
         };
 
         var validateMaxInteger = function(value, max) {
+          do_log("Validation.validateMaxInteger", value, max)
             return parseInt(value) <= parseInt(max);
         };
         
         /* rr.Validation Filters */
 
         var emailFilter = function(fields) {
+          do_log("Validation.emailFilter", fields)
             var flagged = 0;
 
             fields.each(function(i, field) {
@@ -1665,6 +1770,7 @@ $.fn.roadrunner = function(data){
         };
 
         var minValidation = function(fields) {
+          do_log("Validation.minValidation", fields)
             var flagged = 0;
 
             fields.each(function(i, field) {
@@ -1680,6 +1786,7 @@ $.fn.roadrunner = function(data){
         };
 
         var maxValidation = function(fields) {
+          do_log("Validation.maxValidation", fields)
             var flagged = 0;
 
             fields.each(function(i, field) {
