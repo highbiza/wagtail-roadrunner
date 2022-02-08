@@ -547,13 +547,12 @@ class StreamBlock(blocks.StreamBlock):
         return streamfields
 
     def to_python(self, value):
-        child_blocks = self.child_blocks
-        child_blocks.update(self.additional_child_blocks())
-        return blocks.StreamValue(
-            self,
-            [child_data for child_data in value if child_data["type"] in child_blocks],
-            is_lazy=True,
-        )
+        self.child_blocks.update(self.additional_child_blocks())
+        return super().to_python(value)
+
+    def bulk_to_python(self, values):
+        self.child_blocks.update(self.additional_child_blocks())
+        return super().bulk_to_python(values)
 
 
 class RoadRunnerBaseBlock(blocks.StructBlock):
