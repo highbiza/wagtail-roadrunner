@@ -11,8 +11,6 @@ from django.core.serializers.json import DjangoJSONEncoder
 from wagtail.admin.edit_handlers import StreamFieldPanel
 from wagtail.core.rich_text import features as feature_registry
 
-from . import art
-
 
 class RoadRunnerPanel(StreamFieldPanel):
     object_template = "roadrunner/roadrunner_panel.html"
@@ -51,7 +49,6 @@ class RoadRunnerPanel(StreamFieldPanel):
             "tree_name": self.field_name,
             "urls": self.get_urls(),
             "rich_text_opts": self.rich_text_opts(),
-            "art": art,
         }
         context.update(self.get_additional_context())
         return json.dumps(context, cls=DjangoJSONEncoder)

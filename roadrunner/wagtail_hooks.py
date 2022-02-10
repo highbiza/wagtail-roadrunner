@@ -9,48 +9,48 @@ except ImportError:
 
 from wagtail.core import hooks
 
-from . import __version__ as version, urls as roadrunner_urls
+import roadrunner.urls
 
 
 def roadrunner_css():
-    return '<link href="{href}?v={v}" rel="stylesheet">'.format(
-        href=static("roadrunner/css/roadrunner.css"), v=version
+    return '<link href="{href}" rel="stylesheet">'.format(
+        href=static("roadrunner/css/roadrunner.css")
     )
 
 
 def roadrunner_grid_css():
-    return '<link href="{href}?v={v}" rel="stylesheet">'.format(
-        href=static("roadrunner/css/grid.css"), v=version
+    return '<link href="{href}" rel="stylesheet">'.format(
+        href=static("roadrunner/css/grid.css")
     )
 
 
 def roadrunner_widgets_css():
-    return '<link href="{href}?v={v}" rel="stylesheet">'.format(
-        href=static("roadrunner/css/widgets.css"), v=version
+    return '<link href="{href}" rel="stylesheet">'.format(
+        href=static("roadrunner/css/widgets.css")
     )
 
 
 def roadrunner_colorpicker_css():
-    return '<link href="{href}?v={v}" rel="stylesheet">'.format(
-        href=static("roadrunner/plugins/colorpicker/css/colorpicker.css"), v=version
+    return '<link href="{href}" rel="stylesheet">'.format(
+        href=static("roadrunner/plugins/colorpicker/css/colorpicker.css")
     )
 
 
 def roadrunner_js():
-    return '<script type="text/javascript" src="{src}?v={v}"></script>'.format(
-        src=static("roadrunner/js/roadrunner.js"), v=version
+    return '<script type="text/javascript" src="{src}"></script>'.format(
+        src=static("roadrunner/js/roadrunner.js")
     )
 
 
 def roadrunner_widgets_js():
-    return '<script type="text/javascript" src="{src}?v={v}"></script>'.format(
-        src=static("roadrunner/js/widgets.js"), v=version
+    return '<script type="text/javascript" src="{src}"></script>'.format(
+        src=static("roadrunner/js/widgets.js")
     )
 
 
 def roadrunner_colorpicker_js():
-    return '<script type="text/javascript" src="{src}?v={v}"></script>'.format(
-        src=static("roadrunner/plugins/colorpicker/js/colorpicker.js"), v=version
+    return '<script type="text/javascript" src="{src}"></script>'.format(
+        src=static("roadrunner/plugins/colorpicker/js/colorpicker.js")
     )
 
 
@@ -143,4 +143,4 @@ def wagtail():
 
 @hooks.register("register_admin_urls")
 def urlconf_time():
-    return [url(r"^_roadrunner/", include(roadrunner_urls, namespace="roadrunner"))]
+    return [url(r"^_roadrunner/", include(roadrunner.urls, namespace="roadrunner"))]
