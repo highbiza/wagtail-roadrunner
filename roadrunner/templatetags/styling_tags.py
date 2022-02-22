@@ -16,7 +16,7 @@ def get_styling(styling, no_style_tag=False):
 
     def format_prop(prop, value):
         if prop == "font_size":
-            value += "px"
+            value = "%spx" % value
         return "%s: %s;" % (prop.replace("_", "-"), value)
 
     rule_set = [
