@@ -8,11 +8,11 @@ from django.test import TestCase, override_settings
 
 # from django.urls import reverse
 
-from .templatetags.styling_tags import get_styling
-from .blocks import AccordionBlock
-from .edit_handlers import RoadRunnerPanel
-from .fields import RoadRunnerField
-from .wagtail_hooks import css, js, wagtail
+from roadrunner.templatetags.styling_tags import get_styling
+from roadrunner.blocks import AccordionBlock
+from roadrunner.edit_handlers import RoadRunnerPanel
+from roadrunner.fields import RoadRunnerField
+from roadrunner.wagtail_hooks import css, js, wagtail
 
 
 @unittest.skip
