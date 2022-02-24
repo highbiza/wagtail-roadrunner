@@ -1,4 +1,11 @@
-def fix_json(obj, image_keys=("image", "product", "category",)):
+def fix_json(
+    obj,
+    image_keys=(
+        "image",
+        "product",
+        "category",
+    ),
+):
     """
     Repair json where image id's where saved as string instead of a number
     >>> data = [
