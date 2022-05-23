@@ -3,9 +3,11 @@ import $ from "jquery"
 
 import { renderInPlaceHolder, PlaceHolder } from "./jsx"
 import { StylingBlock } from "./stylingblock"
+import { renderPreview } from "./preview.js"
 import { getStreamChild } from "./wagtailprivate"
 
 import "./previewstreamblock.scss"
+
 
 class PreviewBlockChildWrapper {
   constructor(blockDef, originalPlaceholder, modalPrefix, prefix, index, id, initialState, sequence, opts) {
@@ -35,7 +37,7 @@ class PreviewBlockChildWrapper {
     if ("renderPreview" in blockDef) {
       this.renderPreview = blockDef.renderPreview.bind(this)
     } else {
-      this.renderPreview = this.renderPreview.bind(this)
+      this.renderPreview = renderPreview.bind(this)
     }
   }
 
@@ -75,35 +77,7 @@ class PreviewBlockChildWrapper {
     // return the original created child object, which has all the logic on it.
     return child
   }
-  
-  renderPreview(previewPlaceholder, modalPrefix, childInitialState) {
-    
-    const { index, id, initialState, sequence, opts } = this
-    console.log("Initial states comp", childInitialState, initialState)
 
-      if (this.meta.preview && this.meta.preview.length) {
-        const itemDict = this.meta.preview.reduce((acc, item) => {
-          acc[item] = initialState[item]
-          return acc
-        }, {})
-        const items = this.meta.preview.map(item => initialState[item])
-
-        return renderInPlaceHolder(previewPlaceholder, (
-          <div class="">
-          {items.map(item => (
-            <p>{item}</p>
-          ))}
-          </div>
-        ))
-    } else {
-      return renderInPlaceHolder(previewPlaceholder, (
-        <div class="">
-        <p>{this.meta.label}</p>
-        </div>
-      ))
-    }
-  }
-  
   setError(error) {
     $(this.previewElement).addClass("error")
     renderInPlaceHolder(this.previewErrorPlaceholder, (

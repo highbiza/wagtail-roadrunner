@@ -1,5 +1,7 @@
 from django import forms
 from django.utils.functional import cached_property
+from django.utils.safestring import mark_safe
+from django.template.loader import render_to_string
 
 from wagtail.admin.staticfiles import versioned_static
 from wagtail.core.blocks.field_block import FieldBlockAdapter
@@ -27,12 +29,15 @@ class RoadRunnerStructBlockAdapter(StructBlockAdapter):
     def js_args(self, block):
         name, values, meta = super().js_args(block)
         if hasattr(block.meta, "preview_template"):
-            context = self.get_form_context(
-                self.get_default(), prefix="__PREFIX__", errors=None
-            )
-            meta["previewTemplate"] = mark_safe(
-                render_to_string(self.meta.preview_template, context)
-            )
+            try:
+                context = block.get_form_context(
+                    block.get_default(), prefix="__PREFIX__", errors=None
+                )
+                meta["previewTemplate"] = mark_safe(
+                    render_to_string(block.meta.preview_template, context)
+                )
+            except Exception as e:
+                print(e)
 
         if hasattr(block.meta, "preview"):
             meta["preview"] = block.meta.preview
@@ -56,6 +61,19 @@ class RoadRunnerBaseBlockAdapter(RoadRunnerStructBlockAdapter):
     def media(self):
         return super().media + forms.Media(
             css={"all": [versioned_static("roadrunner/roadrunner.css")]},
+        )
+
+
+class PreviewFieldBlockAdapter(FieldBlockAdapter):
+    js_constructor = "roadrunner.fields.PreviewFieldBlockDefinition"
+
+    @cached_property
+    def media(self):
+        return super().media + forms.Media(
+            js=[
+                versioned_static("wagtailadmin/js/telepath/blocks.js"),
+                versioned_static("roadrunner/roadrunner.js"),
+            ],
         )
 
 

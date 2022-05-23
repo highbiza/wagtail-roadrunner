@@ -1,5 +1,6 @@
 import dom, {Fragment} from 'jsx-render'
 import { renderInPlaceHolder, PlaceHolder } from "./jsx"
+import { renderPreview } from "./preview.js"
 import "./stylingblock.scss"
 
 const SvgIcon = ({ name }) => (
@@ -132,6 +133,9 @@ export class StylingBlockDefinition extends window.wagtailStreamField.blocks.Str
         }
         return placeholder
       }, previewPlaceholder)
+    } else {
+      console.log("WWWWUUUUUWUDLLLLDGGG")
+      return renderPreview.call(this, previewPlaceholder, modalPrefix, initialState, initialError)
     }
 
     return previewPlaceholder

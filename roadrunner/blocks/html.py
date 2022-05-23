@@ -59,6 +59,7 @@ class DividerBlock(blocks.StructBlock):
     styling = BaseStylingBlock()
 
     class Meta:
+        preview_template = "preview/html/divider.html"
         group = "HTML"
 
 

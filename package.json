@@ -18,7 +18,8 @@
   "dependencies": {
     "jsx-render": "^1.1.1",
     "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react-dom": "^16.14.0",
+    "string-strip-html": "^9.1.12"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
