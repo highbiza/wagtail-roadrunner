@@ -45,3 +45,5 @@ coverage.xml
 .hypothesis/
 
 *.egg-info
+roadrunner/static/roadrunner
+node_modules/

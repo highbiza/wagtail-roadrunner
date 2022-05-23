@@ -10,7 +10,7 @@
     {% endif %}
     <div id="accordion_{{ uuid }}" class="card-collapse collapse">
         <div class="card-body">
-            {{ self.panel_content|convert_to_html }}
+            {{ self.panel_content|richtext }}
         </div>
         {% if self.footer %}
             <div class="card-footer">{{ self.footer }}</div>

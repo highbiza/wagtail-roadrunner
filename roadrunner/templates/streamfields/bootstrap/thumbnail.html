@@ -1,11 +1,11 @@
 {% load styling_tags %}
-{% load wagtailimages_tags %}
+{% load wagtailimages_tags wagtailcore_tags %}
 
 <div class="card {% get_styling_classes self.styling %}" {% get_styling self.styling %}>
     {% image self.image original class="img-fluid card-img-top" %}
     <div class="card-body">
         {% if self.caption %}
-            {{ self.caption|convert_to_html }}
+            {{ self.caption|richtext }}
             {% if self.text %}
                 <a class="btn btn-{{ self.button_class }}" {{ self.attributes|safe }}>{{ self.text }}</a>
             {% endif %}

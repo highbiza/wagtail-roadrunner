@@ -1,0 +1,38 @@
+{
+  "name": "roadrunner",
+  "version": "3.0.0",
+  "description": "The bootstrap based page maker for wagtail",
+  "main": "js/index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"kut javascript noob, sukkel eikel troep makende nub\"",
+    "build": "webpack",
+    "dev": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.uwkm.nl:2222/UWKM/RoadRunner.git"
+  },
+  "author": "Brechtje Wulpenbroek",
+  "license": "SEE LICENSE IN Copyright highbiza",
+  "dependencies": {
+    "jsx-render": "^1.1.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.0",
+    "sass": "^1.50.0",
+    "sass-loader": "^12.6.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
+  }
+}

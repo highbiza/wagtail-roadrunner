@@ -2,6 +2,8 @@ registered_blocks = []
 
 
 def register_block(name=None, *args, **kwargs):  # pylint: disable=W1113
+    print(name)
+
     def get_name(block):
         return getattr(block, "_name", block.__name__.lower().replace("block", ""))
 
@@ -11,3 +13,7 @@ def register_block(name=None, *args, **kwargs):  # pylint: disable=W1113
     if isinstance(name, type):
         registered_blocks.append((get_name(name), name()))
     return real_register
+
+
+def get_registered_blocks():
+    return registered_blocks

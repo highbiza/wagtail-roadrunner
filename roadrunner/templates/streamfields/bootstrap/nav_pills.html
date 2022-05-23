@@ -22,7 +22,7 @@
         <div class="tab-content">
             {% for tab in self %}
                 <div id="{{ tab.tab_header|slugify }}_{{ blockid }}_{{ forloop.counter }}" class="tab-pane fade{% if forloop.first %} in active show{% endif %} {% get_styling_classes tab.styling %}" {% get_styling tab.styling %}>
-                    {{ tab.tab_content|convert_to_html }}
+                    {{ tab.tab_content|richtext }}
                 </div>
             {% endfor %}
         </div>

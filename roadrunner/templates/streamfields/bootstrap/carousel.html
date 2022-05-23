@@ -23,7 +23,7 @@
                 </picture>
                 {% if slide.caption %}
                     <div class="carousel-caption">
-                        {{ slide.caption|convert_to_html }}
+                        {{ slide.caption|richtext }}
                     </div>
                 {% endif %}
                 {% if slide.url %}</a>{% endif %}

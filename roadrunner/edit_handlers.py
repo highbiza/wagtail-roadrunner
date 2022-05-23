@@ -13,6 +13,10 @@ from wagtail.core.rich_text import features as feature_registry
 
 
 class RoadRunnerPanel(StreamFieldPanel):
+    pass
+
+
+class henk:
     object_template = "roadrunner/roadrunner_panel.html"
     choice_table = {}
 

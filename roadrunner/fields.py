@@ -1,9 +1,26 @@
 from django import forms
-
-from wagtail.core.blocks import ListBlock
+from wagtail.core.blocks.base import BlockField as WagtailBlockField
 from wagtail.core.fields import StreamField
 
-from .blocks import RoadRunnerBaseBlock, TemplateBlock
+from roadrunner.widgets import RoadRunnerBlockWidget
+from roadrunner.blocks.template import TemplateBlock
+from roadrunner.blocks.main import (
+    RoadRunnerBaseBlock,
+    FixedWidthRowBlock,
+    FullWidthRowBlock,
+)
+
+
+class BlockField(WagtailBlockField):
+    """
+    This class has to be called BlockField because it will translate to
+    a css class that makes the field rendered full width
+    """
+
+    def __init__(self, block=None, **kwargs):
+        if "widget" not in kwargs:
+            kwargs["widget"] = RoadRunnerBlockWidget(block)
+        super().__init__(block, **kwargs)
 
 
 class RoadRunnerFormField(forms.Field):
@@ -18,20 +35,14 @@ class RoadRunnerField(StreamField):
             block_types = [
                 (
                     "fixed_width",
-                    ListBlock(
+                    FixedWidthRowBlock(
                         base_block,
-                        template="streamfields/bootstrap/container.html",
-                        icon="fa-th-large",
-                        label="Boxed",
                     ),
                 ),
                 (
                     "full_width",
-                    ListBlock(
+                    FullWidthRowBlock(
                         base_block,
-                        template="streamfields/bootstrap/container_fluid.html",
-                        icon="fa-th",
-                        label="Full",
                     ),
                 ),
                 (
@@ -43,18 +54,22 @@ class RoadRunnerField(StreamField):
                     ),
                 ),
             ]
+
         super().__init__(block_types, **kwargs)
 
-    def get_panel(self):
-        from .edit_handlers import RoadRunnerPanel
-
-        return RoadRunnerPanel
-
     def formfield(self, **kwargs):
-        """
-        Override formfield to use a plain forms.Field so that we do no transformation on the value
-        (as distinct from the usual fallback of forms.CharField, which transforms it into a string).
-        """
-        defaults = {"form_class": RoadRunnerFormField}
-        defaults.update(**kwargs)
-        return super().formfield(**defaults)
+        return super().formfield(form_class=BlockField)
+
+    # def get_panel(self):
+    #     from .edit_handlers import RoadRunnerPanel
+    #
+    #     return RoadRunnerPanel
+
+    # def formfield(self, **kwargs):
+    #     """
+    #     Override formfield to use a plain forms.Field so that we do no transformation on the value
+    #     (as distinct from the usual fallback of forms.CharField, which transforms it into a string).
+    #     """
+    #     defaults = {"form_class": RoadRunnerFormField}
+    #     defaults.update(**kwargs)
+    #     return super().formfield(**defaults)

@@ -1,32 +1,6 @@
 from django import forms
 from django.contrib.contenttypes.models import ContentType
-from django.forms import ChoiceField
-
 from wagtail.core import blocks
-
-
-class MultipleChoiceField(ChoiceField):
-    pass
-
-
-class MultipleChoiceBlock(blocks.ChoiceBlock):
-    many = True
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        choices = self._constructor_kwargs.get("choices")
-        help_text = self._constructor_kwargs.get("help_text")
-        required = self._constructor_kwargs.get("required")
-        label = self._constructor_kwargs.get("label")
-
-        self.field = MultipleChoiceField(
-            choices=choices, help_text=help_text, required=required, label=label
-        )
-
-    def to_python(self, value):
-        if isinstance(value, str):
-            return value
-        return " ".join(value)
 
 
 class ModelChoiceBlock(blocks.FieldBlock):

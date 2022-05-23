@@ -21,6 +21,9 @@ class HeaderBlock(blocks.StructBlock):
     )
     styling = BaseStylingBlock()
 
+    class Meta:
+        group = "HTML"
+
 
 class RichText(blocks.StructBlock):
     block_text = blocks.RichTextBlock(
@@ -28,6 +31,9 @@ class RichText(blocks.StructBlock):
     )
 
     styling = BaseStylingBlock()
+
+    class Meta:
+        group = "HTML"
 
 
 class TextBlock(blocks.StructBlock):
@@ -39,6 +45,9 @@ class ScriptBlock(blocks.StructBlock):
     script = blocks.TextBlock(label="Script", required=False)
     src = blocks.CharBlock(required=False)
 
+    class Meta:
+        group = "HTML"
+
 
 class DividerBlock(blocks.StructBlock):
     border_top_width = blocks.CharBlock(
@@ -48,6 +57,9 @@ class DividerBlock(blocks.StructBlock):
         max_length=255, label="Breedte", help_text="CSS Syntax (bv. 100% of 100px)"
     )
     styling = BaseStylingBlock()
+
+    class Meta:
+        group = "HTML"
 
 
 class ImageBlock(blocks.StructBlock):
@@ -60,9 +72,15 @@ class ImageBlock(blocks.StructBlock):
     )
     styling = BaseStylingBlock()
 
+    class Meta:
+        preview = ["image", "alt"]
+        group = "HTML"
+
 
 class VideoBlock(blocks.StructBlock):
     url = blocks.CharBlock(
         label="URL", help_text="Het adres van een site, de domeinnaam.", max_length=255
     )
-    styling = BaseStylingBlock()
+
+    class Meta:
+        group = "HTML"

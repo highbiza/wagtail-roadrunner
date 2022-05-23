@@ -1,13 +1,8 @@
 import uuid
-
-from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
-from django.forms import ChoiceField
-
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
-from .styling import BaseStylingBlock
+from roadrunner.blocks.styling import BaseStylingBlock
 
 
 class BootstrapColorChoiceBlock(blocks.ChoiceBlock):
@@ -23,22 +18,13 @@ class BootstrapColorChoiceBlock(blocks.ChoiceBlock):
     ]
 
 
-BACKGROUND_CHOICES = [
-    ("bg-primary", "Primary achtergrond"),
-    ("bg-secondary", "Secondary achtergrond"),
-    ("bg-light", "Light achtergrond"),
-    ("bg-dark", "Dark achtergrond"),
-    ("bg-info", "Info achtergrond"),
-    ("bg-success", "Success achtergrond"),
-    ("bg-warning", "Warning achtergrond"),
-    ("bg-danger", "Danger achtergrond"),
-]
-
-
 class ButtonBlock(blocks.StructBlock):
     btn_class = BootstrapColorChoiceBlock(label="Kleur van de knop")
     page = blocks.PageChooserBlock(label="Pagina")
     styling = BaseStylingBlock()
+
+    class Meta:
+        group = "Bootstrap"
 
 
 class TabBlock(blocks.StructBlock):
@@ -54,6 +40,9 @@ class TabBlock(blocks.StructBlock):
     tab_content = blocks.RichTextBlock(label="Inhoud", help_text="Inhoud van de tab.")
     styling = BaseStylingBlock()
 
+    class Meta:
+        group = "Bootstrap"
+
 
 class BreadcrumbBlock(blocks.StructBlock):
     pair_icon = blocks.CharBlock(
@@ -64,6 +53,9 @@ class BreadcrumbBlock(blocks.StructBlock):
     )
     styling = BaseStylingBlock()
 
+    class Meta:
+        group = "Bootstrap"
+
 
 class JumbotronBlock(blocks.StructBlock):
     header = blocks.CharBlock(
@@ -73,6 +65,9 @@ class JumbotronBlock(blocks.StructBlock):
         label="Inhoud", help_text="Inhoud van de tab.", required=False
     )
     styling = BaseStylingBlock()
+
+    class Meta:
+        group = "Bootstrap"
 
 
 class ThumbnailBlock(blocks.StructBlock):
@@ -94,6 +89,9 @@ class ThumbnailBlock(blocks.StructBlock):
     )
     styling = BaseStylingBlock()
 
+    class Meta:
+        group = "Bootstrap"
+
 
 class CardBlock(blocks.StructBlock):
     color = BootstrapColorChoiceBlock(
@@ -110,12 +108,18 @@ class CardBlock(blocks.StructBlock):
     )
     styling = BaseStylingBlock()
 
+    class Meta:
+        group = "Bootstrap"
+
 
 class EmbedBlock(blocks.StructBlock):
     url = blocks.CharBlock(
         max_length=255, label="URL", help_text="Link naar het bestand"
     )
     styling = BaseStylingBlock()
+
+    class Meta:
+        group = "Bootstrap"
 
 
 class ModalBlock(blocks.StructBlock):
@@ -134,6 +138,9 @@ class ModalBlock(blocks.StructBlock):
     )
     styling = BaseStylingBlock()
 
+    class Meta:
+        group = "Bootstrap"
+
 
 class CarouselBlock(blocks.StructBlock):
     image = ImageChooserBlock()
@@ -142,6 +149,9 @@ class CarouselBlock(blocks.StructBlock):
         label="Caption", help_text="Caption van de slide.", required=False
     )
     styling = BaseStylingBlock()
+
+    class Meta:
+        group = "Bootstrap"
 
 
 class AccordionBlock(blocks.StructBlock):
@@ -161,3 +171,6 @@ class AccordionBlock(blocks.StructBlock):
 
     def get_uuid(self):
         return uuid.uuid4()
+
+    class Meta:
+        group = "Bootstrap"

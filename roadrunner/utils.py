@@ -1,3 +1,8 @@
+import json
+from wagtail.core.rich_text import features as feature_registry
+from wagtail.admin.rich_text.converters.contentstate import ContentstateConverter
+
+
 def fix_json(
     obj,
     image_keys=(
@@ -183,4 +188,44 @@ def fix_json(
         return [fix_json(o, image_keys) for o in obj]
     elif isinstance(obj, dict):
         return {key: fix_json((key, value), image_keys) for key, value in obj.items()}
+    return obj
+
+
+converter = ContentstateConverter(feature_registry.get_default_features())
+
+
+def fix_richtext(
+    obj,
+    richtext_keys=(
+        "block_text",
+        "tab_content",
+        "html",
+        "caption",
+        "card_content",
+        "modal_content",
+        "panel_content",
+        "media_content",
+        "well_content",
+        "body",
+        "content",
+        "text",
+        "paragraph",
+    ),
+):
+    if isinstance(obj, tuple):
+        key, value = obj
+        if key in richtext_keys:
+            try:
+                return converter.to_database_format(value)
+            except (TypeError, AttributeError, json.JSONDecodeError) as e:
+                print(key, value)
+                print(e)
+
+        return fix_richtext(value, richtext_keys)
+    elif isinstance(obj, list):
+        return [fix_richtext(o, richtext_keys) for o in obj]
+    elif isinstance(obj, dict):
+        return {
+            key: fix_richtext((key, value), richtext_keys) for key, value in obj.items()
+        }
     return obj

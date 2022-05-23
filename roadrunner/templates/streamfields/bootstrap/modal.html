@@ -17,7 +17,7 @@
             </div>
             {% endif %}
             <div class="modal-body">
-            {{ self.modal_content|convert_to_html }}
+            {{ self.modal_content|richtext }}
             </div>
             {% if self.modal_footer %}
             <div class="modal-footer">
