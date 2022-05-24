@@ -90,6 +90,7 @@ class ThumbnailBlock(blocks.StructBlock):
     styling = BaseStylingBlock()
 
     class Meta:
+        preview_template = "preview/bootstrap/thumbnailblock.html"
         group = "Bootstrap"
 
 

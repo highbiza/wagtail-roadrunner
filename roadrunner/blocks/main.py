@@ -98,7 +98,6 @@ class RoadRunnerBaseBlock(blocks.StructBlock):
     styling = BaseStylingBlock()
 
     def __init__(self, roadrunner_blocks, *args, **kwargs):
-        print("ik kom door init", roadrunner_blocks)
         super().__init__(*args, **kwargs)
         content_child_blocks = self.child_blocks["content"].child_blocks
         if not content_child_blocks:

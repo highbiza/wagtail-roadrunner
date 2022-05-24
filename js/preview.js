@@ -1,15 +1,34 @@
 import dom, { Fragment, portalCreator } from 'jsx-render'
 import { renderInPlaceHolder, PlaceHolder } from "./jsx"
 import { stripHtml } from "string-strip-html";
+import $ from "jquery"
 
 export function renderPreviewTemplate(previewTemplate, previewPlaceholder, modalPrefix, initialState, initialError) {
-  const result = renderInPlaceHolder(previewPlaceholder, (
+  console.log(previewTemplate, modalPrefix)
+  const html = previewTemplate.replace(/__PREFIX__/g, modalPrefix);
+  const { element, placeholder } = renderInPlaceHolder(previewPlaceholder, (
     <Fragment>
-    <div dangerouslySetInnerHTML={{__html: previewTemplate}}/>
+    <div dangerouslySetInnerHTML={{__html: html}}/>
     <PlaceHolder/>
     </Fragment>
   ))
-  return result.placeholder
+
+  if (this.childBlockDefs) {
+    this.childBlockDefs.forEach(childBlockDef => {
+      if ("renderPreview" in childBlockDef) {
+        const childBlockElement = element.querySelector('[data-structblock-child="' + childBlockDef.name + '"]');
+        if (childBlockElement) {
+          const childBlock = childBlockDef.renderPreview(
+            childBlockElement,
+            modalPrefix + '-' + childBlockDef.name,
+            initialState[childBlockDef.name],
+            initialError?.blockErrors[childBlockDef.name]
+          );
+        }
+      }
+    });
+  }
+  return placeholder
 }
 
 export function renderPreviewLabel(label, previewPlaceholder) {
@@ -38,13 +57,20 @@ export function renderPreview(previewPlaceholder, modalPrefix, initialState, ini
   const { meta: { previewTemplate, preview, label }} = this
 
   if (previewTemplate) {
-    return renderPreviewTemplate(previewTemplate, previewPlaceholder, modalPrefix, initialState, initialError)
+    return renderPreviewTemplate.call(this, previewTemplate, previewPlaceholder, modalPrefix, initialState, initialError)
   }
   if (this.meta.preview && this.meta.preview.length) {
-    return renderPreviewItemStates(preview, previewPlaceholder, modalPrefix, initialState, initialError)
+    return renderPreviewItemStates.call(this, preview, previewPlaceholder, modalPrefix, initialState, initialError)
   }
 
   const [firstStateValue] = Object.values(initialState)
-  return renderPreviewLabel(stripHtml(firstStateValue).result || label, previewPlaceholder)
+  
+  let previewLabel = label
+  try {
+    previewLabel = stripHtml(firstStateValue).result || label
+  } catch (e) {
+    previewLabel = label
+  }
+  return renderPreviewLabel.call(this, previewLabel, previewPlaceholder)
 }
 
