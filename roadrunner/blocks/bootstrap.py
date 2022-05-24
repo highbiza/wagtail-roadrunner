@@ -1,9 +1,5 @@
 import uuid
 
-from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
-from django.forms import ChoiceField
-
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
