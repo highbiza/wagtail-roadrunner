@@ -134,7 +134,6 @@ export class StylingBlockDefinition extends window.wagtailStreamField.blocks.Str
         return placeholder
       }, previewPlaceholder)
     } else {
-      console.log("WWWWUUUUUWUDLLLLDGGG")
       return renderPreview.call(this, previewPlaceholder, modalPrefix, initialState, initialError)
     }
 

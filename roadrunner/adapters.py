@@ -90,6 +90,19 @@ class ImageChooserBlockAdapter(FieldBlockAdapter):
         )
 
 
+class RichTextBlockAdapter(FieldBlockAdapter):
+    js_constructor = "roadrunner.fields.RichTextBlockDefinition"
+
+    @cached_property
+    def media(self):
+        return super().media + forms.Media(
+            js=[
+                versioned_static("wagtailadmin/js/telepath/blocks.js"),
+                versioned_static("roadrunner/roadrunner.js"),
+            ],
+        )
+
+
 class RoadrunnerRowBlockAdapter(ListBlockAdapter):
     js_constructor = "roadrunner.fields.RoadrunnerRowBlockDefinition"
 
