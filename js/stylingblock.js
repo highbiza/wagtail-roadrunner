@@ -1,6 +1,6 @@
 import dom, {Fragment} from 'jsx-render'
 import { renderInPlaceHolder, PlaceHolder } from "./jsx"
-import { renderPreview } from "./preview.js"
+import { renderPreview } from "./preview/render.js"
 import "./stylingblock.scss"
 
 const SvgIcon = ({ name }) => (

@@ -1,9 +1,9 @@
 import { RoadrunnerRowBlockDefinition } from "./roadrunnerrowblock"
 import { StylingBlockDefinition } from "./stylingblock"
-import { PreviewStreamBlockDefinition } from "./previewstreamblock"
 import { RoadRunnerBaseBlockDefinition } from "./roadrunnerbaseblock"
 import { ImageChooserBlockDefinition } from "./imagechooserblock"
-import { PreviewFieldBlockDefinition } from "./previewfieldblock"
+import { PreviewStreamBlockDefinition } from "./preview/streamblock"
+import { PreviewFieldBlockDefinition } from "./preview/fieldblock"
 import { RichTextBlockDefinition } from "./richtextblock"
 
 window.telepath.register('roadrunner.fields.RoadrunnerRowBlockDefinition', RoadrunnerRowBlockDefinition)

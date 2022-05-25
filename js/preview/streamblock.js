@@ -1,12 +1,12 @@
 import dom, { Fragment, portalCreator } from 'jsx-render'
 import $ from "jquery"
 
-import { renderInPlaceHolder, PlaceHolder } from "./jsx"
-import { StylingBlock } from "./stylingblock"
-import { renderPreview } from "./preview.js"
-import { getStreamChild } from "./wagtailprivate"
+import { renderInPlaceHolder, PlaceHolder } from "../jsx"
+import { StylingBlock } from "../stylingblock"
+import { getStreamChild } from "../wagtailprivate"
+import { renderPreview } from "./render.js"
 
-import "./previewstreamblock.scss"
+import "./streamblock.scss"
 
 
 class PreviewBlockChildWrapper {

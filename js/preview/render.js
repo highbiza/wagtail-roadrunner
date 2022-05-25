@@ -1,7 +1,8 @@
 import dom, { Fragment, portalCreator } from 'jsx-render'
-import { renderInPlaceHolder, PlaceHolder } from "./jsx"
-import { stripHtml } from "string-strip-html";
 import $ from "jquery"
+import { stripHtml } from "string-strip-html";
+
+import { renderInPlaceHolder, PlaceHolder } from "../jsx"
 
 export function renderPreviewTemplate(previewTemplate, previewPlaceholder, modalPrefix, initialState, initialError) {
   const html = previewTemplate.replace(/__PREFIX__/g, modalPrefix);
