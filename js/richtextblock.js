@@ -13,7 +13,7 @@ export class RichTextBlockDefinition extends window.wagtailStreamField.blocks.Fi
         const html = draftToHtml(rawContentState)
         const result = renderInPlaceHolder(previewPlaceholder, (
           <Fragment>
-          <div dangerouslySetInnerHTML={{__html: html}} />
+          <div className="rich-text" dangerouslySetInnerHTML={{__html: html}} />
           <PlaceHolder/>
           </Fragment>
         ))
