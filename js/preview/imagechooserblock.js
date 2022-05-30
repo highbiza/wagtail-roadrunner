@@ -1,5 +1,5 @@
 import dom, { Fragment, portalCreator } from 'jsx-render'
-import { renderInPlaceHolder, PlaceHolder } from "./jsx"
+import { renderInPlaceHolder, PlaceHolder } from "../jsx"
 import $ from "jquery"
 
 

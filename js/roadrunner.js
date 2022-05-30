@@ -1,10 +1,10 @@
 import { RoadrunnerRowBlockDefinition } from "./roadrunnerrowblock"
 import { StylingBlockDefinition } from "./stylingblock"
 import { RoadRunnerBaseBlockDefinition } from "./roadrunnerbaseblock"
-import { ImageChooserBlockDefinition } from "./imagechooserblock"
+import { ImageChooserBlockDefinition } from "./preview/imagechooserblock"
 import { PreviewStreamBlockDefinition } from "./preview/streamblock"
 import { PreviewFieldBlockDefinition } from "./preview/fieldblock"
-import { RichTextBlockDefinition } from "./richtextblock"
+import { RichTextBlockDefinition } from "./preview/richtextblock"
 
 window.telepath.register('roadrunner.fields.RoadrunnerRowBlockDefinition', RoadrunnerRowBlockDefinition)
 window.telepath.register('roadrunner.fields.StylingBlockDefinition', StylingBlockDefinition)

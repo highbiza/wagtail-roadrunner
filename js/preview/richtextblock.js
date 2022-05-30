@@ -2,7 +2,7 @@ import dom, { Fragment, portalCreator } from 'jsx-render'
 import $ from "jquery"
 import draftToHtml from 'draftjs-to-html';
 
-import { renderInPlaceHolder, PlaceHolder } from "./jsx"
+import { renderInPlaceHolder, PlaceHolder } from "../jsx"
 
 
 export class RichTextBlockDefinition extends window.wagtailStreamField.blocks.FieldBlockDefinition {
