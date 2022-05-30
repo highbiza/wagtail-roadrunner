@@ -40,7 +40,7 @@ class InsertButton {
     // const label = this.sequenceChild.strings[this.labelIdentifier] || this.labelIdentifier;
     this.dom = $((
       <button type="button" title={this.sequenceChild.strings['ADD']} data-streamfield-list-add
-          class="c-sf-block__actions__single c-sf-add-button--visible">
+          class="c-sf-block__actions__single c-sf-add-button--visible add-action-insertbutton">
         +
       </button>
     ));
