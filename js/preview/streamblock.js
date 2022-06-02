@@ -60,6 +60,9 @@ class PreviewBlockChildWrapper {
               </div>
               <div className="modal-footer">
                 <button type="button" className="button" data-dismiss="modal">{meta?.strings?.APPLY || "Apply"}</button>
+                <button type="submit" className="button action-save button-longrunning" data-clicked-text={meta?.strings?.SAVING || "Saving..."}>
+                  {meta?.strings?.SAVE_DRAFT || "Save Draft"}
+                </button>
               </div>
             </div>
           </div>

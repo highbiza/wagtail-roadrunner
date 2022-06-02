@@ -18,6 +18,8 @@ class RoadRunnerStreamBlockAdapter(StreamBlockAdapter):
     def js_args(self, block):
         [name, grouped_child_blocks, values, meta] = super().js_args(block)
         meta["strings"]["APPLY"] = _("Apply")
+        meta["strings"]["SAVING"] = _("Saving...")
+        meta["strings"]["SAVE_DRAFT"] = _("Save Draft")
         return [name, grouped_child_blocks, values, meta]
 
     @property
