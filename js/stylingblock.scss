@@ -1,7 +1,19 @@
 .roadrunner.row .column {
-    .stylingblock .tab-content > .tab-pane.fade {
-        &.in {
-            display:block;
+    .stylingblock {
+        .tab-content > .tab-pane.fade {
+            &.in, &.show.active {
+                display:block;
+                opacity: 1;
+            }
+        }
+        ul.corner-tab-control li a.nav-link {
+            display: block;
+            opacity: 1;
+
+            &.active {
+                display: none;
+                opacity: 0;
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ import dom, {Fragment} from 'jsx-render'
 import { renderInPlaceHolder, PlaceHolder } from "./jsx"
 import { renderPreview } from "./preview/render.js"
 import "./stylingblock.scss"
+import "bootstrap/js/src/tab"
 
 const SvgIcon = ({ name }) => (
     <svg className={`icon ${name} default`} aria-hidden="true" focusable="false">
@@ -55,21 +56,25 @@ export class StylingBlock extends window.wagtailStreamField.blocks.StructBlock {
         const result = renderInPlaceHolder(placeholder, (
           <div className={`stylingblock ${blockDef.meta.classname || ''}`}>
             { blockDef.meta.helpText && <HelpText helpText={blockDef.meta.helpText} /> }
-            <div className="tab-content">
-              <section className="tab-pane fade in show active" id={`all-${ prefix }`} role="tabpanel">
-                <div className="corner-tab-control">
-                  <a className="nav-link" data-toggle="tab" href={`#styling-${prefix}`} role="tab" aria-controls={`styling-${prefix}`} aria-selected="false">
+      
+            <ul className="nav nav-tabs corner-tab-control" role="tablist">
+              <li className="nav-item" role="presentation">
+                  <a className="nav-link" data-bs-toggle="tab" href={`#styling-${prefix}`} role="tab" aria-controls={`styling-${prefix}`} aria-selected="false">
                     <SvgIcon name="icon-palette"/>
                   </a>
-                </div>
+              </li>
+              <li className="nav-item" role="presentation">
+                  <a className="nav-link active" data-bs-toggle="tab" href={`#all-${prefix}`} role="tab" aria-controls={`all-${prefix}`}>
+                    <SvgIcon name="icon-layout"/>
+                  </a>
+              </li>
+            </ul>
+
+            <div className="nav tab-content">
+              <section className="tab-pane fade show active" id={`all-${ prefix }`} role="tabpanel">
                 <PlaceHolder/>
               </section>
               <section className="tab-pane fade" id={`styling-${prefix}`} role="tabpanel">
-                <div className="corner-tab-control">
-                  <a className="nav-link active" data-toggle="tab" href={`#all-${prefix}`}>
-                    <SvgIcon name="icon-layout"/>
-                  </a>
-                </div>
                 <PlaceHolder/>
               </section>
             </div>
