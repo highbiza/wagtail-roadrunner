@@ -1,4 +1,6 @@
 from django import forms
+from django.utils.translation import gettext as _
+
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
@@ -12,6 +14,11 @@ from wagtail.core.blocks.list_block import ListBlockAdapter
 
 class RoadRunnerStreamBlockAdapter(StreamBlockAdapter):
     js_constructor = "roadrunner.fields.PreviewStreamBlockDefinition"
+
+    def js_args(self, block):
+        [name, grouped_child_blocks, values, meta] = super().js_args(block)
+        meta["strings"]["APPLY"] = _("Apply")
+        return [name, grouped_child_blocks, values, meta]
 
     @property
     def media(self):

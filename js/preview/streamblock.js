@@ -45,7 +45,8 @@ class PreviewBlockChildWrapper {
 
     // render our wrapper tempplate with the placeholders for the preview and
     // the child element
-    const { modalPrefix } = this
+    const { modalPrefix, sequence: { blockDef: { meta } } } = this
+
     const result = renderInPlaceHolder(blockElement, (
       <div className="preview field-content">
         <div role="button" data-toggle="modal" data-target={`#${modalPrefix}`}>
@@ -58,7 +59,7 @@ class PreviewBlockChildWrapper {
                 <PlaceHolder />
               </div>
               <div className="modal-footer">
-                <button type="button" className="button" data-dismiss="modal">Toepassen</button>
+                <button type="button" className="button" data-dismiss="modal">{meta?.strings?.APPLY || "Apply"}</button>
               </div>
             </div>
           </div>
