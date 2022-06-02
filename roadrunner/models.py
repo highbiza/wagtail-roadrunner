@@ -24,7 +24,7 @@ from roadrunner.fields import RoadRunnerField
 
 @register_snippet
 class PreFooterSnippet(models.Model):
-    name = models.CharField(verbose_name="Naam", max_length=50)
+    name = models.CharField(verbose_name=_("Name"), max_length=50)
     content = RoadRunnerField()
 
     panels = [FieldPanel("name"), RoadRunnerPanel("content")]
@@ -35,7 +35,7 @@ class PreFooterSnippet(models.Model):
 
 @register_snippet
 class Template(models.Model):
-    name = models.CharField(verbose_name="Naam", max_length=50)
+    name = models.CharField(verbose_name=_("Name"), max_length=50)
     content = RoadRunnerField()
 
     panels = [FieldPanel("name"), RoadRunnerPanel("content")]
@@ -46,13 +46,13 @@ class Template(models.Model):
 
 @register_snippet
 class Block(ClusterableModel):
-    name = models.CharField(verbose_name="Naam", max_length=50)
+    name = models.CharField(verbose_name=_("Name"), max_length=50)
     html = models.TextField(default="<div></div>")
 
     panels = [
         FieldPanel("name"),
         FieldPanel("html"),
-        InlinePanel("fields", heading="Velden"),
+        InlinePanel("fields", heading=_("Fields")),
     ]
 
     def __str__(self):
