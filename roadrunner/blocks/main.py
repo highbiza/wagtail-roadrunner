@@ -7,6 +7,7 @@ from roadrunner.adapters import (
     RoadrunnerRowBlockAdapter,
     RoadRunnerStreamBlockAdapter,
     RoadRunnerBaseBlockAdapter,
+    GridChoiceBlockAdapter,
 )
 from roadrunner.blocks.registry import registered_blocks
 from roadrunner.blocks.styling import BaseStylingBlock
@@ -132,3 +133,4 @@ class FullWidthRowBlock(RoadrunnerRowBlock):
 register(RoadRunnerStreamBlockAdapter(), RoadRunnerStreamBlock)
 register(RoadRunnerBaseBlockAdapter(), RoadRunnerBaseBlock)
 register(RoadrunnerRowBlockAdapter(), RoadrunnerRowBlock)
+register(GridChoiceBlockAdapter(), GridChoiceBlock)

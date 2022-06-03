@@ -123,3 +123,7 @@ class RoadrunnerRowBlockAdapter(ListBlockAdapter):
                 versioned_static("roadrunner/roadrunner.js"),
             ],
         )
+
+
+class GridChoiceBlockAdapter(FieldBlockAdapter):
+    js_constructor = "roadrunner.fields.GridChoiceBlockDefinition"

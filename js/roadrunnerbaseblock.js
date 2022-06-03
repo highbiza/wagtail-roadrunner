@@ -6,13 +6,13 @@ import "./roadrunnerbaseblock.scss"
 
 class RoadRunnerBaseBlock extends StylingBlock {
   constructor(blockDef, placeholder, prefix, initialState, initialError) {
-    console.log("RoadRunnerBaseBlock.constructor", blockDef, placeholder, prefix, initialState, initialError);
+    // console.log("RoadRunnerBaseBlock.constructor", blockDef, placeholder, prefix, initialState, initialError);
     super(blockDef, placeholder, prefix, initialState, initialError);
-    console.log("RoadRunnerBaseBlock", this);
+    // console.log("RoadRunnerBaseBlock", this);
   }
 
   setError(error) {
-    console.log("RoadRunnerBaseBlock.setError", error)
+    // console.log("RoadRunnerBaseBlock.setError", error)
     super.setError(error)
   }
 }
@@ -21,7 +21,7 @@ class RoadRunnerBaseBlock extends StylingBlock {
 export class RoadRunnerBaseBlockDefinition extends window.wagtailStreamField.blocks.StructBlockDefinition {
   constructor(name, childBlockDefs, meta) {
     super(name, childBlockDefs, meta)
-    console.log("RoadRunnerBaseBlockDefinition", name, childBlockDefs, meta)
+    // console.log("RoadRunnerBaseBlockDefinition", name, childBlockDefs, meta)
   }
 
   render(placeholder, prefix, initialState, initialError) {

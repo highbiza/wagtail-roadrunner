@@ -2,6 +2,7 @@ import dom, { Fragment, portalCreator } from 'jsx-render'
 import $ from "jquery"
 import { renderInPlaceHolder, PlaceHolder } from "./jsx"
 import { wagtailGridSizeFromBootstrapGridSize } from "./utils"
+import { GRID_SIZE_CHANGED_EVENT } from "./events"
 import "./roadrunnerrowblock.scss"
 
 class RoadrunnerRowBlockInsertionControl {
@@ -59,12 +60,18 @@ class RoadrunnerRowBlock extends window.wagtailStreamField.blocks.ListBlock {
   }
 
   _createChild(blockDef, placeholder, prefix, index, id, initialState, sequence, opts) {
-    console.log(initialState)
     const { grid: gridSize=["col12"] } = initialState;
     const wagtailGridSize = wagtailGridSizeFromBootstrapGridSize(gridSize)
     console.log("wagtailGridSize", wagtailGridSize)
+
+    const registerGridSizeChanged = (element, attrs) => {
+      element.addEventListener(GRID_SIZE_CHANGED_EVENT, e => {
+        element.className = `column col${e.detail.size}`
+      })
+    }
+
     const result = renderInPlaceHolder(placeholder, (
-      <div className={`column ${wagtailGridSize}`} data-gridsize={gridSize} >
+      <div className={`column ${wagtailGridSize}`} data-gridsize={gridSize} ref={registerGridSizeChanged}>
         <PlaceHolder />
       </div>
     ))
@@ -83,7 +90,7 @@ class RoadrunnerRowBlock extends window.wagtailStreamField.blocks.ListBlock {
 
 export class RoadrunnerRowBlockDefinition extends window.wagtailStreamField.blocks.ListBlockDefinition {
   constructor(name, childBlockDef, initialChildState, meta) {
-    console.log("RoadrunnerRowBlockDefinition", meta)
+    // console.log("RoadrunnerRowBlockDefinition", meta)
     super(name, childBlockDef, initialChildState, meta)
   }
 

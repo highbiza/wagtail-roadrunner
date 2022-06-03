@@ -14,7 +14,7 @@ class PreviewBlockChildWrapper {
     // copy all of the original blockDef props except render, because we are
     // going to use our own render.
     const { render, ...blockDefProps} = blockDef
-    console.log("PreviewBlockChildWrapper", blockDefProps)
+    // console.log("PreviewBlockChildWrapper", blockDefProps)
     Object.assign(this, blockDefProps)
 
     // keep a reference to the original render and the placeholder it was
@@ -94,7 +94,7 @@ class PreviewBlockChildWrapper {
 
 class PreviewStreamChild extends getStreamChild() {
   setError(error) {
-    console.log("PreviewStreamChild.setError", error)
+    // console.log("PreviewStreamChild.setError", error)
     super.setError(error)
     this.blockDef.setError(error)
   }
@@ -106,7 +106,7 @@ class PreviewStreamBlock extends window.wagtailStreamField.blocks.StreamBlock {
   }
 
   _getChildDataForInsertion({ type }) {
-    console.log("PreviewStreamBlock._getChildDataForInsertion", type)
+    // console.log("PreviewStreamBlock._getChildDataForInsertion", type)
     const [blockDef, initialState, uuidv4] = super._getChildDataForInsertion({type})
     initialState.isNew = true
     return [blockDef, initialState, uuidv4]
@@ -125,7 +125,7 @@ class PreviewStreamBlock extends window.wagtailStreamField.blocks.StreamBlock {
   }
 
   setError(error) {
-    console.log("PreviewStreamBlock.setError", error)
+    // console.log("PreviewStreamBlock.setError", error)
     super.setError(error)
   }
 }

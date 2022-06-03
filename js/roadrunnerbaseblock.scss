@@ -1,5 +1,5 @@
-.roadrunner{
-    .column{
+.roadrunner {
+    .column {
         // Wrappes inside of column
         & > div{
             max-width: 100%;
@@ -27,76 +27,6 @@
                 }
                 .c-sf-block__header__title {
                     flex-shrink: 3;
-                }
-            }
-            // Gridchooser
-            .gridchooser-wrapper{
-                margin: 0 -24px;
-                margin-top: -16px;
-                padding: 0 24px;
-                border-bottom: 1px solid #e6e6e6;
-                .gridchooser{
-                    position: relative;
-                    padding: 10px 0;
-                    z-index: 3;
-                    &:not(.open){
-                        .grid-rest{
-                            max-height: 0px;
-                        }
-                    }
-                    &.open{
-                        .grid-rest{
-                            max-height: 150px;
-                        }
-                    }
-                    .grid-rest{
-                        overflow: hidden;
-                        transition: .5s ease-in-out;
-                    }
-                    .toggler{
-                        width: 22px;
-                        height: 22px;
-                        background: white;
-                        border: 1px solid #e6e6e6;
-                        display: flex;
-                        padding: 0;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-                        position: absolute;
-                        bottom: -11px;
-                        left: 50%;
-                        transform: translateX(-50%);
-                        svg{
-                            fill: #bcbbbb;
-                        }
-                    }
-                    .gridchoices-wrapper{
-                        .gridchoice{
-                            display: flex;
-                            align-items: center;
-                            padding: .5rem 0;
-                            .svg-wrapper{
-                                width: 60px;
-                                height: 35px;
-                                svg{
-                                    margin-right: 1rem;
-                                    display: block;
-                                    color: #017d7e;
-                                    margin: 0 auto;
-                                    height: 30px;
-                                    &.icon-tv{width: 30px;}
-                                    &.icon-tablet{width: 20px;}
-                                    &.icon-mobile{width: 13px;}
-                                }
-                            }
-                            .gridplaceholder{
-                                width: 100%;
-                                height: 30px;
-                                background: #017d7e;
-                            }
-                        }
-                    }
                 }
             }
         }

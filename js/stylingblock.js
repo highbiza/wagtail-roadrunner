@@ -1,14 +1,10 @@
 import dom, {Fragment} from 'jsx-render'
 import { renderInPlaceHolder, PlaceHolder } from "./jsx"
 import { renderPreview } from "./preview/render.js"
+import { SvgIcon } from "./utils"
 import "./stylingblock.scss"
 import "bootstrap/js/src/tab"
 
-const SvgIcon = ({ name }) => (
-    <svg className={`icon ${name} default`} aria-hidden="true" focusable="false">
-      <use href={`#${name}`}></use>
-    </svg>
-)
 
 const HelpText = ({ helpText }) => (
   <span>
@@ -30,7 +26,6 @@ const Child = ({ name, label, required=false }) => (
 
 export class StylingBlock extends window.wagtailStreamField.blocks.StructBlock {
   constructor(blockDef, placeholder, prefix, initialState, initialError) {
-    console.log("StructBlock.constructor", blockDef.meta)
     if (blockDef.meta.formTemplate) {
       super(blockDef, placeholder, prefix, initialState, initialError)
     } else {
@@ -104,7 +99,7 @@ export class StylingBlock extends window.wagtailStreamField.blocks.StructBlock {
   }
 
   setError(error) {
-    console.log("StylingBlock.setError", error)
+    // console.log("StylingBlock.setError", error)
     super.setError(error)
   }
 }
@@ -131,7 +126,6 @@ export class StylingBlockDefinition extends window.wagtailStreamField.blocks.Str
       // consecutively.
       return this.meta.preview.reduce((placeholder, name) => {
         const blockDef = childBlockDefsByName[name]
-        console.log(blockDef)
         if ("renderPreview" in blockDef) {
           const result = blockDef.renderPreview(placeholder, modalPrefix, initialState[name], initialError?.[name])
           return result
