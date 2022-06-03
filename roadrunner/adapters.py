@@ -66,6 +66,11 @@ class RoadRunnerStructBlockAdapter(StructBlockAdapter):
 class RoadRunnerBaseBlockAdapter(RoadRunnerStructBlockAdapter):
     js_constructor = "roadrunner.fields.RoadRunnerBaseBlockDefinition"
 
+    def js_args(self, block):
+        name, values, meta = super().js_args(block)
+        meta["classname"] = "struct-block roadrunnerblock"
+        return [name, values, meta]
+
     @property
     def media(self):
         return super().media + forms.Media(

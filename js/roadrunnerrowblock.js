@@ -5,6 +5,7 @@ import { wagtailGridSizeFromBootstrapGridSize } from "./utils"
 import { GRID_SIZE_CHANGED_EVENT } from "./events"
 import "./roadrunnerrowblock.scss"
 
+
 class RoadrunnerRowBlockInsertionControl {
   constructor(placeholder, opts) {
     this.index = opts && opts.index;
@@ -37,6 +38,7 @@ class InsertButton {
     this.sequenceChild.sequence._onRequestInsert(this.sequenceChild.index + 1)
     return false
   }
+
   render(container) {
     // const label = this.sequenceChild.strings[this.labelIdentifier] || this.labelIdentifier;
     this.dom = $((
