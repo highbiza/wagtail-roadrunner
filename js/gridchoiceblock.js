@@ -1,6 +1,6 @@
-import dom, { Fragment, portalCreator } from 'jsx-render'
-import { renderInPlaceHolder, PlaceHolder } from "./jsx"
 import $ from "jquery"
+import dom from 'jsx-render'
+import { renderInPlaceHolder, PlaceHolder } from "./jsx"
 import { SvgIcon, breakPointValue, cols, times } from "./utils"
 import { createGridSizeChanged } from "./events"
 import "./gridchoiceblock.scss"
@@ -26,8 +26,8 @@ const GridLine = ({ value, name, breakpoint}) => {
 
     const segments = $(evt.target.parentNode).children(".gridsegment")
     $(segments).removeClass("active")
+    // set the first index+1 segments to active
     segments.slice(0, index+1).addClass("active")
-    console.log("KOE KOE", segments, segments.slice(0, index))
   }
 
   return (
@@ -63,7 +63,8 @@ class GridChoiceBlock {
   constructor(blockDef, placeholder, prefix, initialState, initialError) {
     console.log("GridChoiceBlock", blockDef, placeholder, prefix, initialState, initialError)
     this.state = initialState
-    renderInPlaceHolder(placeholder, <Grid name={prefix} values={initialState} />)
+    const {element} = renderInPlaceHolder(placeholder, <Grid name={prefix} values={initialState} />)
+    this.element = element
   }
 
   setState(state) {
@@ -94,8 +95,8 @@ class GridChoiceBlock {
   }
 
   focus(opts) {
-    throw new Error("focus", opts);
-    console.log("focus", opts)
+    const gridchooser = $(this.element).find(".dropdown.gridchooser")
+    gridchooser.addClass("open")
   }
 }
 

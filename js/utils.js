@@ -64,3 +64,9 @@ export const times = (num, callback) => {
   }
   return result
 }
+
+
+export function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return rect.top >= 0 && rect.top < window.innerHeight
+}
