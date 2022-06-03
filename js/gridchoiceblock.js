@@ -90,7 +90,7 @@ class GridChoiceBlock {
 
   getTextLabel(opts) {
     console.log("getTextLabel", opts)
-    return "sup fool"
+    return null
   }
 
   focus(opts) {
