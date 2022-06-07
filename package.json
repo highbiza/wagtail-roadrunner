@@ -369,5 +369,6 @@
         }
       ]
     }
-  }
+  },
+  "eslintIgnore": ["js/bootstrapnoconflict/tab.js"]
 }
