@@ -206,13 +206,11 @@ EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, function (
   if (['A', 'AREA'].includes(this.tagName)) {
     event.preventDefault()
   }
-  console.log("ik doe het wel hoor", isDisabled(this))
   if (isDisabled(this)) {
     return
   }
 
   const data = Tab.getOrCreateInstance(this)
-  console.log("Ik ben die data jeweet", data)
   data.show()
 })
 
