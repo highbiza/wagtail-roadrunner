@@ -8,7 +8,7 @@ export const renderInPlaceHolder = (targetPlaceholder, element) => {
   const dataJsxPlaceholders = element.querySelectorAll('[data-jsx-placeholder]')
 
   // add element to the dom
-  parent.replaceChild(element, targetPlaceholder);
+  parent.replaceChild(element, targetPlaceholder)
 
   // if the element was a DocumentFragment it has now been emptied when
   // adding the contained elements to the dom. In that case treat the new
@@ -25,7 +25,7 @@ export const renderInPlaceHolder = (targetPlaceholder, element) => {
       placeholder: dataJsxPlaceholders[0],
     }
   }
-  
+
   if (dataJsxPlaceholders.length > 1) {
     return {
       element,
@@ -34,8 +34,8 @@ export const renderInPlaceHolder = (targetPlaceholder, element) => {
   }
 
   return {
-    element
+    element,
   }
 }
 
-export const PlaceHolder = () => (<div data-jsx-placeholder=""></div>)
+export const PlaceHolder = () => <div data-jsx-placeholder=""></div>

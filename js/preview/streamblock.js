@@ -1,8 +1,7 @@
-import dom, { Fragment, portalCreator } from 'jsx-render'
+import dom from 'jsx-render'
 import $ from "jquery"
 
 import { renderInPlaceHolder, PlaceHolder } from "../jsx"
-import { StylingBlock } from "../stylingblock"
 import { getStreamChild } from "../wagtailprivate"
 import { renderPreview } from "./render.js"
 
@@ -50,7 +49,7 @@ class PreviewBlockChildWrapper {
     const result = renderInPlaceHolder(blockElement, (
       <div className="preview field-content">
         <div role="button" data-toggle="modal" data-target={`#${modalPrefix}`}>
-        <PlaceHolder />
+          <PlaceHolder />
         </div>
         <div className={`modal fade modal-edit`} id={modalPrefix} tabindex="-1" role="dialog" aria-labelledby={`${modalPrefix}Label`} aria-hidden="true">
           <div className="modal-dialog" role="document">
@@ -101,9 +100,6 @@ class PreviewStreamChild extends getStreamChild() {
 }
 
 class PreviewStreamBlock extends window.wagtailStreamField.blocks.StreamBlock {
-  constructor(blockDef, placeholder, prefix, initialState, initialError) {
-    super(blockDef, placeholder, prefix, initialState, initialError)
-  }
 
   _getChildDataForInsertion({ type }) {
     // console.log("PreviewStreamBlock._getChildDataForInsertion", type)
@@ -116,10 +112,10 @@ class PreviewStreamBlock extends window.wagtailStreamField.blocks.StreamBlock {
     const { isNew=false } = initialState
     const modalPrefix = `preview-${prefix}`
     const blockDefWrapper = new PreviewBlockChildWrapper(blockDef, placeholder, modalPrefix, prefix, index, id, initialState, sequence, opts)
-    const child = new PreviewStreamChild(blockDefWrapper, placeholder, prefix, index, id, initialState, sequence, opts);
+    const child = new PreviewStreamChild(blockDefWrapper, placeholder, prefix, index, id, initialState, sequence, opts)
     // const child = super._createChild(blockDefWrapper, placeholder, prefix, index, id, initialState, sequence, opts)
     if (isNew) {
-      $(`#${modalPrefix}`).modal("show");
+      $(`#${modalPrefix}`).modal("show")
     }
     return child
   }
@@ -132,6 +128,6 @@ class PreviewStreamBlock extends window.wagtailStreamField.blocks.StreamBlock {
 
 export class PreviewStreamBlockDefinition extends window.wagtailStreamField.blocks.StreamBlockDefinition {
   render(placeholder, prefix, initialState, initialError) {
-    return new PreviewStreamBlock(this, placeholder, prefix, initialState, initialError);
+    return new PreviewStreamBlock(this, placeholder, prefix, initialState, initialError)
   }
 }

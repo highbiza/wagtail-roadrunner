@@ -1,5 +1,3 @@
-import $ from "jquery"
-
 let PRIVATE_WAGTAIL_CLASSES = {}
 
 function getChildClass(parentClass) {
@@ -14,10 +12,12 @@ function getChildClass(parentClass) {
     {
       meta: {
         label: "",
-        icon: ""
+        icon: "",
       },
       name: "",
-      render: function() {return {}}
+      render() {
+        return {}
+      },
     },
     placeHolder,
     "",
@@ -26,8 +26,8 @@ function getChildClass(parentClass) {
     {},
     null,
     {}
-  );
-  
+  )
+
   const childClass = ChildInstance.constructor
   PRIVATE_WAGTAIL_CLASSES[parentClass] = childClass
 

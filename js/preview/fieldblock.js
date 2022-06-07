@@ -1,6 +1,5 @@
-import dom, { Fragment, portalCreator } from 'jsx-render'
+import dom, { Fragment } from 'jsx-render'
 import { renderInPlaceHolder, PlaceHolder } from "../jsx"
-import $ from "jquery"
 
 
 export class PreviewFieldBlockDefinition extends window.wagtailStreamField.blocks.FieldBlockDefinition {
@@ -8,8 +7,8 @@ export class PreviewFieldBlockDefinition extends window.wagtailStreamField.block
 
     const result = renderInPlaceHolder(previewPlaceholder, (
       <Fragment>
-      <p>{initialState}</p>
-      <PlaceHolder/>
+        <p>{initialState}</p>
+        <PlaceHolder/>
       </Fragment>
     ))
 

@@ -1,4 +1,4 @@
-import dom, {Fragment} from 'jsx-render'
+import dom from 'jsx-render'
 import { renderInPlaceHolder, PlaceHolder } from "./jsx"
 import { renderPreview } from "./preview/render.js"
 import { SvgIcon } from "./utils"
@@ -8,10 +8,10 @@ import "bootstrap/js/src/tab"
 
 const HelpText = ({ helpText }) => (
   <span>
-      <div className="help">
-        <SvgIcon name="icon-help"/>
-        { help_text }
-      </div>
+    <div className="help">
+      <SvgIcon name="icon-help"/>
+      { helpText }
+    </div>
   </span>
 )
 
@@ -29,7 +29,7 @@ export class StylingBlock extends window.wagtailStreamField.blocks.StructBlock {
     if (blockDef.meta.formTemplate) {
       super(blockDef, placeholder, prefix, initialState, initialError)
     } else {
-      const state = initialState || {};
+      const state = initialState || {}
 
       // separate the stylingBlockdef and the childBlockDefs, because the stylingblock
       // will be rendered separately in a tab
@@ -51,22 +51,22 @@ export class StylingBlock extends window.wagtailStreamField.blocks.StructBlock {
         const result = renderInPlaceHolder(placeholder, (
           <div className={`stylingblock ${blockDef.meta.classname || ''}`}>
             { blockDef.meta.helpText && <HelpText helpText={blockDef.meta.helpText} /> }
-      
+
             <ul className="nav nav-tabs corner-tab-control" role="tablist">
               <li className="nav-item" role="presentation">
-                  <a className="nav-link" data-bs-toggle="tab" href={`#styling-${prefix}`} role="tab" aria-controls={`styling-${prefix}`} aria-selected="false">
-                    <SvgIcon name="icon-palette"/>
-                  </a>
+                <a className="nav-link" data-bs-toggle="tab" href={`#styling-${prefix}`} role="tab" aria-controls={`styling-${prefix}`} aria-selected="false">
+                  <SvgIcon name="icon-palette"/>
+                </a>
               </li>
               <li className="nav-item" role="presentation">
-                  <a className="nav-link active" data-bs-toggle="tab" href={`#all-${prefix}`} role="tab" aria-controls={`all-${prefix}`}>
-                    <SvgIcon name="icon-layout"/>
-                  </a>
+                <a className="nav-link active" data-bs-toggle="tab" href={`#all-${prefix}`} role="tab" aria-controls={`all-${prefix}`}>
+                  <SvgIcon name="icon-layout"/>
+                </a>
               </li>
             </ul>
 
             <div className="nav tab-content">
-              <section className="tab-pane fade show active" id={`all-${ prefix }`} role="tabpanel">
+              <section className="tab-pane fade show active" id={`all-${prefix}`} role="tabpanel">
                 <PlaceHolder/>
               </section>
               <section className="tab-pane fade" id={`styling-${prefix}`} role="tabpanel">
@@ -84,14 +84,14 @@ export class StylingBlock extends window.wagtailStreamField.blocks.StructBlock {
 
         // render the stylingblock in the stylingPlaceholderElement and register
         // in the childBlocks registry.
-        const stylingResult = renderInPlaceHolder(stylingPlaceholderElement, (<Child name={stylingBlockdef.name} {...stylingBlockdef.meta}/>))
+        const stylingResult = renderInPlaceHolder(stylingPlaceholderElement, <Child name={stylingBlockdef.name} {...stylingBlockdef.meta}/>)
         const stylingBlock = stylingBlockdef.render(
           stylingResult.placeholder,
           prefix + '-' + stylingBlockdef.name,
           state[stylingBlockdef.name],
-            initialError?.blockErrors[stylingBlockdef.name]
+          initialError?.blockErrors[stylingBlockdef.name]
         )
-        this.childBlocks[stylingBlockdef.name] = stylingBlock;
+        this.childBlocks[stylingBlockdef.name] = stylingBlock
       } else {
         super(blockDef, placeholder, prefix, initialState, initialError)
       }
@@ -105,15 +105,12 @@ export class StylingBlock extends window.wagtailStreamField.blocks.StructBlock {
 }
 
 export class StylingBlockDefinition extends window.wagtailStreamField.blocks.StructBlockDefinition {
-  constructor(name, childBlockDefs, meta) {
-    super(name, childBlockDefs, meta)
-  }
 
   render(placeholder, prefix, initialState, initialError) {
-    return new StylingBlock(this, placeholder, prefix, initialState, initialError);
+    return new StylingBlock(this, placeholder, prefix, initialState, initialError)
   }
 
-  renderPreview = function(previewPlaceholder, modalPrefix, initialState, initialError) {
+  renderPreview(previewPlaceholder, modalPrefix, initialState, initialError) {
     // create lookuptable for child blocks
     const childBlockDefsByName = this.childBlockDefs.reduce((acc, bd) => {
       const { name } = bd
@@ -132,10 +129,7 @@ export class StylingBlockDefinition extends window.wagtailStreamField.blocks.Str
         }
         return placeholder
       }, previewPlaceholder)
-    } else {
-      return renderPreview.call(this, previewPlaceholder, modalPrefix, initialState, initialError)
     }
-
-    return previewPlaceholder
+    return renderPreview.call(this, previewPlaceholder, modalPrefix, initialState, initialError)
   }
 }

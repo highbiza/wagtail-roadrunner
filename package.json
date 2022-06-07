@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"kut javascript noob, sukkel eikel troep makende nub\"",
     "build": "webpack",
-    "dev": "webpack --watch"
+    "dev": "webpack --watch",
+    "lint": "eslint js/"
   },
   "repository": {
     "type": "git",
@@ -25,10 +26,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
+    "@babel/eslint-parser": "^7.18.2",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.7.1",
+    "eslint": "^8.17.0",
+    "eslint-plugin-react": "^7.30.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.0",
@@ -39,6 +43,11 @@
     "webpack-cli": "^4.9.2"
   },
   "eslintConfig": {
+    "settings": {
+      "react": {
+        "version": "999.999.999"
+      }
+    },
     "env": {
       "browser": true,
       "commonjs": true,
@@ -46,12 +55,12 @@
     },
     "extends": [
       "eslint:recommended",
-      "plugin:react/recommended"
+      "plugin:react/jsx-runtime"
     ],
     "globals": {
       "gettext": false
     },
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "parserOptions": {
       "ecmaVersion": 7,
       "ecmaFeatures": {
@@ -94,7 +103,7 @@
         "error",
         "never"
       ],
-      "class-methods-use-this": "error",
+      "class-methods-use-this": "off",
       "comma-dangle": [
         "error",
         "always-multiline"
@@ -134,7 +143,7 @@
       "id-blacklist": "error",
       "id-length": "off",
       "id-match": "error",
-      "indent": "off",
+      "indent": ["error", 2],
       "init-declarations": "error",
       "jsx-quotes": "error",
       "react/jsx-uses-vars": 1,
@@ -264,7 +273,7 @@
       "no-unused-vars": [
         "error",
         {
-          "varsIgnorePattern": "^_$",
+          "varsIgnorePattern": "^_$|dom",
           "vars": "all",
           "args": "none"
         }
@@ -284,7 +293,12 @@
       "no-with": "error",
       "object-curly-newline": "off",
       "object-curly-spacing": "off",
-      "object-property-newline": "error",
+      "object-property-newline": [
+        "error",
+        {
+          "allowAllPropertiesOnSameLine": true
+        }
+      ],
       "object-shorthand": "error",
       "one-var": "off",
       "one-var-declaration-per-line": "error",
@@ -299,7 +313,7 @@
       "prefer-destructuring": "error",
       "prefer-numeric-literals": "error",
       "prefer-promise-reject-errors": "error",
-      "prefer-reflect": "error",
+      "prefer-reflect": "off",
       "prefer-rest-params": "error",
       "prefer-spread": "error",
       "prefer-template": "off",

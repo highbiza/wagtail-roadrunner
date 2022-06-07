@@ -1,6 +1,6 @@
 import $ from "jquery"
 import dom from 'jsx-render'
-import { renderInPlaceHolder, PlaceHolder } from "./jsx"
+import { renderInPlaceHolder } from "./jsx"
 import { SvgIcon, breakPointValue, cols, times } from "./utils"
 import { createGridSizeChanged } from "./events"
 import "./gridchoiceblock.scss"
@@ -8,12 +8,11 @@ import "./gridchoiceblock.scss"
 const ICONS = {
   "col": "icon-mobile",
   "col-md": "icon-tablet",
-  "col-lg": "icon-tv"
+  "col-lg": "icon-tv",
 }
 
-const GridSegment = ({ onClick, active=false }) => (
+const GridSegment = ({ onClick, active=false }) =>
   <span onClick={onClick} className={`gridsegment${active ? ' active': ''}`}></span>
-)
 
 
 const GridLine = ({ value, name, breakpoint}) => {
@@ -22,7 +21,7 @@ const GridLine = ({ value, name, breakpoint}) => {
 
     $(`input[name=${name}][type=hidden]`).val(`${breakpoint}-${index+1}`)
     const gridSizeChangedEvent = createGridSizeChanged(index + 1, breakpoint)
-    evt.target.dispatchEvent(gridSizeChangedEvent);
+    evt.target.dispatchEvent(gridSizeChangedEvent)
 
     const segments = $(evt.target.parentNode).children(".gridsegment")
     $(segments).removeClass("active")
@@ -69,26 +68,29 @@ class GridChoiceBlock {
   }
 
   setState(state) {
-    throw new Error("setState", state);
+    throw new Error("setState", state)
     console.log("setState", state)
     this.state = {...this.state, ...state}
   }
-  
+
   setError(errorList) {
     console.log("setError", errorList)
   }
 
   getState() {
     let result = []
-    $(this.element).find("input[type=hidden]").each((i, e) => {
-      const val = $(e).val()
-      if (val) result.push(val)
-    })
+    $(this.element).find("input[type=hidden]")
+      .each((i, e) => {
+        const val = $(e).val()
+        if (val) {
+          result.push(val)
+        }
+      })
     return result
   }
 
   getValue() {
-    throw new Error("getValue", this.state);
+    throw new Error("getValue", this.state)
     console.log("getValue")
     return this.state
   }
@@ -106,6 +108,6 @@ class GridChoiceBlock {
 
 export class GridChoiceBlockDefinition extends window.wagtailStreamField.blocks.FieldBlockDefinition {
   render(placeholder, prefix, initialState, initialError) {
-    return new GridChoiceBlock(this, placeholder, prefix, initialState, initialError);
+    return new GridChoiceBlock(this, placeholder, prefix, initialState, initialError)
   }
 }

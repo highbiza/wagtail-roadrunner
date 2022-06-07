@@ -1,6 +1,5 @@
-import dom, { Fragment, portalCreator } from 'jsx-render'
+import dom, { Fragment } from 'jsx-render'
 import { renderInPlaceHolder, PlaceHolder } from "../jsx"
-import $ from "jquery"
 
 
 export class ImageChooserBlockDefinition extends window.wagtailStreamField.blocks.FieldBlockDefinition {
@@ -9,8 +8,8 @@ export class ImageChooserBlockDefinition extends window.wagtailStreamField.block
 
     const result = renderInPlaceHolder(previewPlaceholder, (
       <Fragment>
-      {previewImage ? <img src={previewImage.url} width={previewImage.width} height={previewImage.height} alt={previewImage.title} /> : "empty"}
-      <PlaceHolder/>
+        {previewImage ? <img src={previewImage.url} width={previewImage.width} height={previewImage.height} alt={previewImage.title} /> : "empty"}
+        <PlaceHolder/>
       </Fragment>
     ))
 

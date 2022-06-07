@@ -1,6 +1,5 @@
-import dom, { Fragment, portalCreator } from 'jsx-render'
-import $ from "jquery"
-import draftToHtml from 'draftjs-to-html';
+import dom, { Fragment } from 'jsx-render'
+import draftToHtml from 'draftjs-to-html'
 
 import { renderInPlaceHolder, PlaceHolder } from "../jsx"
 
@@ -13,8 +12,8 @@ export class RichTextBlockDefinition extends window.wagtailStreamField.blocks.Fi
         const html = draftToHtml(rawContentState)
         const result = renderInPlaceHolder(previewPlaceholder, (
           <Fragment>
-          <div className="rich-text" dangerouslySetInnerHTML={{__html: html}} />
-          <PlaceHolder/>
+            <div className="rich-text" dangerouslySetInnerHTML={{__html: html}} />
+            <PlaceHolder/>
           </Fragment>
         ))
 
@@ -26,8 +25,8 @@ export class RichTextBlockDefinition extends window.wagtailStreamField.blocks.Fi
 
     const result = renderInPlaceHolder(previewPlaceholder, (
       <Fragment>
-      <h1>{initialState ? initialState.toString() : "empty"}</h1>
-      <PlaceHolder/>
+        <h1>{initialState ? initialState.toString() : "empty"}</h1>
+        <PlaceHolder/>
       </Fragment>
     ))
 
