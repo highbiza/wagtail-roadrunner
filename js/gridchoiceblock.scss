@@ -66,23 +66,37 @@
                             height: 30px;
                             display: flex;
                             .gridsegment {
-                                border: solid 1px var(--color-input-focus-border);
-                                background-color: var(--color-primary-light);
+                                border: solid 1px var(--color-primary);
+                                background-color: white;
                                 width: 8.33333333%;
                                 max-width: 30px;
                                 min-width: 10px;
                                 height: 30px;
                                 display: block;
                                 cursor: pointer;
+                                position: relative;
+                                &:not(:last-child){
+                                    border-right: 0px;
+                                }
+                                &:not(.active){
+                                    &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4),
+                                    &:nth-child(5), &:nth-child(6), &:nth-child(7),
+                                    &:nth-child(8), &:nth-child(9), &:nth-child(10){
+                                        background: #e3eeee;
+                                    }
+                                }
                                 &.active {
                                     background-color: var(--color-primary);
-                                    &:hover {
-                                        background-color: var(--color-primary-light);
-                                    };
+                                    &:not(:first-child):before{
+                                        content: "";
+                                        position: absolute;
+                                        top: -1px;
+                                        left: 0;
+                                        width: 1px;
+                                        height: calc(100% + 2px);
+                                        background: white;
+                                    }
                                 }
-                                &:hover {
-                                    background-color: var(--color-primary);
-                                };
                             }
                         }
                     }
