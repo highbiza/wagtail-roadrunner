@@ -62,9 +62,18 @@ class RoadrunnerRowBlock extends window.wagtailStreamField.blocks.ListBlock {
   }
 
   _onRequestInsert(index, opts) {
-    /* handler for an 'insert new block' action */
-    console.log("_onRequestInsert", index, opts)
     const [blockDef, initialState, id] = this._getChildDataForInsertion(opts);
+    /* handler for an 'insert new block' action */
+    try {
+      const nextChild = this.children[index]
+      if (nextChild) {
+        const { value: { grid }} = nextChild.getState()
+        initialState.grid = grid
+      }
+    } catch (e) {
+      console.log("TODO: see if this ever happens", e)
+    }
+
     const newChild = this._insert(blockDef, initialState, id || null, index, { animate: true });
     // focus the newly added field if we can do so without obtrusive UI behaviour
     newChild.focus({ soft: true });

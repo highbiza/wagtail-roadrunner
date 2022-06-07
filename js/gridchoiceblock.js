@@ -63,6 +63,7 @@ class GridChoiceBlock {
   constructor(blockDef, placeholder, prefix, initialState, initialError) {
     console.log("GridChoiceBlock", blockDef, placeholder, prefix, initialState, initialError)
     this.state = initialState
+    this.prefix = prefix
     const {element} = renderInPlaceHolder(placeholder, <Grid name={prefix} values={initialState} />)
     this.element = element
   }
@@ -78,9 +79,12 @@ class GridChoiceBlock {
   }
 
   getState() {
-    throw new Error("getState", this.state);
-    console.log("getState", this.state)
-    return this.state
+    let result = []
+    $(this.element).find("input[type=hidden]").each((i, e) => {
+      const val = $(e).val()
+      if (val) result.push(val)
+    })
+    return result
   }
 
   getValue() {
