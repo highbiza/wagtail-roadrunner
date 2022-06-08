@@ -20,6 +20,10 @@ window.telepath.register('roadrunner.fields.RichTextBlockDefinition', RichTextBl
 window.telepath.register('roadrunner.fields.GridChoiceBlockDefinition', GridChoiceBlockDefinition)
 
 $(() => {
+  breakPointEmitter.addListener(newBreakPoint => {
+    $("#roadrunner-breakpoint-switcher button").removeClass("active")
+    $(`#roadrunner-breakpoint-switcher button[value=${newBreakPoint}]`).addClass("active")
+  })
   $("#roadrunner-breakpoint-switcher button").each((_, button) => {
     const btn = $(button)
     const value = btn.val()
