@@ -2,7 +2,7 @@ import $ from "jquery"
 import dom from 'jsx-render'
 import { renderInPlaceHolder } from "./jsx"
 import { SvgIcon, breakPointValue, cols, times } from "./utils"
-import { createGridSizeChanged } from "./events"
+import { createGridSizeChanged, breakPointEmitter } from "./events"
 import "./gridchoiceblock.scss"
 
 const ICONS = {
@@ -21,7 +21,9 @@ const GridLine = ({ value, name, breakpoint}) => {
 
     $(`input[name=${name}][type=hidden]`).val(`${breakpoint}-${index+1}`)
     const gridSizeChangedEvent = createGridSizeChanged(index + 1, breakpoint)
-    evt.target.dispatchEvent(gridSizeChangedEvent)
+    if (breakPointEmitter.current == breakpoint) {
+      evt.target.dispatchEvent(gridSizeChangedEvent)
+    }
 
     const segments = $(evt.target.parentNode).children(".gridsegment")
     $(segments).removeClass("active")
@@ -29,8 +31,8 @@ const GridLine = ({ value, name, breakpoint}) => {
     segments.slice(0, index+1).addClass("active")
   }
 
-  return (
-    <div className="gridchoice">
+  const html = (
+    <div className={`gridchoice ${breakPointEmitter.current == breakpoint ? "active" : ""}`}>
       <div className="svg-wrapper"><SvgIcon name={ICONS[breakpoint]}/></div>
       <div className="gridplaceholder">
         {times(12, i => <GridSegment active={i < col} onClick={handleClick(i)} />)}
@@ -38,6 +40,14 @@ const GridLine = ({ value, name, breakpoint}) => {
       <input type="hidden" name={`${name}`} value={value} data-value={value} data-breakpoint={breakpoint} />
     </div>
   )
+  breakPointEmitter.addListener(newBreakPoint => {
+    if (newBreakPoint != breakpoint) {
+      $(html).removeClass("active")
+    } else {
+      $(html).addClass("active")
+    }
+  })
+  return html
 }
 
 const Grid = ({ values, name }) => (
@@ -48,11 +58,8 @@ const Grid = ({ values, name }) => (
       </a>
       <div className="gridchoices-wrapper">
         <GridLine name={name} value={breakPointValue(values, "col-lg")} breakpoint="col-lg" />
-
-        <div className="grid-rest">
-          <GridLine name={name} value={breakPointValue(values, "col-md")} breakpoint="col-md" />
-          <GridLine name={name} value={breakPointValue(values, "col")} breakpoint="col" />
-        </div>
+        <GridLine name={name} value={breakPointValue(values, "col-md")} breakpoint="col-md" />
+        <GridLine name={name} value={breakPointValue(values, "col")} breakpoint="col" />
       </div>
     </div>
   </div>

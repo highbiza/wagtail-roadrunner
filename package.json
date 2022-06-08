@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "test": "echo \"kut javascript noob, sukkel eikel troep makende nub\"",
-    "build": "webpack",
+    "build": "webpack --config prd.config.js",
     "dev": "webpack --watch",
     "lint": "eslint js/"
   },

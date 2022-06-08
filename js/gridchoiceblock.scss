@@ -14,6 +14,12 @@
                     .grid-rest{
                         max-height: 0px;
                     }
+                    .gridchoices-wrapper .gridchoice {
+                        display: none;
+                        &.active {
+                            display: flex;
+                        }
+                    }
                 }
                 &.open{
                     .grid-rest{
