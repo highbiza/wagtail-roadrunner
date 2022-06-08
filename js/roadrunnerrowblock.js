@@ -2,7 +2,7 @@ import dom from 'jsx-render'
 import $ from "jquery"
 import { renderInPlaceHolder, PlaceHolder } from "./jsx"
 import { wagtailGridSizeFromBootstrapGridSize } from "./utils"
-import { GRID_SIZE_CHANGED_EVENT } from "./events"
+import { GRID_SIZE_CHANGED_EVENT, breakPointEmitter } from "./events"
 import "./roadrunnerrowblock.scss"
 
 
@@ -87,20 +87,28 @@ class RoadrunnerRowBlock extends window.wagtailStreamField.blocks.ListBlock {
     const wagtailGridSize = wagtailGridSizeFromBootstrapGridSize(gridSize)
     console.log("wagtailGridSize", wagtailGridSize)
 
-    const registerGridSizeChanged = (element, attrs) => {
-      element.addEventListener(GRID_SIZE_CHANGED_EVENT, e => {
-        element.className = `column col${e.detail.size}`
-      })
-    }
-
     const result = renderInPlaceHolder(placeholder, (
-      <div className={`column ${wagtailGridSize}`} data-gridsize={gridSize} ref={registerGridSizeChanged}>
+      <div className={`column ${wagtailGridSize}`} data-gridsize={gridSize}>
         <PlaceHolder />
       </div>
     ))
 
+    const columnElement = result.element
     const child = super._createChild(blockDef, result.placeholder, prefix, index, id, initialState, sequence, opts)
-    child.element = result.element
+
+    // add event listeners
+    columnElement.addEventListener(GRID_SIZE_CHANGED_EVENT, e => {
+      columnElement.className = `column col${e.detail.size}`
+    })
+    breakPointEmitter.addListener(newBreakpoint => {
+      const { value: { grid }} = child.getState()
+      const size = wagtailGridSizeFromBootstrapGridSize(grid, newBreakpoint)
+      if (size) {
+        columnElement.className = `column ${size}`
+      }
+    })
+
+    child.element = columnElement
     child.addActionButton(new InsertButton(child))
     return child
   }

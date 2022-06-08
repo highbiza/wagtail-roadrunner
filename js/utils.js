@@ -4,12 +4,13 @@ import dom from 'jsx-render'
 const GRID_RE = new RegExp("col(?:-(?<breakpoint>xs|sm|md|lg|xl|xxl))?(?:-(?<size>\\d+))?")
 
 function _wagtailGridSizeFromBootstrapGridSize(gridSize, editorGridSize) {
-  const gridSizeRegex = new RegExp(`${editorGridSize}(?:-\\d+)?`)
+  const gridSizeRegex = new RegExp(`${editorGridSize}-\\d+`)
   const match = gridSize.match(gridSizeRegex)
   if (match) {
     const [selectedGridSize] = match
     return selectedGridSize ? selectedGridSize.replaceAll(/-(xs|sm|md|lg|xl|xxl)?/g, "") : selectedGridSize
   }
+
   return undefined
 }
 

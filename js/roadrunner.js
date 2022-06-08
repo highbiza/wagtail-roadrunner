@@ -8,7 +8,6 @@ import { PreviewStreamBlockDefinition } from "./preview/streamblock"
 import { PreviewFieldBlockDefinition } from "./preview/fieldblock"
 import { RichTextBlockDefinition } from "./preview/richtextblock"
 import { GridChoiceBlockDefinition } from "./gridchoiceblock"
-import "./breakpoint.js"
 import "./roadrunner.scss"
 
 window.telepath.register('roadrunner.fields.RoadrunnerRowBlockDefinition', RoadrunnerRowBlockDefinition)
@@ -21,8 +20,8 @@ window.telepath.register('roadrunner.fields.RichTextBlockDefinition', RichTextBl
 window.telepath.register('roadrunner.fields.GridChoiceBlockDefinition', GridChoiceBlockDefinition)
 
 $(() => {
-  $("#roadrunner-breakpoint-switcher button").each(() => {
-    const btn = $(this)
+  $("#roadrunner-breakpoint-switcher button").each((_, button) => {
+    const btn = $(button)
     const value = btn.val()
     btn.click(evt => {
       breakPointEmitter.dispatch(value)

@@ -19,7 +19,7 @@ const GridLine = ({ value, name, breakpoint}) => {
   const col = cols(value)
   const handleClick = index => evt => {
 
-    $(`input[name=${name}][type=hidden]`).val(`${breakpoint}-${index+1}`)
+    $(`input[name=${name}][type=hidden][data-breakpoint=${breakpoint}]`).val(`${breakpoint}-${index+1}`)
     const gridSizeChangedEvent = createGridSizeChanged(index + 1, breakpoint)
     if (breakPointEmitter.current == breakpoint) {
       evt.target.dispatchEvent(gridSizeChangedEvent)
