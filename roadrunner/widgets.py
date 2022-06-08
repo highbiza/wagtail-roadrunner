@@ -36,7 +36,7 @@ class RoadRunnerBlockWidget(BlockWidget):
                     </button>
                 </li>
                 <li>
-                    <button type="button" value="col-lg" class="c-sf-block__actions__single" title="screen">
+                    <button type="button" value="col-lg" class="c-sf-block__actions__single active" title="screen">
                         <svg class="icon icon-tv default" aria-hidden="true" focusable="false">
                             <use href="#icon-tv"/>
                         </svg>
