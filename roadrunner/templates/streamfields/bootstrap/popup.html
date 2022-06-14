@@ -1,0 +1,22 @@
+{% load styling_tags %}
+{% load wagtailcore_tags roadrunner_tags %}
+
+{% get_unique_id as unique_id %}
+
+<a class="btn btn-{{self.button_style}} {% get_styling_classes self.styling %}" href="#" data-bs-toggle="modal" data-bs-target="#modal_{{ unique_id }}" {% get_styling self.styling %}>{{ self.text }}</a>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_{{ unique_id }}">
+    <div class="modal-dialog{% if self.big_modal %} modal-lg{% endif %}" role="document">
+        <div class="modal-content modal-lg">
+            {% if self.popup_header %}
+            <div class="modal-header">
+                <h5 class="modal-title">{{ self.popup_header }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            {% endif %}
+            <div class="modal-body">
+            {{ self.popup_content|richtext }}
+            </div>
+        </div>
+    </div>
+</div>

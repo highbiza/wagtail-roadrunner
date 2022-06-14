@@ -1,0 +1,99 @@
+.preview{
+	div[data-toggle="modal"]{
+		// Importing bootstrap for easy templating
+		$primary: #007d7e;
+		$dark: #23252a;
+		
+		@import "bootstrap/scss/bootstrap-utilities.scss";
+		@import "bootstrap/scss/bootstrap-grid.scss";
+		@import "bootstrap/scss/buttons";
+		@import "bootstrap/scss/variables";
+		@import "bootstrap/scss/nav";
+
+		// Modal styling
+		.fake-modal{
+			position: unset !important;
+			display: block !important;
+			.modal-dialog{
+				padding-left: 0;
+				width: 100%;
+				.modal-content{
+					position: relative;
+					display: flex;
+					flex-direction: column;
+					width: 100%;
+					pointer-events: auto;
+					background-color: #fff;
+					background-clip: padding-box;
+					border: 1px solid #0003;
+					border-radius: 0rem;
+					outline: 0;
+					padding-bottom: 0;
+					margin-top: 0;
+					.modal-header{
+						display: flex;
+						flex-shrink: 0;
+						align-items: center;
+						justify-content: space-between;
+						padding: 0rem 1rem;
+						border-bottom: 1px solid #dee2e6;
+						border-top-left-radius: calc(0rem - 1px);
+						border-top-right-radius: calc(0rem - 1px);
+						.close{
+							font-size: 2rem;
+							color: $dark !important;
+						}
+					}
+					.modal-body{
+						position: relative;
+						flex: 1 1 auto;
+						padding: 1rem;
+					}
+				}
+			}
+		}
+
+		// Accordion styling
+		.accordion_preview{
+			.accordion{
+				display: flex;
+				align-items: flex-start;
+				span{
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					line-height: 0;
+					margin-right: .75rem;
+					min-width: 20px;
+					width: 20px;
+					min-height: 20px;
+					height: 20px;
+					border-radius: 100%;
+					background: $dark !important;
+					color: white;
+					font-size: 1.2rem;
+					font-weight: 600;
+				}
+				.body{
+					color: $gray-600;
+				}
+			}
+		}
+	}
+
+	// form_template styling
+	.split-row{
+		& > div{
+			@media screen and (min-width: 991px){
+				&:first-child{
+					padding-right: 3%;
+				}
+				&:last-child{
+					padding-left: 3%;
+					border-left: 1px solid #ededed;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,19 @@
+{% load styling_tags %}
+{% load wagtailcore_tags %}
+
+{% with uuid=self.block.get_uuid %}
+<nav {% if self.tab_style == 'pills vertical' %}class="d-flex align-items-start"{% endif %}>
+    <div class="nav nav-{{ self.tab_style }} {% if self.tab_style == 'pills vertical' %}flex-column me-3{% else %}mb-3{% endif %}">
+        {% for tab in self.tabs %}
+            <button class="nav-link {% if forloop.first %}active{% endif %}" data-bs-toggle="tab" data-bs-target="#block{{ uuid }}_tab{{ forloop.counter }}" type="button" role="tab" aria-controls="{{ tab.title }}" aria-selected="true">{{ tab.title }}</button>
+        {% endfor %}
+    </div>
+    <div class="tab-content">
+        {% for tab in self.tabs %}
+        <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="block{{ uuid }}_tab{{ forloop.counter }}" role="tabpanel" aria-labelledby="{{ tab.title }}-tab">
+            {{ tab.panel_content|richtext }}
+        </div>
+        {% endfor %}
+    </div>
+</nav>
+{% endwith %}
