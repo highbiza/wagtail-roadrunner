@@ -28,6 +28,9 @@ class HeaderBlock(blocks.StructBlock):
 
 class PageTitle(blocks.StructBlock):
     styling = BaseStylingBlock()
+    
+    class Meta:
+        group = "HTML"
 
 
 class RichText(blocks.StructBlock):

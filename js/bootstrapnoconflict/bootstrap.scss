@@ -1,13 +1,20 @@
 .preview{
+	// Importing bootstrap for easy templating
+	$primary: #007d7e;
+	$dark: #23252a;
+	
+	@import "bootstrap/scss/bootstrap-utilities.scss";
+	@import "bootstrap/scss/bootstrap-grid.scss";
+	@import "bootstrap/scss/buttons";
+	@import "bootstrap/scss/variables";
+
+
+	// Only inside preview modal
+	.modal-edit{
+		@import "bootstrap/scss/transitions";
+	}
+
 	div[data-toggle="modal"]{
-		// Importing bootstrap for easy templating
-		$primary: #007d7e;
-		$dark: #23252a;
-		
-		@import "bootstrap/scss/bootstrap-utilities.scss";
-		@import "bootstrap/scss/bootstrap-grid.scss";
-		@import "bootstrap/scss/buttons";
-		@import "bootstrap/scss/variables";
 		@import "bootstrap/scss/nav";
 
 		// Modal styling
@@ -80,6 +87,12 @@
 				}
 			}
 		}
+	}
+
+	// Smaller icons
+	.icon-small{
+		font-size: .5rem;
+		vertical-align: middle;
 	}
 
 	// form_template styling

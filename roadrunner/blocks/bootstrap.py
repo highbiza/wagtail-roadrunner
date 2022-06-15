@@ -82,7 +82,7 @@ class TabChildrenBlock(blocks.StructBlock):
 
 class TabBlock(blocks.StructBlock):
     tab_style = BootstrapTabStylingBlock(label="Tab style", default="tabs")
-    tabs = blocks.ListBlock(TabChildrenBlock(), template="streamfields/bootstrap/tabchild.html")
+    tabs = blocks.ListBlock(TabChildrenBlock())
     styling = BaseStylingBlock()
 
     def get_uuid(self):
@@ -91,3 +91,23 @@ class TabBlock(blocks.StructBlock):
     class Meta:
         preview_template = "preview/bootstrap/tab.html"
         group = "Bootstrap"
+
+
+class SliderChildBlock(blocks.StructBlock):
+    image = ImageChooserBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
+    position = blocks.ChoiceBlock(choices=[("top-left", "Top left"),("top-right", "Top right"),("bottom-left", "Bottom left"),("bottom-right", "Bottom right"),("middle-left", "Middle left"),("middle", "Middle"),("middle-right", "Middle right")], required=False, default="middle-left")
+    ribbon_color = blocks.CharBlock(required=False)
+    ribbon_position = blocks.ChoiceBlock(choices = [("left", "Left"),("right", "Right")], required=False)
+
+    class Meta:
+        form_template = "formtemplate/slide.html"
+
+class SliderBlock(blocks.StructBlock):
+    slides = blocks.ListBlock(SliderChildBlock())
+    styling = BaseStylingBlock()
+
+    class Meta:
+        group = "Bootstrap"
+
+

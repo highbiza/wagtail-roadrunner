@@ -18,6 +18,7 @@ from roadrunner.blocks.bootstrap import (
     AccordionBlock,
     ButtonBlock,
     TabBlock,
+    SliderBlock,
 )
 
 preset_blocks = [
@@ -83,7 +84,7 @@ preset_blocks = [
         "button",
         ButtonBlock(
             template="streamfields/bootstrap/button.html",
-            icon="square",
+            icon="form",
             roadrunner_options={"group": "Bootstrap", "title": "label"},
         ),
     ),
@@ -91,7 +92,15 @@ preset_blocks = [
         "tabs",
         TabBlock(
             template="streamfields/bootstrap/tabs.html",
-            icon="square",
+            icon="form",
+            roadrunner_options={"group": "Bootstrap"},
+        ),
+    ),
+    (
+        "slider",
+        SliderBlock(
+            template="streamfields/bootstrap/slider.html",
+            icon="form",
             roadrunner_options={"group": "Bootstrap"},
         ),
     ),

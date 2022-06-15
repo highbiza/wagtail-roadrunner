@@ -8,6 +8,8 @@ import { PreviewStreamBlockDefinition } from "./preview/streamblock"
 import { PreviewFieldBlockDefinition } from "./preview/fieldblock"
 import { RichTextBlockDefinition } from "./preview/richtextblock"
 import { GridChoiceBlockDefinition } from "./gridchoiceblock"
+import "./bootstrapnoconflict/tab"
+import "./bootstrapnoconflict/collapse"
 import "./roadrunner.scss"
 import "./bootstrapnoconflict/bootstrap.scss"
 
