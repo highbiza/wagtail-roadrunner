@@ -9,9 +9,7 @@ export class ColorPickerBlock extends window.wagtailStreamField.blocks.FieldBloc
   constructor(blockDef, placeholder, prefix, initialState, initialError) {
     const { element, placeholders } = renderInPlaceHolder(placeholder, (
       <section className="colorpicker-wrapper">
-        <div className="col12">
-          <PlaceHolder/>
-        </div>
+        <PlaceHolder/>
         <div class="color-picker">
           <PlaceHolder/>
         </div>
@@ -21,7 +19,7 @@ export class ColorPickerBlock extends window.wagtailStreamField.blocks.FieldBloc
     const [blockPlaceholder, pickerPlaceholder] = placeholders
     super(blockDef, blockPlaceholder, prefix, initialState, initialError)
 
-    element.style.setProperty('--picker-color', initialState)
+    element.style.setProperty('--picker-color', initialState || "#C3C3C3")
     const pickerWrapper = $(element).find(".color-picker")
     $(element).find(".input > span")
       .click(() => {
@@ -29,6 +27,12 @@ export class ColorPickerBlock extends window.wagtailStreamField.blocks.FieldBloc
       })
 
     const { widget: { input } } = this
+
+    $(input).on("input", function(){
+      console.log("ik ben ru")
+      element.style.setProperty('--picker-color', $(input).val())
+    });
+
     this.colorpicker = new MiniColorPicker({
       color: initialState,
       position: "inline",
