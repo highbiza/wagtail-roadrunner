@@ -1,4 +1,6 @@
 # Always prefer setuptools over distutils
+import subprocess
+from distutils.command import build as build_module
 from setuptools import setup, find_packages
 
 # To use a consistent encoding
@@ -11,7 +13,7 @@ here = path.abspath(path.dirname(__file__))
 with codecs.open(path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
-extras_require: dict = {
+extras_require = {
     "test": [
         "empty_testproject",
         "pylint-django",
@@ -21,6 +23,13 @@ extras_require: dict = {
         "ocyan.plugin.wagtail",
     ]
 }
+
+class BuildNPM(build_module.build):
+    def run(self):
+        subprocess.check_call(["npm", "install"])
+        subprocess.check_call(["npm", "run", "build"])
+        super().run()
+
 
 setup(
     name="wagtail-roadrunner",
@@ -46,4 +55,5 @@ setup(
     keywords="RoadRunner",
     install_requires=["wagtail", "unidecode"],
     extras_require=extras_require,
+    cmdclass={"build": BuildNPM},
 )
