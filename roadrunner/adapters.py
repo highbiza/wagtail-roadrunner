@@ -132,3 +132,7 @@ class RoadrunnerRowBlockAdapter(ListBlockAdapter):
 
 class GridChoiceBlockAdapter(FieldBlockAdapter):
     js_constructor = "roadrunner.fields.GridChoiceBlockDefinition"
+
+
+class ColorPickerBlockAdapter(FieldBlockAdapter):
+    js_constructor = "roadrunner.fields.ColorPickerBlockDefinition"

@@ -1,5 +1,9 @@
 from wagtail.core import blocks
 
+from roadrunner.telepath import register
+from roadrunner.adapters import ColorPickerBlockAdapter
+
+
 DEFAULT_CHOICES = [
     ("%s-1", "Overal 1x %s"),
     ("%s-2", "Overal 2x %s"),
@@ -45,6 +49,8 @@ def get_choices(t):
 
 class ColorPickerBlock(blocks.CharBlock):
     pass
+
+register(ColorPickerBlockAdapter(), ColorPickerBlock)
 
 
 class BaseStylingBlock(blocks.StructBlock):

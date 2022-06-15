@@ -8,6 +8,7 @@ import { PreviewStreamBlockDefinition } from "./preview/streamblock"
 import { PreviewFieldBlockDefinition } from "./preview/fieldblock"
 import { RichTextBlockDefinition } from "./preview/richtextblock"
 import { GridChoiceBlockDefinition } from "./gridchoiceblock"
+import { ColorPickerBlockDefinition } from "./colorpickerblock"
 import "./roadrunner.scss"
 
 window.telepath.register('roadrunner.fields.RoadrunnerRowBlockDefinition', RoadrunnerRowBlockDefinition)
@@ -18,6 +19,7 @@ window.telepath.register('roadrunner.fields.RoadRunnerBaseBlockDefinition', Road
 window.telepath.register('roadrunner.fields.ImageChooserBlockDefinition', ImageChooserBlockDefinition)
 window.telepath.register('roadrunner.fields.RichTextBlockDefinition', RichTextBlockDefinition)
 window.telepath.register('roadrunner.fields.GridChoiceBlockDefinition', GridChoiceBlockDefinition)
+window.telepath.register('roadrunner.fields.ColorPickerBlockDefinition', ColorPickerBlockDefinition)
 
 $(() => {
   breakPointEmitter.addListener(newBreakPoint => {

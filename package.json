@@ -17,6 +17,7 @@
   "author": "Brechtje Wulpenbroek",
   "license": "SEE LICENSE IN Copyright highbiza",
   "dependencies": {
+    "@easylogic/colorpicker": "^1.10.11",
     "bootstrap": "^5.1.3",
     "draftjs-to-html": "^0.9.1",
     "jsx-render": "^1.3.1",
@@ -143,7 +144,10 @@
       "id-blacklist": "error",
       "id-length": "off",
       "id-match": "error",
-      "indent": ["error", 2],
+      "indent": [
+        "error",
+        2
+      ],
       "init-declarations": "error",
       "jsx-quotes": "error",
       "react/jsx-uses-vars": 1,
@@ -370,5 +374,7 @@
       ]
     }
   },
-  "eslintIgnore": ["js/bootstrapnoconflict/tab.js"]
+  "eslintIgnore": [
+    "js/bootstrapnoconflict/tab.js"
+  ]
 }
