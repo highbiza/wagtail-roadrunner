@@ -23,8 +23,8 @@ extras_require: dict = {
 }
 
 setup(
-    name="roadrunner",
-    version="2.1.1",
+    name="wagtail-roadrunner",
+    version="3.0.0",
     description="RoadRunner",
     long_description=long_description,
     url="https://gitlab.com/uwkm-frets/RoadRunner",
@@ -44,6 +44,6 @@ setup(
         "Framework :: Wagtail :: 2",
     ],
     keywords="RoadRunner",
-    install_requires=["wagtail", "wagtailfontawesome", "unidecode"],
+    install_requires=["wagtail", "unidecode"],
     extras_require=extras_require,
 )
