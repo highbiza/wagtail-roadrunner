@@ -3,12 +3,16 @@ import dom from 'jsx-render'
 
 const GRID_RE = new RegExp("col(?:-(?<breakpoint>xs|sm|md|lg|xl|xxl))?(?:-(?<size>\\d+))?")
 
+function _wagtailGridsize(selectedGridSize) {
+  return selectedGridSize ? selectedGridSize.replaceAll(/-(xs|sm|md|lg|xl|xxl)?/g, "") : selectedGridSize
+}
+
 function _wagtailGridSizeFromBootstrapGridSize(gridSize, editorGridSize) {
   const gridSizeRegex = new RegExp(`${editorGridSize}-\\d+`)
   const match = gridSize.match(gridSizeRegex)
   if (match) {
     const [selectedGridSize] = match
-    return selectedGridSize ? selectedGridSize.replaceAll(/-(xs|sm|md|lg|xl|xxl)?/g, "") : selectedGridSize
+    return  _wagtailGridsize(selectedGridSize)
   }
 
   return undefined
@@ -21,10 +25,16 @@ export function wagtailGridSizeFromBootstrapGridSize(gridSizes, editorGridSize="
   if (wagtailGridSize) {
     return wagtailGridSize
   }
+  wagtailGridSize = breakPointFallback(gridSizes, editorGridSize)
+  if (wagtailGridSize) {
+    return _wagtailGridsize(wagtailGridSize)
+  }
+
   wagtailGridSize = _wagtailGridSizeFromBootstrapGridSize(gridSize, "col")
   if (wagtailGridSize) {
     return wagtailGridSize
   }
+
   return "col12"
 }
 
@@ -37,6 +47,18 @@ export function cols(gridSize, defaultSize=0) {
   return defaultSize
 }
 
+export function breakPointFallback(gridSizes, gridSize) {
+  let breakpoints = ["col-lg", "col-md", "col"]
+  const klats = breakpoints.indexOf(gridSize)
+  breakpoints = breakpoints.slice(klats)
+  for (var i = 0; i < breakpoints.length; i++) {
+    const result = breakPointValue(gridSizes, breakpoints[i])
+    if (result) {
+      return result
+    }
+  }
+  return ""
+}
 
 export function breakPointValue(gridSizes, gridSize) {
   let item=null,

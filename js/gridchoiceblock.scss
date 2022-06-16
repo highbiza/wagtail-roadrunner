@@ -87,12 +87,8 @@
                                 &:not(:last-child){
                                     border-right: 0px;
                                 }
-                                &:not(.active){
-                                    &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4),
-                                    &:nth-child(5), &:nth-child(6), &:nth-child(7),
-                                    &:nth-child(8), &:nth-child(9), &:nth-child(10){
-                                        background: #e3eeee;
-                                    }
+                                &.fallback {
+                                    background: #e3eeee;
                                 }
                                 &.active {
                                     background-color: var(--color-primary);

@@ -1,7 +1,7 @@
 import $ from "jquery"
 import dom from 'jsx-render'
 import { renderInPlaceHolder } from "./jsx"
-import { SvgIcon, breakPointValue, cols, times } from "./utils"
+import { SvgIcon, breakPointValue, breakPointFallback, cols, times } from "./utils"
 import { createGridSizeChanged, breakPointEmitter } from "./events"
 import "./gridchoiceblock.scss"
 
@@ -11,12 +11,13 @@ const ICONS = {
   "col-lg": "icon-tv",
 }
 
-const GridSegment = ({ onClick, active=false }) =>
-  <span onClick={onClick} className={`gridsegment${active ? ' active': ''}`}></span>
+const GridSegment = ({ onClick, active=false, fallback=false }) =>
+  <span onClick={onClick} className={`gridsegment${active ? ' active': ''}${fallback ? ' fallback': ''}`}></span>
 
 
-const GridLine = ({ value, name, breakpoint}) => {
+const GridLine = ({ value, name, breakpoint, backupValue="col-12"}) => {
   const col = cols(value)
+  const backupCols = cols(backupValue)
   const handleClick = index => evt => {
 
     $(`input[name=${name}][type=hidden][data-breakpoint=${breakpoint}]`).val(`${breakpoint}-${index+1}`)
@@ -35,7 +36,7 @@ const GridLine = ({ value, name, breakpoint}) => {
     <div className={`gridchoice ${breakPointEmitter.current == breakpoint ? "active" : ""}`}>
       <div className="svg-wrapper"><SvgIcon name={ICONS[breakpoint]}/></div>
       <div className="gridplaceholder">
-        {times(12, i => <GridSegment active={i < col} onClick={handleClick(i)} />)}
+        {times(12, i => <GridSegment fallback={!col && i < backupCols} active={i < col} onClick={handleClick(i)} />)}
       </div>
       <input type="hidden" name={`${name}`} value={value} data-value={value} data-breakpoint={breakpoint} />
     </div>
@@ -57,8 +58,8 @@ const Grid = ({ values, name }) => (
         <SvgIcon name="icon-arrow-down"/>
       </a>
       <div className="gridchoices-wrapper">
-        <GridLine name={name} value={breakPointValue(values, "col-lg")} breakpoint="col-lg" />
-        <GridLine name={name} value={breakPointValue(values, "col-md")} breakpoint="col-md" />
+        <GridLine name={name} backupValue={breakPointFallback(values, "col-md")} value={breakPointValue(values, "col-lg")} breakpoint="col-lg" />
+        <GridLine name={name} backupValue={breakPointFallback(values, "col")} value={breakPointValue(values, "col-md")} breakpoint="col-md" />
         <GridLine name={name} value={breakPointValue(values, "col")} breakpoint="col" />
       </div>
     </div>
