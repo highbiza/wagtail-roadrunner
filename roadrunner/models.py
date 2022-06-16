@@ -8,11 +8,10 @@ from django.utils.translation import ugettext_lazy as _
 
 from modelcluster.models import ClusterableModel
 
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
 from wagtail.core import blocks
 from wagtail.snippets.models import register_snippet
 
-from roadrunner.edit_handlers import RoadRunnerPanel
 from roadrunner.fields import RoadRunnerField
 
 
@@ -21,7 +20,7 @@ class PreFooterSnippet(models.Model):
     name = models.CharField(_("Name"), max_length=50)
     content = RoadRunnerField()
 
-    panels = [FieldPanel("name"), RoadRunnerPanel("content")]
+    panels = [FieldPanel("name"), StreamFieldPanel("content")]
 
     def __str__(self):
         return self.name
@@ -32,7 +31,7 @@ class Template(models.Model):
     name = models.CharField(_("Name"), max_length=50)
     content = RoadRunnerField()
 
-    panels = [FieldPanel("name"), RoadRunnerPanel("content")]
+    panels = [FieldPanel("name"), StreamFieldPanel("content")]
 
     def __str__(self):
         return self.name
