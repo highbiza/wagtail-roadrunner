@@ -9,7 +9,6 @@ from roadrunner.adapters import (
     RoadRunnerBaseBlockAdapter,
     GridChoiceBlockAdapter,
 )
-from roadrunner.blocks.registry import registered_blocks
 from roadrunner.blocks.styling import BaseStylingBlock
 
 
@@ -67,26 +66,6 @@ class GridChoiceBlock(blocks.MultipleChoiceBlock):
 
 
 class RoadRunnerStreamBlock(blocks.StreamBlock):
-    # def additional_child_blocks(self):
-    #     from roadrunner.registering import registered_blocks
-    #     from roadrunner.models import Block
-    #
-    #     streamfields = Block.get_streamfields()
-    #
-    #     for name, block in registered_blocks:
-    #         block.set_name(name)
-    #         streamfields[name] = block
-    #
-    #     return streamfields
-    #
-    # def to_python(self, value):
-    #     self.child_blocks.update(self.additional_child_blocks())
-    #     return super().to_python(value)
-    #
-    # def bulk_to_python(self, values):
-    #     self.child_blocks.update(self.additional_child_blocks())
-    #     return super().bulk_to_python(values)
-
     class Meta:
         label = None
 
@@ -95,16 +74,8 @@ class RoadRunnerBaseBlock(blocks.StructBlock):
     grid = GridChoiceBlock(
         label="Breedte kolom", help_text="De breedte kolommen (*/12)."
     )
-    content = RoadRunnerStreamBlock(registered_blocks())
+    content = RoadRunnerStreamBlock()
     styling = BaseStylingBlock()
-
-    def __init__(self, roadrunner_blocks, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        content_child_blocks = self.child_blocks["content"].child_blocks
-        if not content_child_blocks:
-            for name, block in roadrunner_blocks:
-                block.set_name(name)
-                content_child_blocks[name] = block
 
     class Meta:
         icon = "grip"

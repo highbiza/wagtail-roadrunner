@@ -1,6 +1,7 @@
 from django import forms
 from wagtail.core.blocks.base import BlockField as WagtailBlockField
 from wagtail.core.fields import StreamField
+from wagtail.core.blocks import StreamBlock
 
 from roadrunner.widgets import RoadRunnerBlockWidget
 from roadrunner.blocks.template import TemplateBlock
@@ -8,7 +9,9 @@ from roadrunner.blocks.main import (
     RoadRunnerBaseBlock,
     FixedWidthRowBlock,
     FullWidthRowBlock,
+    RoadRunnerStreamBlock,
 )
+from roadrunner.blocks.registry import registered_blocks
 
 
 class BlockField(WagtailBlockField):
@@ -29,20 +32,30 @@ class RoadRunnerFormField(forms.Field):
 
 
 class RoadRunnerField(StreamField):
-    def __init__(self, block_types=None, grid=True, **kwargs):
-        if grid:
-            base_block = RoadRunnerBaseBlock(block_types)
-            block_types = [
+    def deconstruct(self):
+        name, path, _, kwargs = super().deconstruct()
+        return name, path, [], kwargs
+
+    def __init__(self, block_types=None, **kwargs):
+        if block_types is None:
+            block_types = registered_blocks()
+
+        roadrunner_block_types = StreamBlock(
+            [
                 (
                     "fixed_width",
                     FixedWidthRowBlock(
-                        base_block,
+                        RoadRunnerBaseBlock(
+                            [("content", RoadRunnerStreamBlock(block_types))]
+                        ),
                     ),
                 ),
                 (
                     "full_width",
                     FullWidthRowBlock(
-                        base_block,
+                        RoadRunnerBaseBlock(
+                            [("content", RoadRunnerStreamBlock(block_types))]
+                        ),
                     ),
                 ),
                 (
@@ -54,8 +67,9 @@ class RoadRunnerField(StreamField):
                     ),
                 ),
             ]
+        )
 
-        super().__init__(block_types, **kwargs)
+        super().__init__(roadrunner_block_types, **kwargs)
 
     def formfield(self, **kwargs):
         return super().formfield(form_class=BlockField)

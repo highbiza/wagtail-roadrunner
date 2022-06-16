@@ -125,7 +125,6 @@ def _registered_blocks():
     if roadrunner_registry_function_setting is not None:
         return import_string(roadrunner_registry_function_setting)(preset_blocks)
 
-    print(preset_blocks, legacy_registered_blocks())
     return list(chain(preset_blocks, legacy_registered_blocks()))
 
 
