@@ -6,7 +6,7 @@
 
     .column {
         &.col1, &.col2, &.col3, &.col4, &.col5, &.col6, &.col7, &.col8, &.col9, &.col10, &.col11, &.col12 {
-            padding: 7px;
+            padding: .5rem 1rem;
         }
 
         display: flex;
@@ -19,14 +19,55 @@
                 height: 100%;
                 &> div {
                     flex-grow: 1;
+                    & > div{
+                        .c-sf-block{
+                            &:not(:hover){
+                                .c-sf-block__header{
+                                    opacity: 0;
+                                    pointer-events: none;
+                                }
+                            }
+                            .c-sf-block__header{
+                                position: absolute;
+                                top: 0;
+                                left: 50%;
+                                transform: translateX(-50%) translateY(-50%);
+                                transition: .2s ease;
+                                z-index: 3;
+                                border-radius: 10px;
+                            }
+
+                            // Improving visibility of the underlying c-sf-block
+                            .c-sf-block{
+                                transition: .2s ease;
+                                border: 1px solid #e6e6e6;
+                                margin: .5rem 0;
+                                .c-sf-block__header{
+                                    position: unset;
+                                    top: unset;
+                                    left: unset;
+                                    transform: unset;
+                                    border-radius: initial;
+                                    opacity: 1;
+                                    pointer-events: all;
+                                }
+                                .c-sf-block__content-inner{
+                                    padding: 1rem;
+                                }
+                            }
+                        }
+                    }
                 }
-                
                 .c-sf-block {
                     margin: 0;
+                    border: 0;
+                    position: relative;
+                    box-shadow: unset !important;
                     .c-sf-block__content{
                         position: relative;
                         .c-sf-block__content-inner{
-                            overflow: hidden;                            
+                            overflow: hidden;
+                            padding: 0;
                         }
                     }
                     .c-sf-block__actions__single > .icon {

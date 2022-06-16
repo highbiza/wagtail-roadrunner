@@ -88,7 +88,7 @@ class ButtonBlock(blocks.StructBlock):
 
 class TabChildrenBlock(blocks.StructBlock):
     title = blocks.CharBlock(
-        max_length=255, label="Lable", help_text="Lable of the button", required=False
+        max_length=255, label="Label", help_text="Label of the button", required=False
     )
     panel_content = blocks.RichTextBlock(
         label="Inhoud", help_text="Body of the tab", required=False

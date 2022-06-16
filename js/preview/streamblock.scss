@@ -1,19 +1,28 @@
 .roadrunner.row .column {
     div.preview {
         cursor: pointer;
-        min-height: 20px;
-        padding: 15px 24px;
-        background-color: #fafafa;
-        border: 1px solid #e3e3e3;
-        border-radius: 8px;
-        &:hover {
-            background-color: #ffffff;
-        }
+        padding: 0;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 75px;
         p {
             margin: 0;
         }
         &.error {
             border: 1px solid red;
+        }
+        .preview{
+            cursor: pointer;
+            min-height: 20px;
+            padding: 15px 24px;
+            background-color: #fafafa;
+            border: 1px solid #e3e3e3;
+            border-radius: 8px;
+            &:hover {
+                background-color: #ffffff;
+            }
         }
     }
     .modal-edit{
