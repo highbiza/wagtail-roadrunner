@@ -1,4 +1,5 @@
 {% load styling_tags %}
-<a href="{{ self.page.url }}" class="btn btn-{{ self.btn_class }} {% get_styling_classes self.styling %}" {% get_styling self.styling %}>
-    {{ self.page.title }}
+
+<a class="btn btn-{{ self.button_style }} {% get_styling_classes block.styling %}" {% if self.page_url %}href="{{ self.page_url.url }}"{% else %}href="{{ self.external_url }}"{% endif %} {% if self.new_tab %}target="_blank"{% endif %} {% get_styling block.styling %}>
+	{{ self.label }}
 </a>

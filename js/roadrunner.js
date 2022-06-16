@@ -9,6 +9,9 @@ import { PreviewFieldBlockDefinition } from "./preview/fieldblock"
 import { RichTextBlockDefinition } from "./preview/richtextblock"
 import { GridChoiceBlockDefinition } from "./gridchoiceblock"
 import { ColorPickerBlockDefinition } from "./colorpickerblock"
+import "./bootstrapnoconflict/tab"
+import "./bootstrapnoconflict/collapse"
+import "./bootstrapnoconflict/bootstrap.scss"
 import "./roadrunner.scss"
 
 window.telepath.register('roadrunner.fields.RoadrunnerRowBlockDefinition', RoadrunnerRowBlockDefinition)
@@ -34,5 +37,4 @@ $(() => {
     })
   })
 })
-
 

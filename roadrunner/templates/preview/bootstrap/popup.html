@@ -1,0 +1,19 @@
+{% load wagtailcore_tags %}
+
+<div class="fake-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">{{ children.popup_header.render_form }}</h2>
+                <a class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="modal-body">
+            {{ children.popup_content.render_form }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<a class="btn btn-dark" style="border-radius: 0">{{ children.text.render_form }}</a>

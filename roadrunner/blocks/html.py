@@ -1,12 +1,15 @@
+from bs4 import BeautifulSoup
+
+from wagtail.core.blocks import StructValue
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
+from wagtail.embeds.blocks import EmbedBlock
 
 from roadrunner.blocks.styling import BaseStylingBlock
 
 
 class HeaderBlock(blocks.StructBlock):
     HEADER_CHOICES = (
-        ("h1", "H1"),
         ("h2", "H2"),
         ("h3", "H3"),
         ("h4", "H4"),
@@ -22,6 +25,14 @@ class HeaderBlock(blocks.StructBlock):
     styling = BaseStylingBlock()
 
     class Meta:
+        preview_template = "preview/html/headerblock.html"
+        group = "HTML"
+
+
+class PageTitle(blocks.StructBlock):
+    styling = BaseStylingBlock()
+    
+    class Meta:
         group = "HTML"
 
 
@@ -33,28 +44,18 @@ class RichText(blocks.StructBlock):
     styling = BaseStylingBlock()
 
     class Meta:
-        group = "HTML"
-
-
-class TextBlock(blocks.StructBlock):
-    text = blocks.TextBlock(label="Tekst")
-    styling = BaseStylingBlock()
-
-
-class ScriptBlock(blocks.StructBlock):
-    script = blocks.TextBlock(label="Script", required=False)
-    src = blocks.CharBlock(required=False)
-
-    class Meta:
+        preview = ["block_text"]
         group = "HTML"
 
 
 class DividerBlock(blocks.StructBlock):
-    border_top_width = blocks.CharBlock(
-        max_length=255, label="Hoogte", help_text="CSS Syntax (bv. 5px)"
+    DIVIDER_CHOICES = (
+        ("lg-thin", "Long thin line"),
+        ("sm-thick", "Small thick line"),
     )
-    width = blocks.CharBlock(
-        max_length=255, label="Breedte", help_text="CSS Syntax (bv. 100% of 100px)"
+
+    divider_type = blocks.ChoiceBlock(
+        choices=DIVIDER_CHOICES, label="Divider type", default="lg-thin"
     )
     styling = BaseStylingBlock()
 
@@ -71,6 +72,7 @@ class ImageBlock(blocks.StructBlock):
         help_text="Optioneel, afbeelding alt tekst",
         required=False,
     )
+    lazy = blocks.BooleanBlock(label="Lazy", default=False, required=False)
     styling = BaseStylingBlock()
 
     class Meta:
@@ -78,10 +80,21 @@ class ImageBlock(blocks.StructBlock):
         group = "HTML"
 
 
+class VideoBlockValue(StructValue):
+    def wide_video(self):
+        video_soup = BeautifulSoup(str(self.get("video")), 'html.parser')
+        video_soup.div["class"] = "embed-wrapper"
+        video_soup.div.iframe["width"]="100%"
+        del video_soup.div.iframe["height"]
+        return video_soup
+
+
 class VideoBlock(blocks.StructBlock):
-    url = blocks.CharBlock(
-        label="URL", help_text="Het adres van een site, de domeinnaam.", max_length=255
-    )
+    video = EmbedBlock(max_width=1200, max_height=800, label="Video url")
+    lazy = blocks.BooleanBlock(label="Lazy", default=False, required=False)
+    styling = BaseStylingBlock()
 
     class Meta:
+        preview_template = "preview/html/video.html"
         group = "HTML"
+        value_class = VideoBlockValue

@@ -1,0 +1,8 @@
+<div class="field {% if child.block.required %}required{% endif %}" data-contentpath="{{ child.block.name }}">
+    {% if child.block.label %}
+        <label class="field__label" {% if child.id_for_label %}for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}</label>
+    {% endif %}
+    <div>
+    {{ child.render_form }}
+	</div>
+</div>

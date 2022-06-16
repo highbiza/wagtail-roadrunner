@@ -54,14 +54,14 @@
         background: 
            linear-gradient(to top right,#0000 50%, #fbfbfb 50.1%) top right/50px 50px no-repeat,
            transparent;
-           a.nav-link {
-               color: #585858;
-               text-align: right;
-               display: block;
-               width: 50px;
-               height: 50px;
-               padding: 3px;
-           }
+        a.nav-link {
+            color: #585858;
+            text-align: right;
+            display: block;
+            width: 50px;
+            height: 50px;
+            padding: 3px;
+        }
     }
     .c-sf-block:focus, .c-sf-block:hover {
         .corner-tab-control {

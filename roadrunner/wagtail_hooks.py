@@ -157,6 +157,9 @@ def register_roadrunner_icons(icons):
             "roadrunner/icons/tablet.svg",
             "roadrunner/icons/tv.svg",
             "roadrunner/icons/layout.svg",
+            "roadrunner/icons/button.svg",
+            "roadrunner/icons/product.svg",
+            "roadrunner/icons/richtext.svg",
         ]
     )
     return icons

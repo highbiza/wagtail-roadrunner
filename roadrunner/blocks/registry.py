@@ -10,21 +10,15 @@ from roadrunner.blocks.html import (
     DividerBlock,
     ImageBlock,
     VideoBlock,
-    TextBlock,
     RichText,
-    ScriptBlock,
+    PageTitle,
 )
 from roadrunner.blocks.bootstrap import (
-    ButtonBlock,
-    BreadcrumbBlock,
-    JumbotronBlock,
-    ThumbnailBlock,
-    CardBlock,
-    EmbedBlock,
-    ModalBlock,
+    PopupBlock,
     AccordionBlock,
+    ButtonBlock,
     TabBlock,
-    CarouselBlock,
+    SliderBlock,
 )
 
 preset_blocks = [
@@ -33,6 +27,14 @@ preset_blocks = [
         "header",
         HeaderBlock(
             template="streamfields/html/header.html",
+            icon="title",
+            roadrunner_options={"group": "HTML", "title": "text"},
+        ),
+    ),
+    (
+        "pagetitle",
+        PageTitle(
+            template="streamfields/html/pagetitle.html",
             icon="title",
             roadrunner_options={"group": "HTML", "title": "text"},
         ),
@@ -48,150 +50,73 @@ preset_blocks = [
     (
         "image",
         ImageBlock(
-            template="streamfields/html/image.html",
-            icon="fa-camera-retro",
+            template="streamfields/html/image_lazy.html",
+            icon="image",
             roadrunner_options={"group": "HTML", "title": "alt"},
         ),
     ),
     (
         "video",
         VideoBlock(
-            template="streamfields/html/video.html",
-            icon="fa-video-camera",
+            template="streamfields/html/embed_video.html",
+            icon="media",
             roadrunner_options={"group": "HTML", "title": "url"},
-        ),
-    ),
-    (
-        "text",
-        TextBlock(
-            template="streamfields/html/text.html",
-            icon="fa-align-left",
-            roadrunner_options={"group": "HTML", "title": "text"},
-            group="HTML",
         ),
     ),
     (
         "richtext",
         RichText(
             template="streamfields/html/richtext.html",
-            icon="fa-align-left",
+            icon="richtext",
             roadrunner_options={"group": "HTML", "title": "block_text"},
-        ),
-    ),
-    (
-        "html",
-        TextBlock(
-            template="streamfields/html/html.html",
-            icon="fa-html5",
-            roadrunner_options={"group": "HTML", "title": "text"},
-            group="HTML",
-        ),
-    ),
-    (
-        "script",
-        ScriptBlock(
-            template="streamfields/html/script.html",
-            icon="fa-code",
-            roadrunner_options={"group": "HTML", "title": "script"},
         ),
     ),
     # bootstrap
     (
+        "popup",
+        PopupBlock(
+            template="streamfields/bootstrap/popup.html",
+            icon="form",
+            roadrunner_options={"group": "Bootstrap", "title": "text"},
+        ),
+    ),
+    (
         "button",
         ButtonBlock(
             template="streamfields/bootstrap/button.html",
-            icon="fa-hand-pointer-o",
+            icon="form",
+            roadrunner_options={"group": "Bootstrap", "title": "label"},
+        ),
+    ),
+    (
+        "tabs",
+        TabBlock(
+            template="streamfields/bootstrap/tabs.html",
+            icon="form",
             roadrunner_options={"group": "Bootstrap"},
         ),
     ),
     (
-        "breadcrumb",
-        BreadcrumbBlock(
-            template="streamfields/bootstrap/breadcrumb.html",
-            icon="fa-chevron-right",
+        "slider",
+        SliderBlock(
+            template="streamfields/bootstrap/slider.html",
+            icon="form",
             roadrunner_options={"group": "Bootstrap"},
         ),
     ),
-    (
-        "jumbotron",
-        JumbotronBlock(
-            template="streamfields/bootstrap/jumbotron.html",
-            icon="fa-file",
-            roadrunner_options={"group": "Bootstrap", "title": "header"},
-        ),
-    ),
-    (
-        "thumbnail",
-        ThumbnailBlock(
-            template="streamfields/bootstrap/thumbnail.html",
-            icon="fa-camera",
-            roadrunner_options={"group": "Bootstrap", "title": "text"},
-        ),
-    ),
-    (
-        "card",
-        CardBlock(
-            template="streamfields/bootstrap/card.html",
-            icon="fa-columns",
-            roadrunner_options={"group": "Bootstrap", "title": "header"},
-        ),
-    ),
-    (
-        "embed",
-        EmbedBlock(
-            template="streamfields/bootstrap/embed.html",
-            icon="fa-terminal",
-            roadrunner_options={"group": "Bootstrap", "title": "url"},
-        ),
-    ),
-    (
-        "modal",
-        ModalBlock(
-            template="streamfields/bootstrap/modal.html",
-            icon="fa-window-restore",
-            roadrunner_options={"group": "Bootstrap", "title": "text"},
-        ),
-    ),
-    (
-        "accordion",
-        AccordionBlock(
-            template="streamfields/bootstrap/accordion.html",
-            icon="fa-bars",
-            roadrunner_options={"group": "Bootstrap", "title": "header"},
-        ),
-    ),
+
     # ListBlocks,
     (
-        "nav_pills",
+        "Accordion",
         blocks.ListBlock(
-            TabBlock(),
-            template="streamfields/bootstrap/nav_pills.html",
-            icon="fa-bars",
-            roadrunner_options={"group": "Bootstrap", "title": "tab_header"},
+            AccordionBlock(),
+            template="streamfields/listblock/accordion.html",
+            icon="plus-inverse",
+            roadrunner_options={"group": "Bootstrap", "title": "header"},
             group="Bootstrap",
         ),
     ),
-    (
-        "nav_tabs",
-        blocks.ListBlock(
-            TabBlock(),
-            template="streamfields/bootstrap/nav_tabs.html",
-            icon="fa-list",
-            roadrunner_options={"group": "Bootstrap", "title": "tab_header"},
-            group="Bootstrap",
-        ),
-    ),
-    (
-        "carousel",
-        blocks.ListBlock(
-            CarouselBlock(),
-            template="streamfields/bootstrap/carousel.html",
-            icon="fa-picture-o",
-            roadrunner_options={"group": "Bootstrap"},
-            group="Bootstrap",
-            label=_("Carousel"),
-        ),
-    ),
+    
 ]
 
 

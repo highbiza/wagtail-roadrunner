@@ -1,0 +1,10 @@
+{% load styling_tags wagtailimages_tags ocyan_thumbnail %}
+
+{% image self.image original format-webp as image_webp %}
+{% image self.image original as image %}
+
+{% if self.lazy %}
+{% lazy_responsive_image image.file alt=self.alt|default:image.file.name %}
+{% else %}
+{% responsive_image image.file alt=self.alt|default:image.file.name %}
+{% endif %}

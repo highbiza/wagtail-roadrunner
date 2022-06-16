@@ -3,7 +3,6 @@ import { renderInPlaceHolder, PlaceHolder } from "./jsx"
 import { renderPreview } from "./preview/render.js"
 import { SvgIcon } from "./utils"
 import "./stylingblock.scss"
-import "./bootstrapnoconflict/tab"
 
 
 const HelpText = ({ helpText }) => (
