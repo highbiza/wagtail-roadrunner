@@ -48,7 +48,7 @@ class PreviewBlockChildWrapper {
 
     const result = renderInPlaceHolder(blockElement, (
       <div className="preview field-content">
-        <div calssName="preview-container" role="button" data-toggle="modal" data-target={`#${modalPrefix}`}>
+        <div className="preview-container" role="button" data-toggle="modal" data-target={`#${modalPrefix}`}>
           <PlaceHolder />
         </div>
         <div className={`modal fade modal-edit`} id={modalPrefix} tabindex="-1" role="dialog" aria-labelledby={`${modalPrefix}Label`} aria-hidden="true">

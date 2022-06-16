@@ -17,7 +17,7 @@ class HeaderBlock(blocks.StructBlock):
         ("h6", "H6"),
     )
     heading_type = blocks.ChoiceBlock(
-        choices=HEADER_CHOICES, label="Header", default="h1"
+        choices=HEADER_CHOICES, label="Header", default="h2"
     )
     text = blocks.CharBlock(
         label="Tekst", help_text="Tekst in de header", max_length=255

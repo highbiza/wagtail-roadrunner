@@ -28,6 +28,9 @@
 			.modal-dialog{
 				padding-left: 0;
 				width: 100%;
+				&:before{
+					content: unset;
+				}
 				.modal-content{
 					position: relative;
 					display: flex;
@@ -113,4 +116,9 @@
 			}
 		}
 	}
+}
+
+.c-sf-container__block-container .c-sf-container__block-container{
+	padding: 1rem 0 !important;
+	border: 0;
 }
