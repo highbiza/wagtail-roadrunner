@@ -31,7 +31,7 @@ class HeaderBlock(blocks.StructBlock):
 
 class PageTitle(blocks.StructBlock):
     styling = BaseStylingBlock()
-    
+
     class Meta:
         group = "HTML"
 
@@ -82,9 +82,9 @@ class ImageBlock(blocks.StructBlock):
 
 class VideoBlockValue(StructValue):
     def wide_video(self):
-        video_soup = BeautifulSoup(str(self.get("video")), 'html.parser')
+        video_soup = BeautifulSoup(str(self.get("video")), "html.parser")
         video_soup.div["class"] = "embed-wrapper"
-        video_soup.div.iframe["width"]="100%"
+        video_soup.div.iframe["width"] = "100%"
         del video_soup.div.iframe["height"]
         return video_soup
 

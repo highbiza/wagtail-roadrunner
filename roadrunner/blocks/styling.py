@@ -50,6 +50,7 @@ def get_choices(t):
 class ColorPickerBlock(blocks.CharBlock):
     pass
 
+
 register(ColorPickerBlockAdapter(), ColorPickerBlock)
 
 

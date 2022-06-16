@@ -18,7 +18,8 @@ class RoadRunnerBlockWidget(BlockWidget):
 
     def render(self, name, value, attrs=None, renderer=None):
         content = super().render(name, value, attrs, renderer)
-        return format_html("""
+        return format_html(
+            """
         <div id="roadrunner-breakpoint-switcher">
             <ul>
                 <li>
@@ -45,4 +46,6 @@ class RoadRunnerBlockWidget(BlockWidget):
             </ul>
         </div>
         {content}
-        """, content=content)
+        """,
+            content=content,
+        )

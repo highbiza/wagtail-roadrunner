@@ -104,7 +104,6 @@ preset_blocks = [
             roadrunner_options={"group": "Bootstrap"},
         ),
     ),
-
     # ListBlocks,
     (
         "Accordion",
@@ -116,7 +115,6 @@ preset_blocks = [
             group="Bootstrap",
         ),
     ),
-    
 ]
 
 
