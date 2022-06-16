@@ -52,7 +52,7 @@ const GridLine = ({ value, name, breakpoint}) => {
 
 const Grid = ({ values, name }) => (
   <div className="gridchooser-wrapper">
-    <div className="dropdown gridchooser">
+    <div className={`dropdown gridchooser${values.length ? "" : " open"}`}>
       <a className="toggler dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <SvgIcon name="icon-arrow-down"/>
       </a>
@@ -82,6 +82,7 @@ class GridChoiceBlock {
 
   setError(errorList) {
     console.log("setError", errorList)
+    $(this.element).find(".dropdown.gridchooser").addClass("error")
   }
 
   getState() {
@@ -108,8 +109,7 @@ class GridChoiceBlock {
   }
 
   focus(opts) {
-    const gridchooser = $(this.element).find(".dropdown.gridchooser")
-    gridchooser.addClass("open")
+    console.log("GridChoiceBlock focus", opts)
   }
 }
 

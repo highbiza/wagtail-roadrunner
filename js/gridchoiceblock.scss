@@ -7,6 +7,9 @@
             padding: 0 24px;
             border-bottom: 1px solid #e6e6e6;
             .gridchooser{
+                &.error {
+                    border: solid 1px red;
+                }
                 position: relative;
                 padding: 10px 0;
                 z-index: 3;
