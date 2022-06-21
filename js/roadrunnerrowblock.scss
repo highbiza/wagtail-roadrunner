@@ -59,15 +59,25 @@
                     }
                 }
                 .c-sf-block {
-                    margin: 0;
-                    border: 0;
+                    .c-sf-block {
+                        margin: 0;
+                        border: 0;
+                        .c-sf-block__actions__single > .icon {
+                            &.icon-arrow-up {
+                                transform: rotate(0deg);
+                            }
+                            &.icon-arrow-down {
+                                transform: rotate(0deg);
+                            }
+                        }
+                    }
                     position: relative;
                     box-shadow: unset !important;
                     .c-sf-block__content{
                         position: relative;
                         .c-sf-block__content-inner{
                             overflow: hidden;
-                            padding: 0;
+                            padding: 0 16px
                         }
                     }
                     .c-sf-block__actions__single > .icon {

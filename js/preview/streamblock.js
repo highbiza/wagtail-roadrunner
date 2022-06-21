@@ -102,7 +102,6 @@ class PreviewStreamChild extends getStreamChild() {
 class PreviewStreamBlock extends window.wagtailStreamField.blocks.StreamBlock {
 
   _getChildDataForInsertion({ type }) {
-    // console.log("PreviewStreamBlock._getChildDataForInsertion", type)
     const [blockDef, initialState, uuidv4] = super._getChildDataForInsertion({type})
     blockDef.isNew = true
     return [blockDef, initialState, uuidv4]
@@ -113,7 +112,6 @@ class PreviewStreamBlock extends window.wagtailStreamField.blocks.StreamBlock {
     const modalPrefix = `preview-${prefix}`
     const blockDefWrapper = new PreviewBlockChildWrapper(blockDef, placeholder, modalPrefix, prefix, index, id, initialState, sequence, opts)
     const child = new PreviewStreamChild(blockDefWrapper, placeholder, prefix, index, id, initialState, sequence, opts)
-    // const child = super._createChild(blockDefWrapper, placeholder, prefix, index, id, initialState, sequence, opts)
     if (isNew) {
       $(`#${modalPrefix}`).modal("show")
     }

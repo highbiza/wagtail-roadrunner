@@ -12,13 +12,15 @@
 	// modal-edit is the editing interface of the blocks
 	.modal-edit{
 		// Transitions should apply only in the modal edit
-		// This import conflicts with the wagtail modal styling so we will scope it within the modal-edit class only
+		// This import conflicts with the wagtail modal styling
+        // so we will scope it within the modal-edit class only
 		@import "bootstrap/scss/transitions";
 	}
 
 	// Container for the preview html
 	.preview-container{
-		// This import conflicts with the wagtail nav/tabs so we import it only scoped within the preview container
+		// This import conflicts with the wagtail nav/tabs so we
+        //import it only scoped within the preview container
 		@import "bootstrap/scss/nav";
 
 		// Custom modal styling for previewing
