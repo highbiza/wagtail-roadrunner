@@ -310,7 +310,6 @@ class Collapse extends BaseComponent {
 
 EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, function (event) {
   // preventDefault only for <a> elements (which change the URL) not inside the collapsible element
-  console.log("EVENT TRIGGER");
   if (event.target.tagName === 'A' || (event.delegateTarget && event.delegateTarget.tagName === 'A')) {
     event.preventDefault()
   }
@@ -319,7 +318,6 @@ EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, function (
   const selectorElements = SelectorEngine.find(selector)
 
   selectorElements.forEach(element => {
-    console.log(element);
     Collapse.getOrCreateInstance(element, { toggle: false }).toggle()
   })
 })
