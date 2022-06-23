@@ -68,7 +68,6 @@ const Grid = ({ values, name }) => (
 
 class GridChoiceBlock {
   constructor(blockDef, placeholder, prefix, initialState, initialError) {
-    console.log("GridChoiceBlock", blockDef, placeholder, prefix, initialState, initialError)
     this.state = initialState
     this.prefix = prefix
     const {element} = renderInPlaceHolder(placeholder, <Grid name={prefix} values={initialState} />)
@@ -83,7 +82,8 @@ class GridChoiceBlock {
 
   setError(errorList) {
     console.log("setError", errorList)
-    $(this.element).find(".dropdown.gridchooser").addClass("error")
+    $(this.element).find(".dropdown.gridchooser")
+      .addClass("error")
   }
 
   getState() {
@@ -95,6 +95,7 @@ class GridChoiceBlock {
           result.push(val)
         }
       })
+
     return result
   }
 

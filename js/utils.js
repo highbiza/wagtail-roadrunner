@@ -19,6 +19,35 @@ function _wagtailGridSizeFromBootstrapGridSize(gridSize, editorGridSize) {
 }
 
 
+export function breakPointValue(gridSizes, gridSize) {
+  let item=null,
+    match=null
+  const { breakpoint } = gridSize.match(GRID_RE).groups
+  for (let i = 0; i < gridSizes.length; i++) {
+    item = gridSizes[i]
+    match = item.match(GRID_RE)
+    if (match && match.groups.breakpoint == breakpoint) {
+      return item
+    }
+  }
+  return ""
+}
+
+
+export function breakPointFallback(gridSizes, gridSize) {
+  let breakpoints = ["col-lg", "col-md", "col"]
+  const klats = breakpoints.indexOf(gridSize)
+  breakpoints = breakpoints.slice(klats)
+  for (let i = 0; i < breakpoints.length; i++) {
+    const result = breakPointValue(gridSizes, breakpoints[i])
+    if (result) {
+      return result
+    }
+  }
+  return ""
+}
+
+
 export function wagtailGridSizeFromBootstrapGridSize(gridSizes, editorGridSize="col-lg") {
   const gridSize = gridSizes.join(" ")
   let wagtailGridSize = _wagtailGridSizeFromBootstrapGridSize(gridSize, editorGridSize)
@@ -45,33 +74,6 @@ export function cols(gridSize, defaultSize=0) {
     return parseInt(match.groups.size, 10)
   }
   return defaultSize
-}
-
-export function breakPointFallback(gridSizes, gridSize) {
-  let breakpoints = ["col-lg", "col-md", "col"]
-  const klats = breakpoints.indexOf(gridSize)
-  breakpoints = breakpoints.slice(klats)
-  for (var i = 0; i < breakpoints.length; i++) {
-    const result = breakPointValue(gridSizes, breakpoints[i])
-    if (result) {
-      return result
-    }
-  }
-  return ""
-}
-
-export function breakPointValue(gridSizes, gridSize) {
-  let item=null,
-    match=null
-  const { breakpoint } = gridSize.match(GRID_RE).groups
-  for (let i = 0; i < gridSizes.length; i++) {
-    item = gridSizes[i]
-    match = item.match(GRID_RE)
-    if (match && match.groups.breakpoint == breakpoint) {
-      return item
-    }
-  }
-  return ""
 }
 
 

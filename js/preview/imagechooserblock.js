@@ -20,4 +20,3 @@ export class ImageChooserBlockDefinition extends window.wagtailStreamField.block
     return result.placeholder
   }
 }
-  
