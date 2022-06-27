@@ -1,6 +1,6 @@
 import dom, { Fragment } from 'jsx-render'
 import { renderInPlaceHolder, PlaceHolder } from "../jsx"
-import { Preview } from "./view"
+import { Preview } from "./render"
 
 
 class ImageChooserPreview extends Preview {

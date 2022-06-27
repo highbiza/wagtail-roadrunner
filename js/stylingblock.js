@@ -1,6 +1,6 @@
 import dom from 'jsx-render'
 import { renderInPlaceHolder, PlaceHolder } from "./jsx"
-import { renderPreview } from "./preview/render.js"
+import { renderPreview, renderPreviewMethod } from "./preview/render.js"
 import { SvgIcon } from "./utils"
 import "./stylingblock.scss"
 
@@ -110,6 +110,7 @@ export class StylingBlockDefinition extends window.wagtailStreamField.blocks.Str
   }
 
   renderPreview(previewPlaceholder, prefix, initialState, initialError) {
+    console.log("StylingBlockDefinition.initialState",initialState)
     // create lookuptable for child blocks
     const childBlockDefsByName = this.childBlockDefs.reduce((acc, bd) => {
       const { name } = bd
@@ -122,15 +123,12 @@ export class StylingBlockDefinition extends window.wagtailStreamField.blocks.Str
       // consecutively.
       const childPlaceholder = this.meta.preview.reduce((placeholder, name) => {
         const blockDef = childBlockDefsByName[name]
-        if ("renderPreview" in blockDef) {
-          const result = blockDef.renderPreview(placeholder, `${name}-${prefix}`, initialState[name], initialError?.[name])
-          return result.placeholder
-        }
-        return placeholder
+        const result = renderPreview(blockDef, placeholder, `${name}-${prefix}`, initialState[name], initialError?.[name])
+        return result.placeholder
       }, previewPlaceholder)
 
       return { element:childPlaceholder.parentNode, placeholder:childPlaceholder }
     }
-    return renderPreview.call(this, previewPlaceholder, prefix, initialState, initialError)
+    return renderPreviewMethod.call(this, previewPlaceholder, prefix, initialState, initialError)
   }
 }

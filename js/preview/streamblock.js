@@ -4,7 +4,7 @@ import $ from "jquery"
 import { renderInPlaceHolder, PlaceHolder } from "../jsx"
 import { getStreamChild } from "../wagtailprivate"
 import { onInputValueChanged } from "../utils"
-import { renderPreview } from "./render.js"
+import { renderPreview, renderPreviewMethod } from "./render.js"
 
 import "./streamblock.scss"
 
@@ -43,7 +43,7 @@ class PreviewBlockWrapper {
     this.wrappedChild = child
 
     // now render our preview in the preview placeholder
-    const preview = blockDef.renderPreview(previewPlaceholder, `preview-${childPrefix}`, initialState)
+    const preview = renderPreview(blockDef, previewPlaceholder, `preview-${childPrefix}`, initialState)
     this.previewErrorPlaceholder = preview.placeholder
     this.preview = preview
 
@@ -113,7 +113,7 @@ class PreviewBlockDefinition {
     if ("renderPreview" in blockDef) {
       this.renderPreview = blockDef.renderPreview.bind(this)
     } else {
-      this.renderPreview = renderPreview.bind(this)
+      this.renderPreview = renderPreviewMethod.bind(this)
     }
   }
 
