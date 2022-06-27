@@ -1,7 +1,6 @@
 import dom, { Fragment } from 'jsx-render'
-import { stripHtml } from "string-strip-html"
-
 import { renderInPlaceHolder, PlaceHolder } from "../jsx"
+import { Preview } from "./view"
 
 export function renderPreviewTemplate(previewTemplate, previewPlaceholder, modalPrefix, initialState, initialError) {
   const html = previewTemplate.replace(/__PREFIX__/g, modalPrefix)
@@ -27,14 +26,13 @@ export function renderPreviewTemplate(previewTemplate, previewPlaceholder, modal
       }
     })
   }
-  return placeholder
+  return { element, placeholder }
 }
 
 export function renderPreviewLabel(label, previewPlaceholder) {
-  const result = renderInPlaceHolder(previewPlaceholder,
+  return renderInPlaceHolder(previewPlaceholder,
     <p>{label}</p>
   )
-  return result.placeholder
 }
 
 export function renderPreviewItemStates(previewItems, previewPlaceholder, modalPrefix, initialState, initialError) {
@@ -43,7 +41,7 @@ export function renderPreviewItemStates(previewItems, previewPlaceholder, modalP
     return acc
   }, [])
 
-  const _ = renderInPlaceHolder(previewPlaceholder, (
+  return renderInPlaceHolder(previewPlaceholder, (
     <div>
       {itemStates.map(item =>
         <p>{item}</p>
@@ -53,7 +51,7 @@ export function renderPreviewItemStates(previewItems, previewPlaceholder, modalP
 }
 
 export function renderPreview(previewPlaceholder, modalPrefix, initialState, initialError) {
-  const { meta: { previewTemplate, preview, label }} = this
+  const { meta: { previewTemplate, preview }} = this
 
   if (previewTemplate) {
     return renderPreviewTemplate.call(this, previewTemplate, previewPlaceholder, modalPrefix, initialState, initialError)
@@ -62,14 +60,6 @@ export function renderPreview(previewPlaceholder, modalPrefix, initialState, ini
     return renderPreviewItemStates.call(this, preview, previewPlaceholder, modalPrefix, initialState, initialError)
   }
 
-  const [firstStateValue] = Object.values(initialState)
-
-  let previewLabel = label
-  try {
-    previewLabel = stripHtml(firstStateValue).result || label
-  } catch (e) {
-    previewLabel = label
-  }
-  return renderPreviewLabel.call(this, previewLabel, previewPlaceholder)
+  return new Preview(this, previewPlaceholder, modalPrefix, initialState, initialError)
 }
 

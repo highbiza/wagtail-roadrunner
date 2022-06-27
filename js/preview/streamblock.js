@@ -3,6 +3,7 @@ import $ from "jquery"
 
 import { renderInPlaceHolder, PlaceHolder } from "../jsx"
 import { getStreamChild } from "../wagtailprivate"
+import { onInputValueChanged } from "../utils"
 import { renderPreview } from "./render.js"
 
 import "./streamblock.scss"
@@ -37,12 +38,23 @@ class PreviewBlockWrapper {
     ))
     this.previewElement = result.element
     const [previewPlaceholder, originalPlaceholder] = result.placeholders
-
     // call the original render and render it in the child placeholder
     this.wrappedChild = blockDef.renderChild(originalPlaceholder, childPrefix, initialState)
 
     // now render our preview in the preview placeholder
-    this.previewErrorPlaceholder = blockDef.renderPreview(previewPlaceholder, modalPrefix, initialState)
+    const preview = blockDef.renderPreview(previewPlaceholder, modalPrefix, initialState)
+    this.previewErrorPlaceholder = preview.placeholder
+    this.preview = preview
+
+    console.log("hey neuken", this.preview)
+
+    onInputValueChanged(this.preview.element, e => {
+      console.log("inputChanged", e, this)
+    })
+
+    $(this.preview.element).change(e => {
+      console.log("i had a change", e)
+    })
   }
 
   getValue() {
@@ -58,12 +70,7 @@ class PreviewBlockWrapper {
   }
 
   setError(errorList) {
-    $(this.previewElement).addClass("error")
-    renderInPlaceHolder(this.previewErrorPlaceholder, (
-      <p className="error-message">
-        <span>Dit block bevat fouten</span>
-      </p>
-    ))
+    this.preview.setError(errorList)
     this.wrappedChild.setError(errorList)
   }
 

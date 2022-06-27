@@ -4,9 +4,10 @@ import { renderInPlaceHolder, PlaceHolder } from "../jsx"
 
 export class ImageChooserBlockDefinition extends window.wagtailStreamField.blocks.FieldBlockDefinition {
   renderPreview(previewPlaceholder, modalPrefix, initialState, initialError) {
+    console.log("ImageChooserBlockDefinition.modalPrefix", modalPrefix)
     const previewImage = initialState?.preview
 
-    const result = renderInPlaceHolder(previewPlaceholder, (
+    return renderInPlaceHolder(previewPlaceholder, (
       <Fragment>
         {previewImage ? <img
           src={previewImage.url}
@@ -16,7 +17,5 @@ export class ImageChooserBlockDefinition extends window.wagtailStreamField.block
         <PlaceHolder/>
       </Fragment>
     ))
-
-    return result.placeholder
   }
 }

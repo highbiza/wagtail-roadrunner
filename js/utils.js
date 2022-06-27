@@ -96,3 +96,36 @@ export function isInViewport(element) {
   const rect = element.getBoundingClientRect()
   return rect.top >= 0 && rect.top < window.innerHeight
 }
+
+
+const observeDOM = (() => {
+  let MutationObserver = window.MutationObserver || window.WebKitMutationObserver
+
+  return (obj, callback) => {
+    if (!obj || obj.nodeType !== 1) {
+      return null
+    }
+
+    if (MutationObserver) {
+      // define a new observer
+      let mutationObserver = new MutationObserver(callback)
+
+      // have the observer observe foo for changes in children
+      mutationObserver.observe(obj, { subtree:true, attributes:true, attributeFilter:["value"] })
+      return mutationObserver
+    }
+
+    // browser support fallback
+    else if (window.addEventListener){
+      return obj.addEventListener('DOMAttrModified', callback, false)
+    }
+
+    return null
+  }
+})()
+
+
+export function onInputValueChanged(el, handler) {
+  return observeDOM(el, handler)
+}
+

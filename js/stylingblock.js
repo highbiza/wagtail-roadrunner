@@ -120,14 +120,16 @@ export class StylingBlockDefinition extends window.wagtailStreamField.blocks.Str
     if (this.meta.preview) {
       // render each childblock below eachother, passing the placeholder
       // consecutively.
-      return this.meta.preview.reduce((placeholder, name) => {
+      const childPlaceholder = this.meta.preview.reduce((placeholder, name) => {
         const blockDef = childBlockDefsByName[name]
         if ("renderPreview" in blockDef) {
           const result = blockDef.renderPreview(placeholder, modalPrefix, initialState[name], initialError?.[name])
-          return result
+          return result.placeholder
         }
         return placeholder
       }, previewPlaceholder)
+
+      return { element:childPlaceholder.parentNode, placeholder:childPlaceholder }
     }
     return renderPreview.call(this, previewPlaceholder, modalPrefix, initialState, initialError)
   }
