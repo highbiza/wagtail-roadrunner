@@ -39,21 +39,21 @@ class PreviewBlockWrapper {
     this.previewElement = result.element
     const [previewPlaceholder, originalPlaceholder] = result.placeholders
     // call the original render and render it in the child placeholder
-    this.wrappedChild = blockDef.renderChild(originalPlaceholder, childPrefix, initialState)
+    const child = blockDef.renderChild(originalPlaceholder, childPrefix, initialState)
+    this.wrappedChild = child
 
     // now render our preview in the preview placeholder
-    const preview = blockDef.renderPreview(previewPlaceholder, modalPrefix, initialState)
+    const preview = blockDef.renderPreview(previewPlaceholder, `preview-${childPrefix}`, initialState)
     this.previewErrorPlaceholder = preview.placeholder
     this.preview = preview
 
-    console.log("hey neuken", this.preview)
-
-    onInputValueChanged(this.preview.element, e => {
-      console.log("inputChanged", e, this)
-    })
-
-    $(this.preview.element).change(e => {
-      console.log("i had a change", e)
+    onInputValueChanged(this.previewElement, e => {
+      console.log("peopppp", preview, e)
+      if ("setState" in preview) {
+        const childState = child.getState()
+        console.log("inputChanged", e, this, childState)
+        preview.setState(childState)
+      }
     })
   }
 

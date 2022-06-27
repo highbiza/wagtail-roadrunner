@@ -99,17 +99,19 @@ export function isInViewport(element) {
 
 
 const observeDOM = (() => {
-  let MutationObserver = window.MutationObserver || window.WebKitMutationObserver
+  const MutationObserver = window.MutationObserver || window.WebKitMutationObserver
 
   return (obj, callback) => {
+    console.log("KKOE KOE", obj,callback)
     if (!obj || obj.nodeType !== 1) {
+      console.log("hoe reet ben jij dan")
       return null
     }
 
     if (MutationObserver) {
       // define a new observer
-      let mutationObserver = new MutationObserver(callback)
-
+      const mutationObserver = new MutationObserver(callback)
+      console.log("IK REET HEEL ERG HENK")
       // have the observer observe foo for changes in children
       mutationObserver.observe(obj, { subtree:true, attributes:true, attributeFilter:["value"] })
       return mutationObserver

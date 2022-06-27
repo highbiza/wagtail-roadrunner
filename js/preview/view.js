@@ -1,4 +1,4 @@
-import dom from 'jsx-render'
+import dom, { Fragment } from 'jsx-render'
 import $ from "jquery"
 import { renderInPlaceHolder, PlaceHolder } from "../jsx"
 import { stripHtml } from "string-strip-html"
@@ -51,6 +51,67 @@ export class Preview {
       <p className="error-message">
         <span>Dit block bevat fouten</span>
       </p>
+    ))
+  }
+}
+
+export class TemplatePreview extends Preview {
+  setState(newState) {
+    for (const [key, value] of Object.entries(newState)) {
+      const child = this.children[key]
+      if ("setState" in child) {
+        child.setState(value)
+      }
+    }
+    this.state = state
+  }
+
+  render(previewPlaceholder, prefix, initialState, initialError) {
+    const { childBlockDefs, meta: { previewTemplate }} = this.blockDef
+    const html = previewTemplate.replace(/__PREFIX__/g, prefix)
+    const { element, placeholder } = renderInPlaceHolder(previewPlaceholder, (
+      <Fragment>
+        <div dangerouslySetInnerHTML={{__html: html}}/>
+        <PlaceHolder/>
+      </Fragment>
+    ))
+
+    this.children = {}
+    if (childBlockDefs) {
+      childBlockDefs.forEach(childBlockDef => {
+        if ("renderPreview" in childBlockDef) {
+          const childBlockElement = element.querySelector('[data-structblock-child="' + childBlockDef.name + '"]')
+          if (childBlockElement) {
+            this.children[childBlockDef.name] = childBlockDef.renderPreview(
+              childBlockElement,
+              prefix + '-' + childBlockDef.name,
+              initialState[childBlockDef.name],
+              initialError?.blockErrors[childBlockDef.name]
+            )
+          }
+        }
+      })
+    }
+
+    return { element, placeholder } 
+  }
+}
+
+export class PreviewList extends Preview {
+  render(previewPlaceholder, prefix, initialState, initialError) {
+    const { meta: { preview }} = this.blockDef
+
+    const itemStates = preview.reduce((acc, item) => {
+      acc.push(initialState[item])
+      return acc
+    }, [])
+
+    return renderInPlaceHolder(previewPlaceholder, (
+      <ul class="preview-items">
+        {itemStates.map(item =>
+          <li id={`wut-${item.id}`}>{item}</li>
+        )}
+      </ul>
     ))
   }
 }
