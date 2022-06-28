@@ -1,6 +1,8 @@
 import dom, { Fragment } from 'jsx-render'
-import { renderInPlaceHolder, PlaceHolder } from "../jsx"
+import $ from "jquery"
+
 import { Preview } from "./render"
+import { renderInPlaceHolder, PlaceHolder } from "../jsx"
 
 
 class ImageChooserPreview extends Preview {
@@ -15,8 +17,12 @@ class ImageChooserPreview extends Preview {
     }
   }
 
+  setState(newState) {
+    this.state = newState
+    $(`#${this.prefix}`).attr(this.getValue())
+  }
+
   render(previewPlaceholder, prefix, initialState, initialError) {
-    console.log("ImageChooserBlockDefinition.modalPrefix", prefix)
     const previewImage = initialState?.preview
 
     return renderInPlaceHolder(previewPlaceholder, (

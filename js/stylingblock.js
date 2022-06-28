@@ -1,6 +1,6 @@
 import dom from 'jsx-render'
 import { renderInPlaceHolder, PlaceHolder } from "./jsx"
-import { renderPreview, renderPreviewMethod } from "./preview/render.js"
+import { renderPreview, renderPreviewMethod, Preview } from "./preview/render.js"
 import { SvgIcon } from "./utils"
 import "./stylingblock.scss"
 
@@ -103,6 +103,50 @@ export class StylingBlock extends window.wagtailStreamField.blocks.StructBlock {
   }
 }
 
+class StylingBlockPreview extends Preview {
+  setState(newState) {
+    for (const [key, value] of Object.entries(newState)) {
+      const child = this.children[key]
+      if (child && "setState" in child) {
+        child.setState(value)
+      } else {
+        console.log("Deze doet het niet", key, value, child)
+      }
+    }
+    this.state = newState
+  }
+
+  render(previewPlaceholder, prefix, initialState, initialError) {
+    console.log("StylingBlockPreview.initialState",initialState)
+
+    const { childBlockDefs, meta: { preview} } = this.blockDef
+
+    // create lookuptable for child blocks
+    const childBlockDefsByName = childBlockDefs.reduce((acc, bd) => {
+      const { name } = bd
+      acc[name] = bd
+      return acc
+    }, {})
+
+    const children = {}
+    this.children = children
+    if (preview) {
+      // render each childblock below eachother, passing the placeholder
+      // consecutively.
+      const childDef = preview.reduce((def, name) => {
+        const { placeholder } = def
+        const blockDef = childBlockDefsByName[name]
+        const result = renderPreview(blockDef, placeholder, `${name}-${prefix}`, initialState[name], initialError?.[name])
+        children[name] = result
+        return result
+      }, { placeholder: previewPlaceholder })
+
+      return childDef
+    }
+
+    return renderPreviewMethod.call(this.blockDef, previewPlaceholder, prefix, initialState, initialError)
+  }
+}
 export class StylingBlockDefinition extends window.wagtailStreamField.blocks.StructBlockDefinition {
 
   render(placeholder, prefix, initialState, initialError) {
@@ -110,25 +154,6 @@ export class StylingBlockDefinition extends window.wagtailStreamField.blocks.Str
   }
 
   renderPreview(previewPlaceholder, prefix, initialState, initialError) {
-    console.log("StylingBlockDefinition.initialState",initialState)
-    // create lookuptable for child blocks
-    const childBlockDefsByName = this.childBlockDefs.reduce((acc, bd) => {
-      const { name } = bd
-      acc[name] = bd
-      return acc
-    }, {})
-
-    if (this.meta.preview) {
-      // render each childblock below eachother, passing the placeholder
-      // consecutively.
-      const childPlaceholder = this.meta.preview.reduce((placeholder, name) => {
-        const blockDef = childBlockDefsByName[name]
-        const result = renderPreview(blockDef, placeholder, `${name}-${prefix}`, initialState[name], initialError?.[name])
-        return result.placeholder
-      }, previewPlaceholder)
-
-      return { element:childPlaceholder.parentNode, placeholder:childPlaceholder }
-    }
-    return renderPreviewMethod.call(this, previewPlaceholder, prefix, initialState, initialError)
+    return new StylingBlockPreview(this, previewPlaceholder, prefix, initialState, initialError)
   }
 }

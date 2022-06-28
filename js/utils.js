@@ -102,23 +102,18 @@ const observeDOM = (() => {
   const MutationObserver = window.MutationObserver || window.WebKitMutationObserver
 
   return (obj, callback) => {
-    console.log("KKOE KOE", obj,callback)
     if (!obj || obj.nodeType !== 1) {
-      console.log("hoe reet ben jij dan")
       return null
     }
 
     if (MutationObserver) {
       // define a new observer
       const mutationObserver = new MutationObserver(callback)
-      console.log("IK REET HEEL ERG HENK")
       // have the observer observe foo for changes in children
       mutationObserver.observe(obj, { subtree:true, attributes:true, attributeFilter:["value"] })
       return mutationObserver
-    }
-
+    } else if (window.addEventListener){
     // browser support fallback
-    else if (window.addEventListener){
       return obj.addEventListener('DOMAttrModified', callback, false)
     }
 
