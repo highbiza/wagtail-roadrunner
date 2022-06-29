@@ -4,7 +4,7 @@ import { Preview, renderPreview } from "./render"
 import "./listblock.scss"
 
 
-class PreviewListBlockPreview extends Preview {
+class ListBlockPreview extends Preview {
   setState(newState) {
     this.state = newState
     const { children } = this
@@ -41,6 +41,6 @@ class PreviewListBlockPreview extends Preview {
 
 export class PreviewListBlockDefinition extends window.wagtailStreamField.blocks.ListBlockDefinition {
   renderPreview(previewPlaceholder, prefix, initialState, initialError) {
-    return new PreviewListBlockPreview(this, previewPlaceholder, prefix, initialState, initialError)
+    return new ListBlockPreview(this, previewPlaceholder, prefix, initialState, initialError)
   }
 }

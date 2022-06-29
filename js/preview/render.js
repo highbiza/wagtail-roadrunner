@@ -28,11 +28,6 @@ export class Preview {
 
   getValue() {
     const { meta: { label }} = this.blockDef
-    // let firstStateValue = null
-    // if (Array.isArray(this.state)) {
-    //
-    // }
-    console.log("Preview.getValue", this.state, typeof this.state, Array.isArray(this.state))
     const [firstStateValue] = Object.values(this.state)
 
     let previewValue = label
@@ -70,13 +65,14 @@ export class TemplatePreview extends Preview {
       const child = this.children[key]
       if ("setState" in child) {
         child.setState(value)
+      } else {
+        console.log("TemplatePreview.setState: Dit child heeft geen preview", child)
       }
     }
     this.state = newState
   }
 
   render(previewPlaceholder, prefix, initialState, initialError) {
-    console.log("TemplatePreview.initialState", initialState)
     const { childBlockDefs, meta: { previewTemplate }} = this.blockDef
     const html = previewTemplate.replace(/__PREFIX__/g, prefix)
     const { element, placeholder } = renderInPlaceHolder(previewPlaceholder, (
@@ -90,7 +86,6 @@ export class TemplatePreview extends Preview {
     if (childBlockDefs) {
       childBlockDefs.forEach(childBlockDef => {
         if ("renderPreview" in childBlockDef) {
-          console.log("rendering preview for", childBlockDef.name)
           const childBlockElement = element.querySelector('[data-structblock-child="' + childBlockDef.name + '"]')
           if (childBlockElement) {
             this.children[childBlockDef.name] = childBlockDef.renderPreview(
@@ -109,23 +104,42 @@ export class TemplatePreview extends Preview {
 }
 
 export class PreviewList extends Preview {
+  setState(newState) {
+    this.state = newState
+    for (const [key, value] of Object.entries(newState)) {
+      const child = this.children[key]
+      if (child && "setState" in child) {
+        child.setState(value)
+      } else {
+        console.log("PreviewList.setState: Dit child heeft geen preview", child, this.children, key, value)
+      }
+    }
+  }
+
   render(previewPlaceholder, prefix, initialState, initialError) {
-    const { meta: { preview }} = this.blockDef
+    const { childBlockDefs, meta: { preview} } = this.blockDef
 
-    const itemStates = preview.reduce((acc, item) => {
-      acc.push(initialState[item])
+    // create lookuptable for child blocks
+    const childBlockDefsByName = childBlockDefs.reduce((acc, bd) => {
+      const { name } = bd
+      acc[name] = bd
       return acc
-    }, [])
+    }, {})
 
-    return renderInPlaceHolder(previewPlaceholder, (
-      <ul class="preview-items">
-        {itemStates.map(item =>
-          <li id={`wut-${item.id}`}>{item}</li>
-        )}
-      </ul>
-    ))
+    const children = {}
+    this.children = children
+    // render each childblock below eachother, passing the placeholder
+    // consecutively.
+    return preview.reduce((def, name) => {
+      const { placeholder } = def
+      const blockDef = childBlockDefsByName[name]
+      const result = renderPreview(blockDef, placeholder, `${name}-${prefix}`, initialState[name], initialError?.[name])
+      children[name] = result
+      return result
+    }, { placeholder: previewPlaceholder })
   }
 }
+
 
 export function renderPreviewMethod(previewPlaceholder, prefix, initialState, initialError) {
   const { meta: { previewTemplate, preview }} = this
