@@ -117,7 +117,20 @@ class RichTextBlockAdapter(FieldBlockAdapter):
         )
 
 
-class RoadrunnerRowBlockAdapter(ListBlockAdapter):
+class PreviewListBlockAdapter(ListBlockAdapter):
+    js_constructor = "roadrunner.fields.PreviewListBlockDefinition"
+
+    @cached_property
+    def media(self):
+        return super().media + forms.Media(
+            js=[
+                versioned_static("wagtailadmin/js/telepath/blocks.js"),
+                versioned_static("roadrunner/roadrunner.js"),
+            ],
+        )
+
+
+class RoadrunnerRowBlockAdapter(PreviewListBlockAdapter):
     js_constructor = "roadrunner.fields.RoadrunnerRowBlockDefinition"
 
     @cached_property

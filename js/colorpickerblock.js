@@ -29,7 +29,6 @@ export class ColorPickerBlock extends window.wagtailStreamField.blocks.FieldBloc
     const { widget: { input } } = this
 
     $(input).on("input", () => {
-      console.log("ik ben ru")
       element.style.setProperty('--picker-color', $(input).val())
     })
 

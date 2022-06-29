@@ -27,7 +27,7 @@ class ImageChooserPreview extends Preview {
 
     return renderInPlaceHolder(previewPlaceholder, (
       <Fragment>
-        {previewImage ? <img id={prefix} {...this.getValue()} /> : "empty"}
+        {previewImage ? <img id={prefix} {...this.getValue()} /> : "empty image"}
         <PlaceHolder/>
       </Fragment>
     ))

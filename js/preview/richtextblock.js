@@ -23,7 +23,7 @@ export class RichTextBlockDefinition extends window.wagtailStreamField.blocks.Fi
 
     return renderInPlaceHolder(previewPlaceholder, (
       <Fragment>
-        <h1>{initialState ? initialState.toString() : "empty"}</h1>
+        <h1>{initialState ? initialState.toString() : "empty richtext"}</h1>
         <PlaceHolder/>
       </Fragment>
     ))

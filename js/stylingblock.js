@@ -98,7 +98,6 @@ export class StylingBlock extends window.wagtailStreamField.blocks.StructBlock {
   }
 
   setError(error) {
-    // console.log("StylingBlock.setError", error)
     super.setError(error)
   }
 }
@@ -117,8 +116,6 @@ class StylingBlockPreview extends Preview {
   }
 
   render(previewPlaceholder, prefix, initialState, initialError) {
-    console.log("StylingBlockPreview.initialState",initialState)
-
     const { childBlockDefs, meta: { preview} } = this.blockDef
 
     // create lookuptable for child blocks

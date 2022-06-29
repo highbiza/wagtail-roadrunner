@@ -3,7 +3,7 @@ import $ from "jquery"
 
 import { renderInPlaceHolder, PlaceHolder } from "../jsx"
 import { getStreamChild } from "../wagtailprivate"
-import { onInputValueChanged } from "../utils"
+import { onHiddenInputValueChanged } from "../utils"
 import { renderPreview, renderPreviewMethod } from "./render.js"
 
 import "./streamblock.scss"
@@ -47,11 +47,20 @@ class PreviewBlockWrapper {
     this.previewErrorPlaceholder = preview.placeholder
     this.preview = preview
 
-    onInputValueChanged(this.previewElement, e => {
-      console.log("peopppp", preview, e)
+    // listen to changes in the forms and update the preview if somethang did change
+
+    // hidden inputs do not send change events
+    onHiddenInputValueChanged(this.previewElement, e => {
       if ("setState" in preview) {
         const childState = child.getState()
-        console.log("inputChanged", e, this, childState)
+        preview.setState(childState)
+      }
+    })
+
+    // regular inputs do send change events
+    $(this.previewElement).change(e => {
+      if ("setState" in preview) {
+        const childState = child.getState()
         preview.setState(childState)
       }
     })
@@ -86,12 +95,9 @@ class PreviewBlockWrapper {
 
 class PreviewBlockDefinition {
   constructor(blockDef, originalPlaceholder, modalPrefix, prefix, index, id, initialState, sequence, opts) {
-    console.log("PreviewBlockDefinition", blockDef)
-
     // copy all of the original blockDef props except render, because we are
     // going to use our own render.
     const { render, ...blockDefProps} = blockDef
-    // console.log("PreviewBlockDefinition", blockDefProps)
     Object.assign(this, blockDefProps)
 
     // keep a reference to the original render and the placeholder it was
@@ -118,14 +124,12 @@ class PreviewBlockDefinition {
   }
 
   render(blockElement, childPrefix, initialState, initialError) {
-    console.log("I am ignoring initialError, because I called by _createChild", initialError)
     return new PreviewBlockWrapper(this, blockElement, this.modalPrefix, childPrefix, this.index, this.id, initialState, this.sequence, this.opts)
   }
 }
 
 class PreviewStreamChild extends getStreamChild() {
   setError(error) {
-    // console.log("PreviewStreamChild.setError", error)
     super.setError(error)
     this.blockDef.setError(error)
   }
@@ -151,7 +155,6 @@ class PreviewStreamBlock extends window.wagtailStreamField.blocks.StreamBlock {
   }
 
   setError(error) {
-    // console.log("PreviewStreamBlock.setError", error)
     super.setError(error)
   }
 

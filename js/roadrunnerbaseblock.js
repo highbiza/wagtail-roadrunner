@@ -7,7 +7,6 @@ import "./roadrunnerbaseblock.scss"
 
 class RoadRunnerBaseBlock extends StylingBlock {
   constructor(blockDef, placeholder, prefix, initialState, initialError) {
-    // console.log("RoadRunnerBaseBlock.constructor", blockDef, placeholder, prefix, initialState, initialError);
     const result = renderInPlaceHolder(placeholder, (
       <div className="roadrunnerbaseblock-container">
         <PlaceHolder />
@@ -16,14 +15,12 @@ class RoadRunnerBaseBlock extends StylingBlock {
 
     super(blockDef, result.placeholder, prefix, initialState, initialError)
     this.element = result.element
-    console.log("RoadRunnerBaseBlock", result)
     this.element.addEventListener(GRID_SIZE_CHANGED_EVENT, evt => {
       this.focus()
     })
   }
 
   setError(error) {
-    // console.log("RoadRunnerBaseBlock.setError", error)
     super.setError(error)
   }
 

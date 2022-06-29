@@ -17,15 +17,22 @@ export class Preview {
 
   render(previewPlaceholder, prefix, initialState, initialError) {
     return renderInPlaceHolder(previewPlaceholder,
-      <div id={prefix} class="preview-label">
-        {this.getValue()}
+      <Fragment>
+        <div id={prefix} class="preview-label">
+          {this.getValue()}
+        </div>
         <PlaceHolder/>
-      </div>
+      </Fragment>
     )
   }
 
   getValue() {
     const { meta: { label }} = this.blockDef
+    // let firstStateValue = null
+    // if (Array.isArray(this.state)) {
+    //
+    // }
+    console.log("Preview.getValue", this.state, typeof this.state, Array.isArray(this.state))
     const [firstStateValue] = Object.values(this.state)
 
     let previewValue = label
@@ -42,8 +49,9 @@ export class Preview {
   }
 
   setState(newState) {
-    $(this.element).find(`#${this.prefix}`)
-      .text(this.getValue())
+    this.state = newState
+    const previewElement = $(this.element).find(`#${this.prefix}`)
+    previewElement.text(this.getValue())
   }
 
   setError(errorList) {
@@ -68,6 +76,7 @@ export class TemplatePreview extends Preview {
   }
 
   render(previewPlaceholder, prefix, initialState, initialError) {
+    console.log("TemplatePreview.initialState", initialState)
     const { childBlockDefs, meta: { previewTemplate }} = this.blockDef
     const html = previewTemplate.replace(/__PREFIX__/g, prefix)
     const { element, placeholder } = renderInPlaceHolder(previewPlaceholder, (
@@ -81,6 +90,7 @@ export class TemplatePreview extends Preview {
     if (childBlockDefs) {
       childBlockDefs.forEach(childBlockDef => {
         if ("renderPreview" in childBlockDef) {
+          console.log("rendering preview for", childBlockDef.name)
           const childBlockElement = element.querySelector('[data-structblock-child="' + childBlockDef.name + '"]')
           if (childBlockElement) {
             this.children[childBlockDef.name] = childBlockDef.renderPreview(

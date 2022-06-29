@@ -85,7 +85,6 @@ class RoadrunnerRowBlock extends window.wagtailStreamField.blocks.ListBlock {
   _createChild(blockDef, placeholder, prefix, index, id, initialState, sequence, opts) {
     const { grid: gridSize=["col12"] } = initialState
     const wagtailGridSize = wagtailGridSizeFromBootstrapGridSize(gridSize)
-    console.log("wagtailGridSize", wagtailGridSize)
 
     const result = renderInPlaceHolder(placeholder, (
       <div className={`column ${wagtailGridSize}`} data-gridsize={gridSize}>

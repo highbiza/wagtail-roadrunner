@@ -122,7 +122,7 @@ const observeDOM = (() => {
 })()
 
 
-export function onInputValueChanged(el, handler) {
+export function onHiddenInputValueChanged(el, handler) {
   return observeDOM(el, handler)
 }
 

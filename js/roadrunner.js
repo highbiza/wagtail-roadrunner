@@ -9,6 +9,8 @@ import { PreviewFieldBlockDefinition } from "./preview/fieldblock"
 import { RichTextBlockDefinition } from "./preview/richtextblock"
 import { GridChoiceBlockDefinition } from "./gridchoiceblock"
 import { ColorPickerBlockDefinition } from "./colorpickerblock"
+import { PreviewListBlockDefinition } from "./preview/listblock"
+
 import "./bootstrapnoconflict/tab"
 import "./bootstrapnoconflict/collapse"
 import "./bootstrapnoconflict/bootstrap.scss"
@@ -23,6 +25,7 @@ window.telepath.register('roadrunner.fields.ImageChooserBlockDefinition', ImageC
 window.telepath.register('roadrunner.fields.RichTextBlockDefinition', RichTextBlockDefinition)
 window.telepath.register('roadrunner.fields.GridChoiceBlockDefinition', GridChoiceBlockDefinition)
 window.telepath.register('roadrunner.fields.ColorPickerBlockDefinition', ColorPickerBlockDefinition)
+window.telepath.register('roadrunner.fields.PreviewListBlockDefinition', PreviewListBlockDefinition)
 
 $(() => {
   breakPointEmitter.addListener(newBreakPoint => {

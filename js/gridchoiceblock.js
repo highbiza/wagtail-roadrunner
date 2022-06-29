@@ -76,12 +76,10 @@ class GridChoiceBlock {
 
   setState(state) {
     throw new Error("setState", state)
-    console.log("setState", state)
     this.state = {...this.state, ...state}
   }
 
   setError(errorList) {
-    console.log("setError", errorList)
     $(this.element).find(".dropdown.gridchooser")
       .addClass("error")
   }
@@ -101,12 +99,10 @@ class GridChoiceBlock {
 
   getValue() {
     throw new Error("getValue", this.state)
-    console.log("getValue")
     return this.state
   }
 
   getTextLabel(opts) {
-    console.log("getTextLabel", opts)
     return null
   }
 

@@ -1,15 +1,20 @@
-import dom, { Fragment } from 'jsx-render'
-import { renderInPlaceHolder, PlaceHolder } from "../jsx"
+import dom from 'jsx-render'
+import { Preview } from "./render"
+import { stripHtml } from "string-strip-html"
 
+
+class PreviewFieldBlockPreview extends Preview {
+  getValue() {
+    if (this.state) {
+      return stripHtml(this.state).result
+    }
+
+    return "empty FieldBlock"
+  }
+}
 
 export class PreviewFieldBlockDefinition extends window.wagtailStreamField.blocks.FieldBlockDefinition {
-  renderPreview(previewPlaceholder, modalPrefix, initialState, initialError) {
-
-    return renderInPlaceHolder(previewPlaceholder, (
-      <Fragment>
-        <p>{initialState}</p>
-        <PlaceHolder/>
-      </Fragment>
-    ))
+  renderPreview(previewPlaceholder, prefix, initialState, initialError) {
+    return new PreviewFieldBlockPreview(this, previewPlaceholder, prefix, initialState, initialError)
   }
 }
