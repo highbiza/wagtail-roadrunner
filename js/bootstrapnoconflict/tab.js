@@ -112,12 +112,10 @@ class Tab extends BaseComponent {
   // Private
 
   _activate(element, container, callback) {
-    console.log("ik activate het ff", element, container, callback, container.nodeName === 'UL')
     const activeElements = container && (container.nodeName === 'UL' || container.nodeName === 'OL') ?
       SelectorEngine.find(SELECTOR_ACTIVE_UL, container) :
       SelectorEngine.children(container, SELECTOR_ACTIVE)
 
-    console.log("ik heb active gevonden", activeElements)
     const active = activeElements[0]
     const isTransitioning = callback && (active && active.classList.contains(CLASS_NAME_FADE))
 
@@ -133,7 +131,6 @@ class Tab extends BaseComponent {
 
   _transitionComplete(element, active, callback) {
     if (active) {
-      console.log("Ik ben klaar", element, active)
       active.classList.remove(CLASS_NAME_ACTIVE)
 
       const dropdownChild = SelectorEngine.findOne(SELECTOR_DROPDOWN_ACTIVE_CHILD, active.parentNode)
