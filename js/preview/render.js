@@ -32,9 +32,9 @@ export class Preview {
 
     let previewValue = label
     try {
-      previewValue = stripHtml(firstStateValue).result || label
+      previewValue = stripHtml(firstStateValue.toString()).result || label
     } catch (e) {
-      previewValue = label
+      previewValue = label || firstStateValue.toString()
     }
     return previewValue
   }
@@ -126,6 +126,7 @@ export class PreviewList extends Preview {
 
     const children = {}
     this.children = children
+
     // render each childblock below eachother, passing the placeholder
     // consecutively.
     return preview.reduce((def, name) => {
