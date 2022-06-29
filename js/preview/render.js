@@ -63,10 +63,8 @@ export class TemplatePreview extends Preview {
   setState(newState) {
     for (const [key, value] of Object.entries(newState)) {
       const child = this.children[key]
-      if ("setState" in child) {
+      if (child && "setState" in child) {
         child.setState(value)
-      } else {
-        console.log("TemplatePreview.setState: Dit child heeft geen preview", child)
       }
     }
     this.state = newState
