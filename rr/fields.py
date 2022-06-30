@@ -3,7 +3,7 @@ from wagtail.core.blocks.base import BlockField as WagtailBlockField
 from wagtail.core.fields import StreamField
 from wagtail.core.blocks import StreamBlock
 
-from rrwidgets import RoadRunnerBlockWidget
+from rr.widgets import RoadRunnerBlockWidget
 from rr.blocks.template import TemplateBlock
 from rr.blocks.main import (
     RoadRunnerBaseBlock,

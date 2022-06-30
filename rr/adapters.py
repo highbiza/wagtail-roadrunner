@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import gettext as _
-
+from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
 
@@ -21,6 +21,7 @@ class RoadRunnerStreamBlockAdapter(StreamBlockAdapter):
         meta["strings"]["SAVE_DRAFT"] = _("Save Draft")
         return [name, grouped_child_blocks, values, meta]
 
+    @property
     def media(self):
         return super().media + forms.Media(
             js=[
@@ -48,6 +49,7 @@ class RoadRunnerStructBlockAdapter(StructBlockAdapter):
 
         return [name, values, meta]
 
+    @cached_property
     def media(self):
         return super().media + forms.Media(
             js=[
@@ -65,6 +67,7 @@ class RoadRunnerBaseBlockAdapter(RoadRunnerStructBlockAdapter):
         meta["classname"] = "struct-block roadrunnerblock"
         return [name, values, meta]
 
+    @property
     def media(self):
         return super().media + forms.Media(
             css={"all": [versioned_static("roadrunner/roadrunner.css")]},
@@ -74,6 +77,7 @@ class RoadRunnerBaseBlockAdapter(RoadRunnerStructBlockAdapter):
 class PreviewFieldBlockAdapter(FieldBlockAdapter):
     js_constructor = "roadrunner.fields.PreviewFieldBlockDefinition"
 
+    @cached_property
     def media(self):
         return super().media + forms.Media(
             js=[
@@ -86,6 +90,7 @@ class PreviewFieldBlockAdapter(FieldBlockAdapter):
 class ImageChooserBlockAdapter(FieldBlockAdapter):
     js_constructor = "roadrunner.fields.ImageChooserBlockDefinition"
 
+    @cached_property
     def media(self):
         return super().media + forms.Media(
             js=[
@@ -98,6 +103,7 @@ class ImageChooserBlockAdapter(FieldBlockAdapter):
 class RichTextBlockAdapter(FieldBlockAdapter):
     js_constructor = "roadrunner.fields.RichTextBlockDefinition"
 
+    @cached_property
     def media(self):
         return super().media + forms.Media(
             js=[
@@ -110,6 +116,7 @@ class RichTextBlockAdapter(FieldBlockAdapter):
 class PreviewListBlockAdapter(ListBlockAdapter):
     js_constructor = "roadrunner.fields.PreviewListBlockDefinition"
 
+    @cached_property
     def media(self):
         return super().media + forms.Media(
             js=[
@@ -122,6 +129,7 @@ class PreviewListBlockAdapter(ListBlockAdapter):
 class RoadrunnerRowBlockAdapter(PreviewListBlockAdapter):
     js_constructor = "roadrunner.fields.RoadrunnerRowBlockDefinition"
 
+    @cached_property
     def media(self):
         return super().media + forms.Media(  # pylint: disable=protected-access
             js=[

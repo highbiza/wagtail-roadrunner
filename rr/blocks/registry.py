@@ -3,7 +3,7 @@ from django.utils.functional import lazy
 from django.utils.module_loading import import_string
 from django.conf import settings
 from wagtail.core import blocks
-from rr.registering import get_registered_blocks as legacy_registered_blocks
+
 from rr.blocks.html import (
     HeaderBlock,
     DividerBlock,
@@ -124,7 +124,7 @@ def _registered_blocks():
     if roadrunner_registry_function_setting is not None:
         return import_string(roadrunner_registry_function_setting)(preset_blocks)
 
-    return list(chain(preset_blocks, legacy_registered_blocks()))
+    return list(chain(preset_blocks))
 
 
 registered_blocks = lazy(_registered_blocks, list)
