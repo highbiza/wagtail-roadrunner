@@ -11,7 +11,7 @@ from django.test import TestCase, override_settings
 from rr.templatetags.styling_tags import get_styling
 from rr.blocks.bootstrap import AccordionBlock
 from rr.edit_handlers import RoadRunnerPanel
-from rr .fields import RoadRunnerField
+from rr.fields import RoadRunnerField
 
 
 @unittest.skip("These tests are for the former version")
