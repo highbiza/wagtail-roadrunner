@@ -3,8 +3,8 @@ from django.utils.functional import lazy
 from django.utils.module_loading import import_string
 from django.conf import settings
 from wagtail.core import blocks
-from roadrunner.registering import get_registered_blocks as legacy_registered_blocks
-from roadrunner.blocks.html import (
+from rr.registering import get_registered_blocks as legacy_registered_blocks
+from rr.blocks.html import (
     HeaderBlock,
     DividerBlock,
     ImageBlock,
@@ -12,7 +12,7 @@ from roadrunner.blocks.html import (
     RichText,
     PageTitle,
 )
-from roadrunner.blocks.bootstrap import (
+from rr.blocks.bootstrap import (
     PopupBlock,
     AccordionBlock,
     ButtonBlock,

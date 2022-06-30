@@ -39,4 +39,4 @@ class ModelChoiceBlock(blocks.FieldBlock):
 
 
 class TemplateBlock(blocks.StructBlock):
-    template = ModelChoiceBlock(model="roadrunner.template")
+    template = ModelChoiceBlock(model="rr.template")

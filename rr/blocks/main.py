@@ -2,14 +2,14 @@ from django.utils.translation import gettext_lazy as _
 from wagtail.core import blocks
 from wagtail.core.blocks import ListBlock
 
-from roadrunner.telepath import register
-from roadrunner.adapters import (
+from rr.telepath import register
+from rr.adapters import (
     RoadrunnerRowBlockAdapter,
     RoadRunnerStreamBlockAdapter,
     RoadRunnerBaseBlockAdapter,
     GridChoiceBlockAdapter,
 )
-from roadrunner.blocks.styling import BaseStylingBlock
+from rr.blocks.styling import BaseStylingBlock
 
 
 class GridChoiceBlock(blocks.MultipleChoiceBlock):

@@ -5,7 +5,7 @@ from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 
-from roadrunner.blocks.styling import BaseStylingBlock
+from rr.blocks.styling import BaseStylingBlock
 
 
 class HeaderBlock(blocks.StructBlock):

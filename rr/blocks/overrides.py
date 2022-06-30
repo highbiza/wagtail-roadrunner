@@ -1,14 +1,14 @@
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
-from roadrunner.adapters import (
+from rr.adapters import (
     ImageChooserBlockAdapter,
     RoadRunnerStructBlockAdapter,
     PreviewListBlockAdapter,
     PreviewFieldBlockAdapter,
     RichTextBlockAdapter,
 )
-from roadrunner.telepath import register
+from rr.telepath import register
 
 # register different adapters for some of wagtails builtin classes
 register(ImageChooserBlockAdapter(), ImageChooserBlock)

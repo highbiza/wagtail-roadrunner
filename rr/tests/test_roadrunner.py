@@ -8,10 +8,10 @@ from django.test import TestCase, override_settings
 
 # from django.urls import reverse
 
-from roadrunner.templatetags.styling_tags import get_styling
-from roadrunner.blocks.bootstrap import AccordionBlock
-from roadrunner.edit_handlers import RoadRunnerPanel
-from roadrunner.fields import RoadRunnerField
+from rr.templatetags.styling_tags import get_styling
+from rr.blocks.bootstrap import AccordionBlock
+from rr.edit_handlers import RoadRunnerPanel
+from rr .fields import RoadRunnerField
 
 
 @unittest.skip("These tests are for the former version")
