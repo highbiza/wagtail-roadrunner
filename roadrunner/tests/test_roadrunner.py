@@ -9,13 +9,12 @@ from django.test import TestCase, override_settings
 # from django.urls import reverse
 
 from roadrunner.templatetags.styling_tags import get_styling
-from roadrunner.blocks import AccordionBlock
+from roadrunner.blocks.bootstrap import AccordionBlock
 from roadrunner.edit_handlers import RoadRunnerPanel
 from roadrunner.fields import RoadRunnerField
-from roadrunner.wagtail_hooks import css, js, wagtail
 
 
-@unittest.skip
+@unittest.skip("These tests are for the former version")
 @override_settings(INSTALLED_APPS=settings.INSTALLED_APPS + ["roadrunner"])
 class RoadRunnerTest(TestCase):
     fixtures = ["roadrunner"]
@@ -37,11 +36,6 @@ class RoadRunnerTest(TestCase):
         styling_attribute_no_tag = get_styling(styling, True)
         self.assertEqual(styling_attribute, 'style="height: 50px;"')
         self.assertEqual(styling_attribute_no_tag, "height: 50px;")
-
-    def test_media(self):
-        self.assertIsNotNone(css())
-        self.assertIsNotNone(js())
-        self.assertIsNotNone(wagtail())
 
     def test_get_uuid(self):
         block = AccordionBlock()

@@ -1,6 +1,5 @@
 import json
 from wagtail.core.blocks.base import BlockWidget
-from django.utils.safestring import mark_safe
 from django.utils.html import format_html
 from .telepath import RoadRunnerJSContext
 

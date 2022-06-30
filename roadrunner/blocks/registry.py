@@ -1,5 +1,4 @@
 from itertools import chain
-from django.utils.translation import gettext_lazy as _
 from django.utils.functional import lazy
 from django.utils.module_loading import import_string
 from django.conf import settings

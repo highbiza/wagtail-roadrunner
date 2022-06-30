@@ -73,17 +73,3 @@ class RoadRunnerField(StreamField):
 
     def formfield(self, **kwargs):
         return super().formfield(form_class=BlockField)
-
-    # def get_panel(self):
-    #     from .edit_handlers import RoadRunnerPanel
-    #
-    #     return RoadRunnerPanel
-
-    # def formfield(self, **kwargs):
-    #     """
-    #     Override formfield to use a plain forms.Field so that we do no transformation on the value
-    #     (as distinct from the usual fallback of forms.CharField, which transforms it into a string).
-    #     """
-    #     defaults = {"form_class": RoadRunnerFormField}
-    #     defaults.update(**kwargs)
-    #     return super().formfield(**defaults)
