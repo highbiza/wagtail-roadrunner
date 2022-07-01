@@ -17,14 +17,14 @@ install: fail-if-no-virtualenv
 	PIP_INDEX_URL=${PIP_INDEX_URL} pip install --editable .[test] --upgrade --upgrade-strategy=eager --pre
 
 lint: fail-if-no-virtualenv
-	@black --check --exclude "migrations/*" roadrunner
+	@black --check --exclude "migrations/*" rr
 	@pylint setup.py roadrunner/
 
 black:
-	@black --exclude "migrations/*" roadrunner
+	@black --exclude "migrations/*" rr
 
 test: fail-if-no-virtualenv
-	@coverage run --source='roadrunner' `which manage.py` test
+	@coverage run --source='rr' `which manage.py` test
 	@coverage report
 	@coverage xml
 	@coverage html
