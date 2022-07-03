@@ -2,4 +2,4 @@
 
 Wagtail page editor for when streamfields + become + too complex +++
 
-Hold on
+This readme will contain the docs as soon as development is done
