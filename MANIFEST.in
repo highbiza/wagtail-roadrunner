@@ -1,3 +1,4 @@
 # Include the data files
 recursive-include rr/templates *.html
+recursive-include rr/templates *.svg
 recursive-include rr/static *
