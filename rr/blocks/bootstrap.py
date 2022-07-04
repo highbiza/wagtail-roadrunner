@@ -2,7 +2,7 @@ import uuid
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
-from roadrunner.blocks.styling import BaseStylingBlock
+from rr.blocks.styling import BaseStylingBlock
 
 
 class BootstrapColorChoiceBlock(blocks.ChoiceBlock):

@@ -12,7 +12,7 @@ from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPane
 from wagtail.core import blocks
 from wagtail.snippets.models import register_snippet
 
-from roadrunner.fields import RoadRunnerField
+from rr.fields import RoadRunnerField
 
 
 @register_snippet

@@ -9,7 +9,7 @@ module.exports = {
     roadrunner: './js/roadrunner.js',
   },
   output: {
-    path: path.join(__dirname, 'roadrunner/static/roadrunner'),
+    path: path.join(__dirname, 'rr/static/roadrunner'),
     filename: '[name].js',
     chunkFilename: '[name]-[id].chunk.js'
   },

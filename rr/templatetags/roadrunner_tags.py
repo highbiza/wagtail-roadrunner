@@ -1,5 +1,5 @@
 from django import template
-from roadrunner.models import PreFooterSnippet
+from rr.models import PreFooterSnippet
 import uuid
 
 register = template.Library()

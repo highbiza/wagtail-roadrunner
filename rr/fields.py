@@ -3,15 +3,15 @@ from wagtail.core.blocks.base import BlockField as WagtailBlockField
 from wagtail.core.fields import StreamField
 from wagtail.core.blocks import StreamBlock
 
-from roadrunner.widgets import RoadRunnerBlockWidget
-from roadrunner.blocks.template import TemplateBlock
-from roadrunner.blocks.main import (
+from rr.widgets import RoadRunnerBlockWidget
+from rr.blocks.template import TemplateBlock
+from rr.blocks.main import (
     RoadRunnerBaseBlock,
     FixedWidthRowBlock,
     FullWidthRowBlock,
     RoadRunnerStreamBlock,
 )
-from roadrunner.blocks.registry import registered_blocks
+from rr.blocks.registry import registered_blocks
 
 
 class BlockField(WagtailBlockField):

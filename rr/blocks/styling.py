@@ -1,7 +1,7 @@
 from wagtail.core import blocks
 
-from roadrunner.telepath import register
-from roadrunner.adapters import ColorPickerBlockAdapter
+from rr.telepath import register
+from rr.adapters import ColorPickerBlockAdapter
 
 
 DEFAULT_CHOICES = [
