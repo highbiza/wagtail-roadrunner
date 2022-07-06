@@ -1,9 +1,19 @@
 
-.roadrunner.row {
+.roadrunner {
     display: flex;
     flex-flow: row wrap;
     width: 100%;
+    .field{
+        width: 100%;
+        & + .field{
+            padding-bottom: 15px;
+        }
+    }
 
+    // Column field__label temporary removal
+    & > .field > .field__label{
+        display: none;
+    }
     .column {
         &.col1, &.col2, &.col3, &.col4, &.col5, &.col6, &.col7, &.col8, &.col9, &.col10, &.col11, &.col12 {
             padding: .5rem 1rem;
@@ -59,6 +69,8 @@
                     }
                 }
                 .c-sf-block {
+                    position: relative;
+                    box-shadow: unset !important;
                     .c-sf-block {
                         margin: 0;
                         border: 0;
@@ -71,13 +83,12 @@
                             }
                         }
                     }
-                    position: relative;
-                    box-shadow: unset !important;
                     .c-sf-block__content{
                         position: relative;
                         .c-sf-block__content-inner{
                             overflow: hidden;
-                            padding: 0 16px
+                            padding: 0 16px;
+                            position: relative;
                         }
                     }
                     .c-sf-block__actions__single > .icon {
@@ -94,32 +105,6 @@
                     }
                 }
             }
-        }
-    }
-    .corner-tab-control {
-        position: absolute;
-        top: 0;
-        right: 0;
-        min-height: 50px;
-        transition: background .3s ease-in-out;
-        background: 
-           linear-gradient(to top right,#0000 50%, #fbfbfb 50.1%) top right/50px 50px no-repeat,
-           transparent;
-        z-index: 10;
-        a.nav-link {
-            color: #585858;
-            text-align: right;
-            display: block;
-            width: 50px;
-            height: 50px;
-            padding: 3px;
-        }
-    }
-    .c-sf-block:focus, .c-sf-block:hover {
-        .corner-tab-control {
-            background: 
-               linear-gradient(to top right,#0000 50%, #f5f5f5 50.1%) top right/50px 50px no-repeat,
-               transparent;
         }
     }
 }
