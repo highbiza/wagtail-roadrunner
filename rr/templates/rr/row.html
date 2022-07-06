@@ -1,0 +1,12 @@
+{% load wagtailcore_tags %}
+{% load styling_tags %}
+
+        <div class="row">
+            {% for block in row %}
+                <div class="{{ block.grid }} {% get_styling_classes block.styling %}" {% get_styling block.styling %}>
+                    {% for content in block.content %}
+                        {% include_block content with blockid=forloop.counter %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
