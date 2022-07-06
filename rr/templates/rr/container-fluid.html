@@ -1,0 +1,11 @@
+{% load wagtailcore_tags %}
+{% load styling_tags %}
+
+{% get_styling_classes self.styling  as rr_stylingclasses %}
+
+<section {% if rr_stylingclasses %}class="{{ rr_stylingclasses }}" {% endif %}{% get_styling self.styling %}>
+    <div class="container-fluid">
+            {% include "rr/row.html" with  row=self.row %}
+        </div>
+    </div>
+</section>

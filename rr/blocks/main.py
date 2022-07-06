@@ -89,16 +89,12 @@ class RoadrunnerRowBlock(ListBlock):
 
 class FixedWidthRowBlock(RoadrunnerRowBlock):
     class Meta:
-        template = "streamfields/bootstrap/container.html"
-        icon = "fa-th-large"
-        label = "Boxed"
+        label = _("Boxed")
 
 
 class FullWidthRowBlock(RoadrunnerRowBlock):
     class Meta:
-        template = ("streamfields/bootstrap/container_fluid.html",)
-        icon = "fa-th"
-        label = "Full"
+        label = _("Full")
 
 
 register(RoadRunnerStreamBlockAdapter(), RoadRunnerStreamBlock)

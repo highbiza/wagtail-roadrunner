@@ -57,11 +57,13 @@ class RoadRunnerField(StreamField):
                                                 RoadRunnerStreamBlock(block_types),
                                             )
                                         ]
-                                    ),
+                                    )
                                 ),
                             ),
                             ("styling", StylingBlock()),
-                        ], form_classname="roadrunner"
+                        ],
+                        template="rr/container.html",
+                        form_classname="roadrunner",
                     ),
                 ),
                 (
@@ -78,11 +80,13 @@ class RoadRunnerField(StreamField):
                                                 RoadRunnerStreamBlock(block_types),
                                             )
                                         ]
-                                    ),
+                                    )
                                 ),
                             ),
                             ("styling", StylingBlock()),
-                        ], form_classname="roadrunner"
+                        ],
+                        template="rr/container-fluid.html",
+                        form_classname="roadrunner",
                     ),
                 ),
                 (

@@ -8,6 +8,7 @@ style_classes = ["block_classes", "padding", "margin", "border_radius", "border"
 
 @register.simple_tag
 def get_styling(styling, no_style_tag=False):
+    print(styling)
     if not styling:
         return
 
@@ -19,14 +20,17 @@ def get_styling(styling, no_style_tag=False):
     rule_set = [
         format_prop(prop, val)
         for prop, val in styling.items()
-        if (val and not prop in style_classes)
+        if (val and prop and not prop in style_classes)
     ]
     attributes = " ".join(rule_set)
 
-    if no_style_tag:
-        return mark_safe(attributes)
+    if attributes:
+        if no_style_tag:
+            return mark_safe(attributes)
 
-    return mark_safe('style="%s"' % attributes)
+        return mark_safe('style="%s"' % attributes)
+
+    return ""
 
 
 @register.simple_tag
