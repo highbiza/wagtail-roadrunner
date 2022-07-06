@@ -9,7 +9,7 @@ from rr.adapters import (
     RoadRunnerBaseBlockAdapter,
     GridChoiceBlockAdapter,
 )
-from rr.blocks.styling import BaseStylingBlock
+from rr.blocks.styling import StylingBlock
 
 
 class GridChoiceBlock(blocks.MultipleChoiceBlock):
@@ -75,7 +75,7 @@ class RoadRunnerBaseBlock(blocks.StructBlock):
         label="Breedte kolom", help_text="De breedte kolommen (*/12)."
     )
     content = RoadRunnerStreamBlock()
-    styling = BaseStylingBlock()
+    styling = StylingBlock()
 
     class Meta:
         icon = "grip"

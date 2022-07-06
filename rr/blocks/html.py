@@ -5,7 +5,7 @@ from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 
-from rr.blocks.styling import BaseStylingBlock
+from rr.blocks.styling import StylingBlock
 
 
 class HeaderBlock(blocks.StructBlock):
@@ -22,7 +22,7 @@ class HeaderBlock(blocks.StructBlock):
     text = blocks.CharBlock(
         label="Tekst", help_text="Tekst in de header", max_length=255
     )
-    styling = BaseStylingBlock()
+    styling = StylingBlock()
 
     class Meta:
         preview_template = "preview/html/headerblock.html"
@@ -30,7 +30,7 @@ class HeaderBlock(blocks.StructBlock):
 
 
 class PageTitle(blocks.StructBlock):
-    styling = BaseStylingBlock()
+    styling = StylingBlock()
 
     class Meta:
         group = "HTML"
@@ -41,7 +41,7 @@ class RichText(blocks.StructBlock):
         label="Inhoud", help_text="Inhoud van het tekstblok", required=False
     )
 
-    styling = BaseStylingBlock()
+    styling = StylingBlock()
 
     class Meta:
         preview = ["block_text"]
@@ -57,7 +57,7 @@ class DividerBlock(blocks.StructBlock):
     divider_type = blocks.ChoiceBlock(
         choices=DIVIDER_CHOICES, label="Divider type", default="lg-thin"
     )
-    styling = BaseStylingBlock()
+    styling = StylingBlock()
 
     class Meta:
         preview_template = "preview/html/divider.html"
@@ -73,7 +73,7 @@ class ImageBlock(blocks.StructBlock):
         required=False,
     )
     lazy = blocks.BooleanBlock(label="Lazy", default=False, required=False)
-    styling = BaseStylingBlock()
+    styling = StylingBlock()
 
     class Meta:
         preview = ["image", "alt"]
@@ -92,7 +92,7 @@ class VideoBlockValue(StructValue):
 class VideoBlock(blocks.StructBlock):
     video = EmbedBlock(max_width=1200, max_height=800, label="Video url")
     lazy = blocks.BooleanBlock(label="Lazy", default=False, required=False)
-    styling = BaseStylingBlock()
+    styling = StylingBlock()
 
     class Meta:
         preview_template = "preview/html/video.html"

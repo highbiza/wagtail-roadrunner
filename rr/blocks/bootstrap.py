@@ -2,7 +2,7 @@ import uuid
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
-from rr.blocks.styling import BaseStylingBlock
+from rr.blocks.styling import StylingBlock
 
 
 class BootstrapColorChoiceBlock(blocks.ChoiceBlock):
@@ -39,7 +39,7 @@ class PopupBlock(blocks.StructBlock):
     )
     popup_content = blocks.RichTextBlock(label="Text", help_text="Body of the popup")
     big_modal = blocks.BooleanBlock(label="Big modal", required=False, default=True)
-    styling = BaseStylingBlock()
+    styling = StylingBlock()
 
     class Meta:
         form_template = "formtemplate/popup.html"
@@ -78,7 +78,7 @@ class ButtonBlock(blocks.StructBlock):
         required=False, default=False, label="Open in new tab"
     )
     button_style = BootstrapColorChoiceBlock(label="Button style")
-    styling = BaseStylingBlock()
+    styling = StylingBlock()
 
     class Meta:
         preview_template = "preview/bootstrap/button.html"
@@ -98,7 +98,7 @@ class TabChildrenBlock(blocks.StructBlock):
 class TabBlock(blocks.StructBlock):
     tab_style = BootstrapTabStylingBlock(label="Tab style", default="tabs")
     tabs = blocks.ListBlock(TabChildrenBlock())
-    styling = BaseStylingBlock()
+    styling = StylingBlock()
 
     def get_uuid(self):
         return uuid.uuid4()
@@ -135,7 +135,7 @@ class SliderChildBlock(blocks.StructBlock):
 
 class SliderBlock(blocks.StructBlock):
     slides = blocks.ListBlock(SliderChildBlock())
-    styling = BaseStylingBlock()
+    styling = StylingBlock()
 
     class Meta:
         group = "Bootstrap"

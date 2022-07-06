@@ -1,10 +1,11 @@
 from django import forms
 from wagtail.core.blocks.base import BlockField as WagtailBlockField
 from wagtail.core.fields import StreamField
-from wagtail.core.blocks import StreamBlock
+from wagtail.core.blocks import StreamBlock, StructBlock
 
 from rr.widgets import RoadRunnerBlockWidget
 from rr.blocks.template import TemplateBlock
+from rr.blocks.styling import StylingBlock
 from rr.blocks.main import (
     RoadRunnerBaseBlock,
     FixedWidthRowBlock,
@@ -44,18 +45,44 @@ class RoadRunnerField(StreamField):
             [
                 (
                     "fixed_width",
-                    FixedWidthRowBlock(
-                        RoadRunnerBaseBlock(
-                            [("content", RoadRunnerStreamBlock(block_types))]
-                        ),
+                    StructBlock(
+                        [
+                            (
+                                "row",
+                                FixedWidthRowBlock(
+                                    RoadRunnerBaseBlock(
+                                        [
+                                            (
+                                                "content",
+                                                RoadRunnerStreamBlock(block_types),
+                                            )
+                                        ]
+                                    ),
+                                ),
+                            ),
+                            ("styling", StylingBlock()),
+                        ], form_classname="roadrunner"
                     ),
                 ),
                 (
                     "full_width",
-                    FullWidthRowBlock(
-                        RoadRunnerBaseBlock(
-                            [("content", RoadRunnerStreamBlock(block_types))]
-                        ),
+                    StructBlock(
+                        [
+                            (
+                                "row",
+                                FullWidthRowBlock(
+                                    RoadRunnerBaseBlock(
+                                        [
+                                            (
+                                                "content",
+                                                RoadRunnerStreamBlock(block_types),
+                                            )
+                                        ]
+                                    ),
+                                ),
+                            ),
+                            ("styling", StylingBlock()),
+                        ], form_classname="roadrunner"
                     ),
                 ),
                 (

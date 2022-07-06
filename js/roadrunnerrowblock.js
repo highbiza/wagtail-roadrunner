@@ -119,6 +119,10 @@ class RoadrunnerRowBlock extends window.wagtailStreamField.blocks.ListBlock {
 
 
 export class RoadrunnerRowBlockDefinition extends window.wagtailStreamField.blocks.ListBlockDefinition {
+  constructor(name, childBlockDef, initialChildState, meta) {
+    meta.label = ""
+    super(name, childBlockDef, initialChildState, meta)
+  }
   render(placeholder, prefix, initialState, initialError) {
     return new RoadrunnerRowBlock(this, placeholder, prefix, initialState, initialError)
   }

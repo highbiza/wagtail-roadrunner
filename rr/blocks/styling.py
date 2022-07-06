@@ -54,7 +54,7 @@ class ColorPickerBlock(blocks.CharBlock):
 register(ColorPickerBlockAdapter(), ColorPickerBlock)
 
 
-class BaseStylingBlock(blocks.StructBlock):
+class StylingBlock(blocks.StructBlock):
     margin = blocks.ChoiceBlock(
         label="Margin", required=False, choices=get_choices("margin")
     )
