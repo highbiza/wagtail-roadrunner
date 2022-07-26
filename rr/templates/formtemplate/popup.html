@@ -31,9 +31,16 @@
 		<section class="tab-pane fade show active" id="all-{{prefix}}" role="tabpanel">
 			<div class="split-row">
 				<div class="col5">
-					<h1>Knop</h1>
-					{% include "roadrunner/partials/form_field.html" with child=children.text %}
-					{% include "roadrunner/partials/form_field.html" with child=children.button_style %}
+					<div>
+						<h1>Knop</h1>
+						{% include "roadrunner/partials/form_field.html" with child=children.text %}
+						{% include "roadrunner/partials/form_field.html" with child=children.button_style %}
+					</div>
+					<div class="mt-5">
+						<h1>Geen knop</h1>
+						{% include "roadrunner/partials/form_field.html" with child=children.open_on_load %}
+						{% include "roadrunner/partials/form_field.html" with child=children.open_once %}
+					</div>
 				</div>
 				<div class="col7">
 					<h1>Popup</h1>

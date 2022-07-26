@@ -21,7 +21,7 @@ class ListBlockPreview extends Preview {
   render(previewPlaceholder, prefix, initialState, initialError) {
     const { element, placeholders: [childPlaceholder, placeholder] } = renderInPlaceHolder(previewPlaceholder, (
       <Fragment>
-        <div class="preview-listblock">
+        <div className="preview-listblock">
           <PlaceHolder/>
         </div>
         <PlaceHolder/>

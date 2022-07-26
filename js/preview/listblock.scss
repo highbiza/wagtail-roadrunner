@@ -1,3 +1,25 @@
 .preview-listblock {
-    border: 4px solid pink;
+    position: relative;
+    height: 300px;
+    padding: 20px 40px;
+    & > div:not([data-jsx-placeholder]){
+        width: calc(100% - 40px);
+        max-width: 550px;
+        height: 300px;
+        position: absolute;
+        top: 0;
+        left: 40px;
+        transition: .2s ease;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 0 20px -10px rgba(0,0,0,.4);
+        @for $i from 1 through 4 {
+            &:nth-child(1n + #{$i}) {
+                transform: translate(calc(($i * -10px) + 10px), calc(($i * 10px) - 10px));
+                
+            }
+        }
+    }
 }
+
+@import "slider_preview";
