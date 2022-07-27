@@ -98,3 +98,10 @@ class VideoBlock(blocks.StructBlock):
         preview_template = "preview/html/video.html"
         group = "HTML"
         value_class = VideoBlockValue
+
+class HtmlBlock(blocks.StructBlock):
+    html = blocks.RawHTMLBlock(required=False)
+
+    class Meta:
+        preview_template = "preview/html/html.html"
+        group = "HTML"

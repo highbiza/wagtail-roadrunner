@@ -4,6 +4,7 @@ from django.utils.module_loading import import_string
 from django.conf import settings
 from wagtail.core import blocks
 
+
 from rr.blocks.html import (
     HeaderBlock,
     DividerBlock,
@@ -11,6 +12,7 @@ from rr.blocks.html import (
     VideoBlock,
     RichText,
     PageTitle,
+    HtmlBlock,
 )
 from rr.blocks.bootstrap import (
     PopupBlock,
@@ -27,7 +29,6 @@ preset_blocks = [
         HeaderBlock(
             template="streamfields/html/header.html",
             icon="title",
-            roadrunner_options={"group": "HTML", "title": "text"},
         ),
     ),
     (
@@ -35,7 +36,6 @@ preset_blocks = [
         PageTitle(
             template="streamfields/html/pagetitle.html",
             icon="title",
-            roadrunner_options={"group": "HTML", "title": "text"},
         ),
     ),
     (
@@ -43,7 +43,6 @@ preset_blocks = [
         DividerBlock(
             template="streamfields/html/divider.html",
             icon="horizontalrule",
-            roadrunner_options={"group": "HTML"},
         ),
     ),
     (
@@ -51,7 +50,6 @@ preset_blocks = [
         ImageBlock(
             template="streamfields/html/image_lazy.html",
             icon="image",
-            roadrunner_options={"group": "HTML", "title": "alt"},
         ),
     ),
     (
@@ -59,7 +57,6 @@ preset_blocks = [
         VideoBlock(
             template="streamfields/html/embed_video.html",
             icon="media",
-            roadrunner_options={"group": "HTML", "title": "url"},
         ),
     ),
     (
@@ -67,7 +64,13 @@ preset_blocks = [
         RichText(
             template="streamfields/html/richtext.html",
             icon="richtext",
-            roadrunner_options={"group": "HTML", "title": "block_text"},
+        ),
+    ),
+    (
+        "html",
+        HtmlBlock(
+            template="streamfields/html/html.html",
+            icon="form",
         ),
     ),
     # bootstrap
@@ -76,7 +79,6 @@ preset_blocks = [
         PopupBlock(
             template="streamfields/bootstrap/popup.html",
             icon="form",
-            roadrunner_options={"group": "Bootstrap", "title": "text"},
         ),
     ),
     (
@@ -84,7 +86,6 @@ preset_blocks = [
         ButtonBlock(
             template="streamfields/bootstrap/button.html",
             icon="form",
-            roadrunner_options={"group": "Bootstrap", "title": "label"},
         ),
     ),
     (
@@ -92,7 +93,6 @@ preset_blocks = [
         TabBlock(
             template="streamfields/bootstrap/tabs.html",
             icon="form",
-            roadrunner_options={"group": "Bootstrap"},
         ),
     ),
     (
@@ -100,7 +100,6 @@ preset_blocks = [
         SliderBlock(
             template="streamfields/bootstrap/slider.html",
             icon="form",
-            roadrunner_options={"group": "Bootstrap"},
         ),
     ),
     # ListBlocks,
@@ -110,8 +109,7 @@ preset_blocks = [
             AccordionBlock(),
             template="streamfields/listblock/accordion.html",
             icon="plus-inverse",
-            roadrunner_options={"group": "Bootstrap", "title": "header"},
-            group="Bootstrap",
+            group="Bootstrap"
         ),
     ),
 ]
