@@ -106,6 +106,7 @@
 
 	// Custom styling for mockup of the form_templates
 	.split-row{
+		display: flex;
 		& > div{
 			@media screen and (min-width: 991px){
 				&:first-child{

@@ -6,7 +6,7 @@
         <div class="carousel-item{% if forloop.first %} active{% endif %}">
             {% image slide.image width-1920 class="img-fluid w-100" %}
             <div class="carousel-caption d-none d-md-block">
-                {{ slide.body|richtext }}
+                {{ slide.body }}
             </div>
             {% if slide.ribbon_color %}
             <span class="ribbon ribbon-{{ slide.ribbon_position }}" style="background-color: {{ slide.ribbon_color }};"></span>

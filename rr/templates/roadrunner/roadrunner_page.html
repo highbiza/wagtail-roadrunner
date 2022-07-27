@@ -6,7 +6,7 @@
 <div class="content_wrapper">
     {% block content %}
         {% for block in page.content %}
-            {% include_block block %}
+            {% include_block block with block_key=block.id %}
         {% endfor %}
     {% endblock %}
 </div>

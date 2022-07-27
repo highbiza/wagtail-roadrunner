@@ -12,6 +12,7 @@
                    linear-gradient(to top right,#0000 50%, #fbfbfb 50.1%) top right/50px 50px no-repeat,
                    transparent;
                 z-index: 10;
+                clip-path: polygon(100% 0, 0 0, 100% 100%);
                 a.nav-link {
                     color: #585858;
                     text-align: right;
