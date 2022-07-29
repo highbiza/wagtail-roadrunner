@@ -39,8 +39,18 @@ class PopupBlock(blocks.StructBlock):
     )
     popup_content = blocks.RichTextBlock(label="Text", help_text="Body of the popup")
     big_modal = blocks.BooleanBlock(label="Big modal", required=False, default=True)
-    open_on_load = blocks.BooleanBlock(label="Open wanneer pagina geladen wordt", help_text="Hierdoor is de button ook niet meer zichtbaar", required=False, default=False)
-    open_once = blocks.BooleanBlock(label="Een keer openen", help_text="Nadat de popup wordt gesloten wordt die niet meer getoont", required=False, default=False)
+    open_on_load = blocks.BooleanBlock(
+        label="Open wanneer pagina geladen wordt",
+        help_text="Hierdoor is de button ook niet meer zichtbaar",
+        required=False,
+        default=False,
+    )
+    open_once = blocks.BooleanBlock(
+        label="Een keer openen",
+        help_text="Nadat de popup wordt gesloten wordt die niet meer getoont",
+        required=False,
+        default=False,
+    )
 
     styling = StylingBlock()
 

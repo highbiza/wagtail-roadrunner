@@ -109,7 +109,7 @@ preset_blocks = [
             AccordionBlock(),
             template="streamfields/listblock/accordion.html",
             icon="plus-inverse",
-            group="Bootstrap"
+            group="Bootstrap",
         ),
     ),
 ]

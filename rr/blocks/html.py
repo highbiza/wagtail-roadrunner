@@ -99,6 +99,7 @@ class VideoBlock(blocks.StructBlock):
         group = "HTML"
         value_class = VideoBlockValue
 
+
 class HtmlBlock(blocks.StructBlock):
     html = blocks.RawHTMLBlock(required=False)
 
