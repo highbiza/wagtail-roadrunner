@@ -3,7 +3,7 @@
 <div id="carouselExampleCaptions" class="carousel slide {% get_styling_classes self.styling %}" {% get_styling self.styling %} data-bs-ride="carousel">
     <div class="carousel-inner">
         {% for slide in self.slides %}
-        <div class="carousel-item{% if forloop.first %} active{% endif %}">
+        <div class="carousel-item{% if forloop.first %} active{% endif %} col-3">
             {% image slide.image width-1920 class="img-fluid w-100" %}
             <div class="carousel-caption d-none d-md-block">
                 {{ slide.body }}

@@ -30,6 +30,9 @@
                 .c-sf-block {
                     position: relative;
                     box-shadow: unset !important;
+                    .c-sf-container__block-container{
+                        padding: 0 !important;
+                    }
                     .c-sf-block {
                         margin: 0;
                         border: 0;
@@ -79,9 +82,36 @@
                                 border: 2px solid #f5f5f5 !important;
                             }
                             div.preview{
-                                padding-top: 1rem;
-                                padding-bottom: 1rem;
                                 background: transparent;
+                                padding: 0;
+                                min-height: unset;
+                                .preview-container{
+                                    padding-top: 1rem;
+                                    padding-bottom: 1rem;
+                                }
+                                .rich-text{
+                                    max-height: 400px;
+                                    overflow: hidden;
+                                    position: relative;
+                                    &:after{
+                                        content: "";
+                                        height: 50px;
+                                        width: 100%;
+                                        background: linear-gradient(to bottom, transparent, white);
+                                        top: 0;
+                                        left: 0;
+                                        margin-top: 350px;
+                                        position: absolute;
+                                        z-index: 2;
+                                    }
+                                }
+                                .video-placeholder{
+                                    display: flex;
+                                    img{
+                                        margin: 0 auto;
+                                        max-width: 500px;
+                                    }
+                                }
                             }
                             .c-sf-block__header{
                                 position: absolute;
@@ -111,6 +141,8 @@
                                     border-radius: initial;
                                     opacity: 1;
                                     pointer-events: all;
+                                    width: auto;
+                                    max-width: 100%;
                                 }
                                 .c-sf-block__content-inner{
                                     padding: 1rem;

@@ -1,0 +1,53 @@
+{% load wagtailadmin_tags %}
+
+<div class="{{ classname }}">
+    {% if help_text %}
+    <span>
+        <div class="help">
+            {% icon name="help" class_name="default" %}
+            {{ help_text }}
+        </div>
+    </span>
+    {% endif %}
+
+    <ul class="nav nav-tabs corner-tab-control" role="tablist">
+		<li class="nav-item" role="presentation">
+			<a class="nav-link" data-bs-toggle="tab" href="#styling-{{prefix}}" role="tab" aria-controls="styling-{{prefix}}" aria-selected="false">
+				<svg class="icon icon-palette default" aria-hidden="true" focusable="false">
+                    <use href="#icon-palette"/>
+                </svg>
+			</a>
+		</li>
+		<li class="nav-item" role="presentation">
+			<a class="nav-link active" data-bs-toggle="tab" href="#all-{{prefix}}" role="tab" aria-controls="all-{{prefix}}">
+				<svg class="icon icon-layout default" aria-hidden="true" focusable="false">
+                    <use href="#icon-layout"/>
+                </svg>
+			</a>
+		</li>
+	</ul>
+
+	<div class="nav tab-content">
+		<section class="tab-pane fade show active" id="all-{{prefix}}" role="tabpanel">
+			{% include "roadrunner/partials/form_field.html" with child=children.image %}
+			{% include "roadrunner/partials/form_field.html" with child=children.alt %}
+			{% include "roadrunner/partials/form_field.html" with child=children.lazy %}
+			<div class="d-flex w-100">
+				<a class="nav-link py-3 fw-bold" data-bs-toggle="collapse" href="#all-{{prefix}}-2" data-bs-target="#all-{{prefix}}-2" role="tab" aria-controls="all-{{prefix}}">
+					Advanced settings
+					<svg class="icon icon-cog default icon-small ps-1" aria-hidden="true" focusable="false">
+						<use href="#icon-cog"/>
+					</svg>
+				</a>
+			</div>
+			<div class="collapse" id="all-{{prefix}}-2" role="tabpanel">
+				{% include "roadrunner/partials/form_field.html" with child=children.page_url %}
+				{% include "roadrunner/partials/form_field.html" with child=children.external_url %}
+				{% include "roadrunner/partials/form_field.html" with child=children.open_in_new_tab %}
+			</div>
+		</section>
+		<section class="tab-pane fade" id="styling-{{prefix}}" role="tabpanel">
+			{{children.styling.render_form}}
+		</section>
+	</div>
+</div>

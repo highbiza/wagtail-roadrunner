@@ -73,10 +73,16 @@ class ImageBlock(blocks.StructBlock):
         required=False,
     )
     lazy = blocks.BooleanBlock(label="Lazy", default=False, required=False)
+    page_url = blocks.PageChooserBlock(label="Pagina url", required=False)
+    external_url = blocks.CharBlock(label="Externe link", required=False)
+    open_in_new_tab = blocks.BooleanBlock(
+        label="Open in een nieuwe tab", required=False
+    )
     styling = StylingBlock()
 
     class Meta:
-        preview = ["image", "alt"]
+        preview = ["image"]
+        form_template = "formtemplate/image.html"
         group = "HTML"
 
 

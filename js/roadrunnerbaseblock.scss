@@ -41,5 +41,18 @@
                 }
             }
         }
+        .c-sf-add-button{
+            height: auto;
+            transition: .2s ease opacity;
+            &:not(:hover){
+                opacity: .5;
+                filter: grayscale(1);
+            }
+            i{
+                line-height: 28px;
+                height: 25px;
+                font-size: 24px;
+            }
+        }
     }
 }
