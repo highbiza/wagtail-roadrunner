@@ -15,7 +15,7 @@
 {% if self.lazy %}
 <picture class="lazy">
     <data-src type="image/webp" srcset="{{ image_webp.url }} {{ image_webp.width }}w, {{ image_webp_50.url }} {{ image_webp_50.width }}w, {{ image_webp_30.url }} {{ image_webp_30.width}}w" ></data-src>
-    <data-src type="image/webp" srcset="{{ image.url }} {{ image.width }}w, {{ image_50.url }} {{ image_50.width }}w, {{ image_30.url }} {{ image_30.width}}w" ></data-src>
+    <data-src srcset="{{ image.url }} {{ image.width }}w, {{ image_50.url }} {{ image_50.width }}w, {{ image_30.url }} {{ image_30.width}}w" ></data-src>
     <data-img class="img-fluid {% get_styling_classes self.styling %}" {% get_styling self.styling %} src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt }}" ></data-img>
 </picture>
 {% else %}
