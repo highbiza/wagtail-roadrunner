@@ -2,7 +2,7 @@ import uuid
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
-from rr.blocks.styling import StylingBlock
+from rr.blocks.styling import StylingBlock, ColorPickerBlock
 
 
 class BootstrapColorChoiceBlock(blocks.ChoiceBlock):
@@ -137,7 +137,7 @@ class SliderChildBlock(blocks.StructBlock):
         required=False,
         default="middle-left",
     )
-    ribbon_color = blocks.CharBlock(required=False)
+    ribbon_color = ColorPickerBlock(label="Ribbon kleur", required=False)
     ribbon_position = blocks.ChoiceBlock(
         choices=[("left", "Left"), ("right", "Right")], required=False
     )
