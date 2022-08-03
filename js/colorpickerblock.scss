@@ -2,38 +2,36 @@
 
 .colorpicker-wrapper{
     position: relative;
-    .fieldname-background_color, .fieldname-color{
-        .field-content .input{
-            color: var(--picker-color);
-            position: relative;
+    .field-content .input{
+        color: var(--picker-color);
+        position: relative;
 
-            span {
-                position: absolute;
-                top: 50%;
-                right: 1.2em;
-                transform: translateY(-50%);
-        
-                &::after {
-                    text-align: center;
-                    content: "";
-                    display: block;
-                    margin: 0 auto;
-                    width: 100%;
-                    height: 32px;
-                    width: 32px;
-                    border: 1px solid var(--picker-color);
-                    border-radius: 50%;
-                    background: var(--picker-color);
-        
-                }
-                &:hover {
-                    &::after {
-                        cursor: pointer;
-                        opacity: .8;
-                        color:white;
-                    }
-                };
+        span {
+            position: absolute;
+            top: 50%;
+            right: 1.2em;
+            transform: translateY(-50%);
+    
+            &::after {
+                text-align: center;
+                content: "";
+                display: block;
+                margin: 0 auto;
+                width: 100%;
+                height: 32px;
+                width: 32px;
+                border: 1px solid var(--picker-color);
+                border-radius: 50%;
+                background: var(--picker-color);
+    
             }
+            &:hover {
+                &::after {
+                    cursor: pointer;
+                    opacity: .8;
+                    color:white;
+                }
+            };
         }
     }
     .color-picker{
