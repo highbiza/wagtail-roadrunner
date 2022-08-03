@@ -1,5 +1,6 @@
-{% load styling_tags wagtailimages_tags %}{% spaceless %}
+{% load styling_tags wagtailimages_tags %}
 
+{% spaceless %}
 {% image self.image original format-webp as image_webp %}
 {% image self.image original as image %}
 {% image self.image scale-50 format-webp as image_webp_50 %}
@@ -12,21 +13,17 @@
 {% endif %}
 
 {% if self.lazy %}
-
 <picture class="lazy">
+    <data-src type="image/webp" srcset="{{ image_webp.url }} {{ image_webp.width }}w, {{ image_webp_50.url }} {{ image_webp_50.width }}w, {{ image_webp_30.url }} {{ image_webp_30.width}}w" ></data-src>
+    <data-src type="image/webp" srcset="{{ image.url }} {{ image.width }}w, {{ image_50.url }} {{ image_50.width }}w, {{ image_30.url }} {{ image_30.width}}w" ></data-src>
+    <data-img class="img-fluid {% get_styling_classes self.styling %}" {% get_styling self.styling %} src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt }}" ></data-img>
+</picture>
+{% else %}
+<picture>
     <source type="image/webp" srcset="{{ image_webp.url }} {{ image_webp.width }}w, {{ image_webp_50.url }} {{ image_webp_50.width }}w, {{ image_webp_30.url }} {{ image_webp_30.width}}w" />
     <source srcset="{{ image.url }} {{ image.width }}w, {{ image_50.url }} {{ image_50.width }}w, {{ image_30.url }} {{ image_30.width}}w" />
     <img class="img-fluid {% get_styling_classes self.styling %}" {% get_styling self.styling %} src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt }}" />
 </picture>
-
-{% else %}
-
-<picture>
-    <data-src type="image/webp" srcset="{{ image_webp.url }} {{ image_webp.width }}w, {{ image_webp_50.url }} {{ image_webp_50.width }}w, {{ image_webp_30.url }} {{ image_webp_30.width}}w" ></data-src>
-    <data-src type="image/webp" srcset="{{ image.url }} {{ image.width }}w, {{ image_50.url }} {{ image_50.width }}w, {{ image_30.url }} {{ image_30.width}}w" ></data-src>
-    <img class="img-fluid {% get_styling_classes self.styling %}" {% get_styling self.styling %} src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt }}" ></img>
-</picture>
-
 {% endif %}
 
 {% if self.page_url or self.external_url %}
