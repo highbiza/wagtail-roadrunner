@@ -2,21 +2,26 @@
     position: relative;
     height: 300px;
     padding: 20px 40px;
-    & > div:not([data-jsx-placeholder]){
+    max-width: 600px;
+    margin: 0 auto;
+    & > div:not([data-jsx-placeholder]), & > img{
         width: calc(100% - 40px);
         max-width: 550px;
-        height: 300px;
+        height: calc(300px - 2rem);
         position: absolute;
         top: 0;
         left: 40px;
         transition: .2s ease;
         border-radius: 1rem;
         overflow: hidden;
-        box-shadow: 0 0 20px -10px rgba(0,0,0,.4);
+        box-shadow: 0 0 15px -5px rgba(0,0,0,.2);
+        background: white;
+        padding: 1rem;
+        object-fit: cover;
+        object-position: center;
         @for $i from 1 through 4 {
             &:nth-child(1n + #{$i}) {
                 transform: translate(calc(($i * -10px) + 10px), calc(($i * 10px) - 10px));
-                
             }
         }
     }

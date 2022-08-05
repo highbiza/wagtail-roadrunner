@@ -1,7 +1,7 @@
 #roadrunner-breakpoint-switcher {
     z-index: 4;
     position: sticky;
-    top:6px;
+    top: 6px;
     display: flex;
     justify-content: flex-end;
     ul {
@@ -16,6 +16,44 @@
                 color: var(--color-primary);
             }
             color: #4d4d4d;
+        }
+    }
+}
+
+// Bootstrap tabs css
+.tabs-wrapper{
+    .nav.tab-content{
+        padding: 1rem !important;
+        border: 1px solid #dee2e6;
+        width: calc(100% - 2rem) !important;
+    }
+    .tab-pane{
+        &:not(.active){
+            display: none;
+        }
+    }
+    .nav-tabs{
+        display: flex;
+        flex-wrap: wrap;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+        .nav-link{
+            display: block;
+            margin-bottom: -1px;
+            background: 0 0;
+            border: 1px solid #0000;
+            border-top-left-radius: 0.25rem;
+            border-top-right-radius: 0.25rem;
+            padding: 0.75rem 1.25rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #495057;
+            &.active{
+                color: #007d7e;
+                background-color: #fff;
+                border-color: #dee2e6 #dee2e6 #fff;
+            }
         }
     }
 }
