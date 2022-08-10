@@ -5,7 +5,9 @@ from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 
+from rr.telepath import register
 from rr.blocks.styling import StylingBlock
+from rr.adapters import PageTitleAdapter
 
 
 class HeaderBlock(blocks.StructBlock):
@@ -34,6 +36,9 @@ class PageTitle(blocks.StructBlock):
 
     class Meta:
         group = "HTML"
+
+
+register(PageTitleAdapter(), PageTitle)
 
 
 class RichText(blocks.StructBlock):

@@ -10,6 +10,7 @@ import { RichTextBlockDefinition } from "./preview/richtextblock"
 import { GridChoiceBlockDefinition } from "./gridchoiceblock"
 import { ColorPickerBlockDefinition } from "./colorpickerblock"
 import { PreviewListBlockDefinition } from "./preview/listblock"
+import { PageTitleDefinition } from "./preview/pagetitle"
 
 import "./bootstrapnoconflict/tab"
 import "./bootstrapnoconflict/collapse"
@@ -26,6 +27,7 @@ window.telepath.register('roadrunner.fields.RichTextBlockDefinition', RichTextBl
 window.telepath.register('roadrunner.fields.GridChoiceBlockDefinition', GridChoiceBlockDefinition)
 window.telepath.register('roadrunner.fields.ColorPickerBlockDefinition', ColorPickerBlockDefinition)
 window.telepath.register('roadrunner.fields.PreviewListBlockDefinition', PreviewListBlockDefinition)
+window.telepath.register("roadrunner.fields.PageTitleDefinition", PageTitleDefinition)
 
 $(() => {
   breakPointEmitter.addListener(newBreakPoint => {

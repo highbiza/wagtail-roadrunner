@@ -31,6 +31,19 @@ class RoadRunnerStreamBlockAdapter(StreamBlockAdapter):
         )
 
 
+class PageTitleAdapter(StructBlockAdapter):
+    js_constructor = "roadrunner.fields.PageTitleDefinition"
+
+    @cached_property
+    def media(self):
+        return super().media + forms.Media(
+            js=[
+                versioned_static("wagtailadmin/js/telepath/blocks.js"),
+                versioned_static("roadrunner/roadrunner.js"),
+            ],
+        )
+
+
 class RoadRunnerStructBlockAdapter(StructBlockAdapter):
     js_constructor = "roadrunner.fields.StylingBlockDefinition"
 
