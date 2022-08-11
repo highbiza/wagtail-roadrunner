@@ -8,7 +8,6 @@ style_classes = ["block_classes", "padding", "margin", "border_radius", "border"
 
 @register.simple_tag
 def get_styling(styling, no_style_tag=False):
-    print(styling)
     if not styling:
         return
 
