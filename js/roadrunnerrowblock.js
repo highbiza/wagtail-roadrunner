@@ -62,12 +62,12 @@ const ContainerSwap = ({prefix, originalWidth, strings}) => {
   }
 
   return (
-      <div class="modal" id={`swap-${prefix}`} tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
+      <div class="modal preview" id={`swap-${prefix}`} tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
-            <div class="modal-header">
-              <h2 class="modal-title">{strings.SWAP_TITLE}</h2>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <div class="modal-header d-flex align-items-center">
+              <h3 class="modal-title my-0">{strings.SWAP_TITLE}</h3>
+              <button type="button" class="btn btn-secondary ms-auto py-1" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -76,7 +76,7 @@ const ContainerSwap = ({prefix, originalWidth, strings}) => {
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-primary swap">{ strings.OK }</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">{ strings.CANCEL }</button>
+              <button type="button" class="btn btn-secondary ms-2" data-dismiss="modal">{ strings.CANCEL }</button>
             </div>
           </div>
         </div>
