@@ -31,6 +31,19 @@ class RoadRunnerStreamBlockAdapter(StreamBlockAdapter):
         )
 
 
+class PageTitleAdapter(StructBlockAdapter):
+    js_constructor = "roadrunner.fields.PageTitleDefinition"
+
+    @cached_property
+    def media(self):
+        return super().media + forms.Media(
+            js=[
+                versioned_static("wagtailadmin/js/telepath/blocks.js"),
+                versioned_static("roadrunner/roadrunner.js"),
+            ],
+        )
+
+
 class RoadRunnerStructBlockAdapter(StructBlockAdapter):
     js_constructor = "roadrunner.fields.StylingBlockDefinition"
 
@@ -128,6 +141,15 @@ class PreviewListBlockAdapter(ListBlockAdapter):
 
 class RoadrunnerRowBlockAdapter(PreviewListBlockAdapter):
     js_constructor = "roadrunner.fields.RoadrunnerRowBlockDefinition"
+
+    def js_args(self, block):
+        [name, child_blocks, values, meta] = super().js_args(block)
+        meta["strings"]["OK"] = _("Ok")
+        meta["strings"]["CANCEL"] = _("Cancel")
+        meta["strings"]["SWAP_TITLE"] = _("Change container width")
+        meta["strings"]["SWAP_TO_FULL_WIDTH"] = _("Change container to full width")
+        meta["strings"]["SWAP_TO_BOXED"] = _("Change container width to boxed")
+        return [name, child_blocks, values, meta]
 
     @cached_property
     def media(self):

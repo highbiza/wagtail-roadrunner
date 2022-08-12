@@ -1,4 +1,3 @@
-
 .roadrunner {
     display: flex;
     flex-flow: row wrap;
@@ -7,6 +6,26 @@
         width: 100%;
         & + .field{
             padding-bottom: 15px;
+        }
+    }
+
+    .modal{
+        .modal-dialog{
+            &.modal-sm{
+                max-width: 700px;
+            }
+            .modal-content{
+                padding-bottom: 0;
+                .modal-body, .modal-header, .modal-footer{
+                    padding: 1rem;
+                }
+                .modal-body{
+                    *:last-child{
+                        // No ugly spacing bottom of body
+                        margin-bottom: 0;
+                    }
+                }
+            }
         }
     }
 
