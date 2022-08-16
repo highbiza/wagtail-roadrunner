@@ -1,18 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 26.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 359.2 359.2" style="enable-background:new 0 0 359.2 359.2;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#333333;}
-	.st1{fill:#FFFFFF;}
-	.st2{font-family:'MyriadPro-Regular';}
-	.st3{font-size:73.0521px;}
-</style>
-<g id="Layer_2">
-	<path class="st0" d="M311.6,261.2H47.4C21.2,261.2,0,240,0,213.8v-68.3c0-26.2,21.2-47.4,47.4-47.4h264.3
-		c26.2,0,47.4,21.2,47.4,47.4v68.3C359,240,337.8,261.2,311.6,261.2z"/>
-	<text transform="matrix(1 0 0 1 82.378 201.147)" class="st1 st2 st3">Lorem</text>
-</g>
-<g id="Layer_1">
-</g>
+<svg id="icon-button" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+	 viewBox="0 0 448 512" style="enable-background:new 0 0 448 512;">
+<path d="M400,224c-9.1,0-17.6,2.7-24.9,7.1c-4.2-22.2-23.6-39.1-47.1-39.1c-17.4,0-32.5,9.3-40.9,23.2c-5-22.3-23.6-39.2-47.1-39.2
+	c-12.4,0-23.5,4.8-32,12.5V40c0-22.1-17.9-40-39.1-40c-23,0-40.9,17.9-40.9,40v322.7L72,288c-7.8-10.5-19.9-16-32-16
+	c-21.2,0-40,17.1-40,40c0,8.4,2.6,16.8,8,24l91.2,121.6C124.8,491.7,165.5,512,208,512h96c79.4,0,144-64.6,144-144v-96
+	C448,245.5,426.5,224,400,224z M240,400c0,8.8-7.2,16-16,16s-16-7.2-16-16v-96c0-8.8,7.2-16,16-16s16,7.2,16,16V400z M304,400
+	c0,8.8-7.2,16-16,16s-16-7.2-16-16v-96c0-8.8,7.2-16,16-16s16,7.2,16,16V400z M368,400c0,8.8-7.2,16-16,16s-16-7.2-16-16v-96
+	c0-8.8,7.2-16,16-16s16,7.2,16,16V400z"/>
 </svg>
