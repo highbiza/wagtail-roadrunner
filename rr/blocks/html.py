@@ -67,6 +67,7 @@ class DividerBlock(blocks.StructBlock):
     class Meta:
         preview_template = "preview/html/divider.html"
         group = "HTML"
+        icon = "divider"
 
 
 class ImageBlock(blocks.StructBlock):

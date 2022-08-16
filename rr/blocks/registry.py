@@ -28,14 +28,14 @@ preset_blocks = [
         "header",
         HeaderBlock(
             template="streamfields/html/header.html",
-            icon="title",
+            icon="header",
         ),
     ),
     (
         "pagetitle",
         PageTitle(
             template="streamfields/html/pagetitle.html",
-            icon="title",
+            icon="pagetitle",
         ),
     ),
     (
@@ -70,7 +70,7 @@ preset_blocks = [
         "html",
         HtmlBlock(
             template="streamfields/html/html.html",
-            icon="form",
+            icon="html",
         ),
     ),
     # bootstrap
@@ -78,28 +78,28 @@ preset_blocks = [
         "popup",
         PopupBlock(
             template="streamfields/bootstrap/popup.html",
-            icon="form",
+            icon="popup",
         ),
     ),
     (
         "button",
         ButtonBlock(
             template="streamfields/bootstrap/button.html",
-            icon="form",
+            icon="button",
         ),
     ),
     (
         "tabs",
         TabBlock(
             template="streamfields/bootstrap/tabs.html",
-            icon="form",
+            icon="tabs",
         ),
     ),
     (
         "slider",
         SliderBlock(
             template="streamfields/bootstrap/slider.html",
-            icon="form",
+            icon="slider",
         ),
     ),
     # ListBlocks,
@@ -108,7 +108,7 @@ preset_blocks = [
         blocks.ListBlock(
             AccordionBlock(),
             template="streamfields/listblock/accordion.html",
-            icon="plus-inverse",
+            icon="accordion",
             group="Bootstrap",
         ),
     ),
