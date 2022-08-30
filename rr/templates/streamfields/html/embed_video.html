@@ -1,5 +1,5 @@
 {% load wagtailembeds_tags styling_tags %}
 
-<div class="embed-video-wrapper {% get_styling_classes block.styling %}" {% get_styling block.styling %}>
+<div class="embed-video-wrapper {% get_styling_classes self.styling %}" {% get_styling self.styling %}>
 	{{ self.wide_video|safe }}
 </div>
