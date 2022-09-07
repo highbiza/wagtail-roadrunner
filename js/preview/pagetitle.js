@@ -5,7 +5,8 @@ import { Preview } from "./render"
 
 class PageTitle extends Preview {
   getValue() {
-    return $("h1").first().text()
+    return $("h1").first()
+      .text()
   }
 
   render(previewPlaceholder, prefix, initialState, initialError) {

@@ -62,25 +62,25 @@ const ContainerSwapUI = ({prefix, originalWidth, strings}) => {
   }
 
   return (
-      <div class="modal preview" id={`swap-${prefix}`} tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-sm" role="document">
-          <div class="modal-content">
-            <div class="modal-header d-flex align-items-center">
-              <h3 class="modal-title my-0">{strings.SWAP_TITLE}</h3>
-              <button type="button" class="btn btn-secondary ms-auto py-1" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>{ description }</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary swap">{ strings.OK }</button>
-              <button type="button" class="btn btn-secondary ms-2" data-dismiss="modal">{ strings.CANCEL }</button>
-            </div>
+    <div class="modal preview" id={`swap-${prefix}`} tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header d-flex align-items-center">
+            <h3 class="modal-title my-0">{strings.SWAP_TITLE}</h3>
+            <button type="button" class="btn btn-secondary ms-auto py-1" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>{ description }</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary swap">{ strings.OK }</button>
+            <button type="button" class="btn btn-secondary ms-2" data-dismiss="modal">{ strings.CANCEL }</button>
           </div>
         </div>
       </div>
+    </div>
   )
 }
 
@@ -88,7 +88,7 @@ const ContainerSwapUI = ({prefix, originalWidth, strings}) => {
 class ContainerSwapWidget {
   constructor(blockDef, prefix) {
     // cut off '-value-row'
-    var containerPrefix = prefix.slice(0, -10)
+    let containerPrefix = prefix.slice(0, -10)
     const containerTypeInput = $(`input[name=${containerPrefix}-type]`)
     const containerContentPath = $(`input[name=${containerPrefix}-id]`).val()
     if (containerContentPath) {
@@ -123,7 +123,7 @@ class ContainerSwapWidget {
       this.originalWidth = "full_width"
       this.containerTitle.text("Full width")
     }
-    const node = this.swapModal[0]
+    const [node] = this.swapModal
     $(this.swapModal).modal('hide')
     this.renderInPlaceHolder(node)
   }
@@ -133,17 +133,18 @@ class ContainerSwapWidget {
     evt.preventDefault()
     $(this.swapModal).modal('show')
   }
-  
+
   renderInPlaceHolder(originalPlaceholder) {
     if (this.hasContentPath) {
       const { element, placeholder} = renderInPlaceHolder(originalPlaceholder, (
         <Fragment>
-        <ContainerSwapUI prefix={this.prefix} originalWidth={this.originalWidth} strings={this.blockDef.meta.strings} />
-        <PlaceHolder/>
+          <ContainerSwapUI prefix={this.prefix} originalWidth={this.originalWidth} strings={this.blockDef.meta.strings} />
+          <PlaceHolder/>
         </Fragment>
       ))
       this.swapModal = $(element).find(`#swap-${this.prefix}`)
-      $(this.swapModal).find(".btn-primary.swap").click(this.handleAcceptSwap)
+      $(this.swapModal).find(".btn-primary.swap")
+        .click(this.handleAcceptSwap)
 
       this.element = element
       this.placeholder = placeholder
