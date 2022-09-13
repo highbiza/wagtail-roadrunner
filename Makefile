@@ -1,6 +1,6 @@
 .PHONY: fail-if-no-virtualenv all install lint black test debug undebug
 
-all: install
+all: install assets
 
 fail-if-no-virtualenv:
 ifndef VIRTUAL_ENV # check for a virtualenv in development environment
@@ -15,9 +15,10 @@ endif
 
 install: fail-if-no-virtualenv
 	PIP_INDEX_URL=${PIP_INDEX_URL} pip install --editable .[test] --upgrade --upgrade-strategy=eager --pre
+
+assets:
 	npm install
 	npm run build
-
 
 lint: fail-if-no-virtualenv
 	@black --check --exclude "migrations/*" rr
