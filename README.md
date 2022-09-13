@@ -132,3 +132,53 @@ ROADRUNNER_REGISTRY_FUNCTION = "myproject.registry.register_custom_blocks"
 Making previews
 ---------------
 
+We don't want to display the full block form in the page editor, just a small
+preview that is enough for a user to be able to recognise the content. There are
+3 ways to define a preview for your block, from simple to advanced these are:
+
+1. Use the ``meta.preview`` property, that lists the fields you want to show.
+2. Define ``meta.preview_template``.
+3. Add a ``renderPreview`` method to your telepath Block definition in javascript.
+
+Using the ``meta.preview`` property is done like this:
+
+```
+class ImageBlock(blocks.StructBlock):
+    image = ImageChooserBlock()
+    alt = blocks.CharBlock(
+        max_length=255,
+        label="Alt.",
+        help_text="Optioneel, afbeelding alt tekst",
+        required=False,
+    )
+    lazy = blocks.BooleanBlock(label="Lazy", default=False, required=False)
+    page_url = blocks.PageChooserBlock(label="Pe url", required=False)
+    external_url = blocks.CharBlock(label="External link", required=False)
+    open_in_new_tab = blocks.BooleanBlock(
+        label="Open in een nieuwe tab", required=False
+    )
+
+    class Meta:
+        preview = ["image"]
+```
+
+This block has a lot of fields that are more configuration than content. For a
+user it is enough to just show the image as the preview. This is easily achieved
+by specifying the ``meta.preview`` property as:
+
+```
+    class Meta:
+        preview = ["image"]
+```
+
+That reduces the clutter in the page editor interface by a lot! Instead of
+showing all the form fields on the page, we just show the most important field
+that makes the content recognisable for the user. The ``meta.preview`` property
+is a list, suppose we also want to make the ``alt`` field visible to the user,
+we could change it to:
+
+```
+    class Meta:
+        preview = ["image", "alt"]
+```
+
