@@ -290,8 +290,8 @@ export class MyPageTitleDefinition extends window.wagtailStreamField.blocks.Stru
   }
 }
 
-// register the 
-window.telepath.register("myproject.PageTitleDefinition", PageTitleDefinition)
+// register the MyPageTitleDefinition class with telepath as "myproject.PageTitleDefinition"
+window.telepath.register("myproject.PageTitleDefinition", MyPageTitleDefinition)
 ```
 
 To use this code, we should register an ``Adapter`` with telepath. Let's not
