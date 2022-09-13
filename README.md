@@ -1,5 +1,5 @@
 wagtail-roadrunner
-------------------
+==================
 
 Wagtail-roadrunner is a new type of page editor for wagtail. With the
 wagtail-roadrunner interface, blocks can be laid out in a grid instead of in
@@ -26,7 +26,7 @@ Wagtail-roadrunner offers a couple of ways for you to define previews for your
 blocks, which are documented below.
 
 Installation
-------------
+============
 
 To install the latest version from pypi
 
@@ -45,7 +45,7 @@ INSTALLED_APPS = [
 ```
 
 Usage
------
+=====
 
 wagtail-roadrunner comes with a new streamfield type, ``RoadRunnerField`` which
 can be used in a wagtail page like this:
@@ -130,7 +130,7 @@ ROADRUNNER_REGISTRY_FUNCTION = "myproject.registry.register_custom_blocks"
 ```
 
 Making previews
----------------
+===============
 
 We don't want to display the full block form in the page editor, just a small
 preview that is enough for a user to be able to recognise the content. There are
@@ -141,7 +141,7 @@ preview that is enough for a user to be able to recognise the content. There are
 3. Add a ``renderPreview`` method to your telepath Block definition in javascript.
 
 The preview property
-====================
+--------------------
 
 Using the ``meta.preview`` property is done like this:
 
@@ -186,7 +186,7 @@ we could change it to:
 ```
 
 The preview_template property
-=============================
+-----------------------------
 
 Using the ``meta.preview_template`` property is done like this:
 
@@ -234,5 +234,3 @@ your block. The fields are always accessed like this:
 ```
     children.field_name.render_form
 ```
-
-
