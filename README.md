@@ -200,18 +200,33 @@ class AccordionBlock(blocks.StructBlock):
         preview_template = "preview/bootstrap/accordion.html"
 ```
 
-What ``meta.preview_template`` does is look up the template for this specific block as
-preview/bootstrap/accordion.html. Here you can make your own templating by adding
-the fields like so:
+``meta.preview_template`` defines the preview template for this specific block as
+preview/bootstrap/accordion.html. This template will be used to render the preview.
+``preview_template`` acts much the same as ``form_template``
+(see https://docs.wagtail.org/en/latest/advanced_topics/customisation/streamfield_blocks.html#how-to-build-custom-streamfield-blocks).
+The template context is the same, with the most important variable:
+
+```
+    children
+     An OrderedDict of BoundBlocks for all of the child blocks making up this StructBlock.
+```
+
+While the preview does not actually render any forms, the same ``render_form``
+method should be used to render the preview of a formfield in the ``preview_template``.
 
 ```
 <div class="accordion_preview">
-    {{children.header.render_form}}
-    {{children.panel_content.render_form}}
+    {{ children.header.render_form }}
+    {{ children.panel_content.render_form }}
 </div>
 
 ```
 
 Here you can add your own (bootstrap) classes and/or html tags to mirror the output of
-your block. The fields are always build like this: ``children.field_name.render_form``
+your block. The fields are always accessed like this:
+
+```
+    children.field_name.render_form
+```
+
 
