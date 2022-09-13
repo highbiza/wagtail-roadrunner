@@ -140,6 +140,9 @@ preview that is enough for a user to be able to recognise the content. There are
 2. Define ``meta.preview_template``.
 3. Add a ``renderPreview`` method to your telepath Block definition in javascript.
 
+The preview property
+====================
+
 Using the ``meta.preview`` property is done like this:
 
 ```
@@ -181,6 +184,9 @@ we could change it to:
     class Meta:
         preview = ["image", "alt"]
 ```
+
+The preview_template property
+=============================
 
 Using the ``meta.preview_template`` property is done like this:
 
