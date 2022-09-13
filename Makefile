@@ -15,6 +15,9 @@ endif
 
 install: fail-if-no-virtualenv
 	PIP_INDEX_URL=${PIP_INDEX_URL} pip install --editable .[test] --upgrade --upgrade-strategy=eager --pre
+	npm install
+	npm run build
+
 
 lint: fail-if-no-virtualenv
 	@black --check --exclude "migrations/*" rr
