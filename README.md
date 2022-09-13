@@ -182,3 +182,36 @@ we could change it to:
         preview = ["image", "alt"]
 ```
 
+Using the ``meta.preview_template`` property is done like this:
+
+```
+class AccordionBlock(blocks.StructBlock):
+    header = blocks.CharBlock(
+        max_length=255,
+        label="Title",
+        help_text="Header of the accordion",
+        required=False,
+    )
+    panel_content = blocks.RichTextBlock(
+        label="Inhoud", help_text="Body of the accordion", required=False
+    )
+
+    class Meta:
+        preview_template = "preview/bootstrap/accordion.html"
+```
+
+What ``meta.preview_template`` does is look up the template for this specific block as
+preview/bootstrap/accordion.html. Here you can make your own templating by adding
+the fields like so:
+
+```
+<div class="accordion_preview">
+    {{children.header.render_form}}
+    {{children.panel_content.render_form}}
+</div>
+
+```
+
+Here you can add your own (bootstrap) classes and/or html tags to mirror the output of
+your block. The fields are always build like this: ``children.field_name.render_form``
+
