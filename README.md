@@ -234,3 +234,98 @@ your block. The fields are always accessed like this:
 ```
     children.field_name.render_form
 ```
+
+The renderPreview method
+------------------------
+
+You can create your own preview UI in javascript by registering your own block
+definition with telepath. To do this, you need to install the wagtail-roadrunner
+as a dependency in your javascript project:
+
+```
+npm add highbiza/wagtail-roadrunner
+```
+
+This will add the wagtail-roadrunner github repo's javascript to your project.
+Now you can import the classes from wagtail-roadrunner in your js files.
+Wagtail-roadrunner does use jsx, but without React because the way wagtail's
+widgets work. They need to be rendered immediately into a placeholder div,
+which would become very tedious in React. wagtail-roadrunner uses jsx-render,
+which provides a jsx renderer implementation. Use the ``renderInPlaceHolder``
+and ``PlaceHolder`` utils from roadrunner in your project.
+
+Here is an example of the ``PageTitle`` UI, shipped with roadrunner but
+modified to fit in your project. It has been changed to Use a ``<heading>``
+instead of a ``<h1>``. We could have subclasses the existing PageTitle js,
+but this is more similar to how things would look for a completely custom
+component started from scratch.
+
+```
+import $ from "jquery"
+import dom, { Fragment } from 'jsx-render'
+import { renderInPlaceHolder, PlaceHolder } from "roadrunner/jsx"
+import { Preview } from "roadrunner/render"
+
+class MyPageTitle extends Preview {
+  getValue() {
+    return $("h1").first()
+      .text()
+  }
+
+  render(previewPlaceholder, prefix, initialState, initialError) {
+    return renderInPlaceHolder(previewPlaceholder,
+      <Fragment>
+        <div id={prefix} class="preview-label">
+          <heading>{this.getValue()}</heading>
+        </div>
+        <PlaceHolder/>
+      </Fragment>
+    )
+  }
+}
+
+export class MyPageTitleDefinition extends window.wagtailStreamField.blocks.StructBlockDefinition {
+  renderPreview(previewPlaceholder, prefix, initialState, initialError) {
+    return new PageTitle(this, previewPlaceholder, prefix, initialState, initialError)
+  }
+}
+
+// register the 
+window.telepath.register("myproject.PageTitleDefinition", PageTitleDefinition)
+```
+
+To use this code, we should register an ``Adapter`` with telepath. Let's not
+start from scratch, but override the adapter shipped with roadrunner. It is
+always best to find out which Adapter is used in wagtail for similar components
+and subclass the Adapter for that type:
+
+```
+from rr.adapters import PageTitleAdapter
+
+class MyCustomPageTitleAdapter(PageTitleAdapter):
+    js_constructor = "myproject.PageTitleDefinition"
+```
+
+To register the Adapter, which will make wagtail use our javascript for
+objects of the registered type, we need to descide if we want to use it in a
+narrow or wide scope.
+
+Wide scope means, everywhere in wagtail, when a object of this type is encountered,
+use this javascript. Narrow scope means only when encountered in a roadrunner
+context, use this javascript.
+
+Narrow registration:
+
+```
+from rr.telepath import register
+from rr.blocks.html import PageTitle
+register(MyCustomPageTitleAdapter(), PageTitle)
+```
+
+If we want to use this code everywhere, just do:
+
+```
+from wagtail.core.telepath import register
+from rr.blocks.html import PageTitle
+register(MyCustomPageTitleAdapter(), PageTitle)
+```
