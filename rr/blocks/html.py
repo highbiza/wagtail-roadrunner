@@ -98,6 +98,10 @@ class VideoBlockValue(StructValue):
         video_soup.div["class"] = "embed-wrapper"
         video_soup.div.iframe["width"] = "100%"
         del video_soup.div.iframe["height"]
+        if self.get("lazy"):
+            video_soup.div.iframe["data-src"] = video_soup.div.iframe["src"]
+            video_soup.div.iframe["class"] = "lazy"
+            del video_soup.div.iframe["src"]
         return video_soup
 
 
