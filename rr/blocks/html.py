@@ -135,8 +135,8 @@ class TableMakerBlock(blocks.StructBlock):
     styling = StylingBlock()
 
     class Meta:
-        template = "streamfields/html/table.html"
-        preview_template = "preview/blocks/table.html"
         icon = "table"
         label = "Table"
         group = "HTML"
+        template = "streamfields/html/table.html"
+        preview_template = "preview/html/table.html"
