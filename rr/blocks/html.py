@@ -2,12 +2,18 @@ from bs4 import BeautifulSoup
 
 from wagtail.core.blocks import StructValue
 from wagtail.core import blocks
+from wagtail.contrib.table_block.blocks import TableBlock, DEFAULT_TABLE_OPTIONS
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 
 from rr.telepath import register
 from rr.blocks.styling import StylingBlock
 from rr.adapters import PageTitleAdapter
+
+# Why? Because wagtail does not add the language files to the media, so when it's anything other than en-US
+# it will throw an error which results in destroyed editor. See https://github.com/wagtail/wagtail/issues/5504#issuecomment-531231091
+US_TABLE_OPTIONS = DEFAULT_TABLE_OPTIONS.copy()
+US_TABLE_OPTIONS["language"] = "en-US"
 
 
 class HeaderBlock(blocks.StructBlock):
@@ -121,4 +127,16 @@ class HtmlBlock(blocks.StructBlock):
 
     class Meta:
         preview_template = "preview/html/html.html"
+        group = "HTML"
+
+
+class TableMakerBlock(blocks.StructBlock):
+    table = TableBlock(table_options=US_TABLE_OPTIONS)
+    styling = StylingBlock()
+
+    class Meta:
+        template = "streamfields/html/table.html"
+        preview_template = "preview/blocks/table.html"
+        icon = "table"
+        label = "Table"
         group = "HTML"
