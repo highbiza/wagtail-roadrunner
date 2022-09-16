@@ -6,7 +6,11 @@ import { stripHtml } from "string-strip-html"
 class PreviewFieldBlockPreview extends Preview {
   getValue() {
     if (this.state) {
-      return stripHtml(this.state).result
+      try {
+        return stripHtml(this.state.toString()).result
+      } catch (e) {
+        return this.state
+      }
     }
 
     return "empty FieldBlock"
