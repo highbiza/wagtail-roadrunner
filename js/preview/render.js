@@ -33,8 +33,8 @@ export class Preview {
     let previewValue = label
     try {
       previewValue = stripHtml(firstStateValue.toString()).result || label
-    } catch (e) {
-      previewValue = label || firstStateValue.toString()
+    } catch {
+      previewValue = label || firstStateValue ? firstStateValue.toString() : "Empty"
     }
     return previewValue
   }
