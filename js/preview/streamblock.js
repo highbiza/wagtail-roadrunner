@@ -139,8 +139,7 @@ class PreviewStreamChild extends getStreamChild() {
 
 class PreviewStreamBlock extends window.wagtailStreamField.blocks.StreamBlock {
 
-  _getChildDataForInsertion(koe) {
-    const { type } = koe
+  _getChildDataForInsertion({ type }) {
     const [blockDef, initialState, uuidv4] = super._getChildDataForInsertion({type})
     blockDef.isNew = true
     return [blockDef, initialState, uuidv4]
