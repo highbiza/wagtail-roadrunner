@@ -1,4 +1,5 @@
 import $ from "jquery"
+import { v4 as uuidv4 } from 'uuid'
 import dom from 'jsx-render'
 import { renderInPlaceHolder } from "./jsx"
 import { SvgIcon, breakPointValue, breakPointFallback, cols, times } from "./utils"
@@ -33,7 +34,7 @@ const GridLine = ({ value, name, breakpoint, backupValue="col-12"}) => {
   }
 
   const html = (
-    <div className={`gridchoice ${breakPointEmitter.current == breakpoint ? "active" : ""}`}>
+    <div className={`gridchoice collapse ${breakPointEmitter.current == breakpoint ? "show" : "gridchoice-toggle"}`}>
       <div className="svg-wrapper"><SvgIcon name={ICONS[breakpoint]}/></div>
       <div className="gridplaceholder">
         {times(12, i => <GridSegment fallback={!col && i < backupCols} active={i < col} onClick={handleClick(i)} />)}
@@ -43,28 +44,34 @@ const GridLine = ({ value, name, breakpoint, backupValue="col-12"}) => {
   )
   breakPointEmitter.addListener(newBreakPoint => {
     if (newBreakPoint != breakpoint) {
-      $(html).removeClass("active")
+      $(html).removeClass("show")
+      $(html).addClass("gridchoice-toggle")
     } else {
-      $(html).addClass("active")
+      $(html).addClass("show")
+      $(html).removeClass("gridchoice-toggle")
     }
   })
   return html
 }
 
-const Grid = ({ values, name }) => (
-  <div className="gridchooser-wrapper">
-    <div className={`dropdown gridchooser${values.length ? "" : " open"}`}>
-      <a className="toggler dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <SvgIcon name="icon-arrow-down"/>
-      </a>
-      <div className="gridchoices-wrapper">
-        <GridLine name={name} backupValue={breakPointFallback(values, "col-md")} value={breakPointValue(values, "col-lg")} breakpoint="col-lg" />
-        <GridLine name={name} backupValue={breakPointFallback(values, "col")} value={breakPointValue(values, "col-md")} breakpoint="col-md" />
-        <GridLine name={name} value={breakPointValue(values, "col")} breakpoint="col" />
+const Grid = ({ values, name }) => {
+  const gridChoiceUUID = `grid-${uuidv4()}`
+  
+  return (
+    <div className="gridchooser-wrapper" id={gridChoiceUUID}>
+      <div className={`gridchooser${values.length ? "" : " open"}`}>
+        <a className="toggler collapsed" data-bs-toggle="collapse" data-bs-target={`#${gridChoiceUUID} .gridchoices-wrapper > .gridchoice-toggle`} aria-haspopup="true" aria-expanded="false">
+          <SvgIcon name="icon-arrow-down"/>
+        </a>
+        <div className="gridchoices-wrapper">
+          <GridLine name={name} backupValue={breakPointFallback(values, "col-md")} value={breakPointValue(values, "col-lg")} breakpoint="col-lg" />
+          <GridLine name={name} backupValue={breakPointFallback(values, "col")} value={breakPointValue(values, "col-md")} breakpoint="col-md" />
+          <GridLine name={name} value={breakPointValue(values, "col")} breakpoint="col" />
+        </div>
       </div>
     </div>
-  </div>
-)
+  )
+}
 
 class GridChoiceBlock {
   constructor(blockDef, placeholder, prefix, initialState, initialError) {
