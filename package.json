@@ -8,7 +8,7 @@
     "test": "echo \"kut javascript noob, sukkel eikel troep makende nub\"",
     "build": "webpack --config prd.config.js",
     "dev": "webpack --watch",
-    "lint": "eslint js/"
+    "lint": "eslint --ignore-pattern=bootstrapnoconflict js/"
   },
   "repository": {
     "type": "git",
