@@ -36,11 +36,13 @@ pip install wagtail-roadrunner
 
 Now add the roadrunner app to your ``INSTALLED_APPS`` setting in your django settings:
 
-```
+```python
 INSTALLED_APPS = [
     # all kinds of apps
     # And now ad the roadrunner app like this:
     "rr", 
+    # Add table block if you plan on using our table block.
+    "wagtail.contrib.table_block",
 ]
 ```
 
@@ -50,7 +52,7 @@ Usage
 wagtail-roadrunner comes with a new streamfield type, ``RoadRunnerField`` which
 can be used in a wagtail page like this:
 
-```
+```python
 from wagtail.admin.edit_handlers import StreamFieldPanel
 from wagtail.core.models import Page
 from wagtail.wagtailsearch import index
@@ -73,7 +75,7 @@ with wagtail-roadrunner. There are 2 ways to change the blocks offered to the us
 
 The first one is to just specify the blocks like in a StreamField:
 
-```
+```python
 from wagtail.admin.edit_handlers import StreamFieldPanel
 from wagtail.core.models import Page
 from wagtail import blocks
@@ -109,7 +111,7 @@ To register blocks with wagtail-roadrunner you should define your own
 This function is passed the default blocks that come with wagtail-roadrunner, so
 if you want you can drop some functionality you don't need. Here is an example:
 
-```
+```python
 # a file named myproject/registry.py
 from .myblocks import GalleryBlock, TetrisBlock
 
@@ -125,7 +127,7 @@ def register_custom_blocks(initial_blocks):
 You then have to register this function with wagtail-roadrunner as django setting
 like this:
 
-```
+```python
 ROADRUNNER_REGISTRY_FUNCTION = "myproject.registry.register_custom_blocks"
 ```
 
@@ -145,7 +147,7 @@ The preview property
 
 Using the ``meta.preview`` property is done like this:
 
-```
+```python
 class ImageBlock(blocks.StructBlock):
     image = ImageChooserBlock()
     alt = blocks.CharBlock(
@@ -169,7 +171,7 @@ This block has a lot of fields that are more configuration than content. For a
 user it is enough to just show the image as the preview. This is easily achieved
 by specifying the ``meta.preview`` property as:
 
-```
+```python
     class Meta:
         preview = ["image"]
 ```
@@ -180,7 +182,7 @@ that makes the content recognisable for the user. The ``meta.preview`` property
 is a list, suppose we also want to make the ``alt`` field visible to the user,
 we could change it to:
 
-```
+```python
     class Meta:
         preview = ["image", "alt"]
 ```
@@ -190,7 +192,7 @@ The preview_template property
 
 Using the ``meta.preview_template`` property is done like this:
 
-```
+```python
 class AccordionBlock(blocks.StructBlock):
     header = blocks.CharBlock(
         max_length=255,
@@ -220,7 +222,7 @@ The template context is the same, with the most important variable:
 While the preview does not actually render any forms, the same ``render_form``
 method should be used to render the preview of a formfield in the ``preview_template``.
 
-```
+```html
 <div class="accordion_preview">
     {{ children.header.render_form }}
     {{ children.panel_content.render_form }}
@@ -260,7 +262,7 @@ instead of a ``<h1>``. We could have subclasses the existing PageTitle js,
 but this is more similar to how things would look for a completely custom
 component started from scratch.
 
-```
+```jsx
 import $ from "jquery"
 import dom, { Fragment } from 'jsx-render'
 import { renderInPlaceHolder, PlaceHolder } from "roadrunner/jsx"
@@ -299,7 +301,7 @@ start from scratch, but override the adapter shipped with roadrunner. It is
 always best to find out which Adapter is used in wagtail for similar components
 and subclass the Adapter for that type:
 
-```
+```python
 from rr.adapters import PageTitleAdapter
 
 class MyCustomPageTitleAdapter(PageTitleAdapter):
@@ -316,7 +318,7 @@ context, use this javascript.
 
 Narrow registration:
 
-```
+```python
 from rr.telepath import register
 from rr.blocks.html import PageTitle
 register(MyCustomPageTitleAdapter(), PageTitle)
@@ -324,7 +326,7 @@ register(MyCustomPageTitleAdapter(), PageTitle)
 
 If we want to use this code everywhere, just do:
 
-```
+```python
 from wagtail.core.telepath import register
 from rr.blocks.html import PageTitle
 register(MyCustomPageTitleAdapter(), PageTitle)

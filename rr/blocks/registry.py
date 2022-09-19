@@ -13,6 +13,7 @@ from rr.blocks.html import (
     RichText,
     PageTitle,
     HtmlBlock,
+    TableMakerBlock,
 )
 from rr.blocks.bootstrap import (
     PopupBlock,
@@ -72,6 +73,10 @@ preset_blocks = [
             template="streamfields/html/html.html",
             icon="html",
         ),
+    ),
+    (
+        "table",
+        TableMakerBlock(),
     ),
     # bootstrap
     (
