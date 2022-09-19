@@ -8,11 +8,35 @@ import "./roadrunnerrowblock.scss"
 
 class RoadrunnerRowBlockInsertionControl {
   constructor(placeholder, opts) {
+    this.opts = opts
     this.index = opts && opts.index
     this.onRequestInsert = opts && opts.onRequestInsert
-    const button = $(`<div data-streamfield-list-add class="d-none u-hidden col"/>`)
-    $(placeholder).replaceWith(button)
-    this.element = button.get(0)
+    this.hidden = true
+    this.renderHidden(placeholder)
+  }
+
+  renderHidden(placeholder) {
+    const { element } = renderInPlaceHolder(placeholder,
+      <div data-streamfield-list-add className="d-none u-hidden col"/>
+    )
+    this.element = element
+    this.hidden = true
+  }
+
+  renderVisible(placeholder) {
+    const { element } = renderInPlaceHolder(placeholder, (
+      <button type="button" title={this.opts.strings.ADD} data-streamfield-list-add
+        className="c-sf-add-button c-sf-add-button--visible">
+        <i aria-hidden="true">+</i>
+      </button>
+    ))
+    $(element).click(() => {
+      if (this.onRequestInsert) {
+        this.onRequestInsert(this.index)
+      }
+    })
+    this.element = element
+    this.hidden = false
   }
 
   setIndex(newIndex) {
@@ -26,6 +50,31 @@ class RoadrunnerRowBlockInsertionControl {
     } else {
       $(this.element).hide()
         .attr('aria-hidden', 'true')
+    }
+  }
+
+  show() {
+    if (this.hidden) {
+      this.renderVisible(this.element)
+    }
+  }
+
+  hide() {
+    if (!this.hidden) {
+      $(this.element).off()
+      this.renderHidden(this.element)
+    }
+  }
+
+  enable() {
+    if (!this.hidden) {
+      $(this.element).removeAttr('disabled')
+    }
+  }
+
+  disable() {
+    if (!this.hidden) {
+      $(this.element).attr('disabled', 'true')
     }
   }
 }
@@ -42,7 +91,6 @@ class InsertButton {
   }
 
   render(container) {
-    // const label = this.sequenceChild.strings[this.labelIdentifier] || this.labelIdentifier;
     this.dom = $((
       <button type="button" title={this.sequenceChild.strings.ADD} data-streamfield-list-add
         class="c-sf-block__actions__single c-sf-add-button--visible add-action-insertbutton">
@@ -227,6 +275,18 @@ class RoadrunnerRowBlock extends window.wagtailStreamField.blocks.ListBlock {
 
   _createInsertionControl(placeholder, opts) {
     return new RoadrunnerRowBlockInsertionControl(placeholder, opts)
+  }
+
+  blockCountChanged() {
+    super.blockCountChanged()
+
+    // when there are no children, InsertionControl must be shown, otherwise
+    // keep them hidden
+    if (this.children.length) {
+      this.inserters.forEach(inserter => inserter.hide())
+    } else {
+      this.inserters.forEach(inserter => inserter.show())
+    }
   }
 }
 

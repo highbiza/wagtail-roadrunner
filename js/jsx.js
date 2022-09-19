@@ -2,6 +2,9 @@ import dom from 'jsx-render'
 
 
 export const renderInPlaceHolder = (targetPlaceholder, element) => {
+  // determine if the element is a DocumentFragment
+  const elementIsDocumentFragment = element.nodeType === Node.DOCUMENT_FRAGMENT_NODE
+
   // find placeholders first, because if it's a DocumentFragment, it will
   // be empty after being added to the dom
   const parent = targetPlaceholder.parentNode
@@ -14,7 +17,7 @@ export const renderInPlaceHolder = (targetPlaceholder, element) => {
   // adding the contained elements to the dom. In that case treat the new
   // parent of the elements that used to be in the DocumentFragment as the
   // element
-  if (!element.childElementCount) {
+  if (elementIsDocumentFragment) {
     element = parent
   }
 
