@@ -16,7 +16,7 @@ const GridSegment = ({ onClick, active=false, fallback=false }) =>
   <span onClick={onClick} className={`gridsegment${active ? ' active': ''}${fallback ? ' fallback': ''}`}></span>
 
 
-const GridLine = ({ value, name, breakpoint, backupValue="col-12"}) => {
+const GridLine = ({ value, name, breakpoint, backupValue="col-12", collapsed=true}) => {
   const col = cols(value)
   const backupCols = cols(backupValue)
   const handleClick = index => evt => {
@@ -34,7 +34,7 @@ const GridLine = ({ value, name, breakpoint, backupValue="col-12"}) => {
   }
 
   const html = (
-    <div className={`gridchoice collapse ${breakPointEmitter.current == breakpoint ? "show" : "gridchoice-toggle"}`}>
+    <div className={`gridchoice collapse ${breakPointEmitter.current != breakpoint && collapsed ? "gridchoice-toggle": "show"}`}>
       <div className="svg-wrapper"><SvgIcon name={ICONS[breakpoint]}/></div>
       <div className="gridplaceholder">
         {times(12, i => <GridSegment fallback={!col && i < backupCols} active={i < col} onClick={handleClick(i)} />)}
@@ -56,17 +56,21 @@ const GridLine = ({ value, name, breakpoint, backupValue="col-12"}) => {
 
 const Grid = ({ values, name }) => {
   const gridChoiceUUID = `grid-${uuidv4()}`
-  
+
+  // if there are no  initial values yet, the block should not be collapsed,
+  // because the user MUST pick at least one value.
+  const collapsed = Boolean(values.length)
+
   return (
     <div className="gridchooser-wrapper" id={gridChoiceUUID}>
-      <div className={`gridchooser${values.length ? "" : " open"}`}>
+      <div className={`gridchooser`}>
         <a className="toggler collapsed" data-bs-toggle="collapse" data-bs-target={`#${gridChoiceUUID} .gridchoices-wrapper > .gridchoice-toggle`} aria-haspopup="true" aria-expanded="false">
           <SvgIcon name="icon-arrow-down"/>
         </a>
         <div className="gridchoices-wrapper">
-          <GridLine name={name} backupValue={breakPointFallback(values, "col-md")} value={breakPointValue(values, "col-lg")} breakpoint="col-lg" />
-          <GridLine name={name} backupValue={breakPointFallback(values, "col")} value={breakPointValue(values, "col-md")} breakpoint="col-md" />
-          <GridLine name={name} value={breakPointValue(values, "col")} breakpoint="col" />
+          <GridLine name={name} backupValue={breakPointFallback(values, "col-md")} value={breakPointValue(values, "col-lg")} breakpoint="col-lg" collapsed={collapsed} />
+          <GridLine name={name} backupValue={breakPointFallback(values, "col")} value={breakPointValue(values, "col-md")} breakpoint="col-md" collapsed={collapsed} />
+          <GridLine name={name} value={breakPointValue(values, "col")} breakpoint="col" collapsed={collapsed} />
         </div>
       </div>
     </div>
