@@ -150,9 +150,16 @@ class PreviewStreamBlock extends window.wagtailStreamField.blocks.StreamBlock {
     const modalPrefix = `preview-${prefix}`
     const blockDefWrapper = new PreviewBlockDefinition(blockDef, placeholder, modalPrefix, prefix, index, id, initialState, sequence, opts)
     const child = new PreviewStreamChild(blockDefWrapper, placeholder, prefix, index, id, initialState, sequence, opts)
+
     if (isNew) {
+      // after the modal has opened, declare this PreviewStreamChild
+      // as nolonger new.
+      $(`#${modalPrefix}`).one('shown.bs.modal', e => {
+        blockDef.isNew = false
+      })
       $(`#${modalPrefix}`).modal("show")
     }
+
     return child
   }
 
