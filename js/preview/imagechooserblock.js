@@ -9,6 +9,12 @@ class ImageChooserPreview extends Preview {
 
   getValue() {
     const previewImage = this.state?.preview
+    if (!previewImage) {
+      return {
+        alt: "empty image"
+      }
+    }
+
     return {
       src: previewImage.url,
       width: previewImage.width,
@@ -18,8 +24,10 @@ class ImageChooserPreview extends Preview {
   }
 
   setState(newState) {
-    this.state = newState
-    $(`#${this.prefix}`).attr(this.getValue())
+    if (newState) {
+      this.state = newState
+      $(`#${this.prefix}`).attr(this.getValue())
+    }
   }
 
   render(previewPlaceholder, prefix, initialState, initialError) {
@@ -27,7 +35,7 @@ class ImageChooserPreview extends Preview {
 
     return renderInPlaceHolder(previewPlaceholder, (
       <Fragment>
-        {previewImage ? <img id={prefix} {...this.getValue()} /> : "empty image"}
+      <img id={prefix} {...this.getValue()} />
         <PlaceHolder/>
       </Fragment>
     ))

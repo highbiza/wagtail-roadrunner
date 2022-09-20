@@ -133,8 +133,8 @@ class PreviewStreamChild extends getStreamChild() {
     super.setError(error)
     this.blockDef.setError(error)
   }
-  collapse() { /* we don't want this */ }
-  expand() { /* we don't want this either */ }
+  collapse() { /* we don't need this functionality */ }
+  expand() { /* we don't need this functionality either */ }
 }
 
 class PreviewStreamBlock extends window.wagtailStreamField.blocks.StreamBlock {
