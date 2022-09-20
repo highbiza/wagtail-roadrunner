@@ -8,73 +8,78 @@
     }
 }
 
-.roadrunner.row .column {
-    div.preview {
-        cursor: pointer;
-        padding: 0;
-        background-color: white;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        min-height: 75px;
-        p {
-            margin: 0;
-        }
-        &.error {
-            border: 1px solid red;
-        }
-        .preview{
+.roadrunner.row {
+    &:before, &:after {
+        width: 0px;
+    }
+    .column {
+        div.preview {
             cursor: pointer;
-            min-height: 20px;
-            padding: 15px 24px;
-            background-color: #fafafa;
-            border: 1px solid #e3e3e3;
-            border-radius: 8px;
-            &:hover {
-                background-color: #ffffff;
+            padding: 0;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 75px;
+            p {
+                margin: 0;
+            }
+            &.error {
+                border: 1px solid red;
+            }
+            .preview{
+                cursor: pointer;
+                min-height: 20px;
+                padding: 15px 24px;
+                background-color: #fafafa;
+                border: 1px solid #e3e3e3;
+                border-radius: 8px;
+                &:hover {
+                    background-color: #ffffff;
+                }
             }
         }
-    }
-    .modal-edit{
-        .modal-content{
-            margin: 2rem 0;
-            padding: 2rem 0;
-            .modal-body, .modal-footer{
-                padding: 0 2rem;
-                position: unset;
-                .tab-content{
-                    section{
-                        padding-top: 0;
+        .modal-edit{
+            .modal-content{
+                margin: 2rem 0;
+                padding: 2rem 0;
+                .modal-body, .modal-footer{
+                    padding: 0 2rem;
+                    position: unset;
+                    .tab-content{
+                        section{
+                            padding-top: 0;
+                        }
                     }
-                }
-                .corner-tab-control {
-                    top: 0;
-                    right: 0;
-                    background: linear-gradient(to top right, #0000 50%, var(--color-primary) 50.1%) top right/65px 65px no-repeat, rgba(255, 255, 255, 0);
-                    a{
-                        width: 65px;
-                        height: 65px;
-                        color: white;
-                        padding: 5px;
-                        .icon.default{
-                            width: 1.75em;
-                            height: 1.75em;
+                    .corner-tab-control {
+                        top: 0;
+                        right: 0;
+                        background: linear-gradient(to top right, #0000 50%, var(--color-primary) 50.1%) top right/65px 65px no-repeat, rgba(255, 255, 255, 0);
+                        a{
+                            width: 65px;
+                            height: 65px;
+                            color: white;
+                            padding: 5px;
+                            .icon.default{
+                                width: 1.75em;
+                                height: 1.75em;
+                            }
                         }
                     }
                 }
-            }
-            .modal-footer{
-                margin-top: 2rem;
+                .modal-footer{
+                    margin-top: 2rem;
+                }
             }
         }
-    }
-    .button{
-        &.secondary{
-            background-color: #666;
-            border-color: #666;
-            &:hover{
-                background-color: #4d4d4d;
-                border-color: #4d4d4d;
+        .button{
+            &.secondary{
+                background-color: #666;
+                border-color: #666;
+                &:hover{
+                    background-color: #4d4d4d;
+                    border-color: #4d4d4d;
+                }
             }
         }
     }
