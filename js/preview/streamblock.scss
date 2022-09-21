@@ -15,12 +15,9 @@
     .column {
         div.preview {
             cursor: pointer;
-            padding: 0;
-            background-color: white;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            min-height: 75px;
             p {
                 margin: 0;
             }
