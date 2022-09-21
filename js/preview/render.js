@@ -27,15 +27,20 @@ export class Preview {
   }
 
   getValue() {
-    const { meta: { label }} = this.blockDef
-    const [firstStateValue] = Object.values(this.state)
-
+    const { meta: { label=null }} = this.blockDef
     let previewValue = label
+
     try {
-      previewValue = stripHtml(firstStateValue.toString()).result || label
+      const [firstStateValue] = Object.values(this.state)
+
+      if (firstStateValue) {
+        previewValue = stripHtml(firstStateValue.toString()).result || label
+      }
     } catch {
-      previewValue = label || firstStateValue ? firstStateValue.toString() : "Empty"
+      // we don't care what happened, we just where unable to convert the
+      // firstStateValue into a string.
     }
+
     return previewValue
   }
 
@@ -89,7 +94,7 @@ export class TemplatePreview extends Preview {
             this.children[childBlockDef.name] = childBlockDef.renderPreview(
               childBlockElement,
               prefix + '-' + childBlockDef.name,
-              initialState[childBlockDef.name],
+              initialState? initialState[childBlockDef.name] : "",
               initialError?.blockErrors[childBlockDef.name]
             )
           }
