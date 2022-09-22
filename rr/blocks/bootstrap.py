@@ -71,12 +71,16 @@ class AccordionBlock(blocks.StructBlock):
         label="Inhoud", help_text="Body of the accordion", required=False
     )
 
-    def get_uuid(self):
-        return uuid.uuid4()
-
     class Meta:
         group = "Bootstrap"
         preview_template = "preview/bootstrap/accordion.html"
+
+
+class AccordionListBlock(blocks.ListBlock):
+    def get_context(self, value, parent_context=None):
+        ctx = super().get_context(value, parent_context=parent_context)
+        ctx["uuid"] = uuid.uuid4()
+        return ctx
 
 
 class ButtonBlock(blocks.StructBlock):
