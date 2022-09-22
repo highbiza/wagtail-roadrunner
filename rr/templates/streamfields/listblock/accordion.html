@@ -1,8 +1,7 @@
 {% load styling_tags %}
 {% load wagtailcore_tags %}
 
-{% with uuid=self.block.get_uuid %}
-<div class="accordion" id="{{uuid}}_parent">
+<div class="accordion">
 	{% for block in self %}
 	<div class="d-flex flex-row align-items-flex-start {% if not forloop.last %}mb-3{% endif %}">
 		<div class="me-2 position-relative">
@@ -14,7 +13,7 @@
 				<h4 class="mb-0">{{ block.header }}</h4>
 				<a href="#" class="stretched-link" data-bs-toggle="collapse" data-bs-target="#accordion_{{ uuid }}_{{ forloop.counter }}" aria-expanded="true" aria-controls="accordion_{{ uuid }}_{{ forloop.counter }}"></a>
 			</div>
-			<div id="accordion_{{ uuid }}_{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="{{ block.header }}" data-bs-parent="#{{uuid}}_parent">
+			<div id="accordion_{{ uuid }}_{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="{{ block.header }}">
 				<div class="accordion-body ps-0">
 		            {{ block.panel_content|richtext }}
 				</div>
@@ -23,4 +22,3 @@
 	</div>
 	{% endfor %}
 </div>
-{% endwith %}

@@ -18,6 +18,7 @@ from rr.blocks.html import (
 from rr.blocks.bootstrap import (
     PopupBlock,
     AccordionBlock,
+    AccordionListBlock,
     ButtonBlock,
     TabBlock,
     SliderBlock,
@@ -110,7 +111,7 @@ preset_blocks = [
     # ListBlocks,
     (
         "Accordion",
-        blocks.ListBlock(
+        AccordionListBlock(
             AccordionBlock(),
             template="streamfields/listblock/accordion.html",
             icon="accordion",
