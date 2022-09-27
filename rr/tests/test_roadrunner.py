@@ -6,10 +6,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.test import TestCase, override_settings
 
-# from django.urls import reverse
-
 from rr.templatetags.styling_tags import get_styling
-from rr.blocks.bootstrap import AccordionBlock
 from rr.edit_handlers import RoadRunnerPanel
 from rr.fields import RoadRunnerField
 
@@ -36,10 +33,6 @@ class RoadRunnerTest(TestCase):
         styling_attribute_no_tag = get_styling(styling, True)
         self.assertEqual(styling_attribute, 'style="height: 50px;"')
         self.assertEqual(styling_attribute_no_tag, "height: 50px;")
-
-    def test_get_uuid(self):
-        block = AccordionBlock()
-        self.assertIsNotNone(block.get_uuid())
 
     def test_road_runner_field(self):
         field = RoadRunnerField([])
