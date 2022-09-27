@@ -331,3 +331,21 @@ from wagtail.core.telepath import register
 from rr.blocks.html import PageTitle
 register(MyCustomPageTitleAdapter(), PageTitle)
 ```
+
+Block searchable content
+---------------------------------
+By default, wagtail will index all blocks that have implemented the get_searchable_content method. It could be that not all fields on a block are meant to be searchable content. In that case you should make your own get_searchable_content implementation.
+
+In our default blocks, we have implemented the get_searchable_content method already, ignoring fields that should not be searched.
+
+To make implementing your own ```get_searchable_content``` easier, we have added a utility function for you in ```rr.search```:
+```python
+def get_searchable_content_for_fields(value, child_blocks, index_fields):
+    content = []
+    for block_key, block in child_blocks.items():
+        if block_key in index_fields:
+            content.extend(block.get_searchable_content(value[block_key]))
+    return content
+```
+
+We use this in the ```SliderChildBlock``` and ```HeaderBlock``` block.
