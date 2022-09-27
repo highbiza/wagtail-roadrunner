@@ -2,7 +2,6 @@ from itertools import chain
 from django.utils.functional import lazy
 from django.utils.module_loading import import_string
 from django.conf import settings
-from wagtail.core import blocks
 
 
 from rr.blocks.html import (

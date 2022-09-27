@@ -21,6 +21,7 @@ class RoadRunnerStreamBlockAdapter(StreamBlockAdapter):
         meta["strings"]["SAVE_DRAFT"] = _("Save Draft")
         return [name, grouped_child_blocks, values, meta]
 
+    # pylint: disable=invalid-overridden-method
     @property
     def media(self):
         return super().media + forms.Media(
@@ -80,6 +81,7 @@ class RoadRunnerBaseBlockAdapter(RoadRunnerStructBlockAdapter):
         meta["classname"] = "struct-block roadrunnerblock"
         return [name, values, meta]
 
+    # pylint: disable=invalid-overridden-method
     @property
     def media(self):
         return super().media + forms.Media(

@@ -22,7 +22,7 @@ assets:
 
 lint: fail-if-no-virtualenv
 	@black --check --exclude "migrations/*" rr
-	@pylint setup.py roadrunner/
+	@pylint setup.py rr/
 
 black:
 	@black --exclude "migrations/*" rr
