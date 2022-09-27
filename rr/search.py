@@ -1,4 +1,4 @@
-def get_specific_fields_searchable_content(value, child_blocks, index_fields):
+def get_searchable_content_for_fields(value, child_blocks, index_fields):
     """
     A util you can use to only add certain child blocks fields to the search index.
     """

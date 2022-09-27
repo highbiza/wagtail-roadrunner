@@ -342,7 +342,7 @@ For example, the ```GridChoiceBlock```, ```BootstrapColorChoiceBlock```, ```Boot
 
 Sometimes you have a block where certain values should only be added to the index, so there's a utility function where you can pass certain fields and it will only add those to the index. This utility function lives in rr.search:
 ```python
-def get_specific_fields_searchable_content(value, child_blocks, index_fields):
+def get_searchable_content_for_fields(value, child_blocks, index_fields):
     content = []
     for block_key, block in child_blocks.items():
         if block_key in index_fields:

@@ -3,7 +3,7 @@ from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
 from rr.blocks.styling import StylingBlock, ColorPickerBlock
-from rr.search import get_specific_fields_searchable_content
+from rr.search import get_searchable_content_for_fields
 
 
 class BootstrapColorChoiceBlock(blocks.ChoiceBlock):
@@ -154,7 +154,7 @@ class SliderChildBlock(blocks.StructBlock):
     )
 
     def get_searchable_content(self, value):
-        return get_specific_fields_searchable_content(
+        return get_searchable_content_for_fields(
             value, self.child_blocks, ["image", "body"]
         )
 
