@@ -334,13 +334,11 @@ register(MyCustomPageTitleAdapter(), PageTitle)
 
 Block searchable content
 ---------------------------------
-By default, wagtail will index all blocks that have implemented the get_searchable_content method.
-Which most blocks (that contain text) have implemented, however in some cases this will index values while it shouldn't really.
+By default, wagtail will index all blocks that have implemented the get_searchable_content method. It could be that not all fields on a block are meant to be searchable content. In that case you should make your own get_searchable_content implementation.
 
-In our default blocks, we have implemented the get_searchable_content method accordingly.
-For example, the ```GridChoiceBlock```, ```BootstrapColorChoiceBlock```, ```BootstrapTabStylingBlock```, ```BootstrapColorChoiceBlock```, ```BootstrapTabStylingBlock```, ```DividerBlock``` and ```StylingBlock``` blocks don't index anything, as those values are only for styling purposes and are not relevant for user search at all.
+In our default blocks, we have implemented the get_searchable_content method already, ignoring fields that should not be searched.
 
-Sometimes you have a block where certain values should only be added to the index, so there's a utility function where you can pass certain fields and it will only add those to the index. This utility function lives in rr.search:
+To make implementing your own ```get_searchable_content``` easier, we have added a utility function for you in ```rr.search```:
 ```python
 def get_searchable_content_for_fields(value, child_blocks, index_fields):
     content = []
