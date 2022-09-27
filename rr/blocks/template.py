@@ -1,42 +1,30 @@
-from django import forms
-from django.contrib.contenttypes.models import ContentType
+from django.utils.functional import cached_property
+
+from wagtail.core.blocks import ChooserBlock
+from wagtail.core.utils import resolve_model_string
 from wagtail.core import blocks
 
 
-class ModelChoiceBlock(blocks.FieldBlock):
-    def __init__(self, model, required=True, help_text=None, **kwargs):
+class ModelChoiceBlock(ChooserBlock):
+    def __init__(self, target_model, required=True, help_text=None, **kwargs):
         self._required = required
         self._help_text = help_text
-        self._model = model
-        super().__init__(**kwargs)
+        self._target_model = target_model
+        super().__init__(target_model, **kwargs)
+
+    @cached_property
+    def target_model(self):
+        return resolve_model_string(self._target_model)
+
+    @cached_property
+    def widget(self):
+        from wagtail.snippets.widgets import AdminSnippetChooser
+
+        return AdminSnippetChooser(self.target_model)
 
     def get_queryset(self):
-        model = self._model
-        if isinstance(model, str):
-            app_label, model_name = model.split(".")
-            model_type = ContentType.objects.get(app_label=app_label, model=model_name)
-            model = model_type.model_class()
-        return model.objects.all()
-
-    @property
-    def field(self):
-        queryset = self.get_queryset()
-        return forms.ModelChoiceField(
-            queryset=queryset,
-            required=self._required,
-            help_text=self._help_text,
-            label=self.label,
-        )
-
-    def to_python(self, value):
-        queryset = self.get_queryset()
-        try:
-            value = queryset.get(id=value)
-        except queryset.model.DoesNotExist:
-            return
-        else:
-            return value
+        return self.target_model.objects.all()
 
 
 class TemplateBlock(blocks.StructBlock):
-    template = ModelChoiceBlock(model="rr.template")
+    template = ModelChoiceBlock(target_model="rr.template")
