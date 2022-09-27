@@ -3,6 +3,7 @@ from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
 from rr.blocks.styling import StylingBlock, ColorPickerBlock
+from rr.search import get_specific_fields_searchable_content
 
 
 class BootstrapColorChoiceBlock(blocks.ChoiceBlock):
@@ -17,6 +18,9 @@ class BootstrapColorChoiceBlock(blocks.ChoiceBlock):
         ("danger", "Danger"),
     ]
 
+    def get_searchable_content(self, value):
+        return []
+
 
 class BootstrapTabStylingBlock(blocks.ChoiceBlock):
     choices = [
@@ -24,6 +28,9 @@ class BootstrapTabStylingBlock(blocks.ChoiceBlock):
         ("pills", "Pills"),
         ("pills vertical", "Vertical pills"),
     ]
+
+    def get_searchable_content(self, value):
+        return []
 
 
 class PopupBlock(blocks.StructBlock):
@@ -145,6 +152,11 @@ class SliderChildBlock(blocks.StructBlock):
     ribbon_position = blocks.ChoiceBlock(
         choices=[("left", "Left"), ("right", "Right")], required=False
     )
+
+    def get_searchable_content(self, value):
+        return get_specific_fields_searchable_content(
+            value, self.child_blocks, ["image", "body"]
+        )
 
     class Meta:
         preview_template = "preview/bootstrap/slider.html"

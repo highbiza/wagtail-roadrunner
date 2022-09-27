@@ -9,6 +9,7 @@ from wagtail.embeds.blocks import EmbedBlock
 from rr.telepath import register
 from rr.blocks.styling import StylingBlock
 from rr.adapters import PageTitleAdapter
+from rr.search import get_specific_fields_searchable_content
 
 # Why? Because wagtail does not add the language files to the media, so when it's anything other than en-US
 # it will throw an error which results in destroyed editor. See https://github.com/wagtail/wagtail/issues/5504#issuecomment-531231091
@@ -31,6 +32,11 @@ class HeaderBlock(blocks.StructBlock):
         label="Tekst", help_text="Tekst in de header", max_length=255
     )
     styling = StylingBlock()
+
+    def get_searchable_content(self, value):
+        return get_specific_fields_searchable_content(
+            value, self.child_blocks, ["text"]
+        )
 
     class Meta:
         preview_template = "preview/html/headerblock.html"
@@ -69,6 +75,9 @@ class DividerBlock(blocks.StructBlock):
         choices=DIVIDER_CHOICES, label="Divider type", default="lg-thin"
     )
     styling = StylingBlock()
+
+    def get_searchable_content(self, value):
+        return []
 
     class Meta:
         preview_template = "preview/html/divider.html"

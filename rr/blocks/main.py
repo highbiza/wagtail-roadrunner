@@ -64,6 +64,9 @@ class GridChoiceBlock(blocks.MultipleChoiceBlock):
             return value
         return value.split()
 
+    def get_searchable_content(self, value):
+        return []
+
 
 class RoadRunnerStreamBlock(blocks.StreamBlock):
     class Meta:

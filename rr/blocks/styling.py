@@ -102,5 +102,8 @@ class StylingBlock(blocks.StructBlock):
         label="CSS classes", max_length=255, required=False
     )
 
+    def get_searchable_content(self, value):
+        return []
+
     class Meta:
         label = "Styling"

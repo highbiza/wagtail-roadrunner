@@ -331,3 +331,23 @@ from wagtail.core.telepath import register
 from rr.blocks.html import PageTitle
 register(MyCustomPageTitleAdapter(), PageTitle)
 ```
+
+Block searchable content
+---------------------------------
+By default, wagtail will index all blocks that have implemented the get_searchable_content method.
+Which most blocks (that contain text) have implemented, however in some cases this will index values while it shouldn't really.
+
+In our default blocks, we have implemented the get_searchable_content method accordingly.
+For example, the ```GridChoiceBlock```, ```BootstrapColorChoiceBlock```, ```BootstrapTabStylingBlock```, ```BootstrapColorChoiceBlock```, ```BootstrapTabStylingBlock```, ```DividerBlock``` and ```StylingBlock``` blocks don't index anything, as those values are only for styling purposes and are not relevant for user search at all.
+
+Sometimes you have a block where certain values should only be added to the index, so there's a utility function where you can pass certain fields and it will only add those to the index. This utility function lives in rr.search:
+```python
+def get_specific_fields_searchable_content(value, child_blocks, index_fields):
+    content = []
+    for block_key, block in child_blocks.items():
+        if block_key in index_fields:
+            content.extend(block.get_searchable_content(value[block_key]))
+    return content
+```
+
+We use this in the ```SliderChildBlock``` and ```HeaderBlock``` block.
