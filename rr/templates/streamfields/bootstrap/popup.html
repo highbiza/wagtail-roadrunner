@@ -1,11 +1,13 @@
 {% load styling_tags %}
 {% load wagtailcore_tags roadrunner_tags %}
 
+{% get_unique_id as uid %}
+
 {% if not self.open_on_load %}
-<a class="btn btn-{{self.button_style}} {% get_styling_classes self.styling %}" href="#" data-bs-toggle="modal" data-bs-target="#modal_{{block_key}}_{{blockid}}" {% get_styling self.styling %}>{{ self.text }}</a>
+<a class="btn btn-{{self.button_style}} {% get_styling_classes self.styling %}" href="#" data-bs-toggle="modal" data-bs-target="#modal_{{block_key}}_{{uid}}" {% get_styling self.styling %}>{{ self.text }}</a>
 {% endif %}
 
-<div class="modal fade" tabindex="-1" role="dialog" id="modal_{{block_key}}_{{blockid}}" {% if self.open_on_load %}data-popup="true"{% endif %} {% if self.open_once %}data-key="modal_{{block_key}}_{{blockid}}"{% endif %}>
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_{{block_key}}_{{uid}}" {% if self.open_on_load %}data-popup="true"{% endif %} {% if self.open_once %}data-key="modal_{{block_key}}_{{uid}}"{% endif %}>
     <div class="modal-dialog{% if self.big_modal %} modal-lg{% endif %}" role="document">
         <div class="modal-content modal-lg">
             {% if self.popup_header %}
