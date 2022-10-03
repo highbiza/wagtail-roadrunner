@@ -92,7 +92,7 @@ class StylingBlock(blocks.StructBlock):
         label="Achtergrond kleur", max_length=255, required=False
     )
     color = ColorPickerBlock(label="Font kleur", max_length=255, required=False)
-    font_size = blocks.IntegerBlock(label="Font grootte", required=False)
+    font_size = blocks.IntegerBlock(label="Font grootte", required=False, help_text="De font grootte wordt in pixels weergegeven")
     text_align = blocks.ChoiceBlock(
         choices=[("left", "Links"), ("right", "Rechts"), ("center", "Midden")],
         label="Uitlijning van tekst",

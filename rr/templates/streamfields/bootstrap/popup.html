@@ -10,12 +10,10 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="modal_{{block_key}}_{{uid}}" {% if self.open_on_load %}data-popup="true"{% endif %} {% if self.open_once %}data-key="modal_{{block_key}}_{{uid}}"{% endif %}>
     <div class="modal-dialog{% if self.big_modal %} modal-lg{% endif %}" role="document">
         <div class="modal-content modal-lg">
-            {% if self.popup_header %}
-            <div class="modal-header">
-                <h5 class="modal-title">{{ self.popup_header }}</h5>
+            <div class="modal-header{% if not self.popup_header %} border-0{% endif %}">
+                {% if self.popup_header %}<h5 class="modal-title">{{ self.popup_header }}</h5>{% endif %}
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            {% endif %}
             <div class="modal-body">
             {{ self.popup_content|richtext }}
             </div>
