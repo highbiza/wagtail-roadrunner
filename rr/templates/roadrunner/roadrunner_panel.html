@@ -1,6 +1,0 @@
-{% load static %}
-<div class="rr_editor lg" id="{{ field.id_for_label }}"></div>
-<input type="hidden" name="{{ field.name }}" id="{{ field.id_for_label }}" />
-<script type="text/javascript">
-    $('.road-runner .rr_editor#{{ field.id_for_label }}').roadrunner({{ roadrunner | safe }});
-</script>

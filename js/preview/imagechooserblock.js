@@ -11,7 +11,7 @@ class ImageChooserPreview extends Preview {
     const previewImage = this.state?.preview
     if (!previewImage) {
       return {
-        alt: "empty image"
+        alt: "empty image",
       }
     }
 
@@ -35,7 +35,7 @@ class ImageChooserPreview extends Preview {
 
     return renderInPlaceHolder(previewPlaceholder, (
       <Fragment>
-      <img id={prefix} {...this.getValue()} />
+        <img id={prefix} {...this.getValue()} />
         <PlaceHolder/>
       </Fragment>
     ))
