@@ -3,7 +3,7 @@ import { Preview } from "./render"
 import { stripHtml } from "string-strip-html"
 
 
-class PreviewFieldBlockPreview extends Preview {
+export class PreviewFieldBlockPreview extends Preview {
   getValue() {
     if (this.state) {
       try {

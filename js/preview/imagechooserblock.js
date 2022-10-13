@@ -5,7 +5,7 @@ import { Preview } from "./render"
 import { renderInPlaceHolder, PlaceHolder } from "../jsx"
 
 
-class ImageChooserPreview extends Preview {
+export class ImageChooserPreview extends Preview {
 
   getValue() {
     const previewImage = this.state?.preview

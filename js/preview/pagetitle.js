@@ -3,7 +3,7 @@ import dom, { Fragment } from 'jsx-render'
 import { renderInPlaceHolder, PlaceHolder } from "../jsx"
 import { Preview } from "./render"
 
-class PageTitle extends Preview {
+export class PageTitle extends Preview {
   getValue() {
     return $("h1").first()
       .text()
