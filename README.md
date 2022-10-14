@@ -241,8 +241,14 @@ The renderPreview method
 ------------------------
 
 You can create your own preview UI in javascript by registering your own block
-definition with telepath. To do this, you can either install wagtail-roadrunner
-as a dependency in your javascript project like this:
+definition with telepath.
+
+There are 2 ways to include wagtail-roadrunner in your project:
+
+1. you can use the exported symbols on ``window``, the entire library is
+   available as ``window.roadrunner``, just like ``window.wagtailStreamField``.
+2. Alternatively you can install wagtail-roadrunner as a dependency in your
+   javascript project like this:
 
 ```
 npm add highbiza/wagtail-roadrunner
@@ -250,9 +256,6 @@ npm add highbiza/wagtail-roadrunner
 
 This will add the wagtail-roadrunner github repo's javascript to your project.
 Now you can import the classes from wagtail-roadrunner in your js files.
-
-Alternatively you can use the exported symbols on ``window``, the entire library is
-available as ``window.roadrunner``, just like ``window.wagtailStreamField``.
 
 Wagtail-roadrunner does use jsx, but without React because the way wagtail's
 widgets work. They need to be rendered immediately into a placeholder div,
@@ -270,13 +273,7 @@ component started from scratch.
 import $ from "jquery"
 import dom, { Fragment } from 'jsx-render'
 
-import { renderInPlaceHolder, PlaceHolder } from "roadrunner/jsx"
-import { Preview } from "roadrunner/preview/render"
-
-/**
- * or you could also import these symbols from window like this:
- */
- 
+// Use object destructuring to get the symbols off of window:
 const {
     roadrunner: {
         jsx: { renderInPlaceHolder, PlaceHolder },
@@ -285,6 +282,15 @@ const {
         }
     }
 } = window
+
+
+/**
+ * or you could also import these symbols from the library if you added
+ * wagtail-roadrunner to your project's dependencies
+ */
+ 
+import { renderInPlaceHolder, PlaceHolder } from "roadrunner/jsx"
+import { Preview } from "roadrunner/preview/render"
 
 /**
  * now you can use the imported symbols and write your own code:
