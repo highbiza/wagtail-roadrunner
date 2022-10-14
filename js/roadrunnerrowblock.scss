@@ -167,8 +167,9 @@
                             // Improving visibility of the underlying c-sf-block
                             .c-sf-block{
                                 transition: .2s ease;
-                                border: 1px solid #e6e6e6;
+                                border: 1px solid #f3f3f3 !important;
                                 margin: .5rem 0;
+                                padding-top: 0 !important;
                                 .c-sf-block__header{
                                     position: unset;
                                     top: unset;
@@ -179,6 +180,7 @@
                                     pointer-events: all;
                                     width: auto;
                                     max-width: 100%;
+                                    margin: 0 auto;
                                 }
                                 .c-sf-block__content-inner{
                                     padding: 1rem;
