@@ -255,9 +255,9 @@ npm add highbiza/wagtail-roadrunner
 ```
 
 This will add the wagtail-roadrunner github repo's javascript to your project.
-Now you can import the classes from wagtail-roadrunner in your js files.
+You can now import the classes from wagtail-roadrunner in your js files.
 
-Wagtail-roadrunner does use jsx, but without React because the way wagtail's
+Wagtail-roadrunner does use jsx, but without React because of the way wagtail's
 widgets work. They need to be rendered immediately into a placeholder div,
 which would become very tedious in React. wagtail-roadrunner uses jsx-render,
 which provides a jsx renderer implementation. Use the ``renderInPlaceHolder``
