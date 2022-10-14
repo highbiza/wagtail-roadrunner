@@ -241,8 +241,8 @@ The renderPreview method
 ------------------------
 
 You can create your own preview UI in javascript by registering your own block
-definition with telepath. To do this, you need to install the wagtail-roadrunner
-as a dependency in your javascript project:
+definition with telepath. To do this, you can either install wagtail-roadrunner
+as a dependency in your javascript project like this:
 
 ```
 npm add highbiza/wagtail-roadrunner
@@ -250,6 +250,10 @@ npm add highbiza/wagtail-roadrunner
 
 This will add the wagtail-roadrunner github repo's javascript to your project.
 Now you can import the classes from wagtail-roadrunner in your js files.
+
+Alternatively you can use the exported symbols on window, the entire library is
+available as ``window.roadrunner``, the same as ``wagtailStreamField``.
+
 Wagtail-roadrunner does use jsx, but without React because the way wagtail's
 widgets work. They need to be rendered immediately into a placeholder div,
 which would become very tedious in React. wagtail-roadrunner uses jsx-render,
@@ -265,8 +269,26 @@ component started from scratch.
 ```jsx
 import $ from "jquery"
 import dom, { Fragment } from 'jsx-render'
+
 import { renderInPlaceHolder, PlaceHolder } from "roadrunner/jsx"
-import { Preview } from "roadrunner/render"
+import { Preview } from "roadrunner/preview/render"
+
+/**
+ * or you could also import these symbols from window like this:
+ */
+ 
+const {
+    roadrunner: {
+        jsx: { renderInPlaceHolder, PlaceHolder },
+        preview: {
+            render: { Preview }
+        }
+    }
+} = window
+
+/**
+ * now you can use the imported symbols and write your own code:
+ */
 
 class MyPageTitle extends Preview {
   getValue() {
