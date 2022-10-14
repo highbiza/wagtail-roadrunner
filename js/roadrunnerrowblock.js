@@ -6,7 +6,7 @@ import { GRID_SIZE_CHANGED_EVENT, breakPointEmitter } from "./events"
 import "./roadrunnerrowblock.scss"
 
 
-class RoadrunnerRowBlockInsertionControl {
+export class RoadrunnerRowBlockInsertionControl {
   constructor(placeholder, opts) {
     this.opts = opts
     this.index = opts && opts.index
@@ -79,7 +79,7 @@ class RoadrunnerRowBlockInsertionControl {
   }
 }
 
-class InsertButton {
+export class InsertButton {
   constructor(sequenceChild) {
     this.sequenceChild = sequenceChild
     this.onClick = this.onClick.bind(this)
@@ -103,7 +103,7 @@ class InsertButton {
   }
 }
 
-const ContainerSwapUI = ({prefix, originalWidth, strings}) => {
+export const ContainerSwapUI = ({prefix, originalWidth, strings}) => {
   let description = strings.SWAP_TO_FULL_WIDTH
   if (originalWidth == "full_width") {
     description = strings.SWAP_TO_BOXED
@@ -133,7 +133,7 @@ const ContainerSwapUI = ({prefix, originalWidth, strings}) => {
 }
 
 
-class ContainerSwapWidget {
+export class ContainerSwapWidget {
   constructor(blockDef, prefix) {
     // cut off '-value-row'
     let containerPrefix = prefix.slice(0, -10)
@@ -211,7 +211,7 @@ class ContainerSwapWidget {
 }
 
 
-class RoadrunnerRowBlock extends window.wagtailStreamField.blocks.ListBlock {
+export class RoadrunnerRowBlock extends window.wagtailStreamField.blocks.ListBlock {
 
   constructor(blockDef, originalPlaceholder, prefix, initialState, initialError) {
     const containerSwap = new ContainerSwapWidget(blockDef, prefix)

@@ -5,7 +5,7 @@ import { GRID_SIZE_CHANGED_EVENT } from "./events"
 import { isInViewport } from "./utils"
 import "./roadrunnerbaseblock.scss"
 
-class RoadRunnerBaseBlock extends StylingBlock {
+export class RoadRunnerBaseBlock extends StylingBlock {
   constructor(blockDef, placeholder, prefix, initialState, initialError) {
     const result = renderInPlaceHolder(placeholder, (
       <div className="roadrunnerbaseblock-container">

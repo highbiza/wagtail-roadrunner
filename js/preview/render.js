@@ -110,11 +110,14 @@ export class PreviewList extends Preview {
   setState(newState) {
     this.state = newState
     for (const [key, value] of Object.entries(newState)) {
+      // never render preview for styling blocks
+      if (key == "styling") continue
+
       const child = this.children[key]
       if (child && "setState" in child) {
         child.setState(value)
       } else {
-        console.log("PreviewList.setState: Dit child heeft geen preview", child, this.children, key, value)
+        console.log("PreviewList.setState: This child has no preview", child, this.children, key, value)
       }
     }
   }

@@ -5,7 +5,7 @@ import { Preview } from "./render"
 import { renderInPlaceHolder, PlaceHolder } from "../jsx"
 
 
-class RichTextBlockPreview extends Preview {
+export class RichTextBlockPreview extends Preview {
   setState(newState) {
     this.state = newState
     const previewElement = $(this.element).find(`#${this.prefix}`)

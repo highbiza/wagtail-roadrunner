@@ -1,17 +1,19 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  mode: "production",
+  mode: "development",
   // Where files should be sent once they are bundled
   entry: {
-    roadrunner: './js/roadrunner.js',
+    roadrunner: './js/index.js',
   },
   output: {
     path: path.join(__dirname, 'rr/static/roadrunner'),
     filename: '[name].js',
-    chunkFilename: '[name]-[id].chunk.js'
+    chunkFilename: '[name]-[id].chunk.js',
+    library: {
+      type: "window"
+    }
   },
   externals: {
     jquery: 'jQuery',
@@ -46,6 +48,5 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'roadrunner.css'
     }),
-    // new HtmlWebpackPlugin({ template: './src/index.html' })
   ],
 }

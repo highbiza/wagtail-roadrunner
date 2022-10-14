@@ -8,7 +8,7 @@ import { renderPreview, renderPreviewMethod } from "./render.js"
 
 import "./streamblock.scss"
 
-class PreviewBlockWrapper {
+export class PreviewBlockWrapper {
   constructor(blockDef, placeholder, modalPrefix, childPrefix, index, id, initialState, sequence, opts) {
     // render our wrapper tempplate with the placeholders for the preview and
     // the child element
@@ -93,7 +93,7 @@ class PreviewBlockWrapper {
 }
 
 
-class PreviewBlockDefinition {
+export class PreviewBlockDefinition {
   constructor(blockDef, originalPlaceholder, modalPrefix, prefix, index, id, initialState, sequence, opts) {
     // copy all of the original blockDef props except render, because we are
     // going to use our own render.
@@ -128,7 +128,7 @@ class PreviewBlockDefinition {
   }
 }
 
-class PreviewStreamChild extends getStreamChild() {
+export class PreviewStreamChild extends getStreamChild() {
   setError(error) {
     super.setError(error)
     this.blockDef.setError(error)
@@ -137,7 +137,7 @@ class PreviewStreamChild extends getStreamChild() {
   expand() { /* we don't need this functionality either */ }
 }
 
-class PreviewStreamBlock extends window.wagtailStreamField.blocks.StreamBlock {
+export class PreviewStreamBlock extends window.wagtailStreamField.blocks.StreamBlock {
 
   _getChildDataForInsertion({ type }) {
     const [blockDef, initialState, uuidv4] = super._getChildDataForInsertion({type})

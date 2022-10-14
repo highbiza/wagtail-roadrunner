@@ -12,11 +12,11 @@ const ICONS = {
   "col-lg": "icon-tv",
 }
 
-const GridSegment = ({ onClick, active=false, fallback=false }) =>
+export const GridSegment = ({ onClick, active=false, fallback=false }) =>
   <span onClick={onClick} className={`gridsegment${active ? ' active': ''}${fallback ? ' fallback': ''}`}></span>
 
 
-const GridLine = ({ value, name, breakpoint, backupValue="col-12", collapsed=true}) => {
+export const GridLine = ({ value, name, breakpoint, backupValue="col-12", collapsed=true}) => {
   const col = cols(value)
   const backupCols = cols(backupValue)
   const handleClick = index => evt => {
@@ -54,7 +54,7 @@ const GridLine = ({ value, name, breakpoint, backupValue="col-12", collapsed=tru
   return html
 }
 
-const Grid = ({ values, name }) => {
+export const Grid = ({ values, name }) => {
   const gridChoiceUUID = `grid-${uuidv4()}`
 
   // if there are no  initial values yet, the block should not be collapsed,
@@ -77,7 +77,7 @@ const Grid = ({ values, name }) => {
   )
 }
 
-class GridChoiceBlock {
+export class GridChoiceBlock {
   constructor(blockDef, placeholder, prefix, initialState, initialError) {
     this.state = initialState
     this.prefix = prefix
