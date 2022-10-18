@@ -9,7 +9,10 @@
 	@import "bootstrap/scss/variables";
 	@import 'bootstrap/scss/nav';
 
-
+    [data-jsx-placeholder] {
+        display: none;
+    }
+    
 
 	// modal-edit is the editing interface of the blocks
 	.modal-edit{

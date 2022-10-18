@@ -121,7 +121,7 @@ class TabChildrenBlock(blocks.StructBlock):
 
 class TabBlock(blocks.StructBlock):
     tab_style = BootstrapTabStylingBlock(label="Tab style", default="tabs")
-    tabs = blocks.ListBlock(TabChildrenBlock())
+    tabs = blocks.ListBlock(TabChildrenBlock(form_classname="nav-link"), form_classname="nav nav-tabs")
     styling = StylingBlock()
 
     def get_uuid(self):

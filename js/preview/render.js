@@ -16,9 +16,10 @@ export class Preview {
   }
 
   render(previewPlaceholder, prefix, initialState, initialError) {
+    const { classname="preview-label" } = this.blockDef.meta
     return renderInPlaceHolder(previewPlaceholder,
       <Fragment>
-        <div id={prefix} class="preview-label">
+        <div id={prefix} class={classname || "preview-label"}>
           {this.getValue()}
         </div>
         <PlaceHolder/>
