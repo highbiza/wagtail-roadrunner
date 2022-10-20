@@ -41,5 +41,10 @@
         &:not(.active) {
             display: none;
         }
+        .active{
+            [data-jsx-placeholder]{
+                display: block;
+            }
+        }
     }
 }
