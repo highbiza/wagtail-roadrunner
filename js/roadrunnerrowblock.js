@@ -191,13 +191,6 @@ export class ContainerSwapWidget {
         </Fragment>
       ))
       this.swapModal = $(element).find(`#swap-${this.prefix}`)
-      // some really dynamic widgets need to measure the comtainer size, but because
-      // the modal is drawn hidden initially we need to fake a resize event so it will
-      // measure when show at the right size.
-      $(element).one('shown.bs.modal', e => {
-        $(window).trigger("resize")
-      })
-
       $(this.swapModal).find(".btn-primary.swap")
         .click(this.handleAcceptSwap)
 
