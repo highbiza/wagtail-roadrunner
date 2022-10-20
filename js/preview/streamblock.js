@@ -57,6 +57,13 @@ export class PreviewBlockWrapper {
       }
     })
 
+    // some really dynamic widgets need to measure the comtainer size, but because
+    // the modal is drawn hidden initially we need to fake a resize event so it will
+    // measure when show at the right size.
+    $(this.previewElement).one('shown.bs.modal', e => {
+      $(window).trigger("resize")
+    })
+
     // regular inputs do send change events
     $(this.previewElement).change(e => {
       if ("setState" in preview) {
