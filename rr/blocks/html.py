@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from django.utils.translation import gettext_lazy as _, pgettext_lazy
 
 from wagtail.core.blocks import StructValue
 from wagtail.core import blocks
@@ -26,11 +27,9 @@ class HeaderBlock(blocks.StructBlock):
         ("h6", "H6"),
     )
     heading_type = blocks.ChoiceBlock(
-        choices=HEADER_CHOICES, label="Header", default="h2"
+        choices=HEADER_CHOICES, label=_("Header type"), default="h2"
     )
-    text = blocks.CharBlock(
-        label="Tekst", help_text="Tekst in de header", max_length=255
-    )
+    text = blocks.CharBlock(label=_("Text"), max_length=255)
     styling = StylingBlock()
 
     def get_searchable_content(self, value):
@@ -52,9 +51,7 @@ register(PageTitleAdapter(), PageTitle)
 
 
 class RichText(blocks.StructBlock):
-    block_text = blocks.RichTextBlock(
-        label="Inhoud", help_text="Inhoud van het tekstblok", required=False
-    )
+    block_text = blocks.RichTextBlock(label=_("Content"), required=False)
 
     styling = StylingBlock()
 
@@ -65,12 +62,12 @@ class RichText(blocks.StructBlock):
 
 class DividerBlock(blocks.StructBlock):
     DIVIDER_CHOICES = (
-        ("lg-thin", "Long thin line"),
-        ("sm-thick", "Small thick line"),
+        ("lg-thin", _("Long thin line")),
+        ("sm-thick", _("Small thick line")),
     )
 
     divider_type = blocks.ChoiceBlock(
-        choices=DIVIDER_CHOICES, label="Divider type", default="lg-thin"
+        choices=DIVIDER_CHOICES, label=_("Divider type"), default="lg-thin"
     )
     styling = StylingBlock()
 
@@ -87,16 +84,21 @@ class ImageBlock(blocks.StructBlock):
     image = ImageChooserBlock()
     alt = blocks.CharBlock(
         max_length=255,
-        label="Alt.",
-        help_text="Optioneel, afbeelding alt tekst",
+        label=_("Alt."),
+        help_text=_("Optional, alternative text for image"),
         required=False,
     )
-    lazy = blocks.BooleanBlock(label="Lazy", default=False, required=False)
-    page_url = blocks.PageChooserBlock(label="Pagina url", required=False)
-    external_url = blocks.CharBlock(label="Externe link", required=False)
-    open_in_new_tab = blocks.BooleanBlock(
-        label="Open in een nieuwe tab", required=False
+    lazy = blocks.BooleanBlock(
+        label=pgettext_lazy("loading", "Lazy"),
+        help_text=_(
+            "If an image is below the fold on the page, mark it as lazy to speed up page load times"
+        ),
+        default=False,
+        required=False,
     )
+    page_url = blocks.PageChooserBlock(label=_("Page url"), required=False)
+    external_url = blocks.CharBlock(label=_("External link"), required=False)
+    open_in_new_tab = blocks.BooleanBlock(label=_("Open in a new tab"), required=False)
     styling = StylingBlock()
 
     class Meta:
@@ -119,8 +121,15 @@ class VideoBlockValue(StructValue):
 
 
 class VideoBlock(blocks.StructBlock):
-    video = EmbedBlock(max_width=1200, max_height=800, label="Video url")
-    lazy = blocks.BooleanBlock(label="Lazy", default=False, required=False)
+    video = EmbedBlock(max_width=1200, max_height=800, label="Video link")
+    lazy = blocks.BooleanBlock(
+        label=pgettext_lazy("loading", "Lazy"),
+        help_text=_(
+            "If a video is below the fold on the page, mark it as lazy to speed up page load times"
+        ),
+        default=False,
+        required=False,
+    )
     styling = StylingBlock()
 
     class Meta:
@@ -138,12 +147,15 @@ class HtmlBlock(blocks.StructBlock):
 
 
 class TableMakerBlock(blocks.StructBlock):
-    table = TableBlock(table_options=US_TABLE_OPTIONS)
+    table = TableBlock(
+        table_options=US_TABLE_OPTIONS,
+        help_text=_("Use the right mouse button to modify the table rows/cells"),
+    )
     styling = StylingBlock()
 
     class Meta:
         icon = "table"
-        label = "Table"
+        label = _("Table")
         group = "HTML"
         template = "streamfields/html/table.html"
         preview_template = "preview/html/table.html"

@@ -1,0 +1,276 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-25 15:07+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: adapters.py:19
+msgid "Apply"
+msgstr ""
+
+#: adapters.py:20
+msgid "Saving..."
+msgstr "Salvataggio in corso..."
+
+#: adapters.py:21
+msgid "Save Draft"
+msgstr "Salva Bozza"
+
+#: adapters.py:149
+msgid "Ok"
+msgstr ""
+
+#: adapters.py:150
+msgid "Cancel"
+msgstr "Annulla"
+
+#: adapters.py:151
+msgid "Change container width"
+msgstr ""
+
+#: adapters.py:152
+msgid "Change container to full width"
+msgstr ""
+
+#: adapters.py:153
+msgid "Change container width to boxed"
+msgstr ""
+
+#: blocks/html.py:30
+msgid "Header type"
+msgstr ""
+
+#: blocks/html.py:32
+msgid "Text"
+msgstr "Testo"
+
+#: blocks/html.py:54
+msgid "Content"
+msgstr "Contenuto"
+
+#: blocks/html.py:65
+msgid "Long thin line"
+msgstr ""
+
+#: blocks/html.py:66
+msgid "Small thick line"
+msgstr ""
+
+#: blocks/html.py:70
+msgid "Divider type"
+msgstr ""
+
+#: blocks/html.py:87
+msgid "Alt."
+msgstr ""
+
+#: blocks/html.py:88
+msgid "Optional, alternative text for image"
+msgstr ""
+
+#: blocks/html.py:92 blocks/html.py:126
+msgctxt "loading"
+msgid "Lazy"
+msgstr ""
+
+#: blocks/html.py:94
+msgid ""
+"If an image is below the fold on the page, mark it as lazy to speed up page "
+"load times"
+msgstr ""
+
+#: blocks/html.py:99
+msgid "Page url"
+msgstr ""
+
+#: blocks/html.py:100
+msgid "External link"
+msgstr "Collegamento esterno"
+
+#: blocks/html.py:101
+msgid "Open in a new tab"
+msgstr ""
+
+#: blocks/html.py:128
+msgid ""
+"If a video is below the fold on the page, mark it as lazy to speed up page "
+"load times"
+msgstr ""
+
+#: blocks/html.py:152
+msgid "Use the right mouse button to modify the table rows/cells"
+msgstr ""
+
+#: blocks/html.py:158
+msgid "Table"
+msgstr "Tabella"
+
+#: blocks/main.py:17
+msgid "12 columns"
+msgstr ""
+
+#: blocks/main.py:18
+msgid "11 columns"
+msgstr ""
+
+#: blocks/main.py:19
+msgid "10 columns"
+msgstr ""
+
+#: blocks/main.py:20
+msgid "9 columns"
+msgstr ""
+
+#: blocks/main.py:21
+msgid "8 columns"
+msgstr ""
+
+#: blocks/main.py:22
+msgid "7 columns"
+msgstr ""
+
+#: blocks/main.py:23
+msgid "6 columns"
+msgstr ""
+
+#: blocks/main.py:24
+msgid "5 columns"
+msgstr ""
+
+#: blocks/main.py:25
+msgid "4 columns"
+msgstr ""
+
+#: blocks/main.py:26
+msgid "3 columns"
+msgstr ""
+
+#: blocks/main.py:27
+msgid "2 columns"
+msgstr ""
+
+#: blocks/main.py:28
+msgid "1 columns"
+msgstr ""
+
+#: blocks/main.py:29
+msgid "12 columns from tablet size"
+msgstr ""
+
+#: blocks/main.py:30
+msgid "11 columns from tablet size"
+msgstr ""
+
+#: blocks/main.py:31
+msgid "10 columns from tablet size"
+msgstr ""
+
+#: blocks/main.py:32
+msgid "9 columns from tablet size"
+msgstr ""
+
+#: blocks/main.py:33
+msgid "8 columns from tablet size"
+msgstr ""
+
+#: blocks/main.py:34
+msgid "7 columns from tablet size"
+msgstr ""
+
+#: blocks/main.py:35
+msgid "6 columns from tablet size"
+msgstr ""
+
+#: blocks/main.py:36
+msgid "5 columns from tablet size"
+msgstr ""
+
+#: blocks/main.py:37
+msgid "4 columns from tablet size"
+msgstr ""
+
+#: blocks/main.py:38
+msgid "3 columns from tablet size"
+msgstr ""
+
+#: blocks/main.py:39
+msgid "2 columns from tablet size"
+msgstr ""
+
+#: blocks/main.py:40
+msgid "1 columns from tablet size"
+msgstr ""
+
+#: blocks/main.py:41
+msgid "12 columns from large screen size"
+msgstr ""
+
+#: blocks/main.py:42
+msgid "11 columns from large screen size"
+msgstr ""
+
+#: blocks/main.py:43
+msgid "10 columns from large screen size"
+msgstr ""
+
+#: blocks/main.py:44
+msgid "9 columns from large screen size"
+msgstr ""
+
+#: blocks/main.py:45
+msgid "8 columns from large screen size"
+msgstr ""
+
+#: blocks/main.py:46
+msgid "7 columns from large screen size"
+msgstr ""
+
+#: blocks/main.py:47
+msgid "6 columns from large screen size"
+msgstr ""
+
+#: blocks/main.py:48
+msgid "5 columns from large screen size"
+msgstr ""
+
+#: blocks/main.py:49
+msgid "4 columns from large screen size"
+msgstr ""
+
+#: blocks/main.py:50
+msgid "3 columns from large screen size"
+msgstr ""
+
+#: blocks/main.py:51
+msgid "2 columns from large screen size"
+msgstr ""
+
+#: blocks/main.py:52
+msgid "1 columns from large screen size"
+msgstr ""
+
+#: blocks/main.py:95
+msgid "Boxed"
+msgstr ""
+
+#: blocks/main.py:100
+msgid "Full"
+msgstr ""
+
+#: models.py:12
+msgid "Name"
+msgstr "Nome"
