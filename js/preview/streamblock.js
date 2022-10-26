@@ -140,6 +140,7 @@ export class PreviewStreamChild extends getStreamChild() {
     super.setError(error)
     this.blockDef.setError(error)
   }
+  /* eslint-disable no-inline-comments */
   collapse() { /* we don't need this functionality */ }
   expand() { /* we don't need this functionality either */ }
 }

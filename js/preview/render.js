@@ -112,7 +112,10 @@ export class PreviewList extends Preview {
     this.state = newState
     for (const [key, value] of Object.entries(newState)) {
       // never render preview for styling blocks
-      if (key == "styling") continue
+      if (key == "styling") {
+        /* eslint-disable no-continue */
+        continue
+      }
 
       const child = this.children[key]
       if (child && "setState" in child) {
@@ -141,6 +144,7 @@ export class PreviewList extends Preview {
     return preview.reduce((def, name) => {
       const { placeholder } = def
       const blockDef = childBlockDefsByName[name]
+      /* eslint-disable no-use-before-define */
       const result = renderPreview(blockDef, placeholder, `${name}-${prefix}`, initialState[name], initialError?.[name])
       children[name] = result
       return result

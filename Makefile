@@ -14,15 +14,16 @@ PIP_INDEX_URL=https://pypi.uwkm.nl/ocyan/testing/+simple/
 endif
 
 install: fail-if-no-virtualenv
+	npm install
 	PIP_INDEX_URL=${PIP_INDEX_URL} pip install --editable .[test] --upgrade --upgrade-strategy=eager --pre
 
 assets:
-	npm install
 	npm run build
 
 lint: fail-if-no-virtualenv
 	@black --check --exclude "migrations/*" rr
 	@pylint setup.py rr/
+	npm run lint
 
 black:
 	@black --exclude "migrations/*" rr

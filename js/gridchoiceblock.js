@@ -59,7 +59,7 @@ export const Grid = ({ values, name }) => {
 
   // if there are no  initial values yet, the block should not be collapsed,
   // because the user MUST pick at least one value.
-  const collapsed = Boolean(values.length)
+  const collapsed = !values.isOpen
 
   return (
     <div className="gridchooser-wrapper" id={gridChoiceUUID}>
@@ -86,6 +86,7 @@ export class GridChoiceBlock {
   }
 
   setState(state) {
+    /* eslint-disable no-unreachable */
     throw new Error("setState", state)
     this.state = {...this.state, ...state}
   }
@@ -109,6 +110,7 @@ export class GridChoiceBlock {
   }
 
   getValue() {
+    /* eslint-disable no-unreachable */
     throw new Error("getValue", this.state)
     return this.state
   }

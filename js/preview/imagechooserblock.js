@@ -31,8 +31,6 @@ export class ImageChooserPreview extends Preview {
   }
 
   render(previewPlaceholder, prefix, initialState, initialError) {
-    const previewImage = initialState?.preview
-
     return renderInPlaceHolder(previewPlaceholder, (
       <Fragment>
         <img id={prefix} {...this.getValue()} />
