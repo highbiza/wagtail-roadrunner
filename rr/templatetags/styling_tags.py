@@ -35,10 +35,11 @@ def get_styling(styling, no_style_tag=False):
 @register.simple_tag
 def get_styling_classes(styling):
     if not styling:
-        return
+        return ""
     klasses = [
         klass for title, klass in styling.items() if (klass and title in style_classes)
     ]
+
     return " ".join(klasses)
 
 
