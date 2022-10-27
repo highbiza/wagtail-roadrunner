@@ -1,5 +1,3 @@
-
-
 .colorpicker-wrapper{
     position: relative;
     .field-content .input{
@@ -41,10 +39,8 @@
         &:not(.active) {
             display: none;
         }
-        .active{
-            [data-jsx-placeholder]{
-                display: block;
-            }
+        div[data-jsx-placeholder]{
+            display: block;
         }
     }
 }
