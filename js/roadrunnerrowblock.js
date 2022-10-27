@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import dom, { Fragment } from 'jsx-render'
 import $ from "jquery"
 import { renderInPlaceHolder, PlaceHolder } from "./jsx"
@@ -226,10 +227,15 @@ export class RoadrunnerRowBlock extends window.wagtailStreamField.blocks.ListBlo
       if (nextChild) {
         const { value: { grid }} = nextChild.getState()
         initialState.grid = grid
+      } else {
+        initialState.grid = ["col-12"]
       }
     } catch (e) {
       console.log("TODO: see if this ever happens", e)
     }
+
+    // all newly added columns show the grid chooser opened
+    initialState.grid.isOpen = true
 
     const newChild = this._insert(blockDef, initialState, id || null, index, { animate: true })
     // focus the newly added field if we can do so without obtrusive UI behaviour
