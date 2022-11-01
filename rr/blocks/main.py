@@ -71,11 +71,12 @@ class GridChoiceBlock(blocks.MultipleChoiceBlock):
 class RoadRunnerStreamBlock(blocks.StreamBlock):
     class Meta:
         label = None
+        required = False
 
 
 class RoadRunnerBaseBlock(blocks.StructBlock):
     grid = GridChoiceBlock(
-        label="Breedte kolom", help_text="De breedte kolommen (*/12)."
+        label="Breedte kolom", help_text="De breedte kolommen (*/12).", default="col-12"
     )
     content = RoadRunnerStreamBlock()
     styling = StylingBlock()
