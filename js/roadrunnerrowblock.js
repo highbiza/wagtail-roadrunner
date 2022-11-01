@@ -234,9 +234,6 @@ export class RoadrunnerRowBlock extends window.wagtailStreamField.blocks.ListBlo
       console.log("TODO: see if this ever happens", e)
     }
 
-    // all newly added columns show the grid chooser opened
-    initialState.grid.isOpen = true
-
     const newChild = this._insert(blockDef, initialState, id || null, index, { animate: true })
     // focus the newly added field if we can do so without obtrusive UI behaviour
     newChild.focus({ soft: true })
