@@ -1,6 +1,7 @@
 import $ from "jquery"
 import { v4 as uuidv4 } from 'uuid'
 import dom from 'jsx-render'
+import Collapse from "./bootstrapnoconflict/collapse"
 import { renderInPlaceHolder } from "./jsx"
 import { SvgIcon, breakPointValue, breakPointFallback, cols, times } from "./utils"
 import { createGridSizeChanged, breakPointEmitter } from "./events"
@@ -20,17 +21,30 @@ export const GridLine = ({ value, name, breakpoint, backupValue="col-12", collap
   const col = cols(value)
   const backupCols = cols(backupValue)
   const handleClick = index => evt => {
-
-    $(`input[name=${name}][type=hidden][data-breakpoint=${breakpoint}]`).val(`${breakpoint}-${index+1}`)
-    const gridSizeChangedEvent = createGridSizeChanged(index + 1, breakpoint)
-    if (breakPointEmitter.current == breakpoint) {
-      evt.target.dispatchEvent(gridSizeChangedEvent)
-    }
-
+    const input = $(`input[name=${name}][type=hidden][data-breakpoint=${breakpoint}]`)
+    const newVal = `${breakpoint}-${index+1}`
+    // clear the active elements
     const segments = $(evt.target.parentNode).children(".gridsegment")
     $(segments).removeClass("active")
-    // set the first index+1 segments to active
-    segments.slice(0, index+1).addClass("active")
+
+    if (input.val() == newVal) {
+      input.val("")
+      if (breakPointEmitter.current == breakpoint) {
+        const gridSizeChangedEvent = createGridSizeChanged(backupCols, breakpoint)
+        evt.target.dispatchEvent(gridSizeChangedEvent)
+      }
+      // take the fallback as the new width
+      segments.slice(0, backupCols).addClass("fallback")
+
+    } else {
+      input.val(newVal)
+      if (breakPointEmitter.current == breakpoint) {
+        const gridSizeChangedEvent = createGridSizeChanged(index + 1, breakpoint)
+        evt.target.dispatchEvent(gridSizeChangedEvent)
+      }
+      // set the first index+1 segments to active
+      segments.slice(0, index+1).addClass("active")
+    }
   }
 
   const html = (
@@ -54,12 +68,8 @@ export const GridLine = ({ value, name, breakpoint, backupValue="col-12", collap
   return html
 }
 
-export const Grid = ({ values, name }) => {
+export const Grid = ({ values, name, collapsed=true }) => {
   const gridChoiceUUID = `grid-${uuidv4()}`
-
-  // if there are no  initial values yet, the block should not be collapsed,
-  // because the user MUST pick at least one value.
-  const collapsed = !values.isOpen
 
   return (
     <div className="gridchooser-wrapper" id={gridChoiceUUID}>
@@ -85,6 +95,13 @@ export class GridChoiceBlock {
     this.element = element
   }
 
+  open() {
+    const gridChoiceUUID = this.element.id
+    $(`#${gridChoiceUUID} .gridchoices-wrapper > .gridchoice-toggle`).each(
+      (_, element) => Collapse.getOrCreateInstance(element, { toggle: false }).show()
+    )
+  }
+
   setState(state) {
     /* eslint-disable no-unreachable */
     throw new Error("setState", state)
@@ -92,8 +109,9 @@ export class GridChoiceBlock {
   }
 
   setError(errorList) {
-    $(this.element).find(".dropdown.gridchooser")
+    $(this.element).find(".gridchooser")
       .addClass("error")
+    this.open()
   }
 
   getState() {
@@ -120,7 +138,7 @@ export class GridChoiceBlock {
   }
 
   focus(opts) {
-    console.log("GridChoiceBlock focus", opts)
+    this.open()
   }
 }
 
