@@ -1,10 +1,14 @@
-{% load styling_tags wagtailimages_tags %}
+{% load styling_tags ocyan_thumbnail %}
 
 <div id="carouselExampleCaptions" class="carousel slide {% get_styling_classes self.styling %}" {% get_styling self.styling %} data-bs-ride="carousel">
     <div class="carousel-inner">
         {% for slide in self.slides %}
         <div class="carousel-item{% if forloop.first %} active{% endif %} col-3">
-            {% image slide.image width-1920 class="img-fluid w-100" %}
+            {% if forloop.first %}
+            {% focuspoint_picture slide.image %}
+            {% else %}
+            {% lazy_focuspoint_picture slide.image %}
+            {% endif %}
             <div class="carousel-caption d-none d-md-block">
                 {{ slide.body }}
             </div>
