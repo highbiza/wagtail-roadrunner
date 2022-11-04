@@ -4,7 +4,7 @@
     <div class="carousel-inner">
         {% for slide in self.slides %}
         <div class="carousel-item{% if forloop.first %} active{% endif %} col-3">
-            {% image slide.image width-1920 class="img-fluid w-100" %}
+            {% include "streamfields/html/image_lazy.html" with picture=slide.image lazy_picture=True %}
             <div class="carousel-caption d-none d-md-block">
                 {{ slide.body }}
             </div>
