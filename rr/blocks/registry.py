@@ -109,7 +109,7 @@ preset_blocks = [
     ),
     # ListBlocks,
     (
-        "Accordion",
+        "accordion",
         AccordionListBlock(
             AccordionBlock(),
             template="streamfields/listblock/accordion.html",
