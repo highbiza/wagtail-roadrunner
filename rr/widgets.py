@@ -12,8 +12,16 @@ class RoadRunnerBlockWidget(BlockWidget):
 
     # pylint: disable=attribute-defined-outside-init
     def _build_block_json(self):
+        print("_build_block_json ")
         self._js_context = RoadRunnerJSContext()
-        self._block_json = json.dumps(self._js_context.pack(self.block_def))
+        print("_build_block_json _js_context done")
+        try:
+            # import pdb; pdb.set_trace()
+            self._block_json = json.dumps(self._js_context.pack(self.block_def))
+        except Exception as e:
+            print("JAAAAA DOOOOIIIEEE", e)
+            raise
+        print("_build_block_json _block_json done")
 
     def render(self, name, value, attrs=None, renderer=None):
         content = super().render(name, value, attrs, renderer)
