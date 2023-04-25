@@ -1,4 +1,4 @@
-{% load styling_tags wagtailimages_tags %}
+{% load styling_tags wagtailimages_tags wagtailcore_tags %}
 
 {% spaceless %}
 {% image self.image original format-webp as image_webp %}
@@ -9,7 +9,7 @@
 {% image self.image scale-30 as image_30 %}
 
 {% if self.page_url or self.external_url %}
-<a href="{% if self.external_url %}{{ self.external_url }}{% else %}{{ self.page_url.url }}{% endif %}"{% if self.open_in_new_tab %} target="_blank"{% endif %}>
+<a href="{% if self.external_url %}{{ self.external_url }}{% else %}{% pageurl self.page_url %}{% endif %}"{% if self.open_in_new_tab %} target="_blank"{% endif %}>
 {% endif %}
 
 {% if self.lazy %}

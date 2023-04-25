@@ -1,5 +1,5 @@
-{% load styling_tags %}
+{% load styling_tags wagtailcore_tags %}
 
-<a class="btn btn-{{ self.button_style }} {% get_styling_classes self.styling %}" {% if self.page_url %}href="{{ self.page_url.url }}"{% else %}href="{{ self.external_url }}"{% endif %} {% if self.new_tab %}target="_blank"{% endif %} {% get_styling self.styling %}>
+<a class="btn btn-{{ self.button_style }} {% get_styling_classes self.styling %}" {% if self.page_url %}href="{% pageurl self.page_url %}"{% else %}href="{{ self.external_url }}"{% endif %} {% if self.new_tab %}target="_blank"{% endif %} {% get_styling self.styling %}>
 	{{ self.label }}
 </a>
