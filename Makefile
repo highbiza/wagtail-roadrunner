@@ -33,7 +33,7 @@ test: fail-if-no-virtualenv
 	@coverage report
 	@coverage xml
 	@coverage html
-	npm audit
+	npm audit --omit dev
 
 debug: fail-if-no-virtualenv
 	PIP_INDEX_URL=${PIP_INDEX_URL} pip install --pre ocyan.plugin.debug
