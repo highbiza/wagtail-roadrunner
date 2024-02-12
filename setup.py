@@ -53,7 +53,7 @@ setup(
         "Framework :: Wagtail :: 2",
     ],
     keywords="RoadRunner",
-    install_requires=["wagtail", "unidecode", "beautifulsoup4"],
+    install_requires=["wagtail", "beautifulsoup4"],
     extras_require=extras_require,
     cmdclass={"build": BuildNPM},
 )
