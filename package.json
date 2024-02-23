@@ -15,7 +15,7 @@
     "url": "ssh://git@git.uwkm.nl:2222/UWKM/RoadRunner.git"
   },
   "author": "Brechtje Wulpenbroek",
-  "license": "SEE LICENSE IN Copyright highbiza",
+  "license": "MIT",
   "dependencies": {
     "@easylogic/colorpicker": "^1.10.11",
     "bootstrap": "^5.1.3",
