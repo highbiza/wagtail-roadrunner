@@ -1,4 +1,4 @@
-from wagtail.core import hooks
+from wagtail import hooks
 
 
 @hooks.register("register_icons")

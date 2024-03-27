@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 from django.utils.translation import gettext_lazy as _, pgettext_lazy
 
-from wagtail.core.blocks import StructValue
-from wagtail.core import blocks
+from wagtail.blocks import StructValue
+from wagtail import blocks
 from wagtail.contrib.table_block.blocks import TableBlock, DEFAULT_TABLE_OPTIONS
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock

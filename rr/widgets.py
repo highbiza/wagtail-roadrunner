@@ -1,5 +1,5 @@
 import json
-from wagtail.core.blocks.base import BlockWidget
+from wagtail.blocks.base import BlockWidget
 from django.utils.html import format_html
 from .telepath import RoadRunnerJSContext
 

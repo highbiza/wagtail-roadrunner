@@ -1,7 +1,7 @@
 from django import forms
-from wagtail.core.blocks.base import BlockField as WagtailBlockField
-from wagtail.core.fields import StreamField
-from wagtail.core.blocks import StreamBlock, StructBlock
+from wagtail.blocks.base import BlockField as WagtailBlockField
+from wagtail.fields import StreamField
+from wagtail.blocks import StreamBlock, StructBlock
 
 from rr.widgets import RoadRunnerBlockWidget
 from rr.blocks.template import TemplateBlock
