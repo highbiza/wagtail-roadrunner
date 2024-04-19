@@ -50,24 +50,24 @@ export class StylingBlock extends window.wagtailStreamField.blocks.StructBlock {
           <div className={`stylingblock ${blockDef.meta.classname || ''}`}>
             { blockDef.meta.helpText && <HelpText helpText={blockDef.meta.helpText} /> }
 
-            <ul className="nav nav-tabs corner-tab-control" role="tablist">
+            <ul className="nav nav-tabs corner-tab-control">
               <li className="nav-item" role="presentation">
-                <a className="nav-link" data-bs-toggle="tab" href={`#styling-${prefix}`} role="tab" aria-controls={`styling-${prefix}`} aria-selected="false">
+                <a className="nav-link" data-bs-toggle="tab" href={`#styling-${prefix}`} aria-controls={`styling-${prefix}`} aria-selected="false">
                   <SvgIcon name="icon-palette"/>
                 </a>
               </li>
               <li className="nav-item" role="presentation">
-                <a className="nav-link active" data-bs-toggle="tab" href={`#all-${prefix}`} role="tab" aria-controls={`all-${prefix}`}>
+                <a className="nav-link active" data-bs-toggle="tab" href={`#all-${prefix}`} aria-controls={`all-${prefix}`}>
                   <SvgIcon name="icon-layout"/>
                 </a>
               </li>
             </ul>
 
             <div className="nav tab-content">
-              <section className="tab-pane fade show active" id={`all-${prefix}`} role="tabpanel">
+              <section className="tab-pane fade show active" id={`all-${prefix}`}>
                 <PlaceHolder/>
               </section>
-              <section className="tab-pane fade" id={`styling-${prefix}`} role="tabpanel">
+              <section className="tab-pane fade styling-content" id={`styling-${prefix}`}>
                 <PlaceHolder/>
               </section>
             </div>
