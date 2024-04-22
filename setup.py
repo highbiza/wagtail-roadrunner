@@ -1,5 +1,6 @@
 # Always prefer setuptools over distutils
 import subprocess
+# pylint: disable=deprecated-module
 from distutils.command import build as build_module
 from setuptools import setup, find_packages
 

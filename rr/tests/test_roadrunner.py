@@ -7,8 +7,6 @@ from django.contrib.auth.models import Group
 from django.test import TestCase, override_settings
 
 from rr.templatetags.styling_tags import get_styling
-from rr.edit_handlers import RoadRunnerPanel
-from rr.fields import RoadRunnerField
 
 
 @unittest.skip("These tests are for the former version")
@@ -33,8 +31,3 @@ class RoadRunnerTest(TestCase):
         styling_attribute_no_tag = get_styling(styling, True)
         self.assertEqual(styling_attribute, 'style="height: 50px;"')
         self.assertEqual(styling_attribute_no_tag, "height: 50px;")
-
-    def test_road_runner_field(self):
-        field = RoadRunnerField([])
-        panel = field.get_panel()
-        self.assertEqual(panel, RoadRunnerPanel)
