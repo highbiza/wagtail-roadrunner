@@ -33,7 +33,7 @@ class BuildNPM(build_module.build):
 
 setup(
     name="wagtail-roadrunner",
-    version="3.0.0",
+    version="4.0.0",
     description="RoadRunner",
     long_description=long_description,
     url="https://gitlab.com/uwkm-frets/RoadRunner",
