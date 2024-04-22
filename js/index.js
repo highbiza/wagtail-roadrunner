@@ -30,17 +30,16 @@ window.telepath.register('roadrunner.fields.PreviewListBlockDefinition', Preview
 window.telepath.register("roadrunner.fields.PageTitleDefinition", PageTitleDefinition)
 
 $(() => {
-  breakPointEmitter.addListener(newBreakPoint => {
-    $("#roadrunner-breakpoint-switcher button").removeClass("active")
-    $(`#roadrunner-breakpoint-switcher button[value=${newBreakPoint}]`).addClass("active")
-  })
-  $("#roadrunner-breakpoint-switcher button").each((_, button) => {
-    const btn = $(button)
-    const value = btn.val()
-    btn.click(evt => {
-      breakPointEmitter.dispatch(value)
+    $("[data-device-width]").change(event => {
+      breakPointEmitter.translateDispatch(event.target.value)
     })
-  })
+
+    try {
+      const storedPreviewPanelDevice = localStorage.getItem('wagtail:preview-panel-device');
+      breakPointEmitter.translateDispatch(storedPreviewPanelDevice)
+    } catch (e) {
+      // No need to change the default device width when nothing is stored.
+    }
 })
 
 export * as roadrunner from "./roadrunner"

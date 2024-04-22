@@ -4,6 +4,7 @@ import draftToHtml from 'draftjs-to-html'
 import { Preview } from "./render"
 import { renderInPlaceHolder, PlaceHolder } from "../jsx"
 
+const { convertToRaw } = window.DraftJS
 
 export class RichTextBlockPreview extends Preview {
   setState(newState) {
@@ -19,7 +20,12 @@ export class RichTextBlockPreview extends Preview {
         const rawContentState = JSON.parse(state)
         return draftToHtml(rawContentState)
       } catch (e) {
-        console.log("Invalid draftail data", e, state)
+        try {
+          const rawContentState2 = convertToRaw(state.getCurrentContent())
+          return draftToHtml(rawContentState2)
+        } catch (e) {
+          console.error("Invalid draftail data", e, state)
+        }
       }
     }
     return `<h1>${state ? state.toString() : "empty richtext"}</h1>`
