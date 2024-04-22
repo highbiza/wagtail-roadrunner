@@ -34,7 +34,7 @@
                     svg{
                         fill: #bcbbbb;
                         &:hover {
-                            fill: var(--color-primary);
+                            fill: var(--w-color-primary);
                         }
                     }
                 }
@@ -60,12 +60,12 @@
 
                             svg{
                                 display: block;
-                                color: var(--color-primary);
+                                color: var(--w-color-primary);
                                 margin: 0 auto;
                                 height: 30px;
-                                &.icon-tv{width: 30px;}
-                                &.icon-tablet{width: 20px;}
-                                &.icon-mobile{width: 13px;}
+                                &.icon-desktop{width: 30px;}
+                                &.icon-tablet-alt{width: 25px;}
+                                &.icon-mobile-alt{width: 25px;}
                             }
                         }
                         .gridplaceholder{
@@ -74,7 +74,7 @@
                             display: flex;
 
                             .gridsegment {
-                                border: solid 1px var(--color-primary);
+                                border: solid 1px var(--w-color-primary);
                                 background-color: white;
                                 width: 8.33333333%;
                                 max-width: 30px;
@@ -90,7 +90,7 @@
                                     background: #e3eeee;
                                 }
                                 &.active {
-                                    background-color: var(--color-primary);
+                                    background-color: var(--w-color-primary);
                                     &:not(:first-child):before{
                                         content: "";
                                         position: absolute;
