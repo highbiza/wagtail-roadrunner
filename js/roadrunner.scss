@@ -1,27 +1,5 @@
-#roadrunner-breakpoint-switcher {
-    z-index: 4;
-    position: sticky;
-    top: 6px;
-    display: flex;
-    justify-content: flex-end;
-    ul {
-        display: flex;
-        background: #fbfbfb;
-        border: 1px solid #e6e6e6;
-        border-radius: 3px;
-        position: relative;
-        right: -6px;
-        li button {
-            &.active {
-                color: var(--color-primary);
-            }
-            color: #4d4d4d;
-        }
-    }
-}
-
 // this is needed to make nested modals possible.
-body.page-editor.modal-open {
+body.modal-open {
     .modal{
         background: rgba(0,0,0,.55);
         backdrop-filter: blur(4px);
@@ -29,4 +7,13 @@ body.page-editor.modal-open {
     .modal-backdrop{
         display: none;
     }
+}
+
+// use all the space possible
+#page-edit-form .w-field__wrapper,
+#page-edit-form .w-field-row,
+#page-edit-form .w-form-width,
+#page-edit-form .fields,
+#page-edit-form .w-panel__wrapper {
+    max-width: unset !important;
 }
