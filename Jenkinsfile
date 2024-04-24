@@ -7,21 +7,21 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                withPythonEnv('System-CPython-3.9') {
+                withPythonEnv('System-CPython-3.10') {
                     pysh "make"
                 }
             }
         }
         stage('Lint') {
             steps {
-                withPythonEnv('System-CPython-3.9') {
+                withPythonEnv('System-CPython-3.10') {
                     pysh "make lint"
                 }
             }
         }
         stage('Test') {
             steps {
-                withPythonEnv('System-CPython-3.9') {
+                withPythonEnv('System-CPython-3.10') {
                     pysh "make test"
                 }
             }
