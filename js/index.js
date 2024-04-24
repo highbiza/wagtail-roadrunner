@@ -30,16 +30,16 @@ window.telepath.register('roadrunner.fields.PreviewListBlockDefinition', Preview
 window.telepath.register("roadrunner.fields.PageTitleDefinition", PageTitleDefinition)
 
 $(() => {
-    $("[data-device-width]").change(event => {
-      breakPointEmitter.translateDispatch(event.target.value)
-    })
+  $("[data-device-width]").change(event => {
+    breakPointEmitter.translateDispatch(event.target.value)
+  })
 
-    try {
-      const storedPreviewPanelDevice = localStorage.getItem('wagtail:preview-panel-device');
-      breakPointEmitter.translateDispatch(storedPreviewPanelDevice)
-    } catch (e) {
-      // No need to change the default device width when nothing is stored.
-    }
+  try {
+    const storedPreviewPanelDevice = localStorage.getItem('wagtail:preview-panel-device')
+    breakPointEmitter.translateDispatch(storedPreviewPanelDevice)
+  } catch (e) {
+    // no need to change the default device width when nothing is stored.
+  }
 })
 
 export * as roadrunner from "./roadrunner"

@@ -10,7 +10,7 @@ import {
   getSelectorFromElement,
   getElementFromSelector,
   reflow,
-  typeCheckConfig
+  typeCheckConfig,
 } from 'bootstrap/js/src/util/index'
 import Data from 'bootstrap/js/src/dom/data'
 import EventHandler from 'bootstrap/js/src/dom/event-handler'
@@ -31,12 +31,12 @@ const DATA_API_KEY = '.data-api'
 
 const Default = {
   toggle: true,
-  parent: null
+  parent: null,
 }
 
 const DefaultType = {
   toggle: 'boolean',
-  parent: '(null|element)'
+  parent: '(null|element)',
 }
 
 const EVENT_SHOW = `show${EVENT_KEY}`
@@ -97,7 +97,7 @@ class Collapse extends BaseComponent {
     }
   }
 
-  // Getters
+  // getters
 
   static get Default() {
     return Default
@@ -107,7 +107,7 @@ class Collapse extends BaseComponent {
     return NAME
   }
 
-  // Public
+  // public
 
   toggle() {
     if (this._isShown()) {
@@ -230,15 +230,15 @@ class Collapse extends BaseComponent {
     return element.classList.contains(CLASS_NAME_SHOW)
   }
 
-  // Private
+  // private
 
   _getConfig(config) {
     config = {
       ...Default,
       ...Manipulator.getDataAttributes(this._element),
-      ...config
+      ...config,
     }
-    config.toggle = Boolean(config.toggle) // Coerce string values
+    config.toggle = Boolean(config.toggle) // coerce string values
     config.parent = getElement(config.parent)
     typeCheckConfig(NAME, config, DefaultType)
     return config
@@ -280,12 +280,12 @@ class Collapse extends BaseComponent {
     })
   }
 
-  // Static
+  // static
 
   static jQueryInterface(config) {
     return this.each(function () {
       const _config = {}
-      if (typeof config === 'string' && /show|hide/.test(config)) {
+      if (typeof config === 'string' && (/show|hide/).test(config)) {
         _config.toggle = false
       }
 

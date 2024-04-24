@@ -23,8 +23,8 @@ export class RichTextBlockPreview extends Preview {
         try {
           const rawContentState2 = convertToRaw(state.getCurrentContent())
           return draftToHtml(rawContentState2)
-        } catch (e) {
-          console.error("Invalid draftail data", e, state)
+        } catch (error) {
+          console.error("Invalid draftail data", error, state)
         }
       }
     }
