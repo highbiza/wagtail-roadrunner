@@ -1,4 +1,17 @@
+.preview-container{
+    .rich-text{
+        & > *:first-child{
+            margin-top: 0;
+            padding-top: 0;
+        }
+    }
+}
 
+[data-contentpath="styling"]{
+    padding-top: 1rem;
+}
+
+/*
 .preview-container{
     .rich-text{
         & > *:first-child{
@@ -88,6 +101,5 @@
         text-transform: unset;
     }
 }
-[data-contentpath="styling"]{
-    padding-top: 1rem;
-}
+
+*/
