@@ -12,8 +12,8 @@ import { ColorPickerBlockDefinition } from "./colorpickerblock"
 import { PreviewListBlockDefinition } from "./preview/listblock"
 import { PageTitleDefinition } from "./preview/pagetitle"
 
-import "./bootstrapnoconflict/tab"
-import "./bootstrapnoconflict/collapse"
+import "bootstrap/js/src/tab"
+import "bootstrap/js/src/collapse"
 import "./bootstrapnoconflict/bootstrap.scss"
 import "./roadrunner.scss"
 
