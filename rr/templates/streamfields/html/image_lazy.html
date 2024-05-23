@@ -2,7 +2,7 @@
 
 {% spaceless %}
 
-{% picture self.image original format-{webp,jpeg} scale-{100,50,30} as renditions %}
+{% picture self.image original format-{webp,jpeg} scale-{100,50,30} preserve-svg as renditions %}
 
 {% if self.page_url or self.external_url %}
 <a href="{% if self.external_url %}{{ self.external_url }}{% else %}{% pageurl self.page_url %}{% endif %}"{% if self.open_in_new_tab %} target="_blank"{% endif %}>
