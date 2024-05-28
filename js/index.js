@@ -35,7 +35,7 @@ $(() => {
   })
 
   try {
-    const storedPreviewPanelDevice = localStorage.getItem('wagtail:preview-panel-device')
+    const storedPreviewPanelDevice = localStorage.getItem('wagtail:preview-panel-device') ||  "desktop"
     breakPointEmitter.translateDispatch(storedPreviewPanelDevice)
   } catch (e) {
     // no need to change the default device width when nothing is stored.
