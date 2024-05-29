@@ -2,7 +2,6 @@ import json
 import logging
 import traceback
 from wagtail.blocks.base import BlockWidget
-from django.utils.html import format_html
 from .telepath import RoadRunnerJSContext
 
 logger = logging.getLogger(__name__)
@@ -21,7 +20,7 @@ class RoadRunnerBlockWidget(BlockWidget):
             self._block_json = json.dumps(self._js_context.pack(self.block_def))
         except Exception as e:
             logger.error(
-                "Something went wrong while rendering the block json", e, type(e)
+                "Something went wrong while rendering the block json %s %s", e, type(e)
             )
             traceback.print_exception(e)
             raise
