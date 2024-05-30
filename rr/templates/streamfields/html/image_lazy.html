@@ -7,14 +7,14 @@
 {% endif %}
 
 {# styling is the same for every kind of image #}
-{% get_styling_classes self.styling as styles %}
+{% get_styling_classes self.styling as classes %}
 
 {# Unfortunately we can't use picture with preserver-svg because we've got some extra attributes to be aaded to the tag #}
 {% if self.image.is_svg %}
 
   {% image self.image original as original %}
 
-  <img src="{{ original.url }}" class="img-fluid {{ styles }}" {% get_styling self.styling %} width="{{ original.width }}" height="{{ original.height }}" alt="{{ original.alt }}" >
+  <img src="{{ original.url }}" class="img-fluid {{ classes }}" {% get_styling self.styling %} width="{{ original.width }}" height="{{ original.height }}" alt="{{ original.alt }}" >
 
 {% else %}
 
@@ -25,7 +25,7 @@
     <picture class="lazy">
         <data-src type="image/webp" srcset="{{ renditions.formats.webp.0.url }} {{ renditions.formats.webp.0.width }}w, {{ renditions.formats.webp.1.url }} {{ renditions.formats.webp.1.width }}w, {{ renditions.formats.webp.2.url }} {{ renditions.formats.webp.2.width}}w"></data-src>
         <data-src srcset="{{ renditions.formats.jpeg.0.url }} {{ renditions.formats.jpeg.0.width }}w, {{ renditions.formats.jpeg.1.url }} {{ renditions.formats.jpeg.1.width }}w, {{ renditions.formats.jpeg.2.url }} {{ renditions.formats.jpeg.2.width}}w"></data-src>
-        <data-img class="img-fluid {{ styles }}" {% get_styling self.styling %} src="{{ renditions.formats.jpeg.0.url }}" width="{{ renditions.formats.jpeg.0.width }}" height="{{ renditions.formats.jpeg.0.height }}" alt="{{ self.alt|default:renditions.formats.jpeg.0.alt }}"></data-img>
+        <data-img class="img-fluid {{ classes }}" {% get_styling self.styling %} src="{{ renditions.formats.jpeg.0.url }}" width="{{ renditions.formats.jpeg.0.width }}" height="{{ renditions.formats.jpeg.0.height }}" alt="{{ self.alt|default:renditions.formats.jpeg.0.alt }}"></data-img>
     </picture>
 
   {% else %}
@@ -33,7 +33,7 @@
     <picture>
         <source type="image/webp" srcset="{{ renditions.formats.webp.0.url }} {{ renditions.formats.webp.0.width }}w, {{ renditions.formats.webp.1.url }} {{ renditions.formats.webp.1.width }}w, {{ renditions.formats.webp.2.url }} {{ renditions.formats.webp.2.width}}w">
         <source srcset="{{ renditions.formats.jpeg.0.url }} {{ renditions.formats.jpeg.0.width }}w, {{ renditions.formats.jpeg.1.url }} {{ renditions.formats.jpeg.1.width }}w, {{ renditions.formats.jpeg.2.url }} {{ renditions.formats.jpeg.2.width}}w">
-        <img class="img-fluid {{ styles }}" {% get_styling self.styling %} src="{{ renditions.formats.jpeg.0.url }}" width="{{ renditions.formats.jpeg.0.width }}" height="{{ renditions.formats.jpeg.0.height }}" alt="{{ self.alt|default:renditions.formats.jpeg.0.alt }}" >
+        <img class="img-fluid {{ classes }}" {% get_styling self.styling %} src="{{ renditions.formats.jpeg.0.url }}" width="{{ renditions.formats.jpeg.0.width }}" height="{{ renditions.formats.jpeg.0.height }}" alt="{{ self.alt|default:renditions.formats.jpeg.0.alt }}" >
     </picture>
 
   {% endif %}
