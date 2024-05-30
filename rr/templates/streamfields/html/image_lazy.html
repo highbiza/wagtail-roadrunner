@@ -2,20 +2,42 @@
 
 {% spaceless %}
 
-{% picture self.image original format-{webp,jpeg} scale-{100,50,30} preserve-svg as renditions %}
-
 {% if self.page_url or self.external_url %}
 <a href="{% if self.external_url %}{{ self.external_url }}{% else %}{% pageurl self.page_url %}{% endif %}"{% if self.open_in_new_tab %} target="_blank"{% endif %}>
 {% endif %}
 
-{% if self.lazy %}
-<picture class="lazy">
-    <data-src type="image/webp" srcset="{{ renditions.formats.webp.0.url }} {{ renditions.formats.webp.0.width }}w, {{ renditions.formats.webp.1.url }} {{ renditions.formats.webp.1.width }}w, {{ renditions.formats.webp.2.url }} {{ renditions.formats.webp.2.width}}w" ></data-src>
-    <data-src srcset="{{ renditions.formats.jpeg.0.url }} {{ renditions.formats.jpeg.0.width }}w, {{ renditions.formats.jpeg.1.url }} {{ renditions.formats.jpeg.1.width }}w, {{ renditions.formats.jpeg.2.url }} {{ renditions.formats.jpeg.2.width}}w" ></data-src>
-    <data-img class="img-fluid {% get_styling_classes self.styling %}" {% get_styling self.styling %} src="{{ renditions.formats.jpeg.0.url }}" width="{{ renditions.formats.jpeg.0.width }}" height="{{ renditions.formats.jpeg.0.height }}" alt="{{ self.alt|default:renditions.formats.jpeg.0.alt }}" ></data-img>
-</picture>
+{# styling is the same for every kind of image #}
+{% get_styling_classes self.styling as classes %}
+
+{# Unfortunately we can't use picture with preserver-svg because we've got some extra attributes to be aaded to the tag #}
+{% if self.image.is_svg %}
+
+  {% image self.image original as original %}
+
+  <img src="{{ original.url }}" class="img-fluid {{ classes }}" {% get_styling self.styling %} width="{{ original.width }}" height="{{ original.height }}" alt="{{ original.alt }}" >
+
 {% else %}
-{{ renditions }}
+
+  {% picture self.image format-{webp,jpeg} scale-{100,50,30} as renditions %}
+
+  {% if self.lazy %}
+
+    <picture class="lazy">
+        <data-src type="image/webp" srcset="{{ renditions.formats.webp.0.url }} {{ renditions.formats.webp.0.width }}w, {{ renditions.formats.webp.1.url }} {{ renditions.formats.webp.1.width }}w, {{ renditions.formats.webp.2.url }} {{ renditions.formats.webp.2.width}}w"></data-src>
+        <data-src srcset="{{ renditions.formats.jpeg.0.url }} {{ renditions.formats.jpeg.0.width }}w, {{ renditions.formats.jpeg.1.url }} {{ renditions.formats.jpeg.1.width }}w, {{ renditions.formats.jpeg.2.url }} {{ renditions.formats.jpeg.2.width}}w"></data-src>
+        <data-img class="img-fluid {{ classes }}" {% get_styling self.styling %} src="{{ renditions.formats.jpeg.0.url }}" width="{{ renditions.formats.jpeg.0.width }}" height="{{ renditions.formats.jpeg.0.height }}" alt="{{ self.alt|default:renditions.formats.jpeg.0.alt }}"></data-img>
+    </picture>
+
+  {% else %}
+
+    <picture>
+        <source type="image/webp" srcset="{{ renditions.formats.webp.0.url }} {{ renditions.formats.webp.0.width }}w, {{ renditions.formats.webp.1.url }} {{ renditions.formats.webp.1.width }}w, {{ renditions.formats.webp.2.url }} {{ renditions.formats.webp.2.width}}w">
+        <source srcset="{{ renditions.formats.jpeg.0.url }} {{ renditions.formats.jpeg.0.width }}w, {{ renditions.formats.jpeg.1.url }} {{ renditions.formats.jpeg.1.width }}w, {{ renditions.formats.jpeg.2.url }} {{ renditions.formats.jpeg.2.width}}w">
+        <img class="img-fluid {{ classes }}" {% get_styling self.styling %} src="{{ renditions.formats.jpeg.0.url }}" width="{{ renditions.formats.jpeg.0.width }}" height="{{ renditions.formats.jpeg.0.height }}" alt="{{ self.alt|default:renditions.formats.jpeg.0.alt }}" >
+    </picture>
+
+  {% endif %}
+
 {% endif %}
 
 {% if self.page_url or self.external_url %}
