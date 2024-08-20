@@ -1,11 +1,36 @@
+@import "dark_mode";
+
 // this is needed to make nested modals possible.
-body.modal-open {
-    .modal{
-        background: rgba(0,0,0,.55);
-        backdrop-filter: blur(4px);
+html{
+    // Added the mixin so it only works when dark mode is on.
+    @media (prefers-color-scheme: dark) {
+        &:not(.w-theme-light){
+            @include darkmode;
+        }
     }
-    .modal-backdrop{
-        display: none;
+    &.w-theme-dark{
+        @include darkmode;
+    }
+    body{
+        &.modal-open {
+            .modal{
+                background: rgba(0,0,0,.55);
+                backdrop-filter: blur(4px);
+            }
+            .modal-backdrop{
+                display: none;
+            }
+        }
+        .roadrunner{
+            .w-panel--nested.w-panel{
+                .roadrunnerblock{
+                    .Draftail-Editor{
+                        min-width: 500px;
+                        min-height: 200px;
+                    }
+                }
+            }
+        }
     }
 }
 
