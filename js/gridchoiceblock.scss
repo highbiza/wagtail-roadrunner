@@ -2,8 +2,7 @@
     .column {
         // Gridchooser
         .gridchooser-wrapper{
-            margin: 0 -24px;
-            padding: 0 24px;
+            margin-bottom: 1rem;
             border-bottom: 1px solid #e6e6e6;
 
             .gridchooser{
@@ -13,6 +12,7 @@
                 position: relative;
                 padding: 10px 0;
                 z-index: 3;
+                padding-bottom: .5rem;
                 &:not(.open){
                     .gridchoices-wrapper .gridchoice.collapse {
                         display: none;
@@ -28,9 +28,9 @@
                     border: 1px solid #e6e6e6;
                     cursor: pointer;
                     position: absolute;
-                    bottom: -11px;
+                    bottom: 0;
+                    transform: translateY(50%) translateX(-50%);
                     left: 50%;
-                    transform: translateX(-50%);
                     svg{
                         fill: #bcbbbb;
                         &:hover {
@@ -56,8 +56,8 @@
                         margin-bottom: 10px;
 
                         .svg-wrapper{
-                            width: 60px;
-
+                                width: 32px;
+                                margin-right: 1rem;
                             svg{
                                 display: block;
                                 color: var(--w-color-primary);
