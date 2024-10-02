@@ -142,7 +142,7 @@ export class ContainerSwapWidget {
     if (containerContentPath) {
       // when a rowblock is being duplicated it doesn't have an id yet.
       this.hasContentPath = true
-      const containerTitle = $(`[data-contentpath=${containerContentPath}] .c-sf-block__actions > .c-sf-block__type`).first()
+      const containerTitle = $(`[data-contentpath=${containerContentPath}] .w-panel__header > .w-panel__heading > .c-sf-block__type`).first()
       const originalWidth = containerTypeInput.val()
       this.blockDef = blockDef
       this.prefix = prefix
