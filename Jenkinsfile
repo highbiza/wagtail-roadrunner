@@ -7,21 +7,21 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                withPythonEnv('System-CPython-3.9') {
+                withPythonEnv('System-CPython-3.10') {
                     pysh "make"
                 }
             }
         }
         stage('Lint') {
             steps {
-                withPythonEnv('System-CPython-3.9') {
+                withPythonEnv('System-CPython-3.10') {
                     pysh "make lint"
                 }
             }
         }
         stage('Test') {
             steps {
-                withPythonEnv('System-CPython-3.9') {
+                withPythonEnv('System-CPython-3.10') {
                     pysh "make test"
                 }
             }
@@ -44,7 +44,7 @@ pipeline {
         }
         success {
             echo 'This will run only if successful'
-            withPythonEnv('System-CPython-3.9') {
+            withPythonEnv('System-CPython-3.10') {
                 echo 'This will run only if successful'
                 pysh "version --plugin=wheel -B${env.BUILD_NUMBER} --skip-build"
                 sh "which git"

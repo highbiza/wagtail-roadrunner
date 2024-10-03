@@ -1,6 +1,6 @@
 from django import template
 from django.utils.safestring import mark_safe
-from wagtail.core.templatetags.wagtailcore_tags import richtext
+from wagtail.templatetags.wagtailcore_tags import richtext
 
 register = template.Library()
 style_classes = ["block_classes", "padding", "margin", "border_radius", "border"]

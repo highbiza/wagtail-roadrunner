@@ -19,7 +19,7 @@ export class PreviewBlockWrapper {
         <div className="preview-container" role="button" data-toggle="modal" data-target={`#${modalPrefix}`}>
           <PlaceHolder />
         </div>
-        <div className="modal fade modal-edit" id={modalPrefix} tabindex="-1" role="dialog" aria-labelledby={`${modalPrefix}Label`} aria-hidden="true">
+        <div className="modal fade modal-edit" id={modalPrefix} tabindex="-1" aria-labelledby={`${modalPrefix}Label`} aria-hidden="true">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-body">
