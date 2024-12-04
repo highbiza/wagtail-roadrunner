@@ -101,7 +101,7 @@ class ButtonBlock(blocks.StructBlock):
     new_tab = blocks.BooleanBlock(
         required=False, default=False, label="Open in new tab"
     )
-    button_style = BootstrapColorChoiceBlock(label="Button style")
+    button_style = BootstrapColorChoiceBlock(label="Button style", required=False)
     styling = StylingBlock()
 
     class Meta:
