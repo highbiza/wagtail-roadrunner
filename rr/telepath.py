@@ -1,4 +1,4 @@
-from wagtail.core.telepath import JSContext
+from wagtail.telepath import JSContext
 
 
 class RegistryWrapper:

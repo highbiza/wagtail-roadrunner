@@ -1,4 +1,4 @@
-from wagtail.core import blocks
+from wagtail import blocks
 
 from rr.telepath import register
 from rr.adapters import ColorPickerBlockAdapter

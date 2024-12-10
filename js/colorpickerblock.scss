@@ -1,6 +1,6 @@
-.colorpicker-wrapper{
+.colorpicker-wrapper {
     position: relative;
-    .field-content .input{
+    .w-field .w-field__input {
         color: var(--picker-color);
         position: relative;
 
@@ -29,7 +29,7 @@
                     opacity: .8;
                     color:white;
                 }
-            };
+            }
         }
     }
     .color-picker{
