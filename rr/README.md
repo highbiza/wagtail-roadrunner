@@ -3,7 +3,7 @@
 Je eigen streamfields registreren
 ```python
 from roadrunner import register_block
-from wagtail.core import blocks
+from wagtail import blocks
 
 
 @register_block

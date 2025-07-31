@@ -5,10 +5,10 @@ from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
 
 from wagtail.admin.staticfiles import versioned_static
-from wagtail.core.blocks.field_block import FieldBlockAdapter
-from wagtail.core.blocks.stream_block import StreamBlockAdapter
-from wagtail.core.blocks.struct_block import StructBlockAdapter
-from wagtail.core.blocks.list_block import ListBlockAdapter
+from wagtail.blocks.field_block import FieldBlockAdapter
+from wagtail.blocks.stream_block import StreamBlockAdapter
+from wagtail.blocks.struct_block import StructBlockAdapter
+from wagtail.blocks.list_block import ListBlockAdapter
 
 
 class RoadRunnerStreamBlockAdapter(StreamBlockAdapter):

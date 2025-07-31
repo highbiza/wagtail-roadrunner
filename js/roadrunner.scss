@@ -1,32 +1,44 @@
-#roadrunner-breakpoint-switcher {
-    z-index: 4;
-    position: sticky;
-    top: 6px;
-    display: flex;
-    justify-content: flex-end;
-    ul {
-        display: flex;
-        background: #fbfbfb;
-        border: 1px solid #e6e6e6;
-        border-radius: 3px;
-        position: relative;
-        right: -6px;
-        li button {
-            &.active {
-                color: var(--color-primary);
+@import "dark_mode";
+
+// this is needed to make nested modals possible.
+html{
+    // Added the mixin so it only works when dark mode is on.
+    @media (prefers-color-scheme: dark) {
+        &:not(.w-theme-light){
+            @include darkmode;
+        }
+    }
+    &.w-theme-dark{
+        @include darkmode;
+    }
+    body{
+        &.modal-open {
+            .modal{
+                background: rgba(0,0,0,.55);
+                backdrop-filter: blur(4px);
             }
-            color: #4d4d4d;
+            .modal-backdrop{
+                display: none;
+            }
+        }
+        .roadrunner{
+            .w-panel--nested.w-panel{
+                .roadrunnerblock{
+                    .Draftail-Editor{
+                        min-width: 500px;
+                        min-height: 200px;
+                    }
+                }
+            }
         }
     }
 }
 
-// this is needed to make nested modals possible.
-body.page-editor.modal-open {
-    .modal{
-        background: rgba(0,0,0,.55);
-        backdrop-filter: blur(4px);
-    }
-    .modal-backdrop{
-        display: none;
-    }
+// use all the space possible
+#page-edit-form .w-field__wrapper,
+#page-edit-form .w-field-row,
+#page-edit-form .w-form-width,
+#page-edit-form .fields,
+#page-edit-form .w-panel__wrapper {
+    max-width: unset !important;
 }

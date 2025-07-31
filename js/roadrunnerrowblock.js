@@ -2,7 +2,7 @@
 import dom, { Fragment } from 'jsx-render'
 import $ from "jquery"
 import { renderInPlaceHolder, PlaceHolder } from "./jsx"
-import { wagtailGridSizeFromBootstrapGridSize } from "./utils"
+import { wagtailGridSizeFromBootstrapGridSize, SvgIcon } from "./utils"
 import { GRID_SIZE_CHANGED_EVENT, breakPointEmitter } from "./events"
 import "./roadrunnerrowblock.scss"
 
@@ -26,9 +26,8 @@ export class RoadrunnerRowBlockInsertionControl {
 
   renderVisible(placeholder) {
     const { element } = renderInPlaceHolder(placeholder, (
-      <button type="button" title={this.opts.strings.ADD} data-streamfield-list-add
-        className="c-sf-add-button c-sf-add-button--visible">
-        <i aria-hidden="true">+</i>
+      <button type="button" title={this.opts.strings.ADD} className="c-sf-add-button c-sf-add-button--visible" aria-expanded="false" data-streamfield-list-add>
+        <SvgIcon name="icon-plus"/>
       </button>
     ))
     $(element).click(() => {
@@ -94,8 +93,8 @@ export class InsertButton {
   render(container) {
     this.dom = $((
       <button type="button" title={this.sequenceChild.strings.ADD} data-streamfield-list-add
-        class="c-sf-block__actions__single c-sf-add-button--visible add-action-insertbutton">
-        +
+        class="button button--icon text-replace white add-action-insertbutton">
+        <SvgIcon name="icon-plus" />
       </button>
     ))
 
@@ -143,7 +142,7 @@ export class ContainerSwapWidget {
     if (containerContentPath) {
       // when a rowblock is being duplicated it doesn't have an id yet.
       this.hasContentPath = true
-      const containerTitle = $(`[data-contentpath=${containerContentPath}] .c-sf-block__actions > .c-sf-block__type`).first()
+      const containerTitle = $(`[data-contentpath=${containerContentPath}] .w-panel__header > .w-panel__heading > .c-sf-block__type`).first()
       const originalWidth = containerTypeInput.val()
       this.blockDef = blockDef
       this.prefix = prefix

@@ -9,9 +9,7 @@ $(error this makefile needs a virtualenv)
 endif
 endif
 
-ifndef PIP_INDEX_URL
-PIP_INDEX_URL=https://pypi.uwkm.nl/ocyan/testing/+simple/
-endif
+PIP_INDEX_URL=https://pypi.uwkm.nl/voxyan/testing/+simple/
 
 install: fail-if-no-virtualenv
 	PIP_INDEX_URL=${PIP_INDEX_URL} pip install --editable .[test] --upgrade --upgrade-strategy=eager --pre

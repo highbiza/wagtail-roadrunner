@@ -12,8 +12,8 @@ import { ColorPickerBlockDefinition } from "./colorpickerblock"
 import { PreviewListBlockDefinition } from "./preview/listblock"
 import { PageTitleDefinition } from "./preview/pagetitle"
 
-import "./bootstrapnoconflict/tab"
-import "./bootstrapnoconflict/collapse"
+import "bootstrap/js/src/tab"
+import "bootstrap/js/src/collapse"
 import "./bootstrapnoconflict/bootstrap.scss"
 import "./roadrunner.scss"
 
@@ -30,17 +30,16 @@ window.telepath.register('roadrunner.fields.PreviewListBlockDefinition', Preview
 window.telepath.register("roadrunner.fields.PageTitleDefinition", PageTitleDefinition)
 
 $(() => {
-  breakPointEmitter.addListener(newBreakPoint => {
-    $("#roadrunner-breakpoint-switcher button").removeClass("active")
-    $(`#roadrunner-breakpoint-switcher button[value=${newBreakPoint}]`).addClass("active")
+  $("[data-device-width]").change(event => {
+    breakPointEmitter.translateDispatch(event.target.value)
   })
-  $("#roadrunner-breakpoint-switcher button").each((_, button) => {
-    const btn = $(button)
-    const value = btn.val()
-    btn.click(evt => {
-      breakPointEmitter.dispatch(value)
-    })
-  })
+
+  try {
+    const storedPreviewPanelDevice = localStorage.getItem('wagtail:preview-panel-device') ||  "desktop"
+    breakPointEmitter.translateDispatch(storedPreviewPanelDevice)
+  } catch (e) {
+    // no need to change the default device width when nothing is stored.
+  }
 })
 
 export * as roadrunner from "./roadrunner"

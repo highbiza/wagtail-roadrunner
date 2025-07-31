@@ -1,16 +1,16 @@
 import $ from "jquery"
 import { v4 as uuidv4 } from 'uuid'
 import dom from 'jsx-render'
-import Collapse from "./bootstrapnoconflict/collapse"
+import Collapse from "bootstrap/js/src/collapse"
 import { renderInPlaceHolder } from "./jsx"
 import { SvgIcon, breakPointValue, breakPointFallback, cols, times } from "./utils"
 import { createGridSizeChanged, breakPointEmitter } from "./events"
 import "./gridchoiceblock.scss"
 
 const ICONS = {
-  "col": "icon-mobile",
-  "col-md": "icon-tablet",
-  "col-lg": "icon-tv",
+  "col": "icon-mobile-alt",
+  "col-md": "icon-tablet-alt",
+  "col-lg": "icon-desktop",
 }
 
 export const GridSegment = ({ onClick, active=false, fallback=false }) =>

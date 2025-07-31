@@ -1,14 +1,4 @@
 .roadrunner {
-    display: flex;
-    flex-flow: row wrap;
-    width: 100%;
-    .field{
-        width: 100%;
-        & + .field{
-            padding-bottom: 15px;
-        }
-    }
-
     .modal{
         .modal-dialog{
             &.modal-sm{
@@ -26,6 +16,19 @@
                     }
                 }
             }
+        }
+    }
+}
+
+/*
+.roadrunner {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    .field{
+        width: 100%;
+        & + .field{
+            padding-bottom: 15px;
         }
     }
 
@@ -198,3 +201,4 @@
     from{ min-width: 30px; }
     to{ min-width: 300px; }
 }
+*/
