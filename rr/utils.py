@@ -1,5 +1,5 @@
 import json
-from wagtail.core.rich_text import features as feature_registry
+from wagtail.rich_text import features as feature_registry
 from wagtail.admin.rich_text.converters.contentstate import ContentstateConverter
 
 

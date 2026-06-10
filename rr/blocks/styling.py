@@ -1,8 +1,7 @@
-from wagtail.core import blocks
+from wagtail import blocks
 
 from rr.telepath import register
 from rr.adapters import ColorPickerBlockAdapter
-
 
 DEFAULT_CHOICES = [
     ("%s-0", "Overal 0x %s"),

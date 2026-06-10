@@ -8,6 +8,7 @@ function getChildClass(parentClass) {
   const parent = document.createElement("div")
   const placeHolder = document.createElement("div")
   parent.appendChild(placeHolder)
+
   const ChildInstance = parentClass.prototype._createChild(
     {
       meta: {
@@ -24,7 +25,7 @@ function getChildClass(parentClass) {
     0,
     "",
     {},
-    null,
+    {getBlockGroups: () => [], getBlockCount: () => 0, getBlockMax: () => 0},
     {}
   )
 

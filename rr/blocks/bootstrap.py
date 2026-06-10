@@ -1,5 +1,5 @@
 import uuid
-from wagtail.core import blocks
+from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
 from rr.blocks.styling import StylingBlock, ColorPickerBlock

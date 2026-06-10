@@ -1,8 +1,9 @@
 from bs4 import BeautifulSoup
-from django.utils.translation import gettext_lazy as _, pgettext_lazy
+from django.utils.translation import gettext, gettext_lazy as _, pgettext_lazy
+from django.core.exceptions import ValidationError
 
-from wagtail.core.blocks import StructValue
-from wagtail.core import blocks
+from wagtail.blocks import StructValue
+from wagtail import blocks
 from wagtail.contrib.table_block.blocks import TableBlock, DEFAULT_TABLE_OPTIONS
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
@@ -91,7 +92,8 @@ class ImageBlock(blocks.StructBlock):
     lazy = blocks.BooleanBlock(
         label=pgettext_lazy("loading", "Lazy"),
         help_text=_(
-            "If an image is below the fold on the page, mark it as lazy to speed up page load times"
+            "If an image is below the fold on the page, mark it as lazy to speed up page load times."
+            "Can't be used with svg images"
         ),
         default=False,
         required=False,
@@ -100,6 +102,13 @@ class ImageBlock(blocks.StructBlock):
     external_url = blocks.CharBlock(label=_("External link"), required=False)
     open_in_new_tab = blocks.BooleanBlock(label=_("Open in a new tab"), required=False)
     styling = StylingBlock()
+
+    def clean(self, value):
+        result = super().clean(value)
+        if result["lazy"] and result["image"].is_svg():
+            raise ValidationError(gettext("Can't use lazy with svg images"))
+
+        return result
 
     class Meta:
         preview = ["image"]

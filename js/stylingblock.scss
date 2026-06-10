@@ -1,44 +1,38 @@
-.road_runner_block_widget{
-    .c-sf-block__content-inner{
+.w-field--road_runner_block_widget {
+
+    // this removed some padding at the side of the row column
+    > div.w-field__input > div > div[data-streamfield-stream-container] > div > section.w-panel.w-panel--nested > div.w-panel__content {
+        padding-inline-start: 0;
+        // correct the row styling, which need a bit of padding
+        > .stylingblock > .nav.tab-content > .styling-content {
+            padding-inline-start: 2em;
+        }
+    }
+
+    .stylingblock {
+        // needed to enable absolute positioning of the corner-tab-control
         position: relative;
-        .stylingblock {
-            .corner-tab-control {
-                position: absolute;
-                top: 0;
-                right: 0;
-                min-height: 50px;
-                transition: background .3s ease-in-out;
-                background: 
-                   linear-gradient(to top right,#0000 50%, #fbfbfb 50.1%) top right/50px 50px no-repeat,
-                   transparent;
-                z-index: 10;
-                clip-path: polygon(100% 0, 0 0, 100% 100%);
-                a.nav-link {
-                    color: #585858;
-                    text-align: right;
-                    display: block;
-                    width: 50px;
-                    height: 50px;
-                    padding: 3px;
-                }
-            }
-            .c-sf-block:focus, .c-sf-block:hover {
-                .corner-tab-control {
-                    background: 
-                       linear-gradient(to top right,#0000 50%, #f5f5f5 50.1%) top right/50px 50px no-repeat,
-                       transparent;
-                }
-            }
-            .tab-content{
-                width: 100%;
-                & > .tab-pane.fade {
-                    &.in, &.show.active {
-                        display:block;
-                        opacity: 1;
-                    }
-                }
-            }
-            ul.corner-tab-control li a.nav-link {
+
+        // place the corner tab control in the top left corner
+        ul.corner-tab-control {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-height: 50px;
+            transition: background .3s ease-in-out;
+            background:
+               linear-gradient(to top right,#0000 50%, #fbfbfb 50.1%) top right/50px 50px no-repeat,
+               transparent;
+            z-index: 10;
+            clip-path: polygon(100% 0, 0 0, 100% 100%);
+
+            a.nav-link {
+                color: #585858;
+                text-align: right;
+                display: block;
+                width: 50px;
+                height: 50px;
+                padding: 3px;
                 display: block;
                 opacity: 1;
 
@@ -47,6 +41,39 @@
                     opacity: 0;
                 }
             }
+
+        }
+
+        // highlighting of stylingblock
+        .w-panel:focus, .w-panel:hover {
+            .corner-tab-control {
+                background:
+                   linear-gradient(to top right,#0000 50%, #f5f5f5 50.1%) top right/50px 50px no-repeat,
+                   transparent;
+            }
+        }
+
+        // tab content behaviour
+        .tab-content{
+            width: 100%;
+            padding-inline-end: 0;
+            padding-inline-start: 0;
+
+            & > .tab-pane.fade {
+                &.in, &.show.active {
+                    display:block;
+                    opacity: 1;
+                }
+            }
+            & > section {
+                display: none;
+                padding-top:1em;
+
+                &.active {
+                    display:block
+                }
+            }
+            
         }
     }
 }

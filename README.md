@@ -54,7 +54,7 @@ can be used in a wagtail page like this:
 
 ```python
 from wagtail.admin.edit_handlers import StreamFieldPanel
-from wagtail.core.models import Page
+from wagtail.models import Page
 from wagtail.wagtailsearch import index
 
 from rr.fields import RoadRunnerField
@@ -77,7 +77,7 @@ The first one is to just specify the blocks like in a StreamField:
 
 ```python
 from wagtail.admin.edit_handlers import StreamFieldPanel
-from wagtail.core.models import Page
+from wagtail.models import Page
 from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
@@ -355,7 +355,7 @@ register(MyCustomPageTitleAdapter(), PageTitle)
 If we want to use this code everywhere, just do:
 
 ```python
-from wagtail.core.telepath import register
+from wagtail.telepath import register
 from rr.blocks.html import PageTitle
 register(MyCustomPageTitleAdapter(), PageTitle)
 ```

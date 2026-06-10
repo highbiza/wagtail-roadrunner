@@ -21,7 +21,11 @@ export class ColorPickerBlock extends window.wagtailStreamField.blocks.FieldBloc
 
     element.style.setProperty('--picker-color', initialState || "#C3C3C3")
     const pickerWrapper = $(element).find(".color-picker")
-    $(element).find(".input > span")
+
+    $(element).find(".w-field__input > input")
+      .after("<span></span>")
+
+    $(element).find(".w-field__input > span")
       .click(() => {
         $(pickerWrapper).toggleClass("active")
       })

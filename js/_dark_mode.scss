@@ -1,0 +1,51 @@
+@mixin darkmode{
+    --w-color-primary: #00b0b1;
+    --w-color-border-furniture: #444;
+    --rr-light-color: #444;
+    --rr-background: #262626;
+    .w-field--road_runner_block_widget{
+        .stylingblock{
+            ul.corner-tab-control{
+                background: #414141;
+                a.nav-link{
+                    color: #c8c8c8;
+                }
+            }
+            .w-panel{
+                &:hover{
+                    ul.corner-tab-control{
+                        background: lighten(#414141, 10%);
+                        a{
+                            border-color: lighten(#414141, 10%);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .roadrunner{
+        .column{
+            .gridchooser-wrapper{
+                border-color: var(--rr-light-color);
+                .gridchooser{
+                    .toggler{
+                        background: var(--rr-light-color);
+                        border-color: var(--rr-light-color);
+                    }
+                    // Background of empty grid space and active border color
+                    .gridchoices-wrapper .gridchoice .gridplaceholder .gridsegment{
+                        &.active:not(:first-child):before{
+                            background-color: var(--rr-background);
+                        }
+                        &:not(.active){
+                            background-color: var(--rr-background);
+                        }
+                        .icon{
+                            fill: white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

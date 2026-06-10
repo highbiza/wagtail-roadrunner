@@ -1,6 +1,6 @@
 from django.utils.translation import gettext_lazy as _
-from wagtail.core import blocks
-from wagtail.core.blocks import ListBlock
+from wagtail import blocks
+from wagtail.blocks import ListBlock
 
 from rr.telepath import register
 from rr.adapters import (
