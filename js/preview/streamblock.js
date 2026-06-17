@@ -10,10 +10,6 @@ import "./streamblock.scss"
 
 export class PreviewBlockWrapper {
   constructor(blockDef, placeholder, modalPrefix, childPrefix, index, id, initialState, sequence, opts) {
-    // render our wrapper tempplate with the placeholders for the preview and
-    // the child element
-    const { sequence: { blockDef: { meta } } } = blockDef
-
     const result = renderInPlaceHolder(placeholder, (
       <div className="preview field-content">
         <div className="preview-container" role="button" data-toggle="modal" data-target={`#${modalPrefix}`}>
@@ -22,13 +18,15 @@ export class PreviewBlockWrapper {
         <div className="modal fade modal-edit" id={modalPrefix} tabindex="-1" aria-labelledby={`${modalPrefix}Label`} aria-hidden="true">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
-              <div className="modal-body">
+              <div className="modal-body" data-panel="">
+                <button type="button" data-panel-toggle="" aria-expanded="true" hidden=""></button>
+                <div data-panel-controls=""></div>
                 <PlaceHolder />
               </div>
               <div className="modal-footer">
-                <button type="button" className="button" data-dismiss="modal">{meta?.strings?.APPLY || "Apply"}</button>
-                <button type="submit" className="button action-save button-longrunning" data-clicked-text={meta?.strings?.SAVING || "Saving..."}>
-                  {meta?.strings?.SAVE_DRAFT || "Save Draft"}
+                <button type="button" className="button" data-dismiss="modal">{gettext('Apply')}</button>
+                <button type="submit" className="button action-save button-longrunning" data-clicked-text={gettext('Saving...')}>
+                  {gettext('Save Draft')}
                 </button>
               </div>
             </div>

@@ -117,3 +117,4 @@ class StylingBlock(blocks.StructBlock):
 
     class Meta:
         label = "Styling"
+        icon = "palette"

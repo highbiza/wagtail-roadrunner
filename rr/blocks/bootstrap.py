@@ -1,5 +1,6 @@
 import uuid
 from wagtail import blocks
+from wagtail.blocks import BlockGroup
 from wagtail.images.blocks import ImageChooserBlock
 
 from rr.blocks.styling import StylingBlock, ColorPickerBlock
@@ -62,9 +63,20 @@ class PopupBlock(blocks.StructBlock):
     styling = StylingBlock()
 
     class Meta:
-        form_template = "formtemplate/popup.html"
         preview_template = "preview/bootstrap/popup.html"
         group = "Bootstrap"
+        form_layout = BlockGroup(
+            [
+                "text",
+                "button_style",
+                "popup_header",
+                "popup_content",
+                "big_modal",
+                "open_on_load",
+                "open_once",
+            ],
+            settings=["styling"],
+        )
 
 
 class AccordionBlock(blocks.StructBlock):
@@ -108,6 +120,10 @@ class ButtonBlock(blocks.StructBlock):
         preview_template = "preview/bootstrap/button.html"
         label = "Button"
         group = "Bootstrap"
+        form_layout = BlockGroup(
+            ["label", "page_url", "external_url", "new_tab", "button_style"],
+            settings=["styling"],
+        )
 
 
 class TabChildrenBlock(blocks.StructBlock):
@@ -132,6 +148,7 @@ class TabBlock(blocks.StructBlock):
     class Meta:
         preview_template = "preview/bootstrap/tab.html"
         group = "Bootstrap"
+        form_layout = BlockGroup(["tab_style", "tabs"], settings=["styling"])
 
 
 class SliderChildBlock(blocks.StructBlock):
@@ -162,7 +179,17 @@ class SliderChildBlock(blocks.StructBlock):
 
     class Meta:
         preview_template = "preview/bootstrap/slider.html"
-        form_template = "formtemplate/slide.html"
+        form_layout = BlockGroup(
+            [
+                "image",
+                "body",
+                BlockGroup(
+                    ["position", "ribbon_color", "ribbon_position"],
+                    heading="Advanced settings",
+                    classname="collapsed",
+                ),
+            ],
+        )
 
 
 class SliderBlock(blocks.StructBlock):
@@ -172,3 +199,4 @@ class SliderBlock(blocks.StructBlock):
     class Meta:
         preview = ["slides"]
         group = "Bootstrap"
+        form_layout = BlockGroup(["slides"], settings=["styling"])

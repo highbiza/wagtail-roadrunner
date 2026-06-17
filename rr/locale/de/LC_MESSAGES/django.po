@@ -20,11 +20,11 @@ msgstr ""
 
 #: adapters.py:19
 msgid "Apply"
-msgstr ""
+msgstr "Anwenden"
 
 #: adapters.py:20
 msgid "Saving..."
-msgstr "Speichern..."
+msgstr "Wird gespeichert…"
 
 #: adapters.py:21
 msgid "Save Draft"
@@ -32,7 +32,7 @@ msgstr "Entwurf speichern"
 
 #: adapters.py:149
 msgid "Ok"
-msgstr ""
+msgstr "OK"
 
 #: adapters.py:150
 msgid "Cancel"
@@ -40,15 +40,15 @@ msgstr "Abbrechen"
 
 #: adapters.py:151
 msgid "Change container width"
-msgstr ""
+msgstr "Containerbreite ändern"
 
 #: adapters.py:152
 msgid "Change container to full width"
-msgstr ""
+msgstr "Container auf volle Breite ändern"
 
 #: adapters.py:153
 msgid "Change container width to boxed"
-msgstr ""
+msgstr "Containerbreite auf Boxed ändern"
 
 #: blocks/html.py:30
 msgid "Header type"

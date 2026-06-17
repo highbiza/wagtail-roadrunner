@@ -1,15 +1,16 @@
+// Backwards compatibility for third-party blocks that still use a custom form_template with the old tab UI.
 .w-field--road_runner_block_widget {
 
     // this removed some padding at the side of the row column
     > div.w-field__input > div > div[data-streamfield-stream-container] > div > section.w-panel.w-panel--nested > div.w-panel__content {
         padding-inline-start: 0;
         // correct the row styling, which need a bit of padding
-        > .stylingblock > .nav.tab-content > .styling-content {
+        > .struct-block > .nav.tab-content > .styling-content {
             padding-inline-start: 2em;
         }
     }
 
-    .stylingblock {
+    .struct-block {
         // needed to enable absolute positioning of the corner-tab-control
         position: relative;
 
@@ -73,7 +74,7 @@
                     display:block
                 }
             }
-            
+
         }
     }
 }
