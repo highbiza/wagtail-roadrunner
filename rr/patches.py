@@ -2,6 +2,7 @@ import warnings
 
 from wagtail.blocks import BlockGroup
 
+from rr.blocks.styling import StylingBlock
 from rr.adapters import RoadRunnerStructBlockAdapter
 
 orig_js_args = RoadRunnerStructBlockAdapter.js_args
@@ -11,7 +12,6 @@ def patched_js_args(self, block):
     """
     Backwards compatibility patch, without this existing blocks will have a very busy layout.
     """
-    from rr.blocks.styling import StylingBlock
 
     name, values, meta = orig_js_args(self, block)
     form_layout = meta.get("formLayout")
