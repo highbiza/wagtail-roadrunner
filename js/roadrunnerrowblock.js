@@ -26,7 +26,7 @@ export class RoadrunnerRowBlockInsertionControl {
 
   renderVisible(placeholder) {
     const { element } = renderInPlaceHolder(placeholder, (
-      <button type="button" title={this.opts.strings.ADD} className="c-sf-add-button c-sf-add-button--visible" aria-expanded="false" data-streamfield-list-add>
+      <button type="button" title={gettext('Add')} className="c-sf-add-button c-sf-add-button--visible" aria-expanded="false" data-streamfield-list-add>
         <SvgIcon name="icon-plus"/>
       </button>
     ))
@@ -92,7 +92,7 @@ export class InsertButton {
 
   render(container) {
     this.dom = $((
-      <button type="button" title={this.sequenceChild.strings.ADD} data-streamfield-list-add
+      <button type="button" title={gettext('Add')} data-streamfield-list-add
         class="button button--icon text-replace white add-action-insertbutton">
         <SvgIcon name="icon-plus" />
       </button>
@@ -103,18 +103,15 @@ export class InsertButton {
   }
 }
 
-export const ContainerSwapUI = ({prefix, originalWidth, strings}) => {
-  let description = strings.SWAP_TO_FULL_WIDTH
-  if (originalWidth == "full_width") {
-    description = strings.SWAP_TO_BOXED
-  }
+export const ContainerSwapUI = ({prefix, originalWidth}) => {
+  const description = originalWidth == "full_width" ? gettext('Change container width to boxed') : gettext('Change container to full width')
 
   return (
     <div class="modal preview" id={`swap-${prefix}`} tabindex="-1" role="dialog">
       <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
           <div class="modal-header d-flex align-items-center">
-            <h3 class="modal-title my-0">{strings.SWAP_TITLE}</h3>
+            <h3 class="modal-title my-0">{gettext('Change container width')}</h3>
             <button type="button" class="btn btn-secondary ms-auto py-1" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -123,8 +120,8 @@ export const ContainerSwapUI = ({prefix, originalWidth, strings}) => {
             <p>{ description }</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary swap">{ strings.OK }</button>
-            <button type="button" class="btn btn-secondary ms-2" data-dismiss="modal">{ strings.CANCEL }</button>
+            <button type="button" class="btn btn-primary swap">{ gettext('Ok') }</button>
+            <button type="button" class="btn btn-secondary ms-2" data-dismiss="modal">{ gettext('Cancel') }</button>
           </div>
         </div>
       </div>
@@ -186,7 +183,7 @@ export class ContainerSwapWidget {
     if (this.hasContentPath) {
       const { element, placeholder} = renderInPlaceHolder(originalPlaceholder, (
         <Fragment>
-          <ContainerSwapUI prefix={this.prefix} originalWidth={this.originalWidth} strings={this.blockDef.meta.strings} />
+          <ContainerSwapUI prefix={this.prefix} originalWidth={this.originalWidth} />
           <PlaceHolder/>
         </Fragment>
       ))

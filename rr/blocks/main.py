@@ -1,6 +1,6 @@
 from django.utils.translation import gettext_lazy as _
 from wagtail import blocks
-from wagtail.blocks import ListBlock
+from wagtail.blocks import BlockGroup, ListBlock
 
 from rr.telepath import register
 from rr.adapters import (
@@ -84,6 +84,7 @@ class RoadRunnerBaseBlock(blocks.StructBlock):
     class Meta:
         icon = "grip"
         preview = "content"
+        form_layout = BlockGroup(["grid", "content"], settings=["styling"])
 
 
 class RoadrunnerRowBlock(ListBlock):

@@ -20,35 +20,35 @@ msgstr ""
 
 #: adapters.py:19
 msgid "Apply"
-msgstr ""
+msgstr "Aplicar"
 
 #: adapters.py:20
 msgid "Saving..."
-msgstr "Enregistrement en cours..."
+msgstr "Guardando…"
 
 #: adapters.py:21
 msgid "Save Draft"
-msgstr "Enregistrer le brouillon"
+msgstr "Guardar borrador"
 
 #: adapters.py:149
 msgid "Ok"
-msgstr ""
+msgstr "OK"
 
 #: adapters.py:150
 msgid "Cancel"
-msgstr "Annuler"
+msgstr "Cancelar"
 
 #: adapters.py:151
 msgid "Change container width"
-msgstr ""
+msgstr "Cambiar ancho del contenedor"
 
 #: adapters.py:152
 msgid "Change container to full width"
-msgstr ""
+msgstr "Cambiar contenedor a ancho completo"
 
 #: adapters.py:153
 msgid "Change container width to boxed"
-msgstr ""
+msgstr "Cambiar ancho del contenedor a boxed"
 
 #: blocks/html.py:30
 msgid "Header type"

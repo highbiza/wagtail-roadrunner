@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 from django.utils.translation import gettext, gettext_lazy as _, pgettext_lazy
 from django.core.exceptions import ValidationError
 
-from wagtail.blocks import StructValue
+from wagtail.blocks import StructValue, BlockGroup
 from wagtail import blocks
 from wagtail.contrib.table_block.blocks import TableBlock, DEFAULT_TABLE_OPTIONS
 from wagtail.images.blocks import ImageChooserBlock
@@ -39,6 +39,7 @@ class HeaderBlock(blocks.StructBlock):
     class Meta:
         preview_template = "preview/html/headerblock.html"
         group = "HTML"
+        form_layout = BlockGroup(["heading_type", "text"], settings=["styling"])
 
 
 class PageTitle(blocks.StructBlock):
@@ -46,6 +47,7 @@ class PageTitle(blocks.StructBlock):
 
     class Meta:
         group = "HTML"
+        form_layout = BlockGroup([], settings=["styling"])
 
 
 register(PageTitleAdapter(), PageTitle)
@@ -59,6 +61,7 @@ class RichText(blocks.StructBlock):
     class Meta:
         preview = ["block_text"]
         group = "HTML"
+        form_layout = BlockGroup(["block_text"], settings=["styling"])
 
 
 class DividerBlock(blocks.StructBlock):
@@ -79,6 +82,7 @@ class DividerBlock(blocks.StructBlock):
         preview_template = "preview/html/divider.html"
         group = "HTML"
         icon = "divider"
+        form_layout = BlockGroup(["divider_type"], settings=["styling"])
 
 
 class ImageBlock(blocks.StructBlock):
@@ -112,8 +116,20 @@ class ImageBlock(blocks.StructBlock):
 
     class Meta:
         preview = ["image"]
-        form_template = "formtemplate/image.html"
         group = "HTML"
+        form_layout = BlockGroup(
+            [
+                "image",
+                "alt",
+                "lazy",
+                BlockGroup(
+                    ["page_url", "external_url", "open_in_new_tab"],
+                    heading="Advanced settings",
+                    classname="collapsed",
+                ),
+            ],
+            settings=["styling"],
+        )
 
 
 class VideoBlockValue(StructValue):
@@ -145,6 +161,7 @@ class VideoBlock(blocks.StructBlock):
         preview_template = "preview/html/video.html"
         group = "HTML"
         value_class = VideoBlockValue
+        form_layout = BlockGroup(["video", "lazy"], settings=["styling"])
 
 
 class HtmlBlock(blocks.StructBlock):
@@ -168,3 +185,4 @@ class TableMakerBlock(blocks.StructBlock):
         group = "HTML"
         template = "streamfields/html/table.html"
         preview_template = "preview/html/table.html"
+        form_layout = BlockGroup(["table"], settings=["styling"])

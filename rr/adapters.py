@@ -1,5 +1,4 @@
 from django import forms
-from django.utils.translation import gettext as _
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
@@ -13,13 +12,6 @@ from wagtail.blocks.list_block import ListBlockAdapter
 
 class RoadRunnerStreamBlockAdapter(StreamBlockAdapter):
     js_constructor = "roadrunner.fields.PreviewStreamBlockDefinition"
-
-    def js_args(self, block):
-        [name, grouped_child_blocks, values, meta] = super().js_args(block)
-        meta["strings"]["APPLY"] = _("Apply")
-        meta["strings"]["SAVING"] = _("Saving...")
-        meta["strings"]["SAVE_DRAFT"] = _("Save Draft")
-        return [name, grouped_child_blocks, values, meta]
 
     # pylint: disable=invalid-overridden-method
     @property
@@ -46,7 +38,7 @@ class PageTitleAdapter(StructBlockAdapter):
 
 
 class RoadRunnerStructBlockAdapter(StructBlockAdapter):
-    js_constructor = "roadrunner.fields.StylingBlockDefinition"
+    js_constructor = "wagtail.blocks.StructBlock"
 
     def js_args(self, block):
         name, values, meta = super().js_args(block)
@@ -143,15 +135,6 @@ class PreviewListBlockAdapter(ListBlockAdapter):
 
 class RoadrunnerRowBlockAdapter(PreviewListBlockAdapter):
     js_constructor = "roadrunner.fields.RoadrunnerRowBlockDefinition"
-
-    def js_args(self, block):
-        [name, child_blocks, values, meta] = super().js_args(block)
-        meta["strings"]["OK"] = _("Ok")
-        meta["strings"]["CANCEL"] = _("Cancel")
-        meta["strings"]["SWAP_TITLE"] = _("Change container width")
-        meta["strings"]["SWAP_TO_FULL_WIDTH"] = _("Change container to full width")
-        meta["strings"]["SWAP_TO_BOXED"] = _("Change container width to boxed")
-        return [name, child_blocks, values, meta]
 
     @cached_property
     def media(self):

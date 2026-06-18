@@ -1,4 +1,4 @@
-.PHONY: fail-if-no-virtualenv all install lint black test debug undebug
+.PHONY: fail-if-no-virtualenv all install lint black makejsmessages test debug undebug
 
 all: install assets
 
@@ -22,6 +22,9 @@ lint: fail-if-no-virtualenv
 	@black --check --exclude "migrations/*" rr
 	@pylint setup.py rr/
 	npm run lint
+
+makejsmessages: assets
+	cd rr && manage.py makemessages -d djangojs --all
 
 black:
 	@black --exclude "migrations/*" rr

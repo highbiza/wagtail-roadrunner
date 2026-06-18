@@ -1,11 +1,10 @@
 import dom from 'jsx-render'
 import { renderInPlaceHolder, PlaceHolder } from "./jsx"
-import { StylingBlock } from "./stylingblock"
 import { GRID_SIZE_CHANGED_EVENT } from "./events"
 import { isInViewport } from "./utils"
 import "./roadrunnerbaseblock.scss"
 
-export class RoadRunnerBaseBlock extends StylingBlock {
+export class RoadRunnerBaseBlock extends window.wagtailStreamField.blocks.StructBlock {
   constructor(blockDef, placeholder, prefix, initialState, initialError) {
     const result = renderInPlaceHolder(placeholder, (
       <div className="roadrunnerbaseblock-container">

@@ -21,6 +21,7 @@ extras_require = {
         "black",
         "vdt.versionplugin.wheel",
         "coverage",
+        "wagtail>=7.3" # block groups etc were added in 7.3
         "ocyan.plugin.wagtail",
     ]
 }
@@ -34,7 +35,7 @@ class BuildNPM(build_module.build):
 
 setup(
     name="wagtail-roadrunner",
-    version="4.0.0",
+    version="4.1.0",
     description="RoadRunner",
     long_description=long_description,
     url="https://gitlab.com/uwkm-frets/RoadRunner",

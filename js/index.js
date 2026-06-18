@@ -1,7 +1,6 @@
 import $ from "jquery"
 import { breakPointEmitter } from "./events"
 import { RoadrunnerRowBlockDefinition } from "./roadrunnerrowblock"
-import { StylingBlockDefinition } from "./stylingblock"
 import { RoadRunnerBaseBlockDefinition } from "./roadrunnerbaseblock"
 import { ImageChooserBlockDefinition } from "./preview/imagechooserblock"
 import { PreviewStreamBlockDefinition } from "./preview/streamblock"
@@ -16,9 +15,9 @@ import "bootstrap/js/src/tab"
 import "bootstrap/js/src/collapse"
 import "./bootstrapnoconflict/bootstrap.scss"
 import "./roadrunner.scss"
+import "./stylingblock.scss"
 
 window.telepath.register('roadrunner.fields.RoadrunnerRowBlockDefinition', RoadrunnerRowBlockDefinition)
-window.telepath.register('roadrunner.fields.StylingBlockDefinition', StylingBlockDefinition)
 window.telepath.register('roadrunner.fields.PreviewStreamBlockDefinition', PreviewStreamBlockDefinition)
 window.telepath.register('roadrunner.fields.PreviewFieldBlockDefinition', PreviewFieldBlockDefinition)
 window.telepath.register('roadrunner.fields.RoadRunnerBaseBlockDefinition', RoadRunnerBaseBlockDefinition)
