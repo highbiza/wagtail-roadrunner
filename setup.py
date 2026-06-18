@@ -21,7 +21,7 @@ extras_require = {
         "black",
         "vdt.versionplugin.wheel",
         "coverage",
-        "wagtail>=7.3" # block groups etc were added in 7.3
+        "wagtail>=7.3",  # block groups etc were added in 7.3
         "ocyan.plugin.wagtail",
     ]
 }
