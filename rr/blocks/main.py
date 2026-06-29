@@ -52,6 +52,14 @@ class GridChoiceBlock(blocks.MultipleChoiceBlock):
         ("col-lg-1", _("1 columns from large screen size")),
     ]
 
+    def to_python(self, value):
+        # Wagtail 7.4 changed MultipleChoiceBlock.to_python to wrap non-list
+        # values in a list, which would render the grid as "['col-12']". We
+        # store the grid as a space-joined string, so keep it a string here.
+        if isinstance(value, (list, tuple)):
+            return " ".join(value)
+        return value
+
     def value_from_form(self, value):
         "we need to store the value as a string"
         return " ".join(value)
