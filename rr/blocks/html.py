@@ -21,6 +21,7 @@ US_TABLE_OPTIONS["language"] = "en-US"
 
 class HeaderBlock(blocks.StructBlock):
     HEADER_CHOICES = (
+        ("h1", "H1"),
         ("h2", "H2"),
         ("h3", "H3"),
         ("h4", "H4"),
