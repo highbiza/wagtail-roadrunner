@@ -1,7 +1,7 @@
 from importlib.metadata import version
 
 from django.urls import path, reverse
-from django.utils.safestring import mark_safe
+from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import cache_page
 from django.views.i18n import JavaScriptCatalog
@@ -33,8 +33,8 @@ def roadrunner_jsi18n_url():
 
 @hooks.register("insert_global_admin_js")
 def roadrunner_jsi18n_script():
-    return mark_safe(
-        f'<script src="{reverse("roadrunner_javascript_catalog")}"></script>'
+    return format_html(
+        '<script src="{}"></script>', reverse("roadrunner_javascript_catalog")
     )
 
 
