@@ -1,4 +1,5 @@
 from django import template
+from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from wagtail.templatetags.wagtailcore_tags import richtext
 
@@ -27,7 +28,7 @@ def get_styling(styling, no_style_tag=False):
         if no_style_tag:
             return mark_safe(attributes)
 
-        return mark_safe('style="%s"' % attributes)
+        return format_html('style="{}"', attributes)
 
     return ""
 
